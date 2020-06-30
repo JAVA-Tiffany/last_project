@@ -19,7 +19,7 @@ public class FaceBookController {
 //    
 //        model.addAttribute("facebook_url", facebook_url);
 //        System.out.println("/facebook" + facebook_url);
-// 
+//    
 //        return "member/join";
 //    }
 
