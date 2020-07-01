@@ -17,13 +17,16 @@
 // })
 
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style type="text/css">
 .div1 {
 padding-top: 200px;
 padding-bottom: 100px;
 font: 400 14px 'Poppins',sans-serif;
+}
+.div2 {
+ padding-top: 20px;
 }
   table {
     width: 60%;
@@ -49,11 +52,11 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <body>
 <jsp:include page="../default/header.jsp"/>
 <div align="center" class="div1">
-<form method="post" action="update?bno=${view.bno}">
+<form method="post" action="update_save?bno=${view.bno}">
 <input type="hidden" value="${view.bno}" name="bno">
    <table class="board_view">
    		
-        
+        <caption>글 수정</caption>
         <colgroup>
             <col width="15%">
             <col width="35%">
@@ -63,8 +66,8 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
           <tbody>
             <tr>
                 <th>제목</th>
-                <td style="size: 80px;">
-                	${view.title}
+                <td>
+                <input type="text" name="title" id="title" size="80" value="${view.title}" placeholder="제목을 입력하세요.">
                 </td>
                 <th>조회수</th>
                 <td>${view.viewcnt }</td>
@@ -77,16 +80,19 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             </tr>
             <tr style="height:300px;">
                 <th>내용</th>
-                <td colspan="3" style="height: 200px; width: 700px;">
-                ${view.content}
+                <td colspan="3">
+                	<input type="text" name="content" id="content" style="height:200px;
+                	 width: 700px;" value="${view.content}" placeholder="내용을 입력해주세요.">
+   
                 </td>
             </tr>
         </tbody>
     </table>
+    <div class="div2">
     <a href="list" id="list" class="btn">목록으로</a>
-    <input type="submit" value="수정하기">
-<%--      <a href="update?bno=${view.bno}" class="btn">수정하기</a>   --%>
-    <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
+    <input type="submit" value="완료">
+<%--     <a href="update?bno=${view.bno}" class="btn">수정하기</a>  --%>
+	</div>
     </form>
  </div>       
 

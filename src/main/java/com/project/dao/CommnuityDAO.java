@@ -39,17 +39,16 @@ public class CommnuityDAO {
 		sqlSession.delete(namepasce+".delete_Commnuity",dto);
 	}
 
-	public void update(CommnuityDTO dto) {
-		System.out.println("DAO");
-		System.out.println(dto.getBno());
-		System.out.println(dto.getContent());
-		System.out.println(dto.getTitle());
-		System.out.println(dto.getViewcnt());
-		System.out.println(dto.getWriter());
-		System.out.println(dto.getRegdate());
+	public void update_save(CommnuityDTO dto) {
+		
 		sqlSession.update(namepasce+".update_Commnuity",dto);
 	}
-		
+	
+	public CommnuityDTO update(CommnuityDTO dto) {
+		return sqlSession.selectOne(namepasce+".view_Commnuity",dto);
+	}
+	
+	
 }
 	
 	
