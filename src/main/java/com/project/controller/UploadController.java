@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class UploadController {
 	@RequestMapping(value="makeFile",method = RequestMethod.POST, produces = "application/text; charset=utf8")
     @ResponseBody
     public String makeFile(@RequestParam String imgbase64){
-    	System.out.println("imgbase64 : "+imgbase64);
+//    	System.out.println("imgbase64 : "+imgbase64);
     	return service.makePngFile(imgbase64);
     }
 	

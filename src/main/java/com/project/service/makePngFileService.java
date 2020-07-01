@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class makePngFileService {
-	
 	public String makePngFile(String imgbase64) {
 		/**
 		 * imgbase64 (imgbase64data:image/png;base64,iVBORw0KGgoAA 로 시작)
@@ -31,7 +30,7 @@ public class makePngFileService {
 			// create a buffered image
 			BufferedImage image = null;
 
-			System.out.println(imgbase64);
+//			System.out.println(imgbase64);
 			byte[] imageByte = Base64.getDecoder().decode(imgbase64);
 			
 			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
@@ -40,7 +39,7 @@ public class makePngFileService {
 
 			// write the image to a file
 			File outputfile = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
-			System.out.println(image);
+//			System.out.println(image);
 			System.out.println(outputfile);
 			ImageIO.write(image, "png", outputfile); // 파일생성
 			return savename+".png";
