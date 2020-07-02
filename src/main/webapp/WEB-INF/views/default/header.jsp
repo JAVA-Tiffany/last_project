@@ -160,7 +160,7 @@
 									LIST</a>
 							</c:when>
 							<c:otherwise>
-								<a href="../SHOP/cart.jsp" style="color: black;">CART</a>
+								<a href="cart" style="color: black;">CART</a>
 								<a href="#" style="color: black;">MYSHOP</a>
 								<a href="#" style="color: black;">WISH LIST</a>
 								<a href="#" style="color: black;">ORDER LIST</a>

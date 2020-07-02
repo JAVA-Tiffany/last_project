@@ -11,13 +11,13 @@
 		select * from self_design where id=#{id}
 	</select>
 	<insert id="insert_User" parameterType="userdto">
-		insert into self_design values(#{id},#{pw},#{name},#{add},#{phon})
+		insert into self_design values(#{id},#{pw},#{name},#{addr},#{phon})
 	</insert>
 	<delete id="delete_User" parameterType="userdto">
 		delete self_design where num=#{num}
 	</delete>
 	<update id="update_User" parameterType="userdto">
-		update self_design set pw=#{pw}, name=#{name}, addr=#{add}, phon=#{phon} where id=#{id}
+		update self_design set pw=#{pw}, name=#{name}, addr=#{addr}, phon=#{phon} where id=#{id}
 	</update>
 	
 	<!-- 상품 리스트 -->
@@ -63,6 +63,9 @@
 		insert into userimg values(#{img},#{id},#{product},#{cancelok},#{money})
 	</insert>
 	<delete id="delete_Userimg" parameterType="userimgdto">
-		delete userimg where id=#{id}
+		delete userimg where where id=#{id}, product=#{product}
 	</delete>
+	<update id="update_Userimg" parameterType="userimgdto">
+		update userimg set cancelok=#{cancelok} where id=#{id}, product=#{product}
+	</update>
 </mapper>

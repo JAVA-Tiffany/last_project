@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	
 </head>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="resources/jquery-3.2.1.min.js"></script>
 <script src="resources/jquery.form.min.js"></script>
 <script src="resources/jquery-1.12.1-ui.js"></script>
 <script src="resources/html2canvas.js"></script>
 <script type="text/javascript">
+
 	function partShot() { //특정부분 스크린샷 
 		html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
 		.then(function (canvas) { //jpg 결과값
@@ -129,6 +131,11 @@
 	    openWin = window.open("tip",
 	            "logindForm", 'status=no, height=750, width=1300, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
 	}
+	
+	url='${img_name}'
+	$(function(){
+		$("#zz").css("background-image", "url('resources/img/desgin/"+url+".png' )"); 
+	});
 </script>
 <body >
 	
@@ -180,13 +187,13 @@
 		</div>
 		<div style="display: flex; flex-flow:low; background-color: #f8f9fa;">
 			<div style="width: 250px; margin-top: 50px;" align="center" >
-				<div align="center" onclick="partShot()" onmouseover="style='cursor:pointer; width: 200px; height: 70px; background-color: #ffffff; border: 1px solid #eaedf0;'" onclick="partShot()" style="width: 200px; height: 70px;background-color: #ffffff; border: 1px solid #eaedf0;"><p style="padding-top: 7px;"> 장바구니 담기</p> </div><br><br>
+				<div align="center" onclick="partShot()" onmouseover="style='cursor:pointer; width: 200px; height: 70px; background-color: #ffffff; border: 1px solid #eaedf0;'" style="width: 200px; height: 70px;background-color: #ffffff; border: 1px solid #eaedf0;"><p style="padding-top: 7px;"> 장바구니 담기</p> </div><br><br>
 				<div style="width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;" align="left" onclick="opentip()" onmouseover="style='cursor:pointer;width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;'">
 					<div style="margin-top: 10px;"> <img src="resources/img/tip.png" style="width: 50px; height: 50px;"> </div>
 					<div style="text-align: center; margin-top: 10px;"> <p>디자인하는 방법</p> </div>
 				</div>
 			</div>
-			<div style="width: 500px; height: 500px; border: 1px solid #eaedf0; background-image: url('resources/img/aaa.png');" id="zz">
+			<div style="width: 500px; height: 500px; border: 1px solid #eaedf0;" id="zz">
 				<div style="width:174px; height:261px; border: 2px solid black; margin-left: 160px; margin-top: 132px;" id="in">
 <!-- 					<div id="image1" style="width: 50px; height: 50px;"> -->
 <!-- 						<canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
@@ -205,7 +212,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 <!-- 	<form id="uploadForm"> -->
 	<input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
 <!-- 	</form> -->

@@ -51,7 +51,7 @@ public class ProjectService {
    
    // 로그인시 ID, PW 확인
    public boolean loginch(String id, String pw) {
-      if(userdao.select(id).getId().equals(id) && userdao.select(id).getPw().equals(pw)) {
+      if(userdao.select(id)!=null && userdao.select(id).getId().equals(id) && userdao.select(id).getPw().equals(pw)) {
          return true;
       }else {
          return false;
