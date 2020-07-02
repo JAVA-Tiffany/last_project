@@ -1,22 +1,16 @@
 package com.project.controller;
 
-import java.awt.image.SampleModel;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.CommnuityDTO;
 import com.project.service.CommunityService;
-import com.project.service.ProjectService;
 
 @Controller
 public class CommunityController {
@@ -53,15 +47,17 @@ public class CommunityController {
 		return "redirect:list";
 	}
 	
+	
+	
 	@RequestMapping("update")
-	public String update(CommnuityDTO dto) {
-		System.out.println(dto.getBno());
-		System.out.println(dto.getContent());
-		System.out.println(dto.getTitle());
-		System.out.println(dto.getViewcnt());
-		System.out.println(dto.getWriter());
-		System.out.println(dto.getRegdate());
-		service.update(dto);
+	public String update(CommnuityDTO dto,Model model) {
+		service.update(dto,model);
+		return "community/update";
+	}
+	
+	@RequestMapping("update_save")
+	public String update_sava(CommnuityDTO dto) {
+		service.update_save(dto);
 		return "redirect:list";
 	}
 	
@@ -81,6 +77,11 @@ public class CommunityController {
 	public String review() {
 		return "community/Review";
 	}
+	
+//	@RequestMapping("qa")
+//	public String Qa() {
+//		return "community/Qa";
+//	}
 	
 	
 }

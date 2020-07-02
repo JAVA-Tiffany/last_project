@@ -47,8 +47,14 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public void update(CommnuityDTO dto) {
-		dao.update(dto);
+	public void update_save(CommnuityDTO dto) {
+		dao.update_save(dto);
+		
+	}
+
+	@Override
+	public void update(CommnuityDTO dto, Model model) {
+		model.addAttribute("view",dao.view(dto));	
 		
 	}
 	

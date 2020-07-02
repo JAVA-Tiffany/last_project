@@ -6,17 +6,23 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.UserDTO;
 import com.project.service.ProjectService;
+import com.project.service.cartService;
 
 @Controller
 public class ProjectController {
    @Autowired
    private ProjectService service;
+   @Autowired
+   private cartService cartservice;
    
    
    @RequestMapping("index")
@@ -34,9 +40,11 @@ public class ProjectController {
    public String loginch(@RequestParam String id, @RequestParam String pw,HttpServletRequest request) {
       boolean chk = service.loginch(id,pw);
       if(chk==true) {
+    	 
          HttpSession session = request.getSession();
          session.setAttribute("id", id);
          session.setAttribute("pw", pw);
+         System.out.println(session.getAttribute("id"));
          return "redirect:index";
       }else {
          return "redirect:login";
@@ -57,13 +65,24 @@ public class ProjectController {
       return "login&join/join";
    }
    
-   @RequestMapping("design")
-   public String design() {
-      return "design/design";
+   @PostMapping("design")
+   public String design(@RequestParam String imgname,@RequestParam String imgmoney,Model model) {
+	   model.addAttribute("img_name",imgname);
+	   model.addAttribute("img_money",imgmoney);
+	   return "design/design";
    }
    @RequestMapping("tip")
    public String tip() {
       return "design/tip";
+   }
+   @RequestMapping(value="userimg_insert",method = RequestMethod.POST, produces = "application/text; charset=utf8")
+   @ResponseBody
+   public String userimg_insert(HttpServletRequest request,@RequestParam String userimg_in,@RequestParam String imgname,@RequestParam String imgmoney) {
+	   System.out.println("userimg_in : "+userimg_in);
+	   System.out.println("imgname : "+imgname);
+	   System.out.println("imgmoney : "+imgmoney);
+	   cartservice.cart_insert(request,userimg_in,imgname,imgmoney);
+	   return "장바구니 저장 완료";
    }
    
    @RequestMapping("cart")

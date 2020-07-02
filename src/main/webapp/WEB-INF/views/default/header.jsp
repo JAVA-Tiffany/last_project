@@ -99,7 +99,7 @@
 	<div id="fixed">
 		<div>
 			<h1>
-				<a href="/Tiffany/default/index.jsp" style="color: black;">Brand</a>
+				<a href="index" style="color: black;">Brand</a>
 			</h1>
 		</div>
 		<div>
@@ -136,8 +136,7 @@
 						<c:choose>
 							<c:when test="${sessionScope.id eq null}">
 
-								<span><a href="login" style="color: black;"
-									onclick="openChild()">LOGIN</a></span>
+								<span><a href="login" style="color: black;" onclick="openChild()">LOGIN</a></span>
 							</c:when>
 							<c:otherwise>
 								<span><a href="logout" style="color: black;">LOGOUT</a></span>

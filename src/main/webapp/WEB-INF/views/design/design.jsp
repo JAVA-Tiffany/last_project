@@ -18,7 +18,7 @@
 		.then(function (canvas) { //jpg 결과값
 			drawImg(canvas.toDataURL('image/jpeg')); //이미지 저장
 			saveAs(canvas.toDataURL(), 'file-name.jpg'); 
-			alert("장바구니에 담겼습니다.")
+			alert("장바구니 담는중")
 		})
 	} 
 	function drawImg(imgData) { 
@@ -43,13 +43,28 @@
 			data : {imgbase64:st[1]},
 			success : function(data) {
 				alert(data)
+				cartsave(data);
 			},
 			error : function() {
 				alert('문제 발생')
 			}
 		})
 	}
-
+	function cartsave(data) {
+		n='${img_name}'
+		m='${img_money}'
+		$.ajax({
+			url : "userimg_insert",
+			type : "POST",
+			data : {userimg_in:data,imgname:n,imgmoney:m},
+			success : function(result) {
+				alert(result)
+			},
+			error : function() {
+				alert('장바구니 저장 실패')
+			}
+		})
+	}
 	</script>
 <script type="text/javascript">
 	var count=1

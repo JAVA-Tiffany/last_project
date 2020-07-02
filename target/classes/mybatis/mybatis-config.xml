@@ -9,5 +9,6 @@
 		<typeAlias alias="baglistdto" type="com.project.dto.BagListDTO"/>
 		<typeAlias alias="earringlistdto" type="com.project.dto.EarringListDTO"/>
 		<typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
+		<typeAlias alias="userimgdto" type="com.project.dto.UserimgDTO"/>
    </typeAliases>
 </configuration>

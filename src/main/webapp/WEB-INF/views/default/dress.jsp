@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
    <script src="resources/jquery-3.2.1.min.js"></script>
    <script type="text/javascript">
       var size= ${list_img.size()}
@@ -64,13 +66,14 @@
       });
 
    </script>
-   
+<%@include file="header.jsp" %>
    <div align="center">
-      <div>
+      <div style="margin-top: 150px;">
          <table id="table"></table>
       </div>
       <div id="num" style="display: flex; flex-flow:low; width: 600px;">
       </div>
    </div>
+<%@include file="footer.jsp" %>
 </body>
 </html>
