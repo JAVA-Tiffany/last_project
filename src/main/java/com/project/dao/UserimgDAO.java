@@ -15,13 +15,16 @@ public class UserimgDAO {
 	public List<UserimgDTO> selectAll() {
 		return sqlSession.selectList(namepasce+".selectAll_Userimg");
 	}
-	public UserimgDTO select(String num) {
-		return sqlSession.selectOne(namepasce+".select_Userimg",num);
+	public List<UserimgDTO> select(String name) {
+		return sqlSession.selectList(namepasce+".select_Userimg",name);
 	}
 	public int insert(UserimgDTO dto) {
 		return sqlSession.insert(namepasce+".insert_Userimg",dto);
 	}
-	public int delete(String num) {
-		return sqlSession.delete(namepasce+".delete_Userimg", num);
+	public int delete(UserimgDTO dto) {
+		return sqlSession.delete(namepasce+".delete_Userimg", dto);
+	}
+	public int update(UserimgDTO dto) {
+		return sqlSession.update(namepasce+".update_Userimg", dto);
 	}
 }

@@ -5,7 +5,7 @@ public class UserimgDTO {
 	private String id;
 	private String product;
 	private String cancelok;
-	private int money;
+	private String money;
 	public String getImg() {
 		return img;
 	}
@@ -30,10 +30,10 @@ public class UserimgDTO {
 	public void setCancelok(String cancelok) {
 		this.cancelok = cancelok;
 	}
-	public int getMoney() {
+	public String getMoney() {
 		return money;
 	}
-	public void setMoney(int money) {
+	public void setMoney(String money) {
 		this.money = money;
 	}
 	
