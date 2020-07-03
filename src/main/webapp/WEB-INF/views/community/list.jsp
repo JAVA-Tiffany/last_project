@@ -12,6 +12,9 @@
 padding-top: 200px;
 padding-bottom: 100px;
 }
+.div2{
+padding-top: 40px;
+}
 body {
 font: 400 15px 'Poppins',sans-serif;
 }
@@ -42,7 +45,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <script type="text/javascript">
       var size= ${list.size()}
       
-      if(size>9){
+      if(size>10){
           $(function (){
              $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
              $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
@@ -76,7 +79,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             <th style="width: 10%;">조회수</th>
          </tr>
 
-      <c:forEach var="dto" items="${list}">
+      <c:forEach var="dto" items="${listAll}">
       <tr>
          <td>${dto.bno }</td>
          <td>
@@ -95,25 +98,27 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    </table>
 
 
-        <p class="category displaynone"></p>
-        <p>
-<!--         <select id="search_date" name="search_date"> -->
-<!-- <option value="week">일주일</option> -->
-<!-- <option value="month">한달</option> -->
-<!-- <option value="month3">세달</option> -->
-<!-- <option value="all">전체</option> -->
-<!-- </select>  -->
-<select id="search_key" name="search_key">
-<option value="subject">제목</option>
-<option value="content">내용</option>
-<option value="writer_name">글쓴이</option>
-<!-- <option value="member_id">아이디</option> -->
-<!-- <option value="nick_name">별명</option> -->
-<!-- <option value="product">상품정보</option> -->
-</select> <input id="search" name="search" class="inputTypeText" placeholder="" value="" type="text"  /> 
-<a href="#none" onclick="BOARD.form_submit('boardSearchForm');">search</a></p>
+   <!-- 검색 form -->
+   <div id="search" class="div2">
+      <!-- search{s} -->
+      <div class="form-group row justify-content-center">
+         <div class="w100" style="padding-right:10px">
+            <select class="form-control form-control-sm" name="searchType" id="searchType">
+               <option value="title">제목</option>
+               <option value="Content">본문</option>
+               <option value="reg_id">작성자</option>
+            </select>
+         </div>
+         <div class="w300" style="padding-right:10px">
+            <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+         </div>
+         <div>
+            <button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+         </div>
+      </div>
+      <!-- search{e} -->
 </div>
-    <div align="center">
+    <div align="center" >
    <div id="num" style="display: flex; flex-flow: low; width: 600px;">
    </div></div>
 
