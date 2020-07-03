@@ -97,15 +97,17 @@ public class ProjectController {
 		HttpSession session = request.getSession();
 		List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
 		ArrayList<Object> arrz= new ArrayList<Object>();
-		for(int i=0;i<arr.size();i++) {
-			String[] z=new String[6];
-			z[0]=arr.get(i).getImg();
-			z[1]=arr.get(i).getId();
-			z[2]=arr.get(i).getProduct();
-			z[3]=arr.get(i).getCancelok();
-			z[4]=arr.get(i).getMoney();
-			z[5]=String.valueOf(i);
-			arrz.add(z);
+		if(arr!=null) {
+			for(int i=0;i<arr.size();i++) {
+				String[] z=new String[6];
+				z[0]=arr.get(i).getImg();
+				z[1]=arr.get(i).getId();
+				z[2]=arr.get(i).getProduct();
+				z[3]=arr.get(i).getCancelok();
+				z[4]=arr.get(i).getMoney();
+				z[5]=String.valueOf(i);
+				arrz.add(z);
+			}
 		}
 		model.addAttribute("cartlist",arrz);
 		return "shop/cart";
