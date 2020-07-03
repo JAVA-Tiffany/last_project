@@ -27,6 +27,7 @@
 </style>
 </head>
 <body>
+   
 
 <!--    top버튼 -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -45,6 +46,7 @@
         });
       });
     </script>
+
 
    <script src="resources/jquery-3.2.1.min.js"></script>
    <script type="text/javascript">
@@ -79,7 +81,7 @@
             sessionStorage.setItem("start", 0);
          }
          c=0
-         a=0
+         number=0
          l=${list_img}
          r=${list_product}
          u=${list_price}
@@ -90,30 +92,18 @@
             uu=u[i]   //가격
             zz=z[i]   //리뷰
             if(i<sessionStorage.getItem("last") && i>=sessionStorage.getItem("start")){
-               a++;
+//                alert("i : "+i+", last : "+sessionStorage.getItem("last")+", start : "+sessionStorage.getItem("start"))
                if(i%3==0) {
                   c++;
                   $('#table').append("<tr style='height:500px' id='tr"+c+"'></tr>");
                }
-               $("#tr"+c).append("<td>"
-               +"<img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5;' style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick='imgin("+a+")'>"
-                   +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+p+"</p> "
-                  +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
-                  +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
-                  +"</td>");
-               $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
-                        +"<input type='hidden' value='"+p+"' name='imgname'>"
-                        +"<input type='hidden' value='"+uu+"' name='imgmoney'>"
-                        +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
-                      +"</form>")
-            
+               $("#tr"+c).append("<td> <img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5'"+
+                     " style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick=location.href='design'> <p align='center' style='margin-top: 5px; font-family:궁서체;'>"+p+"</p> <p align='center' style='margin-top: 5px; font-family:궁서체;'>"+"가격 : &nbsp;"+uu+"</p> <p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p></td>");
             }
+            number++;
          }
-         
       });
-   function imgin(z) {
-      $("#bmit"+z).trigger("click");
-   }
+
    </script>
 <%@include file="header.jsp" %>
    <div align="center">
@@ -123,12 +113,10 @@
       <div id="num" style="display: flex; flex-flow:low; width: 600px;">
       </div>
    </div>
-   
-<!-- top버튼 -->
+ <!-- top버튼 -->
 <a id="backToTop" class="scrolltop" href="#">
       <i class="fas fa-chevron-circle-up"></i>
 </a>
-   
 <%@include file="footer.jsp" %>
 </body>
 </html>
