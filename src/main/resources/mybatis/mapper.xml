@@ -63,9 +63,9 @@
 		insert into userimg values(#{img},#{id},#{product},#{cancelok},#{money})
 	</insert>
 	<delete id="delete_Userimg" parameterType="userimgdto">
-		delete userimg where where id=#{id}, product=#{product}
+		delete userimg where id=#{id} and img=#{img}
 	</delete>
 	<update id="update_Userimg" parameterType="userimgdto">
-		update userimg set cancelok=#{cancelok} where id=#{id}, product=#{product}
+		update userimg set cancelok=#{cancelok} where id=#{id} and img=#{img}
 	</update>
 </mapper>

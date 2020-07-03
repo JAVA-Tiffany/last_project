@@ -95,11 +95,35 @@ public class ProjectController {
 	@RequestMapping("cart")
 	public String cart(Model model,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("id").toString());
 		List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
-		System.out.println(arr.size());
-		model.addAttribute("cartlist",arr);
+		ArrayList<Object> arrz= new ArrayList<Object>();
+		for(int i=0;i<arr.size();i++) {
+			String[] z=new String[6];
+			z[0]=arr.get(i).getImg();
+			z[1]=arr.get(i).getId();
+			z[2]=arr.get(i).getProduct();
+			z[3]=arr.get(i).getCancelok();
+			z[4]=arr.get(i).getMoney();
+			z[5]=String.valueOf(i);
+			arrz.add(z);
+		}
+		model.addAttribute("cartlist",arrz);
 		return "shop/cart";
+	}
+	@RequestMapping("listdel")
+	public String cart_delect(HttpServletRequest request, @RequestParam String img) {
+		System.out.println("img : " + img);
+		String[] c = img.split("/");
+		String m="";
+		for(int i=4;i<c.length;i++) {
+			m+=c[i];
+			if(c.length-1!=i) {
+				m+="/";
+			}
+		}
+		System.out.println("m : "+m);
+		cartservice.cart_delete(request,m);
+		return "redirect:cart";
 	}
 
 	@RequestMapping("dress")
