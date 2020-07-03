@@ -5,6 +5,14 @@ public class EarringListDTO {
 	private String product;
 	private int price;
 	private int count;
+	private int quantity;
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public String getImg() {
 		return img;
 	}
