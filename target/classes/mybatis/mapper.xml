@@ -68,4 +68,12 @@
 	<update id="update_Userimg" parameterType="userimgdto">
 		update userimg set cancelok=#{cancelok} where id=#{id} and img=#{img}
 	</update>
+	
+	<!-- 내 이미지 목록 -->
+	<select id="select_Myimg" resultType="myimgdto"  parameterType="myimgdto">
+		select * from my_img where id=#{id}
+	</select>
+	<insert id="insert_Myimg" parameterType="myimgdto">
+		insert into my_img values(#{img},#{id})
+	</insert>
 </mapper>

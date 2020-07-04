@@ -101,6 +101,21 @@
 	}
     // file창이 종료가 되면 실행
 	function changeValue(obj){
+		var form = $('form')[0];
+		var formData = new FormData(form);
+		$.ajax({
+			url : "fileUpload",
+			type : "POST",
+			data : formData,
+			processData: false,
+		    contentType: false,
+			success : function(result) {
+				alert('파일 저장 성공')
+			},
+			error : function() {
+				alert('파일 저장 실패')
+			}
+		})
 		if (obj.files && obj.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
@@ -130,6 +145,28 @@
 	 
 	    openWin = window.open("tip",
 	            "logindForm", 'status=no, height=750, width=1300, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+	}
+	
+	// 내이미지 클릭시 함수 실행
+	function mying() {
+		window.name = "parentForm";
+	    var popupX = (window.screen.width / 2) - (1300 / 2);
+	 	var popupY= (window.screen.height /2) - (850 / 2);
+	    openWin = window.open("myimg",
+	            "logindForm", 'status=no, height=750, width=800, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+		
+// 	    $.ajax({
+// 			url : "myimg",
+// 			type : "POST",
+// 			dataType : "text",
+// 			success : function(result) {
+// 				alert(result)
+// 			},
+// 			error : function() {
+// 				alert('내이미지 불러오기 실패')
+// 			}
+// 		})
+	    
 	}
 	
 	url='${img_name}'
@@ -206,16 +243,16 @@
 			<div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
 				<img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/upload.png" style="width: 100px;height: 100px;" onclick="uploadBtn()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
+				<img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="mying()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 			</div>
 		</div>
 	</div>
 
-<!-- 	<form id="uploadForm"> -->
+	<form id="form">
 	<input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
-<!-- 	</form> -->
+	</form>
 
 	<!-- 일부분 부분-->
 	<!-- 결과화면을 그려줄 canvas -->

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.dto.MyimgDTO;
 import com.project.dto.UserDTO;
 import com.project.dto.UserimgDTO;
+import com.project.service.MyimgService;
 import com.project.service.ProjectService;
 import com.project.service.cartService;
 
@@ -27,6 +29,7 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private cartService cartservice;
+
 
 	@RequestMapping("index")
 	public String index_run() {
@@ -70,27 +73,7 @@ public class ProjectController {
 		return "login&join/join";
 	}
 
-	@PostMapping("design")
-	public String design(@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
-		model.addAttribute("img_name", imgname);
-		model.addAttribute("img_money", imgmoney);
-		return "design/design";
-	}
-
-	@RequestMapping("tip")
-	public String tip() {
-		return "design/tip";
-	}
-
-	@RequestMapping(value = "userimg_insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	@ResponseBody
-	public String userimg_insert(HttpServletRequest request, @RequestParam String userimg_in,@RequestParam String imgname, @RequestParam String imgmoney) {
-		System.out.println("userimg_in : " + userimg_in);
-		System.out.println("imgname : " + imgname);
-		System.out.println("imgmoney : " + imgmoney);
-		cartservice.cart_insert(request, userimg_in, imgname, imgmoney);
-		return "장바구니 저장 완료";
-	}
+	
 
 	@RequestMapping("cart")
 	public String cart(Model model,HttpServletRequest request) {
