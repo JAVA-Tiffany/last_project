@@ -27,7 +27,7 @@
 				ww=1
 			}
 			w=(ww)*120;
-			$("#d"+c).append("<img src='resources/userimg/"+img[i]+"' onclick='ch("+i+")' style='width: 100px; height: 100px; margin-left: 20px; margin-top: 20px;'> ");
+			$("#d"+c).append("<img src='resources/userimg/"+img[i]+"' id='src"+i+"' onclick='ch("+i+")' style='width: 100px; height: 100px; margin-left: 20px; margin-top: 20px;'> ");
 			$("#d"+c).append("<input type='checkbox' id='check"+i+"' style='margin-top: 28px; margin-left: 66px; position: absolute; left: "+w+"px; top:"+t+"px; height: 20px; width: 20px;'>");
 			ww++;
 		}
@@ -42,10 +42,13 @@
 	function insert() {
 		for(x=0;x<size1;x++){
 			if($("input:checkbox[id='check"+x+"']").is(":checked") == true) {
-				
+				s=$("#src"+x).prop("src")
+				$(opener.document).find("#op").val(s);
+				$(opener.location).attr("href", "javascript:d_fun();");
 				window.close();
+				break;
 			}else if(x==size1-1){
-				alert("선택퇸 사진이 없습니다.")
+				alert("선택된 사진이 없습니다.")
 			}
 		}
 
@@ -60,5 +63,6 @@
 	<form action="design">
 		
 	</form>
+	<input type="hidden" id="myop" value="">
 </body>
 </html>

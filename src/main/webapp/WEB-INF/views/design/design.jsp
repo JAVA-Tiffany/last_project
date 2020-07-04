@@ -154,19 +154,21 @@
 	 	var popupY= (window.screen.height /2) - (850 / 2);
 	    openWin = window.open("myimg",
 	            "logindForm", 'status=no, height=750, width=800, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
-		
-// 	    $.ajax({
-// 			url : "myimg",
-// 			type : "POST",
-// 			dataType : "text",
-// 			success : function(result) {
-// 				alert(result)
-// 			},
-// 			error : function() {
-// 				alert('내이미지 불러오기 실패')
-// 			}
-// 		})
-	    
+	}
+	
+	function d_fun() {
+		alert($("#op").val()+" 사진 선택")
+		id="myCanvas"+count
+	    $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+		$("#image"+count).draggable();
+	   	img[count] = new Image();
+	   	g=img[count]
+	   	img[count].addEventListener('load',function(){
+	     	ctx[count] = document.getElementById(id).getContext("2d");
+	     	ctx[count].drawImage(g,0,0,300,150);
+	   	},false);
+	   	img[count].src=$("#op").val();
+	   	count++
 	}
 	
 	url='${img_name}'
@@ -259,5 +261,7 @@
 	<canvas id="canvas" width="900" height="600"
 		style="border: 1px solid #d3d3d3; display:none;">
 	</canvas>
+	
+	<input type="hidden" id="op" value="">
 </body>
 </html>
