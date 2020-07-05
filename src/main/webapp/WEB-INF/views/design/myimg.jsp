@@ -29,11 +29,11 @@
 			w=(ww)*120;
 			$("#d"+c).append("<img src='resources/userimg/"+img[i]+"' id='src"+i+"' onclick='ch("+i+")' style='width: 100px; height: 100px; margin-left: 20px; margin-top: 20px;'> ");
 			$("#d"+c).append("<input type='checkbox' id='check"+i+"' style='margin-top: 28px; margin-left: 66px; position: absolute; left: "+w+"px; top:"+t+"px; height: 20px; width: 20px;'>");
+			$("#d"+c).append("<input type='button' value='X' onclick='del("+i+")' style='margin-top: 48px; margin-left: 66px; position: absolute; left: "+w+"px; top:"+t+"px; height: 20px; width: 20px;'>")
 			ww++;
 		}
 	})
 	function ch(i) {
-		a=i;
 		for(x=0;x<25;x++){
 			$("input:checkbox[id='check"+x+"']").prop("checked", false)
 		}
@@ -53,6 +53,22 @@
 		}
 
 	}
+	function del(d) {
+		data=img[d]
+		alert(data)
+		$.ajax({
+			url : "myimg_delect",
+			type : "POST",
+			data : {img:data},
+			success : function(result) {
+				alert(result)
+				window.location.reload()
+			},
+			error : function() {
+				alert('내 이미지 삭제 실패')
+			}
+		})
+	}
 </script>
 </head>
 <body>
@@ -63,6 +79,5 @@
 	<form action="design">
 		
 	</form>
-	<input type="hidden" id="myop" value="">
 </body>
 </html>

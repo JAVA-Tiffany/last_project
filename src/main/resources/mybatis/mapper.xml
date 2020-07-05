@@ -76,4 +76,7 @@
 	<insert id="insert_Myimg" parameterType="myimgdto">
 		insert into my_img values(#{img},#{id})
 	</insert>
+	<delete id="delete_Myimg" parameterType="myimgdto">
+		delete my_img where id=#{id} and img=#{img}
+	</delete>
 </mapper>

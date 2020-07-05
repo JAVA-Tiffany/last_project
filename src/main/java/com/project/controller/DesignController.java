@@ -59,4 +59,12 @@ public class DesignController {
 		cartservice.cart_insert(request, userimg_in, imgname, imgmoney);
 		return "장바구니 저장 완료";
 	}
+	@RequestMapping(value = "myimg_delect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String myimg_delete(HttpServletRequest request, @RequestParam String img) {
+		System.out.println("img : " + img);
+		HttpSession session = request.getSession();
+		myimgservice.myimg_delete(session.getAttribute("id").toString(), img);
+		return "내 이미지 삭제 완료";
+	}
 }

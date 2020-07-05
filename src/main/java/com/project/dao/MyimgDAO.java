@@ -18,4 +18,7 @@ public class MyimgDAO {
 	public int insert(MyimgDTO dto) {
 		return sqlSession.insert(namepasce+".insert_Myimg",dto);
 	}
+	public int delect(MyimgDTO dto) {
+		return sqlSession.delete(namepasce+".delete_Myimg",dto);
+	}
 }

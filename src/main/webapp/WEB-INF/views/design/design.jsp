@@ -177,10 +177,10 @@
 	});
 </script>
 <body >
-	
-	<div style="width: 900px; margin: 0 auto">
+	<jsp:include page="../default/header.jsp"/>
+	<div style="width: 900px; margin: 0 auto; margin-top: 100px;">
 		<div style="display: flex; flex-flow:low; width: 700px; margin: 0 auto;" align="left">
-			<div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
+			<div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
 				<img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick=""><br><font style="font-size: 10px; text-align: center">처음으로</font>
 			</div>
 			<div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
@@ -224,7 +224,7 @@
 			</div>
 			
 		</div>
-		<div style="display: flex; flex-flow:low; background-color: #f8f9fa;">
+		<div style="display: flex; flex-flow:low; background-color: #f8f9fa; margin-top: 20px;">
 			<div style="width: 250px; margin-top: 50px;" align="center" >
 				<div align="center" onclick="partShot()" onmouseover="style='cursor:pointer; width: 200px; height: 70px; background-color: #ffffff; border: 1px solid #eaedf0;'" style="width: 200px; height: 70px;background-color: #ffffff; border: 1px solid #eaedf0;"><p style="padding-top: 7px;"> 장바구니 담기</p> </div><br><br>
 				<div style="width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;" align="left" onclick="opentip()" onmouseover="style='cursor:pointer;width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;'">
