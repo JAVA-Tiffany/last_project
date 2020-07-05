@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +41,6 @@
 	z[5]=String.valueOf(i); 
 -->
 	<%@include file="../default/header.jsp"%>
-	<fmt:requestEncoding value="utf-8" />
 	<div style="padding-top: 80px;" align="center">
 		<font size="4"><b>CART</b></font>
 		<table style="margin-top: 20px;" border="1">
