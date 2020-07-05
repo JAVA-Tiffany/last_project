@@ -170,7 +170,7 @@
 	}
 	
 	function d_fun() {
-		alert($("#op").val()+" 사진 선택")
+// 		alert($("#op").val()+" 사진 선택")
 		id="myCanvas"+count
 	    $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
 		$("#image"+count).draggable();
@@ -251,6 +251,27 @@
 	function garbage() {
 		$("div").remove("#image"+ch);
 	}
+// 	상품 수정
+	function change() {
+		var changeop = document.changeopen;
+		
+	    var popupX = (window.screen.width / 2) - (1300 / 2);
+	 	var popupY= (window.screen.height /2) - (850 / 2);
+	    openWin = window.open("",
+	            "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+	    changeop.action="change";
+	    changeop.method="post";
+	    changeop.target="changeopen";
+	    changeop.change_val='${img_goods}';
+	    changeop.submit();
+	}
+	function background_ch() {
+		url=$("#op").val();
+		console.log(url);
+		$(function(){
+			$("#zz").css("background-image", "url('resources/img/desgin/"+url+".png' )"); 
+		});
+	}
 </script>
 <body >
 	<jsp:include page="../default/header.jsp"/>
@@ -319,7 +340,7 @@
 				</div>
 			</div>
 			<div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
-				<img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
+				<img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="change()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/upload.png" style="width: 100px;height: 100px;" onclick="uploadBtn()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="mying()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 				<img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
@@ -338,5 +359,8 @@
 		style="border: 1px solid #d3d3d3; display:none;">
 	</canvas>
 	<input type="hidden" id="op" value="">
+	<form name="changeopen">
+		<input type="hidden" name="change_val">
+	</form>
 </body>
 </html>

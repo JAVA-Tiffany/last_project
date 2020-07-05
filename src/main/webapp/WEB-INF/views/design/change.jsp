@@ -75,23 +75,23 @@
          });
       }
       
-      $(function () {
-          if(sessionStorage.getItem("last")==null){
-             sessionStorage.setItem("last", 9);
-             sessionStorage.setItem("start", 0);
-          }
-          c=0
-          a=0
-          l=${list_img}
-          r=${list_product}
-          u=${list_price}
-          z=${list_count}
-          for(i=0;i<size;i++){
-             s=l[i]   //이미지
-             p=r[i]   //상품이름
-             uu=u[i]   //가격
-             zz=z[i]   //리뷰
-             if(i<sessionStorage.getItem("last") && i>=sessionStorage.getItem("start")){
+		$(function () {
+        	if(sessionStorage.getItem("last")==null){
+            	sessionStorage.setItem("last", 9);
+            	sessionStorage.setItem("start", 0);
+            }
+            c=0
+            a=0
+            l=${list_img}
+            r=${list_product}
+            u=${list_price}
+        	z=${list_count}
+		for(i=0;i<size;i++){
+            s=l[i]   //이미지
+            p=r[i]   //상품이름
+            uu=u[i]   //가격
+            zz=z[i]   //리뷰
+			if(i<sessionStorage.getItem("last") && i>=sessionStorage.getItem("start")){
                 a++;
                 if(i%3==0) {
                    c++;
@@ -100,37 +100,57 @@
                 $("#tr"+c).append("<td>"
                 +"<img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5;' style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick='imgin("+a+")'>"
                     +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+p+"</p> "
-                   +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
-                   +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
-                   +"</td>");
-                $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
-                         +"<input type='hidden' value='"+p+"' name='imgname'>"
-                         +"<input type='hidden' value='"+uu+"' name='imgmoney'>"
-                         +"<input type='hidden' value='dress' name='imggoods'>"
-                         +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
-                       +"</form>")
+                	+"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
+                	+"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
+                	+"</td>");
              
-             }
-          }
-          
-       });
-    function imgin(z) {
-       $("#bmit"+z).trigger("click");
+            	}
+			}
+		});
+	function imgin(z) {
+		ur=$("#imgname"+z).text();
+		$(opener.document).find("#op").val(ur);
+		$(opener.location).attr("href", "javascript:background_ch();");
+		window.close();
     }
-
-   </script>
-<%@include file="header.jsp" %>
-   <div align="center">
-      <div style="margin-top: 150px;">
-         <table id="table"></table>
-      </div>
-      <div id="num" style="display: flex; flex-flow:low; width: 600px;">
-      </div>
-   </div>
- <!-- top버튼 -->
-<a id="backToTop" class="scrolltop" href="#">
-      <i class="fas fa-chevron-circle-up"></i>
-</a>
-<%@include file="footer.jsp" %>
+	var goods_list_count=0;
+	function goods_list_click() {
+		if(goods_list_count%2==0){
+			bag="bag";
+			dress="dress";
+			earring="earring";
+			$("#goods_list").append("<div id='delch'> <label onclick='addchange("+bag+")' onmouseover=style='cursor:pointer;'>가방</label> &nbsp;&nbsp;"
+					+"<label onclick='addchange("+dress+")' onmouseover=style='cursor:pointer;'>옷</label> &nbsp;&nbsp; "
+					+"<label onclick='addchange("+earring+")' onmouseover=style='cursor:pointer;'>귀걸이</label> </div>");
+		}else{
+			$("div").remove("#delch");
+		}
+		goods_list_count++;
+	}
+	function addchange(d) {
+		$("#add").val(d);
+		addch.submit();
+	}
+	</script>
+	
+   
+	<div align="center">
+		<div onmouseover="style='cursor:pointer; margin-top: 30px;'" style="margin-top: 30px;" onclick="goods_list_click()" id="goods_list">
+			기타 액세사리 ↓
+		</div>
+		<div style="margin-top: 50px;">
+			<table id="table"></table>
+		</div>
+		<div id="num" style="display: flex; flex-flow:low; width: 600px;">
+		</div>
+	</div>
+	<!-- top버튼 -->
+	<a id="backToTop" class="scrolltop" href="#">
+	      <i class="fas fa-chevron-circle-up"></i>
+	</a>
+	<label onclick=""></label>
+	<form action="change" method="post" name="addch">
+		<input type="hidden" name="change_val" id="add">
+	</form>
 </body>
 </html>

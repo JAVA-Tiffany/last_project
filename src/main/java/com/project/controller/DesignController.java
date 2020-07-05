@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.MyimgDTO;
 import com.project.service.MyimgService;
+import com.project.service.ProjectService;
 import com.project.service.cartService;
 
 @Controller
@@ -25,11 +26,14 @@ public class DesignController {
 	private cartService cartservice;
 	@Autowired
 	private MyimgService myimgservice;
+	@Autowired
+	private ProjectService service;
 	
 	@PostMapping("design")
-	public String design(@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
+	public String design(@RequestParam String imggoods,@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
 		model.addAttribute("img_name", imgname);
 		model.addAttribute("img_money", imgmoney);
+		model.addAttribute("img_goods", imggoods);
 		return "design/design";
 	}
 	
@@ -66,5 +70,16 @@ public class DesignController {
 		HttpSession session = request.getSession();
 		myimgservice.myimg_delete(session.getAttribute("id").toString(), img);
 		return "내 이미지 삭제 완료";
+	}
+	@RequestMapping(value = "change", method = RequestMethod.POST)
+	public String change(Model model, @RequestParam String change_val) {
+		if(change_val.equals("dress")) {
+			service.dress(model);
+		}else if(change_val.equals("bag")) {
+			service.bag(model);
+		}else {
+			service.earring(model);
+		}
+		return "design/change";
 	}
 }
