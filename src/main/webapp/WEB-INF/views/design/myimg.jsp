@@ -24,7 +24,7 @@
 			}
 			t=(tt)*120;
 			if(i%5==0  && i!=0){
-				ww=1
+				ww=1;
 			}
 			w=(ww)*120;
 			$("#d"+c).append("<img src='resources/userimg/"+img[i]+"' id='src"+i+"' onclick='ch("+i+")' style='width: 100px; height: 100px; margin-left: 20px; margin-top: 20px;'> ");
@@ -35,37 +35,37 @@
 	})
 	function ch(i) {
 		for(x=0;x<25;x++){
-			$("input:checkbox[id='check"+x+"']").prop("checked", false)
+			$("input:checkbox[id='check"+x+"']").prop("checked", false);
 		}
-		$("input:checkbox[id='check"+i+"']").prop("checked", true)
+		$("input:checkbox[id='check"+i+"']").prop("checked", true);
 	};
 	function insert() {
 		for(x=0;x<size1;x++){
 			if($("input:checkbox[id='check"+x+"']").is(":checked") == true) {
-				s=$("#src"+x).prop("src")
+				s=$("#src"+x).prop("src");
 				$(opener.document).find("#op").val(s);
 				$(opener.location).attr("href", "javascript:d_fun();");
 				window.close();
 				break;
 			}else if(x==size1-1){
-				alert("선택된 사진이 없습니다.")
+				alert("선택된 사진이 없습니다.");
 			}
 		}
 
 	}
 	function del(d) {
-		data=img[d]
-		alert(data)
+		data=img[d];
+		alert(data);
 		$.ajax({
 			url : "myimg_delect",
 			type : "POST",
 			data : {img:data},
 			success : function(result) {
-				alert(result)
-				window.location.reload()
+				alert(result);
+				window.location.reload();
 			},
 			error : function() {
-				alert('내 이미지 삭제 실패')
+				alert('내 이미지 삭제 실패');
 			}
 		})
 	}
