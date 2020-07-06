@@ -43,7 +43,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 
 <script src="resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-      var size= ${list.size()}
+      var size= ${listAll.size()}
       
       if(size>10){
           $(function (){
@@ -64,6 +64,12 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
              $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
           });
        }
+      
+	function totle_click(d) {
+		console.log(d);
+		$("#bno_result").val(d);
+		bno_form.submit();
+	}
 </script>
 <jsp:include page="../default/header.jsp"/>
 <%-- <%@include file="header.jsp"%> --%>
@@ -82,11 +88,9 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
       <c:forEach var="dto" items="${listAll}">
       <tr>
          <td>${dto.bno }</td>
-         <td>
-         <a class="title" href="view?bno=${dto.bno}">
-         ${dto.title }</a></td>
+         <td onclick="totle_click(${dto.bno})"><label> ${dto.title} </label> </td>
          <td>${dto.writer }</td>
-         <td style="font-size: 2px;">${dto.regdate }</td>
+         <td style="font-size: 2px;">${dto.regdate}</td>
          <td>${dto.viewcnt }</td>
       </tr>
       </c:forEach>
@@ -98,8 +102,8 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    </table>
 
 
-   <!-- 검색 form -->
-   <div id="search" class="div2">
+	<!-- 검색 form -->
+	<div id="search" class="div2">
       <!-- search{s} -->
       <div class="form-group row justify-content-center">
          <div class="w100" style="padding-right:10px">
@@ -117,12 +121,15 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
          </div>
       </div>
       <!-- search{e} -->
-</div>
+	</div>
     <div align="center" >
    <div id="num" style="display: flex; flex-flow: low; width: 600px;">
    </div></div>
 
 <jsp:include page="../default/footer.jsp"/>
 <%-- <%@include file="footer.jsp"%> --%>
+	<form action="view" name="bno_form" method="post">
+		<input type="hidden" name="bno" id="bno_result">
+	</form>
 </body>
 </html>

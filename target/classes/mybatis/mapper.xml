@@ -79,4 +79,18 @@
 	<delete id="delete_Myimg" parameterType="myimgdto">
 		delete my_img where id=#{id} and img=#{img}
 	</delete>
+	
+	<!-- 댓글  -->
+	<select id="select_reply" resultType="replydto"  parameterType="replydto">
+		select * from reply where bno=#{bno}
+	</select>
+	<insert id="insert_reply" parameterType="replydto">
+		insert into reply(bno, rno, content, writer) values(#{bno}, (select nvl(max(rno)+1,1)from reply), #{content}, #{writer})
+	</insert>
+	<update id="update_reply" parameterType="replydto">
+		update reply set content=#{content} where bno=#{bno} and rno=#{rno}
+	</update>
+	<delete id="delete_reply" parameterType="replydto">
+		delete reply where bno=#{bno} and rno=#{rno}
+	</delete>
 </mapper>
