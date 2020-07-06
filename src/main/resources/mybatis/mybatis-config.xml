@@ -11,5 +11,6 @@
 		<typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
 		<typeAlias alias="userimgdto" type="com.project.dto.UserimgDTO"/>
 		<typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
+		<typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
    </typeAliases>
 </configuration>

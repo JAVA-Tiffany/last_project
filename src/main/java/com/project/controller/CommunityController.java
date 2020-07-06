@@ -1,20 +1,31 @@
 package com.project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.project.dto.CommnuityDTO;
+import com.project.dto.ReplyDTO;
 import com.project.service.CommunityService;
+import com.project.service.ReplyService;
 
 @Controller
 public class CommunityController {
    
    @Inject
    CommunityService service;
+   
+   @Autowired
+   private ReplyService replyService;
    
    @RequestMapping("list")
    public String list(CommnuityDTO dto, Model model) {
@@ -24,12 +35,49 @@ public class CommunityController {
 
    }
    
-   @RequestMapping("view")
-   public String view(CommnuityDTO dto, Model model) {
+   @RequestMapping(value="view", method = {RequestMethod.GET, RequestMethod.POST})
+   public String view(CommnuityDTO dto, Model model, HttpServletRequest request) {
       service.count(dto);
       service.view(dto,model);
-      
+      List<ReplyDTO> arr = replyService.select(dto.getBno());
+      ArrayList<String> a1=new ArrayList<String>();
+      ArrayList<String> a2=new ArrayList<String>();
+      ArrayList<String> a3=new ArrayList<String>();
+      ArrayList<String> a4=new ArrayList<String>();
+      for(int i=0;i<arr.size();i++) {
+    	  a1.add("'"+arr.get(i).getWriter()+"'");
+    	  String[] z=arr.get(i).getContent().split("");
+    	  String sum="";
+    	  int a=0;
+    	  for(int x=0;x<z.length-1;x++) {
+    		  if(z[x+1].equals("\n")) {
+    			  sum+="'"+"\n+'";
+    			  a=1;
+    		  }else {
+    			  if(a==0) {
+    				  sum+=z[x];
+    			  }else {
+    				  a=0;
+    			  }
+    		  }
+    	  }
+    	  arr.get(i).setContent(sum);
+    	  a2.add("'"+arr.get(i).getContent()+"'");
+    	  a3.add("'"+arr.get(i).getBno()+"'");
+    	  a4.add("'"+arr.get(i).getRegDate()+"'");
+      }
+      model.addAttribute("writer_view", a1);
+      model.addAttribute("comment_view", a2);
+      model.addAttribute("bno_view", a3);
+      model.addAttribute("regDate_view", a4);
+      HttpSession session = request.getSession();
+      model.addAttribute("id", session.getAttribute("id").toString());
       return "community/view";
+   }
+   @RequestMapping(value="reply", method = RequestMethod.POST)
+   public String reply(ReplyDTO dto) {
+	   replyService.insert(dto);
+	   return "redirect:view";
    }
    
    @RequestMapping("write")
@@ -73,11 +121,5 @@ public class CommunityController {
    public String review() {
       return "community/Review";
    }
-   
-//   @RequestMapping("qa")
-//   public String Qa() {
-//      return "community/Qa";
-//   }
-   
    
 }

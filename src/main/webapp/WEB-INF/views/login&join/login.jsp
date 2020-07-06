@@ -64,8 +64,8 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn-facebook" onclick="setParentText()">
-							FaceBook 회원가입
+						<button class="login100-form-btn-facebook" onclick="location.href='google'">
+							GOOGLE 회원가입
 						</button>
 					</div>
 					
