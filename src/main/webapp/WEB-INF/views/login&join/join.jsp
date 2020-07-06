@@ -99,6 +99,12 @@ function pagereturn(){
 				opener.parent.location.reload();
 			}
 		}
+		$(function () {
+			a = '${NaverDto.id}';
+			a = '${GoogleId}';
+			$("#id").val(a);
+		});
+		
 	</script>
 <!-- 	회원가입 -->
 
@@ -114,7 +120,7 @@ function pagereturn(){
 					<form action="joinok" name="user" style="align:center;">
 		
 					<div class="wrap-input100 validate-input" align="center">
-						<input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${NaverDto.id }">
+						<input type="text" id="id" placeholder="아이디" class=input100 name="id">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"  style="text-align:right;"></i>
