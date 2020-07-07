@@ -8,6 +8,7 @@ public class ReplyDTO {
 	private String content;
 	private String writer;
 	private String regDate;
+	
 	public int getBno() {
 		return bno;
 	}
