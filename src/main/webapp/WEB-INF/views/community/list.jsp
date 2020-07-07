@@ -149,10 +149,10 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 	</div>
     <div align="center" >
    <div id="num" style="display: flex; flex-flow: low; width: 600px;">
-   </div></div>
+   </div>
+</div>
 
 <jsp:include page="../default/footer.jsp"/>
-<%-- <%@include file="footer.jsp"%> --%>
 	<form action="view" name="bno_form" method="post">
 		<input type="hidden" name="bno" id="bno_result">
 	</form>

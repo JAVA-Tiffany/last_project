@@ -38,8 +38,6 @@
 			$("#comment_btn").val("댓글");
 			$("#comment_cancel").css("display","none");
 			
-			
-			
 			bi=$("#bno_out"+comment_count).val();
 			ci=$("#commare"+comment_count).val();
 			wi=$("#comment_writer"+comment_count).text();
@@ -138,7 +136,6 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     </div>
     <a href="list" id="list" class="btn">목록으로</a>
     <input type="submit" value="수정하기">
-<%--      <a href="update?bno=${view.bno}" class="btn">수정하기</a>   --%>
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
     </form>
     <input type="button" value="댓글" onclick="comment()" id="comment_btn">
