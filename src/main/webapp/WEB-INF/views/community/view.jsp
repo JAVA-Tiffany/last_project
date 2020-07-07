@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="resources/jquery.form.min.js"></script>
 <script type="text/javascript">
 	var comment_count=0;
 	size = ${comment_view.size()};
@@ -19,7 +20,7 @@
 		for(i=0;i<size;i++){
 			$("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; height:250px;'> 작성자 &nbsp; : &nbsp;<label name='comment_writer'>"+writer_view[i]+"</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성시간 &nbsp;:&nbsp;"+regDate_view[i]+""
 					+"<br><textarea id='commare"+comment_count+"' cols='1' style='width:420px;height:200px; margin-top:10px; resize: none;' name='comment_contents'> "+comment_view[i]+"</textarea> </div>");
-			$("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view[i]+"'>")
+			$("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view+"'>")
 			$("#commare"+comment_count).attr('disabled', true);
 			comment_count++;
 		}
@@ -30,21 +31,34 @@
 			$("#comment_btn").val("등록");
 			$("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; height:250px;'> 작성자 &nbsp; : &nbsp;<label id='comment_writer"+comment_count+"'>${id}</label>"
 					+"<br><textarea id='commare"+comment_count+"' cols='1' style='width:420px;height:200px; margin-top:10px; resize: none;' name='comment_contents'> </textarea></div>");
-			$("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view[0]+"'>")
+			$("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view+"'>")
 			$("#comment_cancel").css("display","");
 		}else{
 			$("#commare"+comment_count).attr('disabled', true);
 			$("#comment_btn").val("댓글");
 			$("#comment_cancel").css("display","none");
 			
-			$("#bno_in").val($("#bno_out"+comment_count).val());
-			$("#comment_in").val($("#commare"+comment_count).val());
-			$("#writer_in").val($("#comment_writer"+comment_count).text());
+			
+			
+			bi=$("#bno_out"+comment_count).val();
+			ci=$("#commare"+comment_count).val();
+			wi=$("#comment_writer"+comment_count).text();
+			alert(bi);
+			alert(ci);
+			alert(wi);
+			
+			$.ajax({
+				url : "reply",
+				type : "post",
+				data : {bno:bi,comnet:ci,writer:wi},
+				success : function(result) {
+					alert(result)
+				},
+				error : function() {
+					alert('댓글 실패')
+				}
+			})
 			comment_count++;
-			alert($("#bno_in").val())
-			alert($("#comment_in").val())
-			alert($("#writer_in").val())
-			reply_form.submit();
 		}
 	}
 	function comment_cancel() {
@@ -130,11 +144,6 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     <input type="button" value="댓글" onclick="comment()" id="comment_btn">
     <input type="button" value="취소" onclick="comment_cancel()" id="comment_cancel" style="display: none; margin-left: 10px;">
  </div>       
-	<form name="reply_form" action="reply" method="post">
-		<input type="hidden" id="bno_in" name="bno">
-		<input type="hidden" id="comment_in" name="content">
-		<input type="hidden" id="writer_in" name="writer">
-	</form>
 <jsp:include page="../default/footer.jsp"/>
 </body>
 </html>

@@ -44,16 +44,16 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <script src="resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
       var size= ${listAll.size()}
-      
+      var ch=1;
       if(size>10){
           $(function (){
-             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
-             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
-             for(i=0;i<size/9;i++){
+             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;' onclick='number_down()'><<</a></div> ");
+             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;' onclick='number_onedown()''><</a></div> ");
+             for(i=0;i<size/10;i++){
                 $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</a></div>");
              };
-             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
-             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
+             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;' onclick='number_oneup()'>></a></div> ");
+             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;' onclick='number_up()'>>></a></div>");
           });
        }else{
           $(function (){
@@ -67,7 +67,32 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
       
 	function totle_click(d) {
 		console.log(d);
+		ch=d;
 		$("#bno_result").val(d);
+		bno_form.submit();
+	}
+	function number_onedown() {
+		ch--;
+		$("#bno_result").val(ch);
+		bno_form.submit();
+	}
+	function number_down() {
+		ch=1;
+		$("#bno_result").val(ch);
+		bno_form.submit();
+	}
+	function number_oneup() {
+		ch++;
+		$("#bno_result").val(ch);
+		bno_form.submit();
+	}
+	function number_up() {
+		if(size%10!=0){
+			ch=parseInt(size/10)+1;
+		}else{
+			ch=parseInt(size/10);
+		}
+		$("#bno_result").val(ch);
 		bno_form.submit();
 	}
 </script>

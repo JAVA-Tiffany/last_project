@@ -1,7 +1,5 @@
 package com.project.dto;
 
-import java.util.Date;
-
 public class ReplyDTO {
 	private int bno;
 	private int rno;
