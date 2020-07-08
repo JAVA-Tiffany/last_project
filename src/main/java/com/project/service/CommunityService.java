@@ -28,8 +28,8 @@ public class CommunityService {
 		dao.save_write(dto);
 	}
 
-	public void delete(CommnuityDTO dto) {
-		dao.delete(dto);
+	public void delete(int num) {
+		dao.delete(num);
 	}
 
 	public void update_save(CommnuityDTO dto) {

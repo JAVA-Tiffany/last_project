@@ -3,7 +3,6 @@ package com.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +22,7 @@ import com.project.service.ReplyService;
 @Controller
 public class CommunityController {
    
-   @Inject
+   @Autowired
    CommunityService service;
    
    @Autowired
@@ -113,8 +112,8 @@ public class CommunityController {
    }
    
    @RequestMapping("delete")
-   public String delete(CommnuityDTO dto) {
-      service.delete(dto);
+   public String delete(@RequestParam int num) {
+      service.delete(num);
       return "redirect:list";
    }
    
