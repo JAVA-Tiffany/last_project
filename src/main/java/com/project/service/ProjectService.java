@@ -3,8 +3,6 @@ package com.project.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,6 @@ public class ProjectService {
    private EarringListDAO ealistdao;
    
    public void insert(UserDTO dto) {
-	  
       userdao.insert(dto);
    }
    public void delete(String num) {
@@ -40,7 +37,6 @@ public class ProjectService {
    public void update(UserDTO dto) {
       userdao.update(dto);
    }
-   
    public void select(Model model) {
 	   model.addAttribute("list",userdao.selectAll());
    }

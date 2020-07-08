@@ -6,6 +6,14 @@ public class UserimgDTO {
 	private String product;
 	private String cancelok;
 	private String money;
+	private int quantity;
+
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public String getImg() {
 		return img;
 	}
@@ -36,5 +44,4 @@ public class UserimgDTO {
 	public void setMoney(String money) {
 		this.money = money;
 	}
-	
 }

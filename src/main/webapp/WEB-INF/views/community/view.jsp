@@ -103,7 +103,11 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <form method="post" action="update?bno=${view.bno}">
 <input type="hidden" value="${view.bno}" name="bno">
    <table class="board_view">
+<<<<<<< HEAD
          
+=======
+   		
+>>>>>>> jang
         
         <colgroup>
             <col width="15%">
@@ -115,7 +119,11 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             <tr>
                 <th>제목</th>
                 <td style="size: 80px;">
+<<<<<<< HEAD
                    ${view.title}
+=======
+                	${view.title}
+>>>>>>> jang
                 </td>
                 <th>조회수</th>
                 <td>${view.viewcnt }</td>
@@ -138,7 +146,12 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     <!-- 목록/수정/삭제 -->
     <div>
     <a href="list" id="list" class="btn">목록으로</a>
+<<<<<<< HEAD
     <input type="submit" value="수정하기" style="border: 0px;" >
+=======
+    <input type="submit" value="수정하기">
+<%--      <a href="update?bno=${view.bno}" class="btn">수정하기</a>   --%>
+>>>>>>> jang
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
     </div>
     

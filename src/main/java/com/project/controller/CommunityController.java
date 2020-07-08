@@ -128,4 +128,13 @@ public class CommunityController {
       return "community/Review";
    }
    
+<<<<<<< HEAD
+=======
+//   @RequestMapping("qa")
+//   public String Qa() {
+//      return "community/Qa";
+//   }
+   
+   
+>>>>>>> jang
 }

@@ -158,4 +158,3 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 		<input type="hidden" name="bno" id="bno_result">
 	</form>
 </body>
-</html>

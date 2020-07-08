@@ -27,9 +27,7 @@
 </style>
 </head>
 <body>
-   
-
-<!--    top버튼 -->
+ <!--    top버튼 -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
       jQuery(document).ready(function () {
@@ -132,5 +130,6 @@
       <i class="fas fa-chevron-circle-up"></i>
 </a>
 <%@include file="footer.jsp" %>
+   
 </body>
 </html>

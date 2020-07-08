@@ -36,7 +36,7 @@ public class makePngFileService {
 			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
 			image = ImageIO.read(bis);
 			bis.close();
-
+			
 			// write the image to a file
 			File outputfile = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
 //			System.out.println(image);
