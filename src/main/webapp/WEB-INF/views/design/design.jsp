@@ -14,7 +14,6 @@
 <script src="resources/jquery-1.12.1-ui.js"></script>
 <script src="resources/html2canvas.js"></script>
 <script type="text/javascript">
-
    function partShot() { //특정부분 스크린샷 
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
       .then(function (canvas) { //jpg 결과값
@@ -88,7 +87,6 @@
 //     img[1].addEventListener('load',function(){
 //       ctx[1] = document.getElementById('myCanvas').getContext("2d");
 //         ctx[2] = document.getElementById('myCanvas2').getContext("2d");
-
 //         ctx[1].drawImage(img[1],0,0,300,150);
 //         ctx[2].drawImage(img[2],0,0,300,150);
         
@@ -140,21 +138,17 @@
          
    }
     
-    function in_text() {
-//        alert("in_text")
-//        id="myCanvas"+count
-//        $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
-//       ctx[count] = document.getElementById(id).getContext("2d");
-//        ctx[count].save();
-//        ctx[count].font = '30px';
-//        ctx[count].fillStyle = 'rgba(255,0,255,1)'; // 텍스트 채우기 색깔 지정
-//        ctx[count].fillText('Hello World', 100, 60, 200);
-//        ctx[count].fillRect(100,60, 200, 200);
-//        ctx[count].restore();
-//       count++;
-   }
-
-    
+   function in_text() {
+   	alert("in_text")
+   	id="myCanvas"+count;
+		$('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+		$("#image"+count).draggable();
+		ctx[count] = document.getElementById(id).getContext("2d");
+		ctx[count].font = '100px Arial';
+		ctx[count].fillText('입력', 50, 100);
+		count++;
+	}
+   
     function imgclick(d) {
        ch=d;
        for(i=2;i<count+1;i++){
@@ -321,7 +315,6 @@
    function quality(){
 	   window.open("","quality","width=700,height=700")
    }
-
 </script>
 <body >
    <jsp:include page="../default/header.jsp"/>
@@ -623,18 +616,15 @@
     
           
 <!--     여기까지 -->
-
 	<div border="1" style="width: 992px; margin: 70px auto 50px; text-align: center; display: block; font-size: 14px;">
 		<input type="button" value="배송안내" onclick="window.open('delivery','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 100px;">
 		<input type="button" value="품질보증/청약철회 안내" onclick="window.open('quality','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 80px;">
 	</div>
       
    </div>
-
    <form id="form">
    <input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
    </form>
-
    <!-- 일부분 부분-->
    <!-- 결과화면을 그려줄 canvas -->
    <canvas id="canvas" width="900" height="600"
