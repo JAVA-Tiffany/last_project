@@ -14,7 +14,6 @@
 <script src="resources/jquery-1.12.1-ui.js"></script>
 <script src="resources/html2canvas.js"></script>
 <script type="text/javascript">
-
    function partShot() { //특정부분 스크린샷 
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
       .then(function (canvas) { //jpg 결과값
@@ -88,7 +87,6 @@
 //     img[1].addEventListener('load',function(){
 //       ctx[1] = document.getElementById('myCanvas').getContext("2d");
 //         ctx[2] = document.getElementById('myCanvas2').getContext("2d");
-
 //         ctx[1].drawImage(img[1],0,0,300,150);
 //         ctx[2].drawImage(img[2],0,0,300,150);
         
@@ -102,18 +100,7 @@
       $('#file').click();
    }
     // file창이 종료가 되면 실행
-    function in_text() {
-    	alert("in_text")
-    	id="myCanvas"+count;
-		$('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
-		$("#image"+count).draggable();
-		ctx[count] = document.getElementById(id).getContext("2d");
-		ctx[count].font = '100px Arial';
-		ctx[count].fillText('입력', 50, 100);
-		count++;
-	}
-
-    function changeValue(obj){
+   function changeValue(obj){
       var form = $('form')[0];
       var formData = new FormData(form);
       $.ajax({
@@ -151,21 +138,17 @@
          
    }
     
-    function in_text() {
-//        alert("in_text")
-//        id="myCanvas"+count
-//        $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
-//       ctx[count] = document.getElementById(id).getContext("2d");
-//        ctx[count].save();
-//        ctx[count].font = '30px';
-//        ctx[count].fillStyle = 'rgba(255,0,255,1)'; // 텍스트 채우기 색깔 지정
-//        ctx[count].fillText('Hello World', 100, 60, 200);
-//        ctx[count].fillRect(100,60, 200, 200);
-//        ctx[count].restore();
-//       count++;
-   }
-
-    
+   function in_text() {
+   	alert("in_text")
+   	id="myCanvas"+count;
+		$('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+		$("#image"+count).draggable();
+		ctx[count] = document.getElementById(id).getContext("2d");
+		ctx[count].font = '100px Arial';
+		ctx[count].fillText('입력', 50, 100);
+		count++;
+	}
+   
     function imgclick(d) {
        ch=d;
        for(i=2;i<count+1;i++){
@@ -212,7 +195,7 @@
    
    url='${img_name}'
    $(function(){
-      $("#zz").css("background-image", "url('resources/img/desgin/"+url+".png' )"); 
+      $("#zz").css("background-image", "url('resources/img/bag desgin/"+url+".png' )"); 
    });
    
 //    좌우 반전
@@ -332,11 +315,10 @@
    function quality(){
 	   window.open("","quality","width=700,height=700")
    }
-
 </script>
 <body >
    <jsp:include page="../default/header.jsp"/>
-   <div style="width: 900px; margin: 0 auto; margin-top: 100px; ">
+   <div style="width: 1500px; margin: 0 auto; margin-top: 100px; ">
       <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
             <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>
@@ -390,7 +372,7 @@
                <div style="text-align: center; margin-top: 10px;"> <p>디자인하는 방법</p> </div>
             </div>
          </div>
-         <div style="width: 500px; height: 500px; border: 1px solid #eaedf0;" id="zz">
+         <div style="background-color:green; width: 600px; height: 600px; border: 1px solid #eaedf0;" id="zz">
             <div style="width:174px; height:261px; border: 2px solid black; margin-left: 160px; margin-top: 132px;" id="in">
 <!--                <div id="image1" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
@@ -407,7 +389,7 @@
             <img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="in_text()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
          </div>
-         <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 200px;">
+         <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
 		상품명<br>
 		가격<br><br>
 		<button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button><br>
@@ -444,6 +426,7 @@
 			</ul>
 		</div>
 	</div>
+<!-- 	장바구니 -->
 <!-- 	<div onclick="partShot()" style="position: absolute; width: 380px; left: 50%; transform: translateX(-50%); height: 56px; font-size: 14px; text-align: center; line-height: 58px; color: #fff; font-weight: 300; background-color: #212529; cursor: pointer; bottom: 100px; margin-left: 520px;" >장바구니 담기</div> -->
       </div>
       
@@ -484,12 +467,6 @@
 			</div>
 			</div>
 			</div>
-			<div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
-				<img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="change()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/upload.png" style="width: 100px;height: 100px;" onclick="uploadBtn()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="mying()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="in_text()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
 			<div>
 			<div>
 			<span><strong>사이즈 정보</strong></span>
@@ -640,18 +617,15 @@
     
           
 <!--     여기까지 -->
-
 	<div border="1" style="width: 992px; margin: 70px auto 50px; text-align: center; display: block; font-size: 14px;">
 		<input type="button" value="배송안내" onclick="window.open('delivery','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 100px;">
 		<input type="button" value="품질보증/청약철회 안내" onclick="window.open('quality','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 80px;">
 	</div>
       
    </div>
-
    <form id="form">
    <input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
    </form>
-
    <!-- 일부분 부분-->
    <!-- 결과화면을 그려줄 canvas -->
    <canvas id="canvas" width="900" height="600"

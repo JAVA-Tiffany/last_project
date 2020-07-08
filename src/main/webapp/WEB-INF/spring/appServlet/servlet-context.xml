@@ -23,7 +23,7 @@
 	</beans:bean>
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\대산\git\last_project\src\main\webapp\resources\smarteditor\upload"></beans:constructor-arg>
+		<beans:constructor-arg value="D:\2abcd\workspace-boot\last_project\src\main\webapp\resources\smarteditor\upload"></beans:constructor-arg>
 	</beans:bean>
 	<!-- 업로드 객체 빈등록 -->
 	<!-- 10485760 = 10MB -->
