@@ -5,8 +5,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+<style>
+   .scrolltop {
+        display: none;
+        position: fixed;
+        right: 30px;
+        bottom: 50px;
+        z-index: 1030;
+        font-size: 1.875rem;
+        color: #868e96;
+        transition: all 0.5s ease-in-out;
+        opacity: 0.8;
+      }
+      .scrolltop:hover,
+      .scrolltop:focus {
+        color: #dc3545;
+        transition: all 0.5s ease-in-out;
+      }
+   
+</style>
 </head>
 <body>
+   
+
+<!--    top버튼 -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      jQuery(document).ready(function () {
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+            $('#backToTop').fadeIn(500);
+          } else {
+            $('#backToTop').fadeOut('slow');
+          }
+        });
+        $('#backToTop').click(function (e) {
+          e.preventDefault();
+          $('html, body').animate({scrollTop: 0}, 200);
+        });
+      });
+    </script>
+
+
    <script src="resources/jquery-3.2.1.min.js"></script>
    <script type="text/javascript">
       var size= ${list_img.size()}
@@ -57,19 +98,25 @@
                   $('#table').append("<tr style='height:500px' id='tr"+c+"'></tr>");
                }
                $("#tr"+c).append("<td> <img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5'"+
-" style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick=location.href='design'> <p align='center' style='margin-top: 5px; font-family:궁서체;'>"+p+"</p><p align='center' style='margin-top: 5px; font-family:궁서체;'>"+"가격 :&nbsp;"+uu+"</p><p align='center' style='margin-top: 5px; color:gray;'>"+"리뷰 :&nbsp;"+zz+"</p>");
+                     " style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick=location.href='design'> <p align='center' style='margin-top: 5px; font-family:궁서체;'>"+p+"</p> <p align='center' style='margin-top: 5px; font-family:궁서체;'>"+"가격 : &nbsp;"+uu+"</p> <p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p></td>");
             }
             number++;
          }
       });
+
    </script>
-   
+<%@include file="header.jsp" %>
    <div align="center">
-      <div>
+      <div style="margin-top: 150px;">
          <table id="table"></table>
       </div>
       <div id="num" style="display: flex; flex-flow:low; width: 600px;">
       </div>
    </div>
+ <!-- top버튼 -->
+<a id="backToTop" class="scrolltop" href="#">
+      <i class="fas fa-chevron-circle-up"></i>
+</a>
+<%@include file="footer.jsp" %>
 </body>
 </html>

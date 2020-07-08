@@ -16,7 +16,7 @@ align-items: center;
 
  }
 h1 {
-	margin: 0;
+   margin: 0;
     display: block;
     font-size: 2em;
     margin-block-start: 0.67em;
@@ -30,7 +30,7 @@ nav { color: gray; }
 a { text-decoration:none;  color: #000; !important  } 
 a:link { color: #000; text-decoration: none; } <!-- link : 방문전 링크 상태 -->
 a:visited {
-	color: #000; text-decoration: none; } <!-- visited : 방문후 링크 상태 -->
+   color: #000; text-decoration: none; } <!-- visited : 방문후 링크 상태 -->
 a:hover { color: #000; text-decoration: none; } <!-- hover : 마우스 오버했을 때 링크 상태 -->
 a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 링크 상태 -->
 
@@ -40,7 +40,7 @@ body {
 background: #EEE; }
 
 body, html {
-	
+   
  }
 
 /*//////////////////////////////////////////////////////////////////
@@ -69,13 +69,10 @@ body, html {
 
 /*---------------------------------------------*/
 input {
-	outline: none;
-	border: none;
+   
 }
 
 textarea {
-  outline: none;
-  border: none;
 }
 
 textarea:focus, input:focus {
@@ -104,17 +101,17 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 /*---------------------------------------------*/
 button {
-	outline: none !important;
-	border: none;
-	background: transparent;
+   outline: none !important;
+   border: none;
+   background: transparent;
 }
 
 button:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 iframe {
-	border: none !important;
+   border: none !important;
 }
 
 
@@ -139,12 +136,12 @@ iframe {
 [ login ]*/
 
 .limiter {
-	width: 100%;
+   width: 100%;
   margin: 0 auto;
 }
 
 .container-login100 {
-	width: 100%;
+   width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -225,6 +222,8 @@ iframe {
   height: 50px;
   border-radius: 25px;
   padding: 0 30px 0 68px;
+  outline: none;
+   border: none;
 }
 
 
@@ -304,6 +303,8 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 20px;
+  outline: none;
+   border: none;
 }
 
 .login100-form-btn-naver {
@@ -380,6 +381,8 @@ iframe {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+  outline: none;
+   border: none;
 }
 
 .login100-form-btn-login:hover {

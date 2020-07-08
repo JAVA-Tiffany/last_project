@@ -91,7 +91,7 @@ function pagereturn(){
 		function al() {
 			if (document.getElementById("id").value == "" || document.getElementById("pw").value == ""
 					||document.getElementById("pwc").value == "" || document.getElementById("name").value == "" ||
-					document.getElementById("add").value == "" || document.getElementById("phon").value == "") {
+					document.getElementById("addr").value == "" || document.getElementById("phon").value == "") {
 				alert("비어있는 칸이 존재합니다.")
 			} else {
 				alert("회원가입이 정상적으로 완료되었습니다!")
@@ -144,7 +144,7 @@ function pagereturn(){
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input type="text" id="add" placeholder="주소" class="input100" name="add">
+						<input type="text" id="addr" placeholder="주소" class="input100" name="addr">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>

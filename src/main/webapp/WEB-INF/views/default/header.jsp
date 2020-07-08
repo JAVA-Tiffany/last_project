@@ -99,7 +99,7 @@
 	<div id="fixed">
 		<div>
 			<h1>
-				<a href="/Tiffany/default/index.jsp" style="color: black;">Brand</a>
+				<a href="index" style="color: black;">Brand</a>
 			</h1>
 		</div>
 		<div>
@@ -161,7 +161,7 @@
 									LIST</a>
 							</c:when>
 							<c:otherwise>
-								<a href="../SHOP/cart.jsp" style="color: black;">CART</a>
+								<a href="cart" style="color: black;">CART</a>
 								<a href="#" style="color: black;">MYSHOP</a>
 								<a href="#" style="color: black;">WISH LIST</a>
 								<a href="#" style="color: black;">ORDER LIST</a>

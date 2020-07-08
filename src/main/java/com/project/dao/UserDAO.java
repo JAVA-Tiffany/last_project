@@ -19,6 +19,7 @@ public class UserDAO {
 		return sqlSession.selectOne(namepasce+".select_User",num);
 	}
 	public int insert(UserDTO dto) {
+		
 		return sqlSession.insert(namepasce+".insert_User",dto);
 	}
 	public int delete(String num) {

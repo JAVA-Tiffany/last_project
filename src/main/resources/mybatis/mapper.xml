@@ -11,13 +11,13 @@
 		select * from self_design where id=#{id}
 	</select>
 	<insert id="insert_User" parameterType="userdto">
-		insert into self_design values(#{id},#{pw},#{name},#{add},#{phon})
+		insert into self_design values(#{id},#{pw},#{name},#{addr},#{phon})
 	</insert>
 	<delete id="delete_User" parameterType="userdto">
 		delete self_design where num=#{num}
 	</delete>
 	<update id="update_User" parameterType="userdto">
-		update self_design set pw=#{pw}, name=#{name}, addr=#{add}, phon=#{phon} where id=#{id}
+		update self_design set pw=#{pw}, name=#{name}, addr=#{addr}, phon=#{phon} where id=#{id}
 	</update>
 	
 	<select id="drselectAll_List" resultType="dresslistdto">
@@ -51,5 +51,22 @@
 		delete from board_sys where bno=#{bno}
 	</delete>
 	
+		<!-- 모든 유저 장바구니 리스트 -->
+	<select id="selectAll_Userimg" resultType="userimgdto" parameterType="userimgdto">		<!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
+		select * from userimg
+	</select>
+	<select id="select_Userimg" resultType="userimgdto"  parameterType="userimgdto">
+		select * from userimg where id=#{id}
+	</select>
+	<insert id="insert_Userimg" parameterType="userimgdto">
+		insert into userimg values(#{img},#{id},#{product},#{cancelok},#{money})
+	</insert>
+<delete id="delete_Userimg" parameterType="userimgdto">
+      delete userimg where id=#{id} and img=#{img}
+   </delete>
+	
+<update id="update_Userimg" parameterType="userimgdto">
+      update userimg set cancelok=#{cancelok} where id=#{id} and img=#{img}
+   </update>
 	
 </mapper>

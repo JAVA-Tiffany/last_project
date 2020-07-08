@@ -1,35 +1,51 @@
 package com.project.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
+import com.project.controller.kr.co.bootpay.javaApache.BootpayApi;
+import com.project.controller.kr.co.bootpay.javaApache.model.request.RemoteForm;
 import com.project.dto.UserDTO;
+import com.project.dto.UserimgDTO;
 import com.project.service.ProjectService;
+import com.project.service.cartService;
 
 @Controller
 public class ProjectController {
 	@Autowired
 	private ProjectService service;
-	
-	
+
+	@Autowired
+	private cartService cartService;
+
 	@RequestMapping("index")
 	public String index_run() {
 		return "default/index";
 	}
-	
+
 	@RequestMapping("error")
 	public String error() {
 		return "login&join/alert";
 	}
-	
-	
+
+
 	@RequestMapping("loginchk")
 	public String loginch(@RequestParam String id, @RequestParam String pw,HttpServletRequest request) {
 		boolean chk = service.loginch(id,pw);
@@ -56,24 +72,99 @@ public class ProjectController {
 		service.idch(model,id);
 		return "login&join/join";
 	}
-	
-	@RequestMapping("design")
-	public String design() {
+
+	@PostMapping("design")
+	public String design(@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
+		model.addAttribute("img_name", imgname);
+		System.out.println(imgname);
+		model.addAttribute("img_money", imgmoney);
 		return "design/design";
 	}
+
+
+
 	@RequestMapping("tip")
 	public String tip() {
 		return "design/tip";
 	}
-	
-	@RequestMapping("cart")
-	public String cart() {
-		return "shop/cart";
+
+	@RequestMapping(value = "userimg_insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String userimg_insert(HttpServletRequest request, @RequestParam String userimg_in,@RequestParam String imgname, @RequestParam String imgmoney) {
+		System.out.println("userimg_in : " + userimg_in);
+		System.out.println("imgname : " + imgname);
+		System.out.println("imgmoney : " + imgmoney);
+		cartService.cart_insert(request, userimg_in, imgname, imgmoney);
+		return "장바구니 저장 완료";
 	}
-	
+
+	@RequestMapping("cart")
+	   public String cart(Model model,HttpServletRequest request) {
+	      HttpSession session = request.getSession();
+	      List<UserimgDTO> arr = cartService.cart_select(model,session.getAttribute("id").toString());
+	      ArrayList<Object> arrz= new ArrayList<Object>();
+	      for(int i=0;i<arr.size();i++) {
+	         String[] z=new String[6];
+	         z[0]=arr.get(i).getImg();
+	         z[1]=arr.get(i).getId();
+	         z[2]=arr.get(i).getProduct();
+	         z[3]=arr.get(i).getCancelok();
+	         z[4]=arr.get(i).getMoney();
+	         z[5]=String.valueOf(i);
+	         arrz.add(z);
+	      }
+	      model.addAttribute("cartlist",arrz);
+	      return "shop/cart";
+	   }
+	   @RequestMapping("listdel")
+	   public String cart_delect(HttpServletRequest request, @RequestParam String img) {
+	      System.out.println("img : " + img);
+	      String[] c = img.split("/");
+	      String m="";
+	      for(int i=4;i<c.length;i++) {
+	         m+=c[i];
+	         if(c.length-1!=i) {
+	        	 System.out.println(m);
+	            m+="/";
+	         }
+	      }
+	      System.out.println("m : "+m);
+	      cartService.cart_delete(request,m);
+	      return "redirect:cart";
+	   }
+
 	@RequestMapping("dress")
-	public String body(Model model) {
+	public String dress(Model model) {
 		service.dress(model);
 		return "default/dress";
 	}
+	@RequestMapping("earring")
+	public String earring(Model model) {
+		service.earring(model);
+		return "default/earring";
+	}
+	@RequestMapping("bag")
+	public String bag(Model model) {
+		service.bag(model);
+		return "default/bag";
+	}
+	
+	@RequestMapping("orderForm")
+	public String orderForm() {
+		return "shop/orderForm";
+	}
+	
+	@RequestMapping(value="buy", method = {RequestMethod.GET, RequestMethod.POST})
+	public String buy(Model model, @RequestParam(value="fpro", required=false) String fpro, @RequestParam(value="total", required=false) String total
+						, @RequestParam(value="sum", required=false) String sum) {
+		System.out.println(fpro);
+		System.out.println(total);
+		System.out.println(sum);
+		model.addAttribute("fpro", fpro);
+		model.addAttribute("total", total);
+		model.addAttribute("sum", sum);		
+		return "shop/buy";
+	}
+	
+
 }

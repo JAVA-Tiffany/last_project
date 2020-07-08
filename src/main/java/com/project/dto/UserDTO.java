@@ -4,7 +4,7 @@ public class UserDTO {
 	private String id;
 	private String pw;
 	private String name;
-	private String add;
+	private String addr;
 	private String phon;
 
 	public String getId() {
@@ -25,11 +25,11 @@ public class UserDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdd() {
-		return add;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAdd(String add) {
-		this.add = add;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 	public String getPhon() {
 		return phon;
