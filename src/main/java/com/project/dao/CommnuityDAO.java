@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.ReplyDTO;
 
 @Repository
 public class CommnuityDAO {
@@ -36,6 +37,13 @@ public class CommnuityDAO {
    }
 
    public void delete(CommnuityDTO dto) {
+	  List<ReplyDTO> arr =sqlSession.selectList(namepasce+".select_reply",dto.getBno());
+	  for(int i=0;i<arr.size();i++) {
+		  ReplyDTO reply = new ReplyDTO();
+		  reply.setBno(arr.get(i).getBno());
+		  reply.setRno(arr.get(i).getRno());
+		  sqlSession.delete(namepasce+".delete_reply", reply);
+	  }
       sqlSession.delete(namepasce+".delete_Commnuity",dto);
    }
 
