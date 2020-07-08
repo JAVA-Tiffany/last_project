@@ -31,6 +31,7 @@ public class ProjectService {
    private EarringListDAO ealistdao;
    
    public void insert(UserDTO dto) {
+	  
       userdao.insert(dto);
    }
    public void delete(String num) {
@@ -38,6 +39,10 @@ public class ProjectService {
    }
    public void update(UserDTO dto) {
       userdao.update(dto);
+   }
+   
+   public void select(Model model) {
+	   model.addAttribute("list",userdao.selectAll());
    }
    
    // 회원가입시 ID 확인

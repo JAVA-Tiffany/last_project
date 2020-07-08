@@ -5,14 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.project.dto.CommnuityDTO;
 
 @Repository
 public class CommnuityDAO {
-   @Inject
+   @Autowired
    private SqlSession sqlSession;
-
    
    public static final String namepasce="com.project.mybatis.myMapper";
    
@@ -35,8 +35,8 @@ public class CommnuityDAO {
       
    }
 
-   public void delete(CommnuityDTO dto) {
-      sqlSession.delete(namepasce+".delete_Commnuity",dto);
+   public void delete(int num) {
+      sqlSession.delete(namepasce+".delete_Commnuity",num);
    }
 
    public void update_save(CommnuityDTO dto) {

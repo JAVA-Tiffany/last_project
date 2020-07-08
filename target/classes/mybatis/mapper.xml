@@ -14,7 +14,7 @@
 		insert into self_design values(#{id},#{pw},#{name},#{addr},#{phon})
 	</insert>
 	<delete id="delete_User" parameterType="userdto">
-		delete self_design where num=#{num}
+		delete self_design where id=#{id}
 	</delete>
 	<update id="update_User" parameterType="userdto">
 		update self_design set pw=#{pw}, name=#{name}, addr=#{addr}, phon=#{phon} where id=#{id}
@@ -49,7 +49,7 @@
 		insert into board_sys (bno,title,content,writer) values((select nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
 	</insert>
 	<delete id="delete_Commnuity">
-		delete from board_sys where bno=#{bno}
+		delete from board_sys where bno=#{num}
 	</delete>
 	
 	<!-- 모든 유저 장바구니 리스트 -->
@@ -79,4 +79,25 @@
 	<delete id="delete_Myimg" parameterType="myimgdto">
 		delete my_img where id=#{id} and img=#{img}
 	</delete>
+	
+	<!-- Notice 게시물 관련 -->
+	<select id="selectAll_Notice" resultType="Noticedto">
+		select * from notice order by bno desc
+	</select>
+	<select id="view_Notice" resultType="Noticedto">
+		select * from notice where bno=#{bno}
+	</select>
+	<update id="count_Notice">
+		update notice set viewcnt = viewcnt + 1 where bno=#{bno}
+	</update>
+	<update id="update_Notice" parameterType="Noticedto">
+		update notice set title=#{title},content=#{content} where bno=#{bno}
+	</update>
+	<insert id="insert_Notice">
+		insert into notice (bno,title,content,writer) values((select nvl(max(bno)+1,1)from notice),#{title},#{content},'관리자' )
+	</insert>
+	<delete id="delete_Notice">
+		delete from notice where bno=#{num}
+	</delete>
+	
 </mapper>

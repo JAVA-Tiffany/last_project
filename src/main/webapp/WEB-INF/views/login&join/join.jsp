@@ -94,7 +94,6 @@ function pagereturn(){
 					document.getElementById("addr").value == "" || document.getElementById("phon").value == "") {
 				alert("비어있는 칸이 존재합니다.")
 			} else {
-				alert("회원가입이 정상적으로 완료되었습니다!")
 				user.submit()
 				opener.parent.location.reload();
 			}

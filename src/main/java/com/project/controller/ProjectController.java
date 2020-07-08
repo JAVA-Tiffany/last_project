@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.MyimgDTO;
 import com.project.dto.UserDTO;
@@ -37,28 +38,51 @@ public class ProjectController {
 	}
 
 	@RequestMapping("error")
-	public String error() {
+	public String error(@RequestParam String num,Model model) {
+		switch (num) {
+		case "1":
+			model.addAttribute("num",num);
+			return "login&join/alert";
+		case "2":
+			model.addAttribute("num",num);
+			return "login&join/alert";
+		default:
+			break;
+		}
 		return "login&join/alert";
 	}
 
 	@RequestMapping("loginchk")
-	public String loginch(@RequestParam String id, @RequestParam String pw, HttpServletRequest request) {
-		boolean chk = service.loginch(id, pw);
-		if (chk == true) {
-
-			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
-			session.setAttribute("pw", pw);
-			System.out.println(session.getAttribute("id"));
-			return "redirect:index";
-		} else {
-			return "redirect:login";
-		}
-	}
+	   public String loginch(@RequestParam String id, @RequestParam String pw,HttpServletRequest request,RedirectAttributes redirectattributer) {
+	      boolean chk = service.loginch(id,pw);
+	      if(chk==true) {
+	    	  if(id.equals("admin")) {
+	    		  HttpSession session = request.getSession();
+	    		  session.setAttribute("id", id);
+	    		  session.setAttribute("pw", pw);
+	    		  
+	    		  return "redirect:adminpage";
+	    	  }else {
+	    		  HttpSession session = request.getSession();
+	    		  session.setAttribute("id", id);
+	    		  session.setAttribute("pw", pw);
+	    		  return "redirect:index";
+	    	  }
+	        
+	      }else {
+	         return "redirect:error?num=1";
+	      }
+	   }
 
 	@RequestMapping("joinok")
 	public String joinok(UserDTO dto) {
-		service.insert(dto);
+		try {
+			service.insert(dto);
+		} catch (Exception e) {
+			System.out.println("동일한 아이디존재합니다");
+			return "redirect:error?num=2";
+		}
+		
 		return "redirect:index";
 	}
 
