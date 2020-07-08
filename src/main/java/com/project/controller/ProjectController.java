@@ -93,31 +93,6 @@ public class ProjectController {
 		return "login&join/join";
 	}
 
-	@PostMapping("design")
-	public String design(@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
-		model.addAttribute("img_name", imgname);
-		System.out.println(imgname);
-		model.addAttribute("img_money", imgmoney);
-		return "design/design";
-	}
-
-
-
-	@RequestMapping("tip")
-	public String tip() {
-		return "design/tip";
-	}
-
-	@RequestMapping(value = "userimg_insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	@ResponseBody
-	public String userimg_insert(HttpServletRequest request, @RequestParam String userimg_in,@RequestParam String imgname, @RequestParam String imgmoney) {
-		System.out.println("userimg_in : " + userimg_in);
-		System.out.println("imgname : " + imgname);
-		System.out.println("imgmoney : " + imgmoney);
-		cartservice.cart_insert(request, userimg_in, imgname, imgmoney);
-		return "장바구니 저장 완료";
-	}
-
 	@RequestMapping("cart")
 	   public String cart(Model model,HttpServletRequest request) {
 	      HttpSession session = request.getSession();

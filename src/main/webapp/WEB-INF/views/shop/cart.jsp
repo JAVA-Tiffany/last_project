@@ -23,6 +23,8 @@
 		$("#moneyTotal").val(moneysum);
 		$("#sum").val(countsum);
 		$("#total").val(parseInt($("#moneyTotal").val()) + 2500);
+		$("#sum2").val(countsum);
+		$("#total2").val(parseInt($("#moneyTotal").val()) + 2500);
 	}
 
 	$(function() {
@@ -33,7 +35,9 @@
 		}
 		$("#moneyTotal").val(moneysum);
 		$("#sum").val(countsum);
-		$("#total").val(parseInt($("#moneyTotal").val()) + 2500);
+		$("#total").val(parseInt($("#moneyTotal").text()) + 2500);
+		$("#sum2").val(countsum);
+		$("#total2").val(parseInt($("#moneyTotal").val()) + 2500);
 		
 	})
 	
@@ -145,10 +149,10 @@
 			<input type="hidden" id="total" name="total">
 			<table>
 				<tr>
-					<th colspan="5">총수량 : <input type="text" value="0"name="sum" id="sum" style="border: none;" disabled="disabled">
+					<th colspan="5">총수량 : <input type="text" value="0"name="sum" id="sum2" style="border: none;" disabled="disabled">
 					가격:<input type="text" value="0" name="moneyTotal" id="moneyTotal" style="border: none;" disabled="disabled"> 
 					배송비 : <input type="text" value="2500" name="coopang" style="border: none;" disabled="disabled"> 
-					합계 : <input type="text" value="0" name="total" id="total" style="border: none;" disabled="disabled">
+					합계 : <input type="text" value="0" name="total" id="total2" style="border: none;" disabled="disabled">
 					</th>
 				</tr>
 			</table>

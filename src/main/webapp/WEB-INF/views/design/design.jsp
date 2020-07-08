@@ -14,7 +14,6 @@
 <script src="resources/jquery-1.12.1-ui.js"></script>
 <script src="resources/html2canvas.js"></script>
 <script type="text/javascript">
-
    function partShot() { //특정부분 스크린샷 
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
       .then(function (canvas) { //jpg 결과값
@@ -88,7 +87,6 @@
 //     img[1].addEventListener('load',function(){
 //       ctx[1] = document.getElementById('myCanvas').getContext("2d");
 //         ctx[2] = document.getElementById('myCanvas2').getContext("2d");
-
 //         ctx[1].drawImage(img[1],0,0,300,150);
 //         ctx[2].drawImage(img[2],0,0,300,150);
         
@@ -102,18 +100,7 @@
       $('#file').click();
    }
     // file창이 종료가 되면 실행
-    function in_text() {
-    	alert("in_text")
-    	id="myCanvas"+count;
-		$('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
-		$("#image"+count).draggable();
-		ctx[count] = document.getElementById(id).getContext("2d");
-		ctx[count].font = '100px Arial';
-		ctx[count].fillText('입력', 50, 100);
-		count++;
-	}
-
-    function changeValue(obj){
+   function changeValue(obj){
       var form = $('form')[0];
       var formData = new FormData(form);
       $.ajax({
@@ -151,21 +138,17 @@
          
    }
     
-    function in_text() {
-//        alert("in_text")
-//        id="myCanvas"+count
-//        $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
-//       ctx[count] = document.getElementById(id).getContext("2d");
-//        ctx[count].save();
-//        ctx[count].font = '30px';
-//        ctx[count].fillStyle = 'rgba(255,0,255,1)'; // 텍스트 채우기 색깔 지정
-//        ctx[count].fillText('Hello World', 100, 60, 200);
-//        ctx[count].fillRect(100,60, 200, 200);
-//        ctx[count].restore();
-//       count++;
+   function in_text() {
+      alert("in_text")
+      id="myCanvas"+count;
+      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px;' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $("#image"+count).draggable();
+      ctx[count] = document.getElementById(id).getContext("2d");
+      ctx[count].font = '100px Arial';
+      ctx[count].fillText('입력', 50, 100);
+      count++;
    }
-
-    
+   
     function imgclick(d) {
        ch=d;
        for(i=2;i<count+1;i++){
@@ -212,7 +195,7 @@
    
    url='${img_name}'
    $(function(){
-      $("#zz").css("background-image", "url('resources/img/desgin/"+url+".png' )"); 
+      $("#zz").css("background-image", "url('resources/img/bag desgin/"+url+".png' )"); 
    });
    
 //    좌우 반전
@@ -326,18 +309,17 @@
    
    //배송안내
    function delivery(){
-	   window.open("","delivery","width=700,height=700");
+      window.open("","delivery","width=700,height=700");
    }
    //청약철회
    function quality(){
-	   window.open("","quality","width=700,height=700")
+      window.open("","quality","width=700,height=700")
    }
-
 </script>
 <body >
    <jsp:include page="../default/header.jsp"/>
-   <div style="width: 900px; margin: 0 auto; margin-top: 100px; ">
-      <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
+   <div style="width: 1500px; margin: 0 auto; margin-top: 100px; ">
+      <div style="display: flex; flex-flow:row; width: 700px; margin-left: 200px; ">
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
             <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>
          </div>
@@ -390,7 +372,7 @@
                <div style="text-align: center; margin-top: 10px;"> <p>디자인하는 방법</p> </div>
             </div>
          </div>
-         <div style="width: 500px; height: 500px; border: 1px solid #eaedf0;" id="zz">
+         <div style="background-color:green; width: 600px; height: 600px; border: 1px solid #eaedf0;" id="zz">
             <div style="width:174px; height:261px; border: 2px solid black; margin-left: 160px; margin-top: 132px;" id="in">
 <!--                <div id="image1" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
@@ -407,143 +389,137 @@
             <img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="in_text()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
          </div>
-         <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 200px;">
-		상품명<br>
-		가격<br><br>
-		<button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button><br>
-		<br>
-		색상 - 클릭되는 순간 바뀜<br>
-		<div style="display: flex; flex: row;">
-			<div style="background-color: #fefefe; border: 1px solid gray; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-			<div style="background-color: #ffee49; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"" ></div> 
-			<div style="background-color: #fa733c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #dc3c78; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #8bdfff; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #8be31b; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #06a132; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #1f5bbc; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div>
-		</div>
-		<div style="display: flex; flex: row;">
-			<div style="background-color: #9d0d1c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #a5a5aa; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #0a1429; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #080808; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-			<div style="background-color: #f8d6d5; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
-		</div>
-		<br>
-		
-		
-<!-- 		귀걸이랑 가방은 해당안됨 -->
-		사이즈
-		<div style="display: flex; flex: row;">
-			<ul style="list-style:none; margin:0; padding:0;">
-				<li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">S</li>
-				<li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">M</li>
-				<li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">XL</li>
-				<li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">2XL</li>
-			</ul>
-		</div>
-	</div>
-<!-- 	<div onclick="partShot()" style="position: absolute; width: 380px; left: 50%; transform: translateX(-50%); height: 56px; font-size: 14px; text-align: center; line-height: 58px; color: #fff; font-weight: 300; background-color: #212529; cursor: pointer; bottom: 100px; margin-left: 520px;" >장바구니 담기</div> -->
+         <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
+      상품명<br>
+      가격<br><br>
+      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button><br>
+      <br>
+      색상 - 클릭되는 순간 바뀜<br>
+      <div style="display: flex; flex: row;">
+         <div style="background-color: #fefefe; border: 1px solid gray; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
+         <div style="background-color: #ffee49; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"" ></div> 
+         <div style="background-color: #fa733c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #dc3c78; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #8bdfff; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #8be31b; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #06a132; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #1f5bbc; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div>
+      </div>
+      <div style="display: flex; flex: row;">
+         <div style="background-color: #9d0d1c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #a5a5aa; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #0a1429; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #080808; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+         <div style="background-color: #f8d6d5; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;""></div> 
+      </div>
+      <br>
+      
+      
+<!--       귀걸이랑 가방은 해당안됨 -->
+      사이즈
+      <div style="display: flex; flex: row;">
+         <ul style="list-style:none; margin:0; padding:0;">
+            <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">S</li>
+            <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">M</li>
+            <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">XL</li>
+            <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">2XL</li>
+         </ul>
+      </div>
+   </div>
+<!--    <div onclick="partShot()" style="position: absolute; width: 380px; left: 50%; transform: translateX(-50%); height: 56px; font-size: 14px; text-align: center; line-height: 58px; color: #fff; font-weight: 300; background-color: #212529; cursor: pointer; bottom: 100px; margin-left: 520px;" >장바구니 담기</div> -->
       </div>
       
-      <!-- 	밑에 글씨들~ -->
+      <!--    밑에 글씨들~ -->
 <div>
-	<div style="padding-top:0; border-top: 0 none; display: block;">
-	<p><strong>상품 정보</strong></p>
-		<div>
-			<p>※모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.</p>
-			<p>남녀공용<br>도톰한 17수 라운드 티셔츠 입니다.<br>오래입어도 쉽게 모양이 변하지 않는 상품입니다.</p>
-			<ul>
-				<li>소재 : 면100%</li>
-				<li>제조사 : Printstar</li>
-				<li>제조국 : Made in China</li>
-				<li>사이즈 : S,M,L,XL</li>
-				<li>신축성 : 신축성 좋음</li>
-				<li>감촉 : 부드러운 감촉</li>
-				<li>두께 : 도톰한 소재</li>
-			</ul>
-			<p><strong>세탁방법</strong></p>
-			<ul>
-				<li>드라이크리닝 또는 단독 손세탁가능합니다.</li>
-				<li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li>
-				<li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li>
-			</ul>
-			<p><strong>MODEL SIZE</strong></p>
-			<ul>
-				<li>남자 착용사이즈 화이트 XL, 키 186, 상의 34, 허리 28, 신발 280</li>
-				<li>여자 착용사이즈 블랙 M, 키 174, 상의 33.5, 허리 23, 신발 250</li>
-			</ul>
-			</div>
-			<div style="display: none;">
-				<div>
-			</div>
-			<img src="" alt="" />
-			<div></div>
-			<div "></div>
-			</div>
-			</div>
-			</div>
-			<div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
-				<img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="change()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/upload.png" style="width: 100px;height: 100px;" onclick="uploadBtn()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="mying()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="in_text()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-				<img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-			<div>
-			<div>
-			<span><strong>사이즈 정보</strong></span>
-			<span></span>
-			</div>
-			<div>
-			<table border="1" style="width:100%; -webkit-tab-hightlight-color: transparent; border-spacing: 2px; letter-spacing: -.1px; table-layout: fixed; border-collapse: collapse; text-align: center; display: table; box-sizing: border-box; border-spacing: 2px; border-color: red/*#e9ecef*/;">
-				<tr style="display: table-row; vertical-align: inherit; background-color: #fafafa;">
-					<th>Size (cm)</th>
-					<th>S</th>
-					<th>M</th>
-					<th>L</th>
-					<th>XL</th>
-				</tr>
-				<tr>
-					<th>총기장</th>
-					<td>67</td>
-					<td>72</td>
-					<td>73</td>
-					<td>77</td>
-				</tr>
-				<tr>
-					<th>어깨넓이</th>
-					<td>50</td>
-					<td>52</td>
-					<td>55</td>
-					<td>57</td>
-				</tr>
-				<tr>
-					<th>가슴둘레</th>
-					<td>55</td>
-					<td>58</td>
-					<td>62</td>
-					<td>65.5</td>
-				</tr>
-				<tr>
-					<th>소매길이</th>
-					<td>24</td>
-					<td>26</td>
-					<td>26.5</td>
-					<td>28</td>
-				</tr>
-			</table>
-			<div has_size_info_url="false">
-				<ul>
-					<li>상세 사이즈는 측정 방법과 위치에 따라 1~3cm 오차가 발생할 수 있습니다. 기재된 상세 사이즈와 실측
+   <div style="padding-top:0; border-top: 0 none; display: block;">
+   <p><strong>상품 정보</strong></p>
+      <div>
+         <p>※모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.</p>
+         <p>남녀공용<br>도톰한 17수 라운드 티셔츠 입니다.<br>오래입어도 쉽게 모양이 변하지 않는 상품입니다.</p>
+         <ul>
+            <li>소재 : 면100%</li>
+            <li>제조사 : Printstar</li>
+            <li>제조국 : Made in China</li>
+            <li>사이즈 : S,M,L,XL</li>
+            <li>신축성 : 신축성 좋음</li>
+            <li>감촉 : 부드러운 감촉</li>
+            <li>두께 : 도톰한 소재</li>
+         </ul>
+         <p><strong>세탁방법</strong></p>
+         <ul>
+            <li>드라이크리닝 또는 단독 손세탁가능합니다.</li>
+            <li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li>
+            <li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li>
+         </ul>
+         <p><strong>MODEL SIZE</strong></p>
+         <ul>
+            <li>남자 착용사이즈 화이트 XL, 키 186, 상의 34, 허리 28, 신발 280</li>
+            <li>여자 착용사이즈 블랙 M, 키 174, 상의 33.5, 허리 23, 신발 250</li>
+         </ul>
+         </div>
+         <div style="display: none;">
+            <div>
+         </div>
+         <img src="" alt="" />
+         <div></div>
+         <div "></div>
+         </div>
+         </div>
+         </div>
+         <div>
+         <div>
+         <span><strong>사이즈 정보</strong></span>
+         <span></span>
+         </div>
+         <div>
+         <table border="1" style="width:100%; -webkit-tab-hightlight-color: transparent; border-spacing: 2px; letter-spacing: -.1px; table-layout: fixed; border-collapse: collapse; text-align: center; display: table; box-sizing: border-box; border-spacing: 2px; border-color: red/*#e9ecef*/;">
+            <tr style="display: table-row; vertical-align: inherit; background-color: #fafafa;">
+               <th>Size (cm)</th>
+               <th>S</th>
+               <th>M</th>
+               <th>L</th>
+               <th>XL</th>
+            </tr>
+            <tr>
+               <th>총기장</th>
+               <td>67</td>
+               <td>72</td>
+               <td>73</td>
+               <td>77</td>
+            </tr>
+            <tr>
+               <th>어깨넓이</th>
+               <td>50</td>
+               <td>52</td>
+               <td>55</td>
+               <td>57</td>
+            </tr>
+            <tr>
+               <th>가슴둘레</th>
+               <td>55</td>
+               <td>58</td>
+               <td>62</td>
+               <td>65.5</td>
+            </tr>
+            <tr>
+               <th>소매길이</th>
+               <td>24</td>
+               <td>26</td>
+               <td>26.5</td>
+               <td>28</td>
+            </tr>
+         </table>
+         <div has_size_info_url="false">
+            <ul>
+               <li>상세 사이즈는 측정 방법과 위치에 따라 1~3cm 오차가 발생할 수 있습니다. 기재된 상세 사이즈와 실측
         오차(1~3cm)에 대한 불량처리는 어려우며 교환 및 환불 사유가 될 수 없습니다.</li><li>마플에서 판매되는 상품은 각 브랜드, 도매처에서 각각의 샘플링을 거쳐 공급되는 제품이므로, 특정
               브랜드 또는 가지고 계신 상품과 상세 사이즈가 다를 수 있습니다.<br />실측구매 시 상세 사이즈를 반드시 확인 부탁드립니다.
-              		</li>
-              		<li>사이즈 측정은 상품을 바닥에 펼친 후 끝선과 끝선까지 측정해야하며, 신축성 있는 소재일 경우,
+                    </li>
+                    <li>사이즈 측정은 상품을 바닥에 펼친 후 끝선과 끝선까지 측정해야하며, 신축성 있는 소재일 경우,
               잡아당기지 않고 바닥에 펼쳐진 상태 그대로 측정해야합니다. 오차범위 이외 잘못된 측정으로 인한
               반품 및 교환은 어려운 점 양해 부탁드립니다.
-              		</li>
-              	</ul>
+                    </li>
+                 </ul>
             </div>
             </div>
             </div>
@@ -568,20 +544,20 @@
       <img src="" alt="" />
       </div>
       <h2>주의사항</h2>
-      	<ul>
-      		<li>배경이 투명한 PNG의 경우, CMYK 색상모드로 웹용(Save for Web) 저장해주세요.<br />배경이 꽉 찬 JPG의
+         <ul>
+            <li>배경이 투명한 PNG의 경우, CMYK 색상모드로 웹용(Save for Web) 저장해주세요.<br />배경이 꽉 찬 JPG의
         경우, RGB 색상모드로 저장해주세요.<br />이미지 크기는 최소 2500~3500px / 해상도는 150dpi 이상으로
         제작해주세요.</li><li>상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를 확인해 주세요.
-        	</li>
-        	<li>작은 원본 이미지를 사이즈 규격에 맞게 임의로 크게 확대할 경우 인쇄 시 화질이 깨질 수 있습니다.
-        	</li>
-        	<li>상품 실측 사이즈를 반드시 확인해 주세요.
-        	</li>
-        	<li>인쇄를 원하시는 위치가 있을 시 [상품 제작 요청사항]에 남겨주시거나, 1:1 상담 또는
+           </li>
+           <li>작은 원본 이미지를 사이즈 규격에 맞게 임의로 크게 확대할 경우 인쇄 시 화질이 깨질 수 있습니다.
+           </li>
+           <li>상품 실측 사이즈를 반드시 확인해 주세요.
+           </li>
+           <li>인쇄를 원하시는 위치가 있을 시 [상품 제작 요청사항]에 남겨주시거나, 1:1 상담 또는
         고객센터(help@marpple.com)로 메일 주세요. 따로 위치 지정 요청이 없으면 가장 보편적인 위치로
         인쇄해드립니다.
-        	</li><li>모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
-        	</li>
+           </li><li>모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
+           </li>
         </ul>
         <h2>교환/환불 불가 사항</h2>
         <p>마플의 모든 상품은 고객 주문에 따라 개별 제작되는 방식으로 단순 변심을 포함, 아래의 경우에는 교환 /
@@ -640,18 +616,15 @@
     
           
 <!--     여기까지 -->
-
-	<div border="1" style="width: 992px; margin: 70px auto 50px; text-align: center; display: block; font-size: 14px;">
-		<input type="button" value="배송안내" onclick="window.open('delivery','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 100px;">
-		<input type="button" value="품질보증/청약철회 안내" onclick="window.open('quality','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 80px;">
-	</div>
+   <div border="1" style="width: 992px; margin: 70px auto 50px; text-align: center; display: block; font-size: 14px;">
+      <input type="button" value="배송안내" onclick="window.open('delivery','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 100px;">
+      <input type="button" value="품질보증/청약철회 안내" onclick="window.open('quality','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 80px;">
+   </div>
       
    </div>
-
    <form id="form">
    <input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
    </form>
-
    <!-- 일부분 부분-->
    <!-- 결과화면을 그려줄 canvas -->
    <canvas id="canvas" width="900" height="600"
