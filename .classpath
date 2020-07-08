@@ -30,6 +30,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/jang/0703/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="D:/Programming/Workspace/0703/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
