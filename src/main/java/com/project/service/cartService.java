@@ -39,7 +39,6 @@ public class cartService {
       dto.setId(session.getAttribute("id").toString());
       dto.setImg(img);
       dao.delete(dto);
-//      System.out.println("img이름 : "+img.split("/")[2]);
       // 삭제할 파일 경로
       File file = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\"+img.split("/")[2]); 
       if( file.exists() ){ 
