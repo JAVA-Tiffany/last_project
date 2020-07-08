@@ -35,8 +35,8 @@ public class CommnuityDAO {
       
    }
 
-   public void delete(int num) {
-      sqlSession.delete(namepasce+".delete_Commnuity",num);
+   public void delete(CommnuityDTO dto) {
+      sqlSession.delete(namepasce+".delete_Commnuity",dto);
    }
 
    public void update_save(CommnuityDTO dto) {

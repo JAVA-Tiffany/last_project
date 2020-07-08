@@ -45,11 +45,11 @@
 	<update id="update_Commnuity" parameterType="comdto">
 		update board_sys set title=#{title},content=#{content} where bno=#{bno}
 	</update>
-	<insert id="insert_Commnuity">
+	<insert id="insert_Commnuity" parameterType="comdto">
 		insert into board_sys (bno,title,content,writer) values((select nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
 	</insert>
-	<delete id="delete_Commnuity">
-		delete from board_sys where bno=#{num}
+	<delete id="delete_Commnuity" parameterType="comdto">
+		delete from board_sys where bno=#{bno}
 	</delete>
 	
 	<!-- 모든 유저 장바구니 리스트 -->

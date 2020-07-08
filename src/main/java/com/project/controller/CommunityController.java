@@ -112,8 +112,8 @@ public class CommunityController {
    }
    
    @RequestMapping("delete")
-   public String delete(@RequestParam int num) {
-      service.delete(num);
+   public String delete(CommnuityDTO dto) {
+      service.delete(dto);
       return "redirect:list";
    }
    
