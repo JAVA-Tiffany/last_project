@@ -43,6 +43,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 
 <script src="resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+    
       var size= ${listAll.size()}
       var ch=1;
       if(size>10){
@@ -101,7 +102,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 
 <div align="center" class="div1">
    <table border="0">
-      <caption><font style="font: 400 30px 'Poppins',sans-serif;">Q/A<br></font></caption>
+      <caption><font color="333333" style="font: 400 30px 'Poppins',sans-serif;">Q/A<br></font></caption>
          <tr>
             <th style="width: 10%;">번호</th>
             <th style="width: 50%;">제목</th>

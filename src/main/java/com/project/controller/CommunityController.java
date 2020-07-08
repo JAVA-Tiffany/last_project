@@ -46,25 +46,25 @@ public class CommunityController {
       ArrayList<String> a2=new ArrayList<String>();
       ArrayList<String> a4=new ArrayList<String>();
       for(int i=0;i<arr.size();i++) {
-    	  a1.add("'"+arr.get(i).getWriter()+"'");
-    	  String[] z=arr.get(i).getContent().split("");
-    	  String sum="";
-    	  int a=0;
-    	  for(int x=0;x<z.length-1;x++) {
-    		  if(z[x+1].equals("\n")) {
-    			  sum+="'"+"\n+'";
-    			  a=1;
-    		  }else {
-    			  if(a==0) {
-    				  sum+=z[x];
-    			  }else {
-    				  a=0;
-    			  }
-    		  }
-    	  }
-    	  arr.get(i).setContent(sum);
-    	  a2.add("'"+arr.get(i).getContent()+"'");
-    	  a4.add("'"+arr.get(i).getRegDate()+"'");
+         a1.add("'"+arr.get(i).getWriter()+"'");
+         String[] z=arr.get(i).getContent().split("");
+         String sum="";
+         int a=0;
+         for(int x=0;x<z.length-1;x++) {
+            if(z[x+1].equals("\n")) {
+               sum+="'"+"\n+'";
+               a=1;
+            }else {
+               if(a==0) {
+                  sum+=z[x];
+               }else {
+                  a=0;
+               }
+            }
+         }
+         arr.get(i).setContent(sum);
+         a2.add("'"+arr.get(i).getContent()+"'");
+         a4.add("'"+arr.get(i).getRegDate()+"'");
       }
       model.addAttribute("writer_view", a1);
       model.addAttribute("comment_view", a2);
@@ -74,16 +74,18 @@ public class CommunityController {
       model.addAttribute("id", session.getAttribute("id").toString());
       return "community/view";
    }
+   
    @RequestMapping(value="reply", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
    public String reply(@RequestParam String bno,@RequestParam String comnet,@RequestParam String writer) {
-	   ReplyDTO dto = new ReplyDTO();
-	   dto.setBno(Integer.valueOf(bno));
-	   dto.setContent(comnet);
-	   dto.setWriter(writer);
-	   replyService.insert(dto);
-	   return "댓글 입력";
+      ReplyDTO dto = new ReplyDTO();
+      dto.setBno(Integer.valueOf(bno));
+      dto.setContent(comnet);
+      dto.setWriter(writer);
+      replyService.insert(dto);
+      return "댓글 입력";
    }
+
    
    @RequestMapping("write")
    public String write() {
