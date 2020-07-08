@@ -28,17 +28,7 @@
    }
 
    $(function() {
-      $("#fpro").val($("#Pname").text());
-      for(i = 0; i < size; i++){
-         moneysum+=parseInt($("#mos" + i).text());
-         countsum+=parseInt($("#count" + i).text());
-      }
-      $("#moneyTotal").val(moneysum);
-      $("#sum").val(countsum);
-      $("#total").val(parseInt($("#moneyTotal").text()) + 2500);
-      $("#sum2").val(countsum);
-      $("#total2").val(parseInt($("#moneyTotal").val()) + 2500);
-      
+	   result()
    })
    
    

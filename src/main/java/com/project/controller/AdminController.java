@@ -74,7 +74,7 @@ public class AdminController {
 	public String DelBoard(@RequestParam String num) {
 		String[] arr = num.split(" ");
 		for(int i=0;i<arr.length;i++) {
-			serviceCom.delete(Integer.parseInt(arr[i]));
+//			serviceCom.delete(Integer.parseInt(arr[i]));
 		}
 		
 		return "redirect:acboard";
