@@ -82,4 +82,14 @@ public class DesignController {
 		}
 		return "design/change";
 	}
+	
+	@RequestMapping("delivery")
+	public String delivery() {
+		return "design/delivery";
+	}
+	
+	@RequestMapping("quality")
+	public String quality() {
+		return "design/quality";
+	}
 }
