@@ -38,7 +38,7 @@ public class makePngFileService {
 			bis.close();
 
 			// write the image to a file
-			File outputfile = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
+			File outputfile = new File("C:\\Users\\Jang\\Desktop\\workspase-boot\\last_project\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
 //			System.out.println(image);
 			System.out.println(outputfile);
 			ImageIO.write(image, "png", outputfile); // 파일생성
