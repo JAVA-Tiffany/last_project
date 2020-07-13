@@ -29,6 +29,14 @@
         transition: all 0.5s ease-in-out;
       }
 </style>
+<script src="resources/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	function data_move(d) {
+		$("#index_type_text").val(d);
+		alert($("#index_type_text").val());
+		index_form.submit();
+	}
+</script>
 <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
 <link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
@@ -45,33 +53,33 @@
 
 <!-- <font class="font" size="7">나만의 상품</font> -->
 <!-- 귀걸이 -->
-<div class="img1" onclick="location.href='earring'">
-<img src="resources/img/2.jpg" onclick="location.href='earring'" style=" padding-left: 500px;padding-top:50px; width: 600px; ">
-<img src="resources/img/5.png" onclick="location.href='earring'" style=" padding-top:50px; width: 500px; height: 800px;  "></div>
+<div class="img1" onclick="data_move('earring')">
+<img src="resources/img/2.jpg" onclick="data_move('earring')'" style=" padding-left: 500px;padding-top:50px; width: 600px; ">
+<img src="resources/img/5.png" onclick="data_move('earring')" style=" padding-top:50px; width: 500px; height: 800px;  "></div>
 
 
-<div class="img2" onclick="location.href='earring'">
-<img src="resources/img/04.jpg" onclick="location.href='earring'" style="padding-left: 100px; padding-top:50px; width: 500px;">
-<img src="resources/img/3.jpg" onclick="location.href='earring'" style="padding-left: 500px; width: 400px;" ></div>
+<div class="img2" onclick="data_move('earring')">
+<img src="resources/img/04.jpg" onclick="data_move('earring')" style="padding-left: 100px; padding-top:50px; width: 500px;">
+<img src="resources/img/3.jpg" onclick="data_move('earring')" style="padding-left: 500px; width: 400px;" ></div>
 
 <!-- 가방  -->
-<div class="img3" onclick="location.href='bag'">
-<img src="resources/img/10.JPG" onclick="location.href='bag'" style=" padding-left: 500px;padding-top:50px; width: 600px; ">
-<img src="resources/img/11.png" onclick="location.href='bag'" style=" padding-top:50px; width: 500px; height: 800px;  "></div>
+<div class="img3" onclick="data_move('bag')">
+<img src="resources/img/10.JPG" onclick="data_move('bag')" style=" padding-left: 500px;padding-top:50px; width: 600px; ">
+<img src="resources/img/11.png" onclick="data_move('bag')" style=" padding-top:50px; width: 500px; height: 800px;  "></div>
 
-<div class="img4" onclick="location.href='bag'" >
-<img src="resources/img/6.png" onclick="location.href='bag'" style="padding-left: 100px; padding-top:50px; width: 500px;">
-<img src="resources/img/12.png" onclick="location.href='bag'" style="padding-left: 500px; width: 400px;" ></div>
+<div class="img4" onclick="data_move('bag')" >
+<img src="resources/img/6.png" onclick="data_move('bag')" style="padding-left: 100px; padding-top:50px; width: 500px;">
+<img src="resources/img/12.png" onclick="data_move('bag')" style="padding-left: 500px; width: 400px;" ></div>
 
 <!-- 의류 -->
 
-<div class="img5" onclick="location.href='dress'">
-<img src="resources/img/15.png" onclick="location.href='dress'" style=" padding-left: 500px;padding-top:50px; width: 500px; ">
-<img src="resources/img/16.png" onclick="location.href='dress'" style="  "></div>
+<div class="img5" onclick="data_move('dress')">
+<img src="resources/img/15.png" onclick="data_move('dress')" style=" padding-left: 500px;padding-top:50px; width: 500px; ">
+<img src="resources/img/16.png" onclick="data_move('dress')" style="  "></div>
 
-<div class="img6" onclick="location.href='dress'">
-<img src="resources/img/13.png" onclick="location.href='dress'" style="padding-left: 100px; padding-top:50px; width: 500px;">
-<img src="resources/img/14.png" onclick="location.href='dress'" style="padding-left: 500px; width: 400px;" ></div>
+<div class="img6" onclick="data_move('dress')">
+<img src="resources/img/13.png" onclick="data_move('dress')" style="padding-left: 100px; padding-top:50px; width: 500px;">
+<img src="resources/img/14.png" onclick="data_move('dress')" style="padding-left: 500px; width: 400px;" ></div>
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
@@ -93,6 +101,10 @@
 <a id="backToTop" class="scrolltop" href="#">
       <i class="fas fa-chevron-circle-up"></i>
 </a>
+
+<form action="data" method="post" name="index_form">
+	<input type="hidden" name="type" id="index_type_text">
+</form>
 
 <%@include file="footer.jsp" %>
 

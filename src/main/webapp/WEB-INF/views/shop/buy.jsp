@@ -1,19 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
 <head>
-   <title>Home</title>
+<title>Home</title>
 </head>
 
 <body>
-<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
-<script>
+   <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js"
+      type="application/javascript"></script>
+   <script>
 BootPay.request({
    price: '${total}', 
    application_id: "5efe7c794f74b40021f2c0f2",
    name: '${fpro} and others ${sum}', 
-   pg: '',
-   method: '', 
+   pg: 'inicis',
+   method: 'card', 
    show_agree_window: 1, 
    items: [
       {
@@ -27,7 +28,7 @@ BootPay.request({
       }
    ],
    user_info: {
-      username: '장승',
+      username: '장승호',
       email: 'rechardjang@naver.com',
       addr: '인천 서창남순환로200 101동 1103호',
       phone: '010-5772-5132'

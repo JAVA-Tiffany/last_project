@@ -49,26 +49,26 @@ public class ProjectController {
 	}
 
 	@RequestMapping("loginchk")
-	   public String loginch(@RequestParam String id, @RequestParam String pw,HttpServletRequest request,RedirectAttributes redirectattributer) {
-	      boolean chk = service.loginch(id,pw);
-	      if(chk==true) {
-	    	  if(id.equals("admin")) {
-	    		  HttpSession session = request.getSession();
-	    		  session.setAttribute("id", id);
-	    		  session.setAttribute("pw", pw);
-	    		  
-	    		  return "redirect:adminpage";
-	    	  }else {
-	    		  HttpSession session = request.getSession();
-	    		  session.setAttribute("id", id);
-	    		  session.setAttribute("pw", pw);
-	    		  return "redirect:index";
-	    	  }
-	        
-	      }else {
-	         return "redirect:error?num=1";
-	      }
-	   }
+	public String loginch(@RequestParam String id, @RequestParam String pw,HttpServletRequest request,RedirectAttributes redirectattributer) {
+		boolean chk = service.loginch(id,pw);
+		if(chk==true) {
+			if(id.equals("admin")) {
+				HttpSession session = request.getSession();
+				session.setAttribute("id", id);
+				session.setAttribute("pw", pw);
+
+				return "redirect:adminpage";
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("id", id);
+				session.setAttribute("pw", pw);
+				return "redirect:index";
+			}
+
+		}else {
+			return "redirect:error?num=1";
+		}
+	}
 
 	@RequestMapping("joinok")
 	public String joinok(UserDTO dto) {
@@ -78,13 +78,24 @@ public class ProjectController {
 			System.out.println("동일한 아이디존재합니다");
 			return "redirect:error?num=2";
 		}
-		
+
 		return "redirect:index";
 	}
 
 	@RequestMapping("join")
 	public String join() {
 		return "login&join/join";
+	}
+
+	@RequestMapping("myinfo")
+	public String myinfo(Model model,HttpServletRequest request) {
+		service.myinfo(model, request);
+		return "login&join/myinfo";
+	}
+	@RequestMapping("info_change")
+	public String info_change(UserDTO dto) {
+		service.update(dto);
+		return "redirect:index";
 	}
 
 	@RequestMapping("idch")
@@ -95,72 +106,74 @@ public class ProjectController {
 
 
 	@RequestMapping("cart")
-	   public String cart(Model model,HttpServletRequest request) {
-	      HttpSession session = request.getSession();
-	      List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
-	      ArrayList<Object> arrz= new ArrayList<Object>();
-	      for(int i=0;i<arr.size();i++) {
-	         String[] z=new String[6];
-	         z[0]=arr.get(i).getImg();
-	         z[1]=arr.get(i).getId();
-	         z[2]=arr.get(i).getProduct();
-	         z[3]=arr.get(i).getCancelok();
-	         z[4]=arr.get(i).getMoney();
-	         z[5]=String.valueOf(i);
-	         arrz.add(z);
-	      }
-	      model.addAttribute("cartlist",arrz);
-	      return "shop/cart";
-	   }
-	   @RequestMapping("listdel")
-	   public String cart_delect(HttpServletRequest request, @RequestParam String img) {
-	      System.out.println("img : " + img);
-	      String[] c = img.split("/");
-	      String m="";
-	      for(int i=4;i<c.length;i++) {
-	         m+=c[i];
-	         if(c.length-1!=i) {
-	        	 System.out.println(m);
-	            m+="/";
-	         }
-	      }
-	      System.out.println("m : "+m);
-	      cartservice.cart_delete(request,m);
-	      return "redirect:cart";
-	   }
+	public String cart(Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
+		ArrayList<Object> arrz= new ArrayList<Object>();
+		for(int i=0;i<arr.size();i++) {
+			String[] z=new String[7];
+			z[0]=arr.get(i).getImg();
+			z[1]=arr.get(i).getId();
+			z[2]=arr.get(i).getProduct();
+			z[3]=arr.get(i).getCancelok();
+			z[4]=arr.get(i).getMoney();
+			z[5]=String.valueOf(i);
+			z[6]=arr.get(i).getNum();
+			arrz.add(z);
+		}
+		model.addAttribute("cartlist",arrz);
+		return "shop/cart";
+	}
+	@RequestMapping("listdel")
+	public String cart_delect(HttpServletRequest request, @RequestParam String img) {
+		System.out.println("img : " + img);
+		String[] c = img.split("/");
+		String m="";
+		for(int i=4;i<c.length;i++) {
+			m+=c[i];
+			if(c.length-1!=i) {
+				System.out.println(m);
+				m+="/";
+			}
+		}
+		System.out.println("m : "+m);
+		cartservice.cart_delete(request,m);
+		return "redirect:cart";
+	}
 
-	@RequestMapping("dress")
-	public String dress(Model model) {
-		service.dress(model);
-		return "default/dress";
-	}
-	@RequestMapping("earring")
-	public String earring(Model model) {
-		service.earring(model);
-		return "default/earring";
-	}
-	@RequestMapping("bag")
-	public String bag(Model model) {
-		service.bag(model);
-		return "default/bag";
+	@RequestMapping("data")
+	public String data(Model model,@RequestParam String type) {
+		service.data(model,type);
+		if(type.equals("dress")) {
+			return "default/dress";
+		}else if(type.equals("bag")) {
+			return "default/dress";
+		}else {
+			return "default/earring";
+		}
 	}
 	
+
 	@RequestMapping("orderForm")
 	public String orderForm() {
 		return "shop/orderForm";
 	}
-	
+
 	@RequestMapping(value="buy", method = {RequestMethod.GET, RequestMethod.POST})
 	public String buy(Model model, @RequestParam(value="fpro", required=false) String fpro, @RequestParam(value="total", required=false) String total
-						, @RequestParam(value="sum", required=false) String sum) {
+			, @RequestParam(value="sum", required=false) String sum) {
 		System.out.println(fpro);
 		System.out.println(total);
 		System.out.println(sum);
 		model.addAttribute("fpro", fpro);
 		model.addAttribute("total", total);
-		model.addAttribute("sum", sum);		
+		model.addAttribute("sum", sum);      
 		return "shop/buy";
 	}
-	
 
+	@RequestMapping(value="header_review", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String header_review() {
+		return service.header_review_list();
+	}
 }

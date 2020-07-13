@@ -27,4 +27,10 @@ public class UserimgDAO {
 	public int update(UserimgDTO dto) {
 		return sqlSession.update(namepasce+".update_Userimg", dto);
 	}
+	public int update_Count(UserimgDTO dto) {
+		return sqlSession.update(namepasce+".update_Count", dto);
+	}
+	public int update_Countd(UserimgDTO dto) {
+		return sqlSession.update(namepasce+".update_Count-1", dto);
+	}
 }

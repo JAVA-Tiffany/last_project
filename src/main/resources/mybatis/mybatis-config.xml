@@ -5,13 +5,12 @@
 <configuration>
    <typeAliases>
 		<typeAlias alias="userdto" type="com.project.dto.UserDTO"/>
-		<typeAlias alias="dresslistdto" type="com.project.dto.DressListDTO"/>
-		<typeAlias alias="baglistdto" type="com.project.dto.BagListDTO"/>
-		<typeAlias alias="earringlistdto" type="com.project.dto.EarringListDTO"/>
+		<typeAlias alias="datalistdto" type="com.project.dto.DataListDTO"/>
 		<typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
 		<typeAlias alias="userimgdto" type="com.project.dto.UserimgDTO"/>
 		<typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
 		<typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
 		<typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>
+		<typeAlias alias="reviewdto" type="com.project.dto.ReviewDTO"/>
    </typeAliases>
 </configuration>
