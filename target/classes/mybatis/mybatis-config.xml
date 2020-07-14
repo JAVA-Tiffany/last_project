@@ -13,5 +13,6 @@
 		<typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
 		<typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
 		<typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>
+		<typeAlias alias="reviewdto" type="com.project.dto.ReviewDTO"/>
    </typeAliases>
 </configuration>

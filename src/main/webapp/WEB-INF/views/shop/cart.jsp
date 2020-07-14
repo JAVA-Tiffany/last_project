@@ -6,29 +6,93 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 <script src="resources/jquery-3.2.1.min.js"></script>
 
 
 <script type="text/javascript">
-   var size = ${cartlist.size()};
-   var moneysum=0;
-   var countsum=0;
+   function numUp(d) {
+      var num = $("#count"+d).text();
+      var product = $("#Pname"+d).text();
+      $.ajax({
+         url: "num_up",
+         type: "GET",
+         data: {num:num, product:product},
+         success:function(data){
+            $("#count").text(data);
+         },
+         error: function() {console.log("실패")}
+      })
+            z = parseInt($("#count" + d).text()) + 1;
+            $("#count" + d).text(z);
+           $("#To" + d).text(parseInt($("#count" + d).text())*parseInt($("#mo" + d).text()));
+           result();
+   }
+//  function down(d) {
+//  a = $("#count" + d).text();
+//  if (parseInt($("#count" + d).text()) > 1) {
+//     a = parseInt($("#count" + d).text()) - 1;
+//  }
+//  $("#count" + d).text(a);
+//  $("#mos" + d).text(
+//        parseInt($("#count" + d).text())
+//              * parseInt($("#mo" + d).text()) + "");
+//  moneysum=0;
+//  countsum=0
+//  result();
+//}
+   function numDown(d) {
+      var num = $("#count"+d).text();
+      var product = $("#Pname"+d).text();
+      
+    if (parseInt($("#count" + d).text()) > 1) {
+        a = parseInt($("#count" + d).text()) - 1;
+        
+    }
+      
+      $.ajax({
+         url: "num_down",
+         type: "GET",
+         data: {num:num, product:product},
+         success:function(data){
+            $("#count").text(data);
+            
+         },
+         error: function() {console.log("실패");console.log(num);}
+      })
+            z = parseInt($("#count" + d).text()) - 1;
+            $("#count" + d).text(z);
+           $("#To" + d).text(parseInt($("#count" + d).text())*parseInt($("#mo" + d).text()));
+           result();
+   }
+   
+
+
+
    
    function result() {
+      var size = ${cartlist.size()};
+      var moneysum=0;
+      var countsum=0;
       
       for(i = 0; i < size; i++){
-         moneysum+=parseInt($("#mos" + i).text());
+         moneysum+=parseInt($("#To" + i).text());
          countsum+=parseInt($("#count" + i).text());
       }
-      $("#moneyTotal").val(moneysum);
       $("#sum").val(countsum);
-      $("#total").val(parseInt($("#moneyTotal").val()) + 2500);
       $("#sum2").val(countsum);
+      $("#moneyTotal").val(moneysum);
+      
+      $("#total").val(parseInt($("#moneyTotal").val()) + 2500);
+      
       $("#total2").val(parseInt($("#moneyTotal").val()) + 2500);
+      $("#fpro").val($("#Pname"+0).text());
+      
    }
 
-   $(function() {
-	   result();
+   $(function() {   
+      result();
    })
    
    
@@ -39,32 +103,32 @@
       moneysum=0;
       result();
    }
-   function up(d) {
-      z = parseInt($("#count" + d).text()) + 1;
-      $("#count" + d).text(z);
-      $("#mos" + d).text(
-            parseInt($("#count" + d).text())
-                  * parseInt($("#mo" + d).text()) + "");
-      moneysum=0;
-      countsum=0
-      result();
-   }
-   function down(d) {
-      a = $("#count" + d).text();
-      if (parseInt($("#count" + d).text()) > 1) {
-         a = parseInt($("#count" + d).text()) - 1;
-      }
-      $("#count" + d).text(a);
-      $("#mos" + d).text(
-            parseInt($("#count" + d).text())
-                  * parseInt($("#mo" + d).text()) + "");
-      moneysum=0;
-      countsum=0
-      result();
-   }
+//    function up(d) {
+//       z = parseInt($("#count" + d).text()) + 1;
+//       $("#count" + d).text(z);
+//       $("#mos" + d).text(
+//             parseInt($("#count" + d).text())
+//                   * parseInt($("#mo" + d).text()) + "");
+//       moneysum=0;
+//       countsum=0
+//       result();
+//    }
+//    function down(d) {
+//       a = $("#count" + d).text();
+//       if (parseInt($("#count" + d).text()) > 1) {
+//          a = parseInt($("#count" + d).text()) - 1;
+//       }
+//       $("#count" + d).text(a);
+//       $("#mos" + d).text(
+//             parseInt($("#count" + d).text())
+//                   * parseInt($("#mo" + d).text()) + "");
+//       moneysum=0;
+//       countsum=0
+//       result();
+//    }
 
    
-   
+   //바로 결제로 가는 form
       function buy() {
          var buy = document.bbuy;
          
@@ -115,16 +179,16 @@
                <td style="height: 50px; width: 200px;" align="center"><img
                   style="height: 100px; width: 100px;" src="${dto[0]}"
                   id="url${dto[5]}"></td>
-               <td style="height: 50px;"><label id="Pname">${dto[2]}</label></td>
-               <td style="height: 50px; width: 200px;">단가 : <label
-                  id="mo${dto[5]}">${dto[4]}</label><br> 총합 : <label
-                  id="mos${dto[5]}">${dto[4]}</label>
+               <td style="height: 50px;"><label id="Pname${dto[5]}">${dto[2]}</label></td>
+               <td style="height: 50px; width: 200px;">
+                        단가 : <label id="mo${dto[5]}">${dto[4]}</label><br> 
+                        총합 : <label id="To${dto[5]}">${dto[4] * dto[6]}</label>
                </td>
                <td style="height: 50px; width: 200px;"><label id="cancelok">${dto[3]}</label></td>
                <td style="height: 50px; width: 100px;" align="center"><input
-                  type="button" value="-" onclick="down('${dto[5]}')"> <label
-                  style="margin-left: 10px; margin-right: 10px;" id="count${dto[5]}">1</label>
-                  <input type="button" value="+" onclick="up('${dto[5]}')">
+                  type="button" value="-"  onclick="numDown('${dto[5]}')"> <label
+                  style="margin-left: 10px; margin-right: 10px;" id="count${dto[5]}">${dto[6]}</label>
+                  <input type="button" value="+" onclick="numUp('${dto[5]}')">
                </td>
                <td style="width: 50px;" align="center"><a href="#"
                   onclick="del('${dto[5]}')"><font size="5">삭제</font></a></td>
@@ -132,6 +196,12 @@
          </c:forEach>
       </table>
    </div>
+   <form action="orderForm">
+         <input type="hidden" name="list" value="${cartlist}">
+         <input type="submit" value="장승호">
+   </form>
+   
+<!--    바로결제로가는 div -->
    <div align="center" style="margin-top: 30px;">
       <form name="bbuy">
          <input type="hidden" id="fpro" name="fpro">

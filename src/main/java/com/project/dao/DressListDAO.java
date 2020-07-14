@@ -15,4 +15,8 @@ public class DressListDAO {
 	public List<DressListDTO> selectAll() {
 		return sqlSession.selectList(namepasce+".drselectAll_List");
 	}
+	
+	public void updateQuantity(DressListDTO dto) {
+		sqlSession.update(namepasce + ".updateQuantity",dto);
+	}
 }

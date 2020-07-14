@@ -52,4 +52,20 @@ public class cartService {
       }
 
    }
+   
+   public void cart_update(String id ,int num, String product) {
+	      UserimgDTO dto = new UserimgDTO();
+	      dto.setId(id);
+	      dto.setNum(Integer.toString(num));
+	      dto.setProduct(product);
+	      dao.update_Count(dto);
+	   }
+	   
+	   public void cart_update2(String id ,int num, String product) {
+	      UserimgDTO dto = new UserimgDTO();
+	      dto.setId(id);
+	      dto.setNum(Integer.toString(num));
+	      dto.setProduct(product);
+	      dao.update_Countd(dto);
+	   }
 }

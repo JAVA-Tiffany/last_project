@@ -10,18 +10,21 @@ import com.project.dto.ReplyDTO;
 
 @Service
 public class ReplyService {
-	@Autowired
-	private ReplyDAO replydao;
-	public List<ReplyDTO> select(int num) {
-		return replydao.select(num);
-	}
-	public int insert(ReplyDTO dto) {
-		return replydao.insert(dto);
-	}
-	public int delete(ReplyDAO dto) {
-		return replydao.delete(dto);
-	}
-	public int update(ReplyDAO dto) {
-		return replydao.update(dto);
-	}
+   @Autowired
+   private ReplyDAO replydao;
+   public List<ReplyDTO> select(int num) {
+      return replydao.select(num);
+   }
+   public int insert(ReplyDTO dto) {
+      return replydao.insert(dto);
+   }
+   public int delete(ReplyDTO dto) {
+      return replydao.delete(dto);
+   }
+   public int update(ReplyDTO dto) {
+      return replydao.update(dto);
+   }
+   public int last() {
+      return replydao.last_reply();
+   }
 }

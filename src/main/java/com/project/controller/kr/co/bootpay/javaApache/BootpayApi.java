@@ -92,6 +92,7 @@ public class BootpayApi {
         token.application_id = this.application_id;
         token.private_key = this.private_key;
 
+        
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = getPost(URL_ACCESS_TOKEN, new StringEntity(new Gson().toJson(token), "UTF-8"));
 
@@ -99,6 +100,8 @@ public class BootpayApi {
         String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
         ResToken resToken = new Gson().fromJson(str, ResToken.class);
 
+        System.out.println(str);
+        
         if(resToken.status == 200)
             this.token = resToken.data.token;
     }

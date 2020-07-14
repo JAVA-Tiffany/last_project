@@ -9,6 +9,7 @@ import java.util.Base64;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class makePngFileService {
 			bis.close();
 			
 			// write the image to a file
-			File outputfile = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
+			File outputfile = new File("C:\\WorkSpace\\last_project_merge\\src\\main\\webapp\\resources\\userimg\\" + savename + ".png");
 //			System.out.println(image);
 			System.out.println(outputfile);
 			ImageIO.write(image, "png", outputfile); // 파일생성

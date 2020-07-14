@@ -85,7 +85,7 @@ public class LoginController {
 		//4.파싱 닉네임 세션으로 저장
 		
 			UserDTO dto = new UserDTO();
-			dto.setId(id);dto.setName(name);
+			dto.setId(id);dto.setName(name);dto.setEmail(email);
 			
 			model.addAttribute("NaverDto", dto);
 			return "login&join/join";

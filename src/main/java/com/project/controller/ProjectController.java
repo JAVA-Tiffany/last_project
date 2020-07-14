@@ -94,24 +94,25 @@ public class ProjectController {
 	}
 
 
-	@RequestMapping("cart")
-	   public String cart(Model model,HttpServletRequest request) {
-	      HttpSession session = request.getSession();
-	      List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
-	      ArrayList<Object> arrz= new ArrayList<Object>();
-	      for(int i=0;i<arr.size();i++) {
-	         String[] z=new String[6];
-	         z[0]=arr.get(i).getImg();
-	         z[1]=arr.get(i).getId();
-	         z[2]=arr.get(i).getProduct();
-	         z[3]=arr.get(i).getCancelok();
-	         z[4]=arr.get(i).getMoney();
-	         z[5]=String.valueOf(i);
-	         arrz.add(z);
-	      }
-	      model.addAttribute("cartlist",arrz);
-	      return "shop/cart";
-	   }
+	  @RequestMapping("cart")
+      public String cart(Model model,HttpServletRequest request) {
+         HttpSession session = request.getSession();
+         List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
+         ArrayList<Object> arrz= new ArrayList<Object>();
+         for(int i=0;i<arr.size();i++) {
+            String[] z=new String[7];
+            z[0]=arr.get(i).getImg();
+            z[1]=arr.get(i).getId();
+            z[2]=arr.get(i).getProduct();
+            z[3]=arr.get(i).getCancelok();
+            z[4]=arr.get(i).getMoney();
+            z[5]=String.valueOf(i);
+            z[6]=arr.get(i).getNum();
+            arrz.add(z);
+         }
+         model.addAttribute("cartlist",arrz);
+         return "shop/cart";
+      }
 	   @RequestMapping("listdel")
 	   public String cart_delect(HttpServletRequest request, @RequestParam String img) {
 	      System.out.println("img : " + img);
@@ -162,5 +163,24 @@ public class ProjectController {
 		return "shop/buy";
 	}
 	
+	@RequestMapping("myinfo")
+	   public String myinfo(Model model,HttpServletRequest request) {
+	      service.myinfo(model, request);
+	      return "login&join/myinfo";
+	   }
+	
+	   @RequestMapping("info_change")
+	   public String info_change(UserDTO dto) {
+	      service.update(dto);
+	      return "redirect:index";
+	   }
+	   
+	   @RequestMapping(value="header_review", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	   @ResponseBody
+	   public String header_review() {
+	      return service.header_review_list();
+	   }
 
+	   
+	   
 }

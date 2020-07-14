@@ -24,6 +24,8 @@ public class Test {
     public static void goGetToken() {
         try {
             api.getAccessToken();
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,7 +35,7 @@ public class Test {
         try {
             HttpResponse res = api.verify("593f8febe13f332431a8ddae");
             String str = IOUtils.toString(res.getEntity().getContent(), "UTF-8");
-            System.out.println(str);
+            System.out.println(str + "검증");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +62,6 @@ public class Test {
         subscribeBilling.item_name = "정기결제 테스트 아이템";
         subscribeBilling.price = 3000;
         subscribeBilling.order_id = "" + (System.currentTimeMillis() / 1000);
-
 
         try {
             HttpResponse res = api.subscribe_billing(subscribeBilling);

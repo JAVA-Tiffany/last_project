@@ -4,6 +4,9 @@ package com.project.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -27,7 +30,7 @@ public class ProjectService {
    private BagListDAO balistdao;
    @Autowired
    private EarringListDAO ealistdao;
-   
+  
    public void insert(UserDTO dto) {
       userdao.insert(dto);
    }
@@ -112,4 +115,16 @@ public class ProjectService {
       model.addAttribute("list_price",arr3);
       model.addAttribute("list_count",arr4);
    }
+   
+   
+   
+   public void myinfo(Model model,HttpServletRequest request) {
+	      HttpSession session = request.getSession();
+	      model.addAttribute("myinfo_list",userdao.select(session.getAttribute("id").toString()));
+	   }
+   
+   public String header_review_list() {
+	      List<DressListDTO> arr = drlistdao.selectAll();
+	      return arr.get(0).getProduct();
+	   }
 }

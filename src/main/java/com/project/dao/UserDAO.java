@@ -19,7 +19,7 @@ public class UserDAO {
 		return sqlSession.selectOne(namepasce+".select_User",num);
 	}
 	public int insert(UserDTO dto) {
-		
+
 		return sqlSession.insert(namepasce+".insert_User",dto);
 	}
 	public int delete(String num) {
@@ -27,5 +27,11 @@ public class UserDAO {
 	}
 	public int update(UserDTO dto) {
 		return sqlSession.update(namepasce+".update_User", dto);
+	}
+	public List<UserDTO> selectid(UserDTO dto){
+		return sqlSession.selectList(namepasce+".select_UserId", dto);
+	}
+	public List<UserDTO> selectpw(UserDTO dto){
+		return sqlSession.selectList(namepasce+".select_UserPw", dto);
 	}
 }

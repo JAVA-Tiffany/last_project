@@ -10,7 +10,7 @@ import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
 
 @Repository
-public class NoticeDAO {
+public class AdminDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -34,6 +34,14 @@ public class NoticeDAO {
 	}
 	public void delete(int num) {
 		sqlSession.delete(namepasce+".delete_Notice",num);
+	}
+	
+	public void deleteQA(int num) {
+		sqlSession.delete(namepasce+ ".delete_QA",num);
+	}
+	
+	public void save_Modify(AdminNoticeDTO dto) {
+		sqlSession.update(namepasce+".update_Notice",dto);
 	}
 
 }

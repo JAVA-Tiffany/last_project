@@ -71,10 +71,8 @@
             </tr>
         </tbody>
     </table>
-    <a href="list" id="list" class="btn">목록으로</a>
-    <input type="submit" value="수정하기">
-<%--      <a href="update?bno=${view.bno}" class="btn">수정하기</a>   --%>
-    <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
+    <input type="button" onclick="location.href='acnotice'"value="목록">
+    <input type="button" onclick="location.href='ModifyNotice?bno=${view.bno}'"value="수정하기">
     </form>
  </div>       
 

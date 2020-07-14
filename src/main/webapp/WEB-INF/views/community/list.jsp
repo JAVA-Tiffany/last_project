@@ -37,6 +37,14 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     border: none;
     vertical-align: top;
 }
+.form-group {
+   width: 90%;
+   margin: 10px auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 </style>
 </head>
 <body>
@@ -66,36 +74,57 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
           });
        }
       
-	function totle_click(d) {
-		console.log(d);
-		ch=d;
-		$("#bno_result").val(d);
-		bno_form.submit();
-	}
-	function number_onedown() {
-		ch--;
-		$("#bno_result").val(ch);
-		bno_form.submit();
-	}
-	function number_down() {
-		ch=1;
-		$("#bno_result").val(ch);
-		bno_form.submit();
-	}
-	function number_oneup() {
-		ch++;
-		$("#bno_result").val(ch);
-		bno_form.submit();
-	}
-	function number_up() {
-		if(size%10!=0){
-			ch=parseInt(size/10)+1;
-		}else{
-			ch=parseInt(size/10);
-		}
-		$("#bno_result").val(ch);
-		bno_form.submit();
-	}
+   function totle_click(d) {
+      console.log(d);
+      ch=d;
+      $("#bno_result").val(d);
+      bno_form.submit();
+   }
+   function number_onedown() {
+      ch--;
+      $("#bno_result").val(ch);
+      bno_form.submit();
+   }
+   function number_down() {
+      ch=1;
+      $("#bno_result").val(ch);
+      bno_form.submit();
+   }
+   function number_oneup() {
+      ch++;
+      $("#bno_result").val(ch);
+      bno_form.submit();
+   }
+   function number_up() {
+      if(size%10!=0){
+         ch=parseInt(size/10)+1;
+      }else{
+         ch=parseInt(size/10);
+      }
+      $("#bno_result").val(ch);
+      bno_form.submit();
+   }
+   
+   function title_search() {
+      
+      alert($("#searchType").val());
+      //타입 입력
+      $("#type_result").val($("#searchType").val());
+      
+      if($("#searchType").val()=="title"){
+         $("#search_result").val($("#keyword").val());
+         alert($("#search_result").val());
+         list_form.submit();
+      }else if($("#searchType").val()=="Content"){
+         $("#search_result").val($("#keyword").val());
+         alert($("#search_result").val());
+         list_form.submit();
+      }else{
+         $("#search_result").val($("#keyword").val());
+         alert($("#search_result").val());
+         list_form.submit();
+      }
+   }
 </script>
 <jsp:include page="../default/header.jsp"/>
 <%-- <%@include file="header.jsp"%> --%>
@@ -128,10 +157,10 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    </table>
 
 
-	<!-- 검색 form -->
-	<div id="search" class="div2">
+   <!-- 검색 form -->
+   <div id="search" class="div2">
       <!-- search{s} -->
-      <div class="form-group row justify-content-center">
+      <div class="form-group row justify-content-center" style="padding-bottom: 10px;">
          <div class="w100" style="padding-right:10px">
             <select class="form-control form-control-sm" name="searchType" id="searchType">
                <option value="title">제목</option>
@@ -143,18 +172,22 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
          </div>
          <div>
-            <button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+            <button type="button" class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="title_search()">검색</button>
          </div>
       </div>
       <!-- search{e} -->
-	</div>
+   </div>
     <div align="center" >
    <div id="num" style="display: flex; flex-flow: low; width: 600px;">
    </div>
 </div>
 
 <jsp:include page="../default/footer.jsp"/>
-	<form action="view" name="bno_form" method="post">
-		<input type="hidden" name="bno" id="bno_result">
-	</form>
+   <form action="view" name="bno_form" method="post">
+      <input type="hidden" name="bno" id="bno_result">
+   </form>
+   <form action="search" name="list_form" method="post">
+      <input type="hidden" name="search_result" id="search_result">
+      <input type="hidden" name="type_result" id="type_result">
+   </form>
 </body>

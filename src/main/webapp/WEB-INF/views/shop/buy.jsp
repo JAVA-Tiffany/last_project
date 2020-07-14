@@ -9,7 +9,7 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js" type="application/javascript"></script>
 <script>
 BootPay.request({
-   price: '${total}', 
+   price: '1000', 
    application_id: "5efe7c794f74b40021f2c0f2",
    name: '${fpro} and others ${sum}', 
    pg: '',
