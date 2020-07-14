@@ -130,21 +130,6 @@ public class ProjectController {
 	      return "redirect:cart";
 	   }
 
-	@RequestMapping("dress")
-	public String dress(Model model) {
-		service.dress(model);
-		return "default/dress";
-	}
-	@RequestMapping("earring")
-	public String earring(Model model) {
-		service.earring(model);
-		return "default/earring";
-	}
-	@RequestMapping("bag")
-	public String bag(Model model) {
-		service.bag(model);
-		return "default/bag";
-	}
 	
 	@RequestMapping("orderForm")
 	public String orderForm() {
@@ -181,6 +166,16 @@ public class ProjectController {
 	      return service.header_review_list();
 	   }
 
-	   
+	   @RequestMapping("data")
+	   public String data(Model model,@RequestParam String type) {
+	      service.data(model,type);
+	      if(type.equals("dress")) {
+	         return "default/dress";
+	      }else if(type.equals("bag")) {
+	         return "default/dress";
+	      }else {
+	         return "default/earring";
+	      }
+	   }
 	   
 }

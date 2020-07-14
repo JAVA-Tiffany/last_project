@@ -41,7 +41,7 @@
 </style>
 </head>
 <body>
-<c:if test="${sessionScope.id ne 'admin' }">
+<c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
 	location.href="index"
@@ -64,13 +64,13 @@ $(document).ready(function() {
        
        var quantity = document.getElementsByClassName("quantityData")[index].value;
        console.log(quantity)
-        var no = td.eq(1).text();
-       	
+       	var type= td.eq(1).text();
+        var no = td.eq(2).text();
         
         $.ajax({
             url: "modifyQuantity",
             type: "POST",
-            data: {quantity:quantity,product:no},
+            data: {quantity:quantity,product:no,type:type},
             success: function(data){
                 reloadList();
             },
@@ -99,34 +99,15 @@ $(document).ready(function() {
 				<th style="width: 10%;">수정</th>
 			</tr>
 
-	<c:forEach var="dress" items="${dress}">
+	<c:forEach var="datalist" items="${datalist}">
       <tr>
       	<td><input type="checkbox" name="checkBtn"></td>
-         <td>${dress.product }</td>
-         <td>${dress.price }</td>
-         <td>${dress.quantity }</td>
+      	<td style="display:none;">${datalist.type }</td>
+         <td>${datalist.product }</td>
+         <td>${datalist.price }</td>
+         <td>${datalist.quantity }</td>
          <td><input type="text" class="quantityData" placeholder="재고수정"></td>
          <td><input type="button" class="Modifybtn1" value="수정"/></td>
-      </tr>
-      </c:forEach>
-      <c:forEach var="bag" items="${bag}">
-      <tr>
-      	<td><input type="checkbox" name="checkBtn"></td>
-         <td>${bag.product }</td>
-         <td>${bag.price }</td>
-         <td>${bag.quantity }</td>
-         <td><input type="text" class="quantityData" placeholder="재고수정"></td>
-         <td><input type="button" class="Modifybtn2" value="수정"/></td>
-      </tr>
-      </c:forEach>
-      <c:forEach var="ear" items="${earling}">
-      <tr>
-      	<td><input type="checkbox" name="checkBtn"></td>
-         <td>${ear.product }</td>
-         <td>${ear.price }</td>
-         <td>${ear.quantity }</td>
-         <td><input type="text" class="quantityData" placeholder="재고수정"></td>
-         <td><input type="button" class="Modifybtn3" value="수정"/></td>
       </tr>
       </c:forEach>
       <tr>

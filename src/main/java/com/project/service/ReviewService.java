@@ -7,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.project.dao.BagListDAO;
-import com.project.dao.DressListDAO;
-import com.project.dao.EarringListDAO;
+import com.project.dao.DataListDAO;
 import com.project.dao.ReviewDAO;
-import com.project.dto.BagListDTO;
-import com.project.dto.DressListDTO;
-import com.project.dto.EarringListDTO;
+import com.project.dto.DataListDTO;
 import com.project.dto.ReviewDTO;
 
 @Service
@@ -21,25 +17,13 @@ public class ReviewService {
    @Autowired
    private ReviewDAO reviewdao;
    @Autowired 
-   private DressListDAO dresslistDAO;
-   @Autowired 
-   private EarringListDAO earringlistDAO;
-   @Autowired 
-   private BagListDAO baglistDAO;
+   private DataListDAO datalistDAO;
    public void selectAll(Model model,String review_text) {
       ReviewDTO dto = new ReviewDTO();
       dto.setImg(review_text);
       List<ReviewDTO> arr =reviewdao.selectAll(dto);
-      List<DressListDTO> l1=dresslistDAO.selectAll();
-      List<EarringListDTO> l2=earringlistDAO.selectAll();
-      List<BagListDTO> l3=baglistDAO.selectAll();
+      List<DataListDTO> l3=datalistDAO.selectAll();
       String list = "상품 리스트\n\n";
-      for(int i=0;i<l1.size();i++) {
-         list+=l1.get(i).getProduct()+"\n";
-      }
-      for(int i=0;i<l2.size();i++) {
-         list+=l2.get(i).getProduct()+"\n";
-      }
       for(int i=0;i<l3.size();i++) {
          list+=l3.get(i).getProduct()+"\n";
       }
@@ -87,16 +71,8 @@ public class ReviewService {
          model.addAttribute("review_list", arr2);
          model.addAttribute("review_img",search_text);
       }
-      List<DressListDTO> l1=dresslistDAO.selectAll();
-      List<EarringListDTO> l2=earringlistDAO.selectAll();
-      List<BagListDTO> l3=baglistDAO.selectAll();
+      List<DataListDTO> l3=datalistDAO.selectAll();
       String list = "상품 리스트\n\n";
-      for(int i=0;i<l1.size();i++) {
-         list+=l1.get(i).getProduct()+"\n";
-      }
-      for(int i=0;i<l2.size();i++) {
-         list+=l2.get(i).getProduct()+"\n";
-      }
       for(int i=0;i<l3.size();i++) {
          list+=l3.get(i).getProduct()+"\n";
       }

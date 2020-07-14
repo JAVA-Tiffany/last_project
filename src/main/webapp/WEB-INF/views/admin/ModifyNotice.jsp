@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,6 +84,12 @@ $(function(){
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
+<script type="text/javascript">
+	alert("관리자만 접근가능합니다")
+	location.href="index"
+</script>
+</c:if>
 <div align="center" class="div1">
 <form id="frm" method="post" action="ModifyNoticeSave">
 <input type="hidden" value="${view.bno}" name="bno">

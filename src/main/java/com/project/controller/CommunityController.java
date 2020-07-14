@@ -36,6 +36,7 @@ public class CommunityController {
    @RequestMapping("list")
    public String list(CommnuityDTO dto, Model model) {
       service.listAll(dto,model);
+      service.adminview(dto,model);
       return "community/list";
    }
    
@@ -76,8 +77,14 @@ public class CommunityController {
       model.addAttribute("regDate_view", a4);
       model.addAttribute("rno_view", a3);
       HttpSession session = request.getSession();
+      
+      if(session.getAttribute("id")==null) {
+          model.addAttribute("logstart","로그인 해주세요");
+          return "login&join/login";
+       }else {
       model.addAttribute("id", session.getAttribute("id").toString());
       return "community/view";
+       }
    }
    
    @RequestMapping(value="reply", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -125,7 +132,7 @@ public class CommunityController {
    @RequestMapping("notice")
    public String notice(AdminNoticeDTO dto,Model model) {
 	   serviceAdm.listAll(dto, model);
-		
+		serviceAdm.adminList(dto, model);
       return "community/notice";
    }
    @RequestMapping("noticeview")
@@ -134,8 +141,8 @@ public class CommunityController {
 
 		System.out.println(bno + "bno check");
 		dto.setBno(bno);
+		serviceAdm.count(dto);
 		serviceAdm.view(dto,model);
-
 		return "community/noticeview";
 	}
    

@@ -115,7 +115,9 @@ $(document).ready(function() {
 
 </script>
 </head>
-<body><c:if test="${sessionScope.id ne 'admin' }">
+<body>
+
+<c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
 	location.href="index"
@@ -133,13 +135,24 @@ $(document).ready(function() {
 				<th style="width: 10%;">작성일</th>
 				<th style="width: 10%;">조회수</th>
 			</tr>
-
+		<c:forEach var="adminList" items="${adminList}">
+		<tr>
+		<td><input type="checkbox" name="checkBtn"></td>
+         <td>${adminList.bno }</td>
+         <td>
+         <a style="text-decoration: none;"class="title" href="NoticeContent?bno=${adminList.bno}">
+         ${adminList.title }</a></td>
+         <td>${adminList.writer }</td>
+         <td style="font-size: 2px;">${adminList.regdate }</td>
+         <td>${adminList.viewcnt }</td>
+      </tr>
+		</c:forEach>
 		 <c:forEach var="dto" items="${listAll}">
       <tr>
       	<td><input type="checkbox" name="checkBtn"></td>
          <td>${dto.bno }</td>
          <td>
-         <a class="title" href="NoticeContent?bno=${dto.bno}">
+         <a style="text-decoration: none;" class="title" href="NoticeContent?bno=${dto.bno}">
          ${dto.title }</a></td>
          <td>${dto.writer }</td>
          <td style="font-size: 2px;">${dto.regdate }</td>

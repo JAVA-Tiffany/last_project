@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,10 +15,62 @@
 <link rel="stylesheet" type="text/css" href="resources/css/main.css?after">
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+.input1001 {
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+  display: block;
+  width: 150px;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 30px;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+</style>
 </head>
 <body>
 <iframe src="http://nid.naver.com/nidlogin.logout" style="visibility:hidden;display:none"></iframe>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+function post() {
+   new daum.Postcode(
+         {
+            oncomplete : function(data) {
+               var fullAddr = '';
+               var extraAddr = '';
+
+               if (data.userSelectedType === 'R') {
+                  fullAddr = data.roadAddress;
+               } else {
+                  fullAddr = data.jibunAddress;
+               }
+
+               if (data.userSelectedType === 'R') {
+                  if (data.bname !== '') {
+                     extraAddr += data.bname;
+                  }
+                  if (data.buildingName !== '') {
+                     extraAddr += (extraAddr !== '' ? ', '
+                           + data.buildingName : data.buildingName);
+                  }
+                  fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+                        + ')' : '');
+               }
+
+               document.getElementById('post_postcode').value = data.zonecode;
+               alert(fullAddr)
+               document.getElementById('post_address').value = fullAddr;
+
+               document.getElementById('sample6_address2').focus();
+            }
+         }).open();
+}
 function deltoken(){
    $.ajax({
       url:"deltoken",
@@ -91,9 +142,12 @@ function pagereturn(){
       function al() {
          if (document.getElementById("id").value == "" || document.getElementById("pw").value == ""
                ||document.getElementById("pwc").value == "" || document.getElementById("name").value == "" ||
-               document.getElementById("addr").value == "" || document.getElementById("phon").value == "" ||
-               document.getElementById("email").value == "") {
-            alert("비어있는 칸이 존재합니다.")
+               document.getElementById("post_postcode").value == "" || document.getElementById("post_address").value == "" || document.getElementById("sample6_address2").value == "" || document.getElementById("phon").value == "" ||
+               document.getElementById("email").value == "" || document.getElementById("email_btn").value != "인증 메일 수정") {
+           if(document.getElementById("email_btn").value != "인증 메일 수정")
+              alert("메일 인증이 필요합니다.")
+            else
+               alert("비어있는 칸이 존재합니다.")
          } else {
             user.submit()
             opener.parent.location.reload();
@@ -104,10 +158,40 @@ function pagereturn(){
          a = '${GoogleId}';
          $("#id").val(a);
       });
-      
+      function eamil_k() {
+         alert("인증번호 보내는 중")
+         if($("#email_btn").val()=="인증 발급"){
+            $.ajax({
+                  url : "mailSending",
+                  type : "POST",
+                  data : {email:$("#email").val()},
+                  success : function(data) {
+                     alert("인증번호 보내졌습니다.")
+                     $("#join_key_text").val(data);
+                     $("#email_btn").val("인증 확인");
+                  },
+                  error : function() {
+                     alert('보내기 실패')
+                  }
+             })
+         }else if($("#email_btn").val()=="인증 확인"){
+            if($("#join_email_key").val()==$("#join_key_text").val()){
+               alert("인증 완료")
+               $("#email_btn").val("인증 메일 수정");
+               $("#email_btn").attr("readonly","readonly")
+               $("#email").attr("readonly","readonly")
+            }else{
+               alert("인증 실패")
+               $("#email_btn").val("인증 발급");
+            }
+         }else{
+            $("#email_btn").removeAttr("readonly")
+           $("#email").removeAttr("readonly")
+         }
+        
+   }
    </script>
 <!--    회원가입 -->
-
 <div class="limiter">
       <div class="container-login100" align="center">
          <div class="wrap-login100" align="center">
@@ -149,13 +233,36 @@ function pagereturn(){
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
+               
+               
+               
+               <div style="display: flex; flex:row;">
+                  <div class="wrap-input100 validate-input" style="width: 200px; margin-right: 20px;">
+                     <input type="text" placeholder="우편번호" class="input100" id="post_postcode" name="addr1" readonly="readonly">
+                     <span class="focus-input100"></span>
+                     <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                     </span>
+                  </div>
+                  <div align="center"><input type="button" value="우편번호 찾기" class="input1001" onclick="post()" onmouseover="style='cursor:pointer;'"></div>
+               </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="addr" placeholder="주소" class="input100" name="addr">
+                  <input type="text" placeholder="주소" class="input100"  id="post_address" name="addr2" readonly="readonly">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
+               <div class="wrap-input100 validate-input">
+                  <input type="text" placeholder="상세주소" class="input100" id="sample6_address2" name="addr3">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                     <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+               </div>
+               
+               
+               
                <div class="wrap-input100 validate-input">
                   <input type="text" id="phon" placeholder="핸드폰번호 xxx-xxxx-xxxx" class="input100" name="phon">
                   <span class="focus-input100"></span>
@@ -164,11 +271,21 @@ function pagereturn(){
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="email" placeholder="email@eamil" class="input100" name="email" value="${NaverDto.email }">
+                  <input type="text" id="email" placeholder="email@eamil" class="input100" name="email" id="email">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
+               </div>
+               <div style="display: flex; flex:row;">
+                  <div class="wrap-input100 validate-input" style="width: 200px; margin-right: 20px;">
+                     <input type="text" placeholder="인증번호" class="input100" id="join_email_key" name="join_email_key">
+                     <span class="focus-input100"></span>
+                     <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                     </span>
+                  </div>
+                  <div align="center"><input type="button" id="email_btn" value="인증 발급" class="input1001" onclick="eamil_k()" onmouseover="style='cursor:pointer;'"></div>
                </div>
                <div class="container-login100-form-btn">
             <input type="button" class="login100-form-btn-login" onclick="al()" value="회원가입">
@@ -185,7 +302,7 @@ function pagereturn(){
    </div>
    </div>
    </div>
-   
+   <input type="hidden" id="join_key_text">
    <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
    <script src="resources/vendor/bootstrap/js/popper.js"></script>
    <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>

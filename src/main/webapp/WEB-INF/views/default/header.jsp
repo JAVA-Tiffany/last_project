@@ -10,7 +10,7 @@
    href="resources/css/util.css?after">
 <link rel="stylesheet" type="text/css"
    href="resources/css/main.css?after">
-<script src="resources/jquery-3.2.1.min.js"></script>
+
 <script type="text/javascript">
    $(function() {
       $.ajax({

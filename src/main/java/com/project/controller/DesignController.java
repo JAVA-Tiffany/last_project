@@ -83,15 +83,9 @@ public class DesignController {
          return "내 이미지 삭제 완료";
        }
    }
-   @RequestMapping(value = "change", method = RequestMethod.POST)
+   @RequestMapping(value = "change", method = {RequestMethod.GET, RequestMethod.POST})
    public String change(Model model, @RequestParam String change_val) {
-      if(change_val.equals("dress")) {
-         service.dress(model);
-      }else if(change_val.equals("bag")) {
-         service.bag(model);
-      }else {
-         service.earring(model);
-      }
+      service.data(model,change_val);
       return "design/change";
    }
    

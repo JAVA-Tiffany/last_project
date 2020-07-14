@@ -101,7 +101,7 @@
    }
 //    file창이 종료가 되면 실행
    function changeValue(obj){
-      var form = $('form')[0];
+      var form = $('#form')[0];
       var formData = new FormData(form);
       $.ajax({
          url : "fileUpload",
@@ -142,14 +142,32 @@
    function in_text() {
       alert("in_text")
       id="myCanvas"+count;
-      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
       ctx[count] = document.getElementById(id).getContext("2d");
-      ctx[count].font = '100px Arial';
+      ctx[count].font = '70px Arial';
       ctx[count].fillText('입력', 50, 100);
       count++;
    }
-    
+   
+//    텍스트 더블 클릭시 실행
+    function test_dblclick() {
+       alert("텍스트 더블클릭")
+       $("div").remove("#text_dblclick_event");
+       $("#left_menu").append("<div id='text_dblclick_event' style='margin-top:30px'><input id='textin' type='text' placeholder='입력할 글자 입력' onchange='dblclick_end("+ch+")'></div>");
+   }
+   function dblclick_end(d) {
+      alert($("#textin").val())
+      $("div").remove("#image"+d);
+      new_id="myCanvas"+d;
+      $('#in').append("<div id='image"+d+"' style=' width: 200px; height: 70px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 200px; height: 70px;'></canvas></div>")
+      $("#image"+d).draggable();
+      ctx[count] = document.getElementById(new_id).getContext("2d");
+      ctx[count].font = '70px Arial';
+      ctx[count].fillText($("#textin").val(), 0, 100);
+      $("div").remove("#text_dblclick_event");
+   }
+   
    // 이미지 클릭시 화면 투명도 절반으로 줄이는 함수
     function imgclick(d) {
         ch=d;
@@ -307,7 +325,6 @@
       changeop.action="change";
       changeop.method="post";
       changeop.target="changeopen";
-      changeop.change_val='${img_goods}';
       changeop.submit();
    }
     function background_ch() {
@@ -351,10 +368,15 @@
     function quality(){
        window.open("","quality","width=700,height=700")
     }
+    
+    function re_view() {
+       design_review_form.submit();
+   }
 </script>
 <body >
+   
    <jsp:include page="../default/header.jsp"/>
-   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;">
+   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" >
       <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
             <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>
@@ -401,7 +423,7 @@
          
       </div>
       <div style="display: flex; flex-flow:row; background-color: #f8f9fa; margin-top: 20px; margin-right: 100px;">
-         <div style="width: 250px; margin-top: 50px;" align="center" >
+         <div style="width: 250px; margin-top: 50px;" align="center" id="left_menu">
             <div align="center" onclick="partShot()" onmouseover="style='cursor:pointer; width: 200px; height: 70px; background-color: #ffffff; border: 1px solid #eaedf0;'" style="width: 200px; height: 70px;background-color: #ffffff; border: 1px solid #eaedf0;"><p style="padding-top: 7px;"> 장바구니 담기</p> </div><br><br>
             <div style="width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;" align="left" onclick="opentip()" onmouseover="style='cursor:pointer;width: 200px; height:70px; background-color: #ffffff; display: flex; flex-flow:low; border: 1px solid #eaedf0;'">
                <div style="margin-top: 10px;"> <img src="resources/img/tip.png" style="width: 50px; height: 50px;"> </div>
@@ -426,9 +448,10 @@
             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
          </div>
          <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
-      상품명<br>
-      가격<br><br>
-      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button><br>
+      상품명 : <label>${img_name}</label><br>
+         가격 : <label>${img_money}</label><br><br>
+      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button>
+      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
       <br>
       색상 - 클릭되는 순간 바뀜<br>
       <div style="display: flex; flex: row;">
@@ -451,10 +474,19 @@
       <br>
       
       
+      
+   <script type="text/javascript">
+      $(function() {
+         if("${img_goods}"!="dress"){
+            $("#size_select").css("display","none");
+         }
+      })
+   </script>
 <!--       귀걸이랑 가방은 해당안됨 -->
-      사이즈
-      <div style="display: flex; flex: row;">
-         <ul style="list-style:none; margin:0; padding:0;">
+      
+      <div style="display: flex; flex: row;" id="size_select">
+         <ul style="list-style:none; margin:0; padding:0;" id="size_select">
+            <li>사이즈</li>
             <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">S</li>
             <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">M</li>
             <li style="box-sizing: border-box; text-align: center; cursor: pointer; margin-right: 8px; border: solid 1px #d5dbe0; font-size: 14px; color: #000; width: 69px; height: 40px; line-height: 40px; margin-bottom: 8px; list-style: none; float: left;">XL</li>
@@ -692,9 +724,15 @@
       style="border: 1px solid #d3d3d3; display:none;">
    </canvas>
    <input type="hidden" id="op" value="">
+   
    <form name="changeopen">
-      <input type="hidden" name="change_val">
+      <input type="hidden" name="change_val" id="change_val" value="${img_goods}">
    </form>
+   
+   <form name="design_review_form" method="post" action="review">
+      <input type="hidden" name="review_text" id="review_text" value="${img_name}">
+   </form>
+      
    <jsp:include page="../default/footer.jsp"/>
 </body>
 </html>

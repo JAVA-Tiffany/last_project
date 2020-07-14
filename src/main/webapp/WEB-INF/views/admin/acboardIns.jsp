@@ -40,7 +40,7 @@ $(function(){
       });
       
       //저장버튼 클릭시 form 전송
-      $("#save").click(function(){
+      $("#saveacboard").click(function(){
           oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
           $("#acBoardForm").submit();
       });    
@@ -169,7 +169,7 @@ $(document).ready(function() {
 
 
 <div align="center" class="div1">
-	<form id="frm" action="save_Notice" method="post">
+	<form id="acBoardForm" action="save_acBoard" method="post">
 	  <table class="table">
 	  
 	   <caption>글 작성</caption>
@@ -191,12 +191,12 @@ $(document).ready(function() {
 		<th>내용 :</th>
 		<td>
 		<textarea name="content" id="smarteditor" style="height:200px;width: 700px;"></textarea>
-		
+		<input type="hidden" name="writer" value="관리자">
 	</tr>
 
 	</table>
 	<div class="div2">
-		<input type="button" id="save" value="저장"/>
+		<input type="button" id="saveacboard" value="저장"/>
 		<button type="reset">취소</button>
 	</div>
 	</form>

@@ -115,7 +115,8 @@ $(document).ready(function() {
 
 </script>
 </head>
-<body><c:if test="${sessionScope.id ne 'admin' }">
+<body>
+<c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
 	location.href="index"
@@ -139,7 +140,7 @@ $(document).ready(function() {
       	<td><input type="checkbox" name="checkBtn"></td>
          <td>${dto.bno }</td>
          <td>
-         <a class="title" href="view?bno=${dto.bno}">
+         <a style="text-decoration: none;" class="title" href="view?bno=${dto.bno}">
          ${dto.title }</a></td>
          <td>${dto.writer }</td>
          <td style="font-size: 2px;">${dto.regdate }</td>
@@ -149,6 +150,7 @@ $(document).ready(function() {
       <tr>
          <td colspan="5" style="text-align: center;">
             <button type="button" id="Delbutton">글삭제</button>
+            <button type="button" onclick="location.href='acboardIns'">글등록</button>
          </td>
       </tr>
    </table>

@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 </script>
 </head>
-<body><c:if test="${sessionScope.id ne 'admin' }">
+<body><c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
 	location.href="index"
@@ -110,11 +110,11 @@ $(document).ready(function() {
    	</c:when>
    	<c:otherwise>
    		<td><input type="checkbox" name="checkBtn"></td>
-   		<td style="height: 100px;">${list.id}</td>
-    	<td style="height: 100px;">${list.pw}</td>
-    	<td style="height: 100px;">${list.name}</td>
-    	<td style="height: 100px;">${list.addr}</td>
-    	<td style="height: 100px;">${list.phon}</td>
+   		<td>${list.id}</td>
+    	<td>${list.pw}</td>
+    	<td>${list.name}</td>
+    	<td>${list.addr1}&nbsp;${list.addr2 }&nbsp;${list.addr3 }</td>
+    	<td>${list.phon}</td>
     	
    	</c:otherwise>
    </c:choose>

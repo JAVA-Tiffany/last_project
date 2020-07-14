@@ -24,11 +24,15 @@ public class CommnuityDAO {
       return sqlSession.selectList(namepasce+".selectAll_Commnuity",dto);
    }
    
-   
+   public List<CommnuityDTO> adminlist(CommnuityDTO dto) {
+	   return sqlSession.selectList(namepasce+".selectAdminAll_Commnuity",dto);
+   }
 
    public CommnuityDTO view(CommnuityDTO dto) {
       return sqlSession.selectOne(namepasce+".view_Commnuity",dto);
    }
+   
+   
 
    public void count(CommnuityDTO dto) {
       sqlSession.update(namepasce+".count_Commnuity",dto);

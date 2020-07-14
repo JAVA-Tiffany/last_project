@@ -139,7 +139,15 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             <th style="width: 10%;">작성일</th>
             <th style="width: 10%;">조회수</th>
          </tr>
-
+		<c:forEach var="adminList" items="${adminList}">
+		<tr>
+         <td><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
+         <td onclick="totle_click(${adminList.bno})"><label> ${adminList.title} </label> </td>
+         <td>관리자</td>
+         <td style="font-size: 2px;">${adminList.regdate }</td>
+         <td>${adminList.viewcnt }</td>
+      </tr>
+		</c:forEach>
       <c:forEach var="dto" items="${listAll}">
       <tr>
          <td>${dto.bno }</td>
@@ -181,7 +189,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    <div id="num" style="display: flex; flex-flow: low; width: 600px;">
    </div>
 </div>
-
+</div>
 <jsp:include page="../default/footer.jsp"/>
    <form action="view" name="bno_form" method="post">
       <input type="hidden" name="bno" id="bno_result">

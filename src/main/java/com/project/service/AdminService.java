@@ -7,15 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.project.dao.CommnuityDAO;
-import com.project.dao.DressListDAO;
-import com.project.dao.EarringListDAO;
+import com.project.dao.DataListDAO;
 import com.project.dao.AdminDAO;
-import com.project.dao.BagListDAO;
 import com.project.dto.AdminNoticeDTO;
-import com.project.dto.BagListDTO;
 import com.project.dto.CommnuityDTO;
-import com.project.dto.DressListDTO;
-import com.project.dto.EarringListDTO;
+import com.project.dto.DataListDTO;
 
 @Service
 public class AdminService {
@@ -25,13 +21,15 @@ public class AdminService {
 
 	@Autowired
 	private CommnuityDAO comdao;
+	
 	@Autowired
-	private DressListDAO drlistdao;
-	@Autowired
-	private BagListDAO balistdao;
-	@Autowired
-	private EarringListDAO ealistdao;
+	private DataListDAO datadao;
 
+	public void adminList(AdminNoticeDTO dto, Model model) {
+		model.addAttribute("adminList",dao.adminList(dto));
+	}
+	
+	
 	public void listAll(AdminNoticeDTO dto, Model model) {
 		model.addAttribute("listAll",dao.listAll(dto));
 
@@ -62,21 +60,23 @@ public class AdminService {
 	}
 	
 	public void selectAllQuantity(Model model) {
-		List<DressListDTO> dress = drlistdao.selectAll();
-		List<BagListDTO> bag = balistdao.selectAll();
-		List<EarringListDTO> earling = ealistdao.selectAll();
-
-		model.addAttribute("dress",dress);
-		model.addAttribute("bag",bag);
-		model.addAttribute("earling",earling);
-		
+		List<DataListDTO> data = datadao.selectAll();
+		model.addAttribute("datalist",data);
 	}
 	
 	
-	public void updateQuantity(String product,String quantity) {
-		DressListDTO dress = new DressListDTO();
-		dress.setProduct(product);dress.setQuantity(Integer.parseInt(quantity));
-		drlistdao.updateQuantity(dress);
+	public void updateQuantity(String product,String quantity,String type) {
+		DataListDTO data = new DataListDTO();
+		data.setProduct(product);data.setQuantity(Integer.parseInt(quantity));
+		data.setType(type);
+		datadao.updateQuantity(data);
+	}
+	
+	public void save_writeBoard(CommnuityDTO dto) {
+		String title = "<b style='color:black;'>[공지]"+dto.getTitle() + "</b>";
+		dto.setTitle(title);
+		dao.save_writeBoard(dto);
+		
 	}
 }
 
