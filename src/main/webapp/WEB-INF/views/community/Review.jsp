@@ -48,7 +48,7 @@
                text=$("#content"+d).val();
                if(s==0){
                   $("#infocount"+d).text(parseInt($("#infocount"+d).text())+1);
-                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:300px;'cols='1' >"+text+"</textarea>");
+                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:300px; margin-top:0px' cols='1' >"+text+"</textarea>");
                   $("#dtr"+d).append("<input id='text_change"+d+"' onclick='review_change("+d+")' type='button' value='수정'>");
                   $("#open_btn"+d).val("▲");
                   $("#title"+d).removeAttr('disabled');
