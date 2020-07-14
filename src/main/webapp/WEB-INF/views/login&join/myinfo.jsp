@@ -102,11 +102,6 @@ function pagereturn(){
              opener.parent.location.reload();
           }
        }
-       $(function () {
-          a = '${NaverDto.id}';
-          a = '${GoogleId}';
-          $("#id").val(a);
-       });
        function eamil_k() {
      	  alert("인증번호 보내는 중")
      	  if($("#email_btn").val()=="인증 발급"){
@@ -154,7 +149,7 @@ function pagereturn(){
                <form action="joinok" name="user" style="align:center;">
       
                <div class="wrap-input100 validate-input" align="center">
-                  <input type="text" id="id" placeholder="아이디" class=input100 name="id">
+                  <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"  style="text-align:right;"></i>
@@ -163,21 +158,21 @@ function pagereturn(){
                
                   
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw">
+                  <input type="text" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()">
+                  <input type="text" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="name" placeholder="이름" class="input100" name="name" value="${NaverDto.name }">
+                  <input type="text" id="name" placeholder="이름" class="input100" name="name" value="${myinfo_list.name}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
@@ -188,7 +183,7 @@ function pagereturn(){
                
                <div style="display: flex; flex:row;">
 	               <div class="wrap-input100 validate-input" style="width: 200px; margin-right: 20px;">
-	                  <input type="text" placeholder="우편번호" class="input100" id="post_postcode" name="addr1" readonly="readonly">
+	                  <input type="text" placeholder="우편번호" class="input100" id="post_postcode" name="addr1" readonly="readonly" value="${myinfo_list.addr1}">
 	                  <span class="focus-input100"></span>
 	                  <span class="symbol-input100">
 	                     <i class="fa fa-lock" aria-hidden="true"></i>
@@ -197,14 +192,14 @@ function pagereturn(){
 	               <div align="center"><input type="button" value="우편번호 찾기" class="input1001" onclick="post()" onmouseover="style='cursor:pointer;'"></div>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" placeholder="주소" class="input100"  id="post_address" name="addr2" readonly="readonly">
+                  <input type="text" placeholder="주소" class="input100"  id="post_address" name="addr2" readonly="readonly" value="${myinfo_list.addr2}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" placeholder="상세주소" class="input100" id="sample6_address2" name="addr3">
+                  <input type="text" placeholder="상세주소" class="input100" id="sample6_address2" name="addr3" value="${myinfo_list.addr3}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
@@ -214,14 +209,14 @@ function pagereturn(){
                
                
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="phon" placeholder="핸드폰번호 xxx-xxxx-xxxx" class="input100" name="phon">
+                  <input type="text" id="phon" placeholder="핸드폰번호 xxx-xxxx-xxxx" class="input100" name="phon" value="${myinfo_list.phon}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="email" placeholder="email@eamil" class="input100" name="email" id="email">
+                  <input type="text" id="email" placeholder="email@eamil" class="input100" name="email" id="email" value="${myinfo_list.email}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
@@ -229,13 +224,13 @@ function pagereturn(){
                </div>
                <div style="display: flex; flex:row;">
 	               <div class="wrap-input100 validate-input" style="width: 200px; margin-right: 20px;">
-	                  <input type="text" placeholder="인증번호" class="input100" id="join_email_key" name="join_email_key">
+	                  <input type="text" placeholder="인증번호" class="input100" id="join_email_key" name="join_email_key" value="********">
 	                  <span class="focus-input100"></span>
 	                  <span class="symbol-input100">
 	                     <i class="fa fa-lock" aria-hidden="true"></i>
 	                  </span>
 	               </div>
-	               <div align="center"><input type="button" id="email_btn" value="인증 발급" class="input1001" onclick="eamil_k()" onmouseover="style='cursor:pointer;'"></div>
+	               <div align="center"><input type="button" id="email_btn" value="인증 메일 수정" class="input1001" onclick="eamil_k()" onmouseover="style='cursor:pointer;'"></div>
                </div>
                <div class="container-login100-form-btn">
             <input type="button" class="login100-form-btn-login" onclick="al()" value="회원가입">
