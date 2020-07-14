@@ -40,6 +40,7 @@ public class AdminController {
 	}
 	@RequestMapping("acboard")
 	public String acboard(Model model,CommnuityDTO dto) {
+		serviceCom.adminview(dto, model);
 		 serviceCom.listAll(dto,model);
 		return "admin/Acboard";
 	}

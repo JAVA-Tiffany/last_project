@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="D:\Programming\Workspace\last_project\src\main\webapp\resources\userimg"></beans:constructor-arg>
+		<beans:constructor-arg value="C:\WorkSpace\last_project_merge\src\main\webapp\resources\userimg"></beans:constructor-arg>
 	</beans:bean>
 	<!-- 업로드 객체 빈등록 -->
 	<!-- 10485760 = 10MB -->

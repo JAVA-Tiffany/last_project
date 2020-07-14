@@ -52,20 +52,21 @@
       })
    }
    function cartsave(data) {
-      n='${img_name}'
-      m='${img_money}'
-      $.ajax({
-         url : "userimg_insert",
-         type : "POST",
-         data : {userimg_in:data,imgname:n,imgmoney:m},
-         success : function(result) {
-            alert(result)
-         },
-         error : function() {
-            alert('장바구니 저장 실패')
-         }
-      })
-   }
+	      n='${img_name}'
+	      m='${img_money}'
+	      ty='${img_goods}'
+	      $.ajax({
+	         url : "userimg_insert",
+	         type : "POST",
+	         data : {userimg_in:data,imgname:n,imgmoney:m,type:ty},
+	         success : function(result) {
+	            alert(result)
+	         },
+	         error : function() {
+	            alert('장바구니 저장 실패')
+	         }
+	      })
+	   }
    </script>
 <script type="text/javascript">
    

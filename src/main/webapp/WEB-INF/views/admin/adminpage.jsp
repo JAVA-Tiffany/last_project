@@ -6,30 +6,75 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.div1 {
+padding-top: 100px;
+padding-bottom: 100px;
 
+}
+.div1 a:hover {
+color:red; background-color: black;
+}
+
+body {
+   font: 400 14px 'Poppins',sans-serif;
+}
+
+
+a { text-decoration:none;  color: #000; !important  } 
+a:link { color: #000; text-decoration: none; } <!-- link : 방문전 링크 상태 -->
+a:visited {
+   color: #000; text-decoration: none; } <!-- visited : 방문후 링크 상태 -->
+a:hover { color:red; text-decoration: none; } <!-- hover : 마우스 오버했을 때 링크 상태 -->
+a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 링크 상태 -->
+
+
+</style>
 <!-- <link rel="stylesheet" type="text/css" -->
-<!-- 	href="resources/css/main.css?after"> -->
+<!--    href="resources/css/main.css?after"> -->
 </head>
 <body>
 <c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
-	alert("관리자만 접근가능합니다")
-	location.href="index"
+   alert("관리자만 접근가능합니다")
+   location.href="index"
 </script>
 </c:if>
-관리자 페이지 입니다.<br>
-재고관리, 계정 조회, 계정 삭제, 게시물 관리, 구매관리,
 
+<!-- <div align="center"> -->
+<!-- <button type="button" onclick="location.href ='acsearch'" style="width:100px;height:70px;">계정 관리</button><br><br> -->
+<!-- <button type="button" onclick="location.href ='QuantityManage'" style="width:100px;height:70px;">재고관리</button><br><br> -->
+<!-- <button type="button" onclick="location.href ='acboard'" style="width:100px;height:70px;">게시물 관리</button><br><br> -->
+<!-- <button type="button" onclick="location.href ='acnotice'" style="width:100px;height:70px;">공지사항</button><br><br> -->
+<!-- <button type="button" style="width:100px;height:70px;">구매관리</button><br><br> -->
 
-<div align="center">
-<button type="button" onclick="location.href ='acsearch'" style="width:100px;height:70px;">계정 관리</button><br><br>
-<button type="button" onclick="location.href ='QuantityManage'" style="width:100px;height:70px;">재고관리</button><br><br>
-<button type="button" onclick="location.href ='acboard'" style="width:100px;height:70px;">게시물 관리</button><br><br>
-<button type="button" onclick="location.href ='acnotice'" style="width:100px;height:70px;">공지사항</button><br><br>
-<button type="button" style="width:100px;height:70px;">구매관리</button><br><br>
+   <div style="float: left;">
+      <a href="index"><font color="blue" size="4" style="font-family: 나눔바른고딕;">홈페이지</font></a>
+   </div>
+   <div style="float: right;">
+      User : <a href="myinfo"><font color="red" style="font-family: 나눔바른고딕;">${id}</font></a> &nbsp; &nbsp;
+      <a href="logout"><font color="blue" size="4" style="font-family: 나눔바른고딕;">로그아웃</font></a>
+   </div>
 
+<div align="center" class="div1">
+<table style="width: 80%;">
 
+   <tr style="background-color: #007bff; text-align: center;"  >
+      
+      
+      <td><a href="acsearch"><font color="white" size="4">계정 관리</font></a></td>
+      <td><a href="QuantityManage"><font color="white" size="4">재고관리</font></a></td>
+      <td><a href="acboard"><font color="white" size="4">게시물 관리</font></a></td>
+      <td><a href="acnotice"><font color="white" size="4">공지사항</font></a></td>
+      <td><a href="#"><font color="white" size="4">구매관리</font></a></td>
+   </tr>
+</table>
 </div>
+<div class="div2" style="padding-top: 100px; text-align: center;" >
+
+<font size="10" color="#007bff" style="font-family: 나눔바른고딕;">관리자 페이지입니다. :)</font>
+</div>
+
 
 
 

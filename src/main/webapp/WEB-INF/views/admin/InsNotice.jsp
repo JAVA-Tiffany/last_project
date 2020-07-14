@@ -42,7 +42,7 @@ $(function(){
       //저장버튼 클릭시 form 전송
       $("#save").click(function(){
           oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-          $("#acBoardForm").submit();
+          $("#frm").submit();
       });    
 });
  

@@ -134,7 +134,18 @@ $(document).ready(function() {
 				<th style="width: 10%;">작성일</th>
 				<th style="width: 10%;">조회수</th>
 			</tr>
-
+			<c:forEach var="adminList" items="${adminList}">
+		<tr>
+		<td><input type="checkbox" name="checkBtn"></td>
+         <td><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
+          
+         <td><a style="text-decoration: none;" class="title" href="view?bno=${adminList.bno}">
+         ${adminList.title }</a> </td>
+         <td>관리자</td>
+         <td style="font-size: 2px;">${adminList.regdate }</td>
+         <td>${adminList.viewcnt }</td>
+      </tr>
+      </c:forEach>
 		 <c:forEach var="dto" items="${listAll}">
       <tr>
       	<td><input type="checkbox" name="checkBtn"></td>

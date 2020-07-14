@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,21 +46,37 @@
 
    //체크박스 전체선택 및 전체 해제
    function cAll() {
-         
-         if($("#chk_all").prop("checked")==true){
-            alert("체크 온")
-            $("#chk2").attr("checked",true);
-            $("#chk3").attr("checked",true);
-            $("#chk4").attr("checked",true);
-         }else{
-            alert("체크 dhvm")
-            $("#chk2").attr("checked",false);
-            $("#chk3").attr("checked",false);
-            $("#chk4").attr("checked",false);
-         }
+
+      if ($("#chk_all").prop("checked") == true) {
+         alert("체크 온")
+         $("#chk2").attr("checked", true);
+         $("#chk3").attr("checked", true);
+         $("#chk4").attr("checked", true);
+      } else {
+         alert("체크 dhvm")
+         $("#chk2").attr("checked", false);
+         $("#chk3").attr("checked", false);
+         $("#chk4").attr("checked", false);
+      }
 
    }
+   
+   //바로 결제로 가는 form
+    function buy() {
+       var buy = document.bbuy;
+        var popupX = (window.screen.width / 2) - (1300 / 2);
+        var popupY= (window.screen.height /2) - (850 / 2);
+        openWin = window.open("",
+                "bbbuy", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY +
+          ' , screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+        buy.action="buy";
+        buy.method="post";
+        buy.target="bbbuy";
+        buy.submit();
+        
+    }
 </script>
+
 
 <style type="text/css">
 #input_text1 {
@@ -91,7 +109,8 @@
          </div>
       </div>
 
-
+<form name="bbuy" method="post">
+   
       <p>
       <div>
          <div
@@ -102,11 +121,8 @@
             <div style="display: flex; flex: row;">
                <div style="margin: 0 24px; display: block;">
                   <textarea
-                     style="width: 520px; height: 72px; border: solid 1px #d5dbe0;  overflow: auto; box-sizing: border-box; 
-                     padding: 16px; font-size: 14px; outline: none; color: -internal-light-dark-color(black,white); word-spacing: normal;
-                      text-indent: 9px;  display: inline-block; background-color: light-dark-color(rgb(255,255,255),rgb(59,59,59));
-                     flex-direction: column; cursor: text; white-space: pre-wrap; overflow-wrap: break-word; outline-color: black;"
-                     placeholder="상품 제작 요청사항이 있으면 작성해주세요."></textarea>
+                     style="width: 520px; height: 72px; border: solid 1px #d5dbe0; overflow: auto; box-sizing: border-box; padding: 16px; font-size: 14px; outline: none; color: -internal-light-dark-color(black, white); word-spacing: normal; text-indent: 9px; display: inline-block; background-color: light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59)); flex-direction: column; cursor: text; white-space: pre-wrap; overflow-wrap: break-word; outline-color: black;"
+                     placeholder="상품 제작 요청사항이 있으면 작성해주세요." name="ProRequest"></textarea>
                   <p
                      style="color: #868e96; font-size: 12px; line-height: 1.83; margin-bottom: 0; display: block;">자수
                      작업은 디자인에 따라 가능 여부가 달라지며 추가 비용이 발생합니다.</p>
@@ -121,56 +137,69 @@
             <div
                style="display: flex; margin-bottom: 10px; align-items: center; justify-content: space-between; color: #495057; font-size: 14px;">
                <span style="line-height: 1.17; color: #495057; font-size: 14px;">총
-                  수량</span> <span style="margin-left: 140px;">가져올것 개</span>
+                  수량</span> <span style="margin-left: 140px;">${sum }개</span>
+                  <input type="hidden" name="sum" value="${sum }"> 
             </div>
             <div
                style="display: flex; margin-bottom: 10px; align-items: center; justify-content: space-between; color: #495057; font-size: 14px;">
                <span style="line-height: 1.17; color: #495057; font-size: 14px;">총
                   상품 금액</span> <span
-                  style="font-weight: bold; line-height: 1.14; font-size: 14px;">가져올것
+                  style="font-weight: bold; line-height: 1.14; font-size: 14px;">
+                  <fmt:formatNumber value="${total-2500 }" pattern="#,###"/>
                   원</span>
             </div>
             <div
                style="display: flex; margin-bottom: 10px; align-items: center; justify-content: space-between; color: #495057; font-size: 14px;">
                <span style="line-height: 1.17; font-size: 14px;">배송비</span> <span
-                  style="font-weight: bold; line-height: 1.14; font-size: 14px;">2500원</span>
+                  style="font-weight: bold; line-height: 1.14; font-size: 14px;">2,500원</span>
             </div>
             <p></p>
             <div
                style="display: flex; align-items: center; justify-content: space-between; font-weight: bold; font-size: 14px;">
                <span style="font-size: 14px; font-weight: bold;">최종 결제금액</span> <span
-                  style="font-size: 14px; line-height: 1; font-weight: bold;">가져올것
+                  style="font-size: 14px; line-height: 1; font-weight: bold;">
+                  <fmt:formatNumber value="${total }" pattern="#,###"/>
                   원</span>
+                  <input type="hidden" value="${total }" name="total">
             </div>
             <div
                style="width: 350px; background-color: #fff; margin-bottom: 8px; padding: 24px 0; box-sizing: border-box; display: block;">
                <div style="display: block; font-size: 14px; font-weight: bold;">
-                  주문 상품정보
+                  주문 상품정보</div>
+               <c:forEach var="dto" items="${list}">
+               <input type="hidden" value="${dto.type}" name="type">
                   <hr style="width: 90%;">
-               </div>
-               <div style="display: flex; letter-spacing: -1.px; font-size: 14px;">
                   <div
-                     style="width: 96px; height: 96px; margin-right: 24px; cursor: pointer;">
-                     이미지</div>
-                  <div style="width: 100%; display: block;">
+                     style="display: flex; letter-spacing: -1.px; font-size: 14px;">
                      <div
-                        style="display: block; margin-bottom: 16px; font-size: 12px; text-decoration: none;">
-                        품명</div>
-                     <div style="font-size: 14px; display: flex; margin-top: 8px;">
-                        <div>사이즈 free</div>
+                        style="width: 96px; height: 96px; margin-right: 24px; cursor: pointer;">
+                        <img style="height: 100px; width: 100px;" src="${dto.img}">
                      </div>
-                     <div>
-                        <div>수량</div>
+                     <div style="width: 100%; display: block;">
+                        <div
+                           style="display: block; margin-bottom: 16px; font-size: 12px; text-decoration: none;">
+                           <label>${dto.product}</label>
+                           <input type="hidden" name="lPro" value="${dto.product }">
+                        </div>
+                        <div style="font-size: 14px; display: flex; margin-top: 8px;">
+                           <div>사이즈 free</div>
+                        </div>
+                        <div>
+                           <div>
+                              수량 : <label>${dto.num }</label>
+                           </div>
+                        </div>
+                        <div>
+                           가격 : <label>${dto.money}</label>
+                        </div>
                      </div>
-                     <div
-                        style="display: block; font-size: 14px; letter-spacing: -1px;">
-                        가격</div>
-                  </div>
-               </div>
 
+                  </div>
+               </c:forEach>
             </div>
          </div>
       </div>
+
 
       <div
          style="background-color: #fff; margin-bottom: 8px; width: 600px; pause: 24px 0; box-sizing: border-box; letter-spacing: -1.px; font-size: 14px; color: #000;">
@@ -184,16 +213,16 @@
             <label
                style="display: inline-block; width: 106px; cursor: default; font-weight: normal;">이름</label>
             <input type="text"
-               style="display: inline-block; margin-bottom: 16px;" name=""
-               value="" placeholder="이름을 입력해주세요.">
+               style="display: inline-block; margin-bottom: 16px;"
+               value="${userInfo.name }">
          </div>
          <div
             style="position: relative; display: block; letter-spacing: -1.px; font-size: 14px; color: #000; margin: 0 24px;">
             <label
                style="display: inline-block; width: 106px; cursor: default; font-weight: normal;">연락처</label>
             <input type="text"
-               style="display: inline-block; margin-bottom: 16px;" name=""
-               value="" placeholder="-없이 01000000000">
+               style="display: inline-block; margin-bottom: 16px;"
+               value="${userInfo.phon }" name="phon">
          </div>
          <div
             style="position: relative; display: block; letter-spacing: -1.px; font-size: 14px; color: #000; margin: 0 24px;">
@@ -201,7 +230,8 @@
                style="display: inline-block; width: 106px; cursor: default; font-weight: normal; margin-top: 10px; vertical-align: top;">이메일</label>
             <div
                style="margin: 0; display: inline-block; padding-top: 6px; padding-bottom: 16px; width: 400px;">
-               <span> 회원가입했던 이메일~ </span>
+               <span ><label id="email">${userInfo.email }</label> </span>
+               <input type="hidden" value="${userInfo.email }" name="email">
                <div>위 이메일로 주문 내역 메일이 전송됩니다. 사용 가능한 메일인지 확인해주세요.</div>
             </div>
          </div>
@@ -267,35 +297,37 @@
                      style="display: inline-block; width: 80px; cursor: default;">
                      수령인</label> <input
                      style="display: inline-block; margin-bottom: 16px; font-size: 14px; height: 10px; padding: 8px 16px; width: 350px;"
-                     type="text" name="" placeholder="이름을 입력해주세요." value="">
+                     type="text" name="name" value="${userInfo.name }">
                </div>
                <div style="position: relative; display: block;">
                   <label
                      style="display: inline-block; width: 80px; cursor: default;">연락처</label>
                   <input
                      style="display: inline-block; margin-bottom: 16px; font-size: 14px; height: 10px; padding: 8px 16px; width: 350px;"
-                     type="text" name="" placeholder="- 없이 01000000000" value="">
+                     type="text" name="hpon" placeholder="- 없이 01000000000"
+                     value="${userInfo.phon }">
                </div>
                <div style="position: relative; display: block;">
                   <label
                      style="display: inline-block; width: 80px; cursor: default;">배송지</label>
                   <input
                      style="display: inline-block; margin-bottom: 16px; font-size: 14px; height: 10px; padding: 8px 16px; width: 180px;"
-                     type="text" id="post_postcode" placeholder="우편번호"> <input
+                     type="text" id="post_postcode" placeholder="우편번호" name="addr1" value="${userInfo.addr1 }"> <input
                      onclick="post()"
                      style="width: 30%; border: 1px solid red; background-color: rgba(0, 0, 0, 0); padding: 5px; margin-left: 13px;"
                      type="button" value="우편번호 찾기"> <input
-                     style="margin-left: 85px; display: inline-block; margin-bottom: 16px; font-size: 14px;"
-                     type="text" id="post_address" placeholder="주소"> <input
-                     style="margin-left: 85px; display: inline-block; margin-bottom: 16px; font-size: 14px;"
-                     type="text" id="sample6_address2" placeholder="상세 주소를 입력해주세요.">
+                     style="margin-left: 85px; display: inline-block; margin-bottom: 16px; font-size: 14px; height: 25px; width: 377px;"
+                     type="text" id="post_address" placeholder="주소"
+                     value="${userInfo.addr2 }" name="addr2"> <input
+                     style="margin-left: 85px; display: inline-block; margin-bottom: 16px; font-size: 14px; height: 25px; width: 377px;"
+                     type="text" id="sample6_address2" placeholder="상세 주소를 입력해주세요." name="addr3" value="${userInfo.addr3 }">
                </div>
                <div style="position: relative; display: block;">
                   <label
                      style="display: inline-block; width: 80px; cursor: default;">배송메모</label>
                   <select
                      style="display: inline-block; margin-bottom: 16px; border: solid 1px #d5dbe0; height: 30px; padding: 8 16px; box-sizing: border-box;"
-                     name="">
+                     name="delRequest">
                      <option value="">배송 메모를 선택해주세요.</option>
                      <option value="배송 전에 미리 연락 바랍니다.">배송 전에 미리 연락 바랍니다.</option>
                      <option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
@@ -321,24 +353,27 @@
                   <div
                      style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #495057;">
                      <span style="font-size: 14px;">총 수량</span> <span
-                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">가져올것개</span>
+                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">${sum }개</span>
                   </div>
                   <div
                      style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #495057;">
                      <span style="font-size: 14px;">총 상품 금액</span> <span
-                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">가져올것
+                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">
+                        <fmt:formatNumber value="${total-2500 }" pattern="#,###"/>
                         원</span>
                   </div>
                   <div
                      style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #495057;">
                      <span style="font-size: 14px;">배송비</span> <span
-                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">2500원</span>
+                        style="font-weight: bold; line-height: 1.14; font-size: 14px;">2,500원</span>
                   </div>
                </div>
                <div
                   style="display: flex; align-items: center; justify-content: space-between; font-weight: bold; font-size: 14px;">
                   <span style="font-size: 14px;">최종 결제금액</span> <span
-                     style="font-weight: bold; font-size: 16px;">가져올것 원</span>
+                     style="font-weight: bold; font-size: 16px;">
+                     <fmt:formatNumber value="${total }" pattern="#,###"/>
+                     원</span>
                </div>
             </div>
          </div>
@@ -389,13 +424,17 @@
                </div>
             </div>
          </div>
+         
 
-         <button
+            
+            
+         <button 
             style="margin-top: 16px; width: 100%; height: 48px; border: none; background-color: #212529; font-size: 14px; color: #fff; display: flex; align-items: center; justify-content: center; outline: none; padding: 0;"
-            onclick="buy()" type="button">
-            <span>결제하기</span>
+            type="button" onclick="buy()">
+<!--             1onclick="buy()"  -->
+         <span>결제하기</span>
          </button>
-
+         </form>
       </div>
 
    </div>

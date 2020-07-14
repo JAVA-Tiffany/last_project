@@ -128,26 +128,6 @@
 //    }
 
    
-   //바로 결제로 가는 form
-      function buy() {
-         var buy = document.bbuy;
-         
-          var popupX = (window.screen.width / 2) - (1300 / 2);
-          var popupY= (window.screen.height /2) - (850 / 2);
-          openWin = window.open("",
-                  "bbbuy", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY +
-            ' , screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
-          buy.action="buy";
-          buy.method="post";
-          buy.target="bbbuy";
-          buy.change_val='${fpro}';
-          buy.change_val='${sum}';
-          buy.change_val='${total}';
-          buy.submit();
-          
-      }
-
-   
 </script>
 </head>
 <body>
@@ -176,9 +156,7 @@
          </tr>
          <c:forEach var="dto" items="${cartlist}">
             <tr>
-               <td style="height: 50px; width: 200px;" align="center"><img
-                  style="height: 100px; width: 100px;" src="${dto[0]}"
-                  id="url${dto[5]}"></td>
+               <td style="height: 50px; width: 200px;" align="center"><img style="height: 100px; width: 100px;" src="${dto[0]}" id="url${dto[5]}"></td>
                <td style="height: 50px;"><label id="Pname${dto[5]}">${dto[2]}</label></td>
                <td style="height: 50px; width: 200px;">
                         단가 : <label id="mo${dto[5]}">${dto[4]}</label><br> 
@@ -196,17 +174,16 @@
          </c:forEach>
       </table>
    </div>
-   <form action="orderForm">
-         <input type="hidden" name="list" value="${cartlist}">
-         <input type="submit" value="장승호">
-   </form>
+   
+
+   
    
 <!--    바로결제로가는 div -->
    <div align="center" style="margin-top: 30px;">
-      <form name="bbuy">
-         <input type="hidden" id="fpro" name="fpro">
-         <input type="hidden" id="sum" name="sum">
-         <input type="hidden" id="total" name="total">
+      <form action="orderForm">
+         <input type="hidden" name="list" value="${cartlist}">
+      <input type="hidden" id="total" name="total">
+      <input type="hidden" id="sum" name="sum">
          <table>
             <tr>
                <th colspan="5">총수량 : <input type="text" value="0"name="sum2" id="sum2" style="border: none;" disabled="disabled">
@@ -216,8 +193,9 @@
                </th>
             </tr>
          </table>
+         <button type="submit"  style="width: 350px; background-color: black; height: 50px; margin-top: 25px;" ><font color="white" size="4">주문서 작성</font></button>
       </form>
-         <button type="button" onclick="buy()" style="width: 350px; background-color: black; height: 50px; margin-top: 25px;" ><font color="white" size="4">주문서 작성</font></button>
+         
    </div>
 
 </body>

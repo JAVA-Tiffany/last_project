@@ -101,7 +101,7 @@
    </update>
       <insert id="insert_Userimg" parameterType="userimgdto">
       insert into userimg
-      values(#{img},#{id},#{product},#{cancelok},#{money},1)
+      values(#{img},#{id},#{product},#{cancelok},#{money},1,#{type})
    </insert>
    
 	<!-- 내 이미지 목록 -->
