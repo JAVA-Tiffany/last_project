@@ -10,13 +10,21 @@ import com.project.dto.DataListDTO;
 
 @Repository
 public class DataListDAO {
-	@Autowired private SqlSession sqlSession;
-	public static final String namepasce="com.project.mybatis.myMapper";
+	@Autowired
+	private SqlSession sqlSession;
+	public static final String namepasce = "com.project.mybatis.myMapper";
+
 	public List<DataListDTO> selectAll() {
-		return sqlSession.selectList(namepasce+".dataselectAll_List");
+		return sqlSession.selectList(namepasce + ".dataselectAll_List");
 	}
+
 	public List<DataListDTO> select(DataListDTO dto) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namepasce+".dataselect_List",dto);
+		return sqlSession.selectList(namepasce + ".dataselect_List", dto);
 	}
+
+	public void updateQuantity(DataListDTO dto) {
+		sqlSession.update(namepasce + ".updateQuantity", dto);
+	}
+
 }

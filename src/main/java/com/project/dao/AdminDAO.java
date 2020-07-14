@@ -17,6 +17,10 @@ public class AdminDAO {
 
    public static final String namepasce="com.project.mybatis.myMapper";
 
+   public List<AdminNoticeDTO> adminList(AdminNoticeDTO dto) {
+      return sqlSession.selectList(namepasce+".select_adminList",dto);
+   }
+   
    public List<AdminNoticeDTO> listAll(AdminNoticeDTO dto) {
       return sqlSession.selectList(namepasce+".selectAll_Notice",dto);
    }
@@ -29,7 +33,13 @@ public class AdminDAO {
 
    }
    public void save_write(AdminNoticeDTO dto) {
-      sqlSession.insert(namepasce+".insert_Notice",dto);
+      if(dto.getWriter().equals("admin")) {
+         String title="<b style='color:black;'>[공지]  "+dto.getTitle()+"</b>";
+         dto.setTitle(title);
+         sqlSession.insert(namepasce+".insert_Notice",dto);
+      }else {
+         sqlSession.insert(namepasce+".insert_Notice",dto);
+      }
 
    }
    public void delete(int num) {
@@ -43,5 +53,10 @@ public class AdminDAO {
    public void save_Modify(AdminNoticeDTO dto) {
       sqlSession.update(namepasce+".update_Notice",dto);
    }
+   
+   public void save_writeBoard(CommnuityDTO dto) {
+         sqlSession.insert(namepasce+".Adinsert_Commnuity",dto);
+         
+      }
 
 }

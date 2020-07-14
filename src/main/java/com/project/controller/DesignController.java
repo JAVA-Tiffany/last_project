@@ -61,12 +61,12 @@ public class DesignController {
 
    @RequestMapping(value = "userimg_insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
-   public String userimg_insert(Model model,HttpServletRequest request, @RequestParam String userimg_in,@RequestParam String imgname, @RequestParam String imgmoney) {
+   public String userimg_insert(Model model,HttpServletRequest request, @RequestParam String userimg_in,@RequestParam String imgname, @RequestParam String imgmoney, @RequestParam String type) {
       if(request.getSession().getAttribute("id")==null) {
           model.addAttribute("logstart","로그인 해주세요");
           return "login&join/login";
        }else {
-         cartservice.cart_insert(request, userimg_in, imgname, imgmoney);
+         cartservice.cart_insert(request, userimg_in, imgname, imgmoney,type);
          return "장바구니 저장 완료";
        }
    }

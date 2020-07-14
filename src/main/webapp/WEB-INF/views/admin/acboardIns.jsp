@@ -1,11 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>공지사항 관리 페이지</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>공지사항 등록 페이지</title>
+<!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
+<script type="text/javascript">
+
+var oEditors = [];
+$(function(){
+      nhn.husky.EZCreator.createInIFrame({
+          oAppRef: oEditors,
+          elPlaceHolder: "smarteditor", //textarea에서 지정한 id와 일치해야 합니다. 
+          //SmartEditor2Skin.html 파일이 존재하는 경로
+          sSkinURI: "resources/smarteditor/SmartEditor2Skin.html",  
+          htParams : {
+              // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseToolbar : true,             
+              // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseVerticalResizer : true,     
+              // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseModeChanger : true,         
+              fOnBeforeUnload : function(){
+                   
+              }
+          }, 
+          fOnAppLoad : function(){
+              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+              oEditors.getById["smarteditor"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+          },
+          fCreator: "createSEditor2"
+          
+      });
+      
+      //저장버튼 클릭시 form 전송
+      $("#saveacboard").click(function(){
+          oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
+          $("#acBoardForm").submit();
+      });    
+});
+ 
+ 
+ 
+</script>
+</head>
+
 <style type="text/css">
 .div1 {
 padding-top: 200px;
@@ -41,7 +86,6 @@ padding-top: 40px;
     .table caption{caption-side: bottom; display: none;}
   
 </style>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
       var size= ${list.size()}
       
@@ -116,7 +160,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
 <c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
@@ -124,48 +167,39 @@ $(document).ready(function() {
 </script>
 </c:if>
 
+
 <div align="center" class="div1">
-	<table border="1" class="table">
-		<caption><font style="font: 400 30px 'Poppins',sans-serif;">Notice<br></font></caption>
-			<tr>
-				<th></th>
-				<th style="width: 10%;">번호</th>
-				<th style="width: 50%;">제목</th>
-				<th style="width: 10%;">작성자</th>
-				<th style="width: 10%;">작성일</th>
-				<th style="width: 10%;">조회수</th>
-			</tr>
-		<c:forEach var="adminList" items="${adminList}">
-		<tr>
-		<td><input type="checkbox" name="checkBtn"></td>
-         <td>${adminList.bno }</td>
-         <td>
-         <a style="text-decoration: none;"class="title" href="NoticeContent?bno=${adminList.bno}">
-         ${adminList.title }</a></td>
-         <td>${adminList.writer }</td>
-         <td style="font-size: 2px;">${adminList.regdate }</td>
-         <td>${adminList.viewcnt }</td>
-      </tr>
-		</c:forEach>
-		 <c:forEach var="dto" items="${listAll}">
-      <tr>
-      	<td><input type="checkbox" name="checkBtn"></td>
-         <td>${dto.bno }</td>
-         <td>
-         <a style="text-decoration: none;" class="title" href="NoticeContent?bno=${dto.bno}">
-         ${dto.title }</a></td>
-         <td>${dto.writer }</td>
-         <td style="font-size: 2px;">${dto.regdate }</td>
-         <td>${dto.viewcnt }</td>
-      </tr>
-      </c:forEach>
-      <tr>
-         <td colspan="6" style="text-align: center;">
-            <button type="button" id="Delbutton">삭제</button>
-            <button type="button" onclick ="location.href='InsNotice'">등록</button>
-         </td>
-      </tr>
-   </table>
-   </div>
+	<form id="acBoardForm" action="save_acBoard" method="post">
+	  <table class="table">
+	  
+	   <caption>글 작성</caption>
+	        <colgroup>
+            <col width="15%">
+            <col width="35%">
+            <col width="15%">
+            <col width="*">
+        </colgroup>
+	
+	<tr>
+		<th>제목 :</th>
+		<td>
+		<input type="text" name="title" id="title" size="80">
+		</td>
+	</tr>
+	
+	<tr>
+		<th>내용 :</th>
+		<td>
+		<textarea name="content" id="smarteditor" style="height:200px;width: 700px;"></textarea>
+		<input type="hidden" name="writer" value="관리자">
+	</tr>
+
+	</table>
+	<div class="div2">
+		<input type="button" id="saveacboard" value="저장"/>
+		<button type="reset">취소</button>
+	</div>
+	</form>
+</div>
 </body>
 </html>

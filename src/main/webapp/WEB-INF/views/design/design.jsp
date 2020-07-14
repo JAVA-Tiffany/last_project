@@ -39,6 +39,7 @@
    function saveAs(uri, filename) { 
       alert(filename)
       st=uri.split(",")
+      
       $.ajax({
          url : "makeFile",
          type : "POST",
@@ -55,10 +56,11 @@
    function cartsave(data) {
       n='${img_name}'
       m='${img_money}'
+      ty='${img_goods}'
       $.ajax({
          url : "userimg_insert",
          type : "POST",
-         data : {userimg_in:data,imgname:n,imgmoney:m},
+         data : {userimg_in:data,imgname:n,imgmoney:m,type:ty},
          success : function(result) {
             alert(result)
          },

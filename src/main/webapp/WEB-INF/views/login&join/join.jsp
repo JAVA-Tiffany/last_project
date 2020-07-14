@@ -182,9 +182,8 @@
 				a = '${NaverDto.id}';
 			}else if('${GoogleId}'!=''){
 				a = '${GoogleId}';
-			}else{
-				$("#id").val(a);
 			}
+			$("#id").val(a);
 		});
 		function eamil_k() {
 			alert("인증번호 보내는 중")

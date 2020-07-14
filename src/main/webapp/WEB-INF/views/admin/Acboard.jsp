@@ -68,12 +68,12 @@ padding-top: 40px;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#Delbutton").click(function(){ 
-		var rowData = new Array(); 
+   $("#Delbutton").click(function(){ 
+      var rowData = new Array(); 
         var tdArr = new Array();
         var checkbox = $("input[name=checkBtn]:checked");
 
-	checkbox.each(function(i) {
+   checkbox.each(function(i) {
         var tr = checkbox.parent().parent().eq(i);
         var td = tr.children();
        
@@ -81,41 +81,42 @@ $(document).ready(function() {
         var userid = td.eq(1).text()+" ";
         tdArr.push(userid);
                 
-   		 });
-		var str = ""
-		for(var i=0; i<tdArr.length; i++) {
-			console.log(tdArr[i])
-			str +=tdArr[i]
-		}
-		
-		Swal.fire({
-			  title: '게시글을 삭제하시겠습니까?',
-			  text: '선택하신 게시물 : '+str+'를 정말 삭제하시겠습니까?',
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Yes, delete it!'
-		}).then((result) => {
-			  if (result.value) {
-			    Swal.fire({
-			    	title:'Deleted!',
-			    	text: '성공적으로 삭제되었습니다!',
-			    	icon: 'success',
-			      preConfirm:function(){
-				    	 location.href="DelBoard?num="+str
-				    }
-			    })
-			  }
-			})
-	});
+          });
+      var str = ""
+      for(var i=0; i<tdArr.length; i++) {
+         console.log(tdArr[i])
+         str +=tdArr[i]
+      }
+      
+      Swal.fire({
+           title: '게시글을 삭제하시겠습니까?',
+           text: '선택하신 게시물 : '+str+'를 정말 삭제하시겠습니까?',
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+           if (result.value) {
+             Swal.fire({
+                title:'Deleted!',
+                text: '성공적으로 삭제되었습니다!',
+                icon: 'success',
+               preConfirm:function(){
+                    location.href="DelBoard?num="+str
+                }
+             })
+           }
+         })
+   });
 
 });
-	
+   
 
 </script>
 </head>
-<body><c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
+<body>
+<c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
    alert("관리자만 접근가능합니다")
    location.href="index"
@@ -123,23 +124,34 @@ $(document).ready(function() {
 </c:if>
 
 <div align="center" class="div1">
-	<table border="1" class="table">
-		<caption><font style="font: 400 30px 'Poppins',sans-serif;">Q/A<br></font></caption>
-			<tr>
-				<th></th>
-				<th style="width: 10%;">번호</th>
-				<th style="width: 50%;">제목</th>
-				<th style="width: 10%;">작성자</th>
-				<th style="width: 10%;">작성일</th>
-				<th style="width: 10%;">조회수</th>
-			</tr>
-
-		 <c:forEach var="dto" items="${listAll}">
+   <table border="1" class="table">
+      <caption><font style="font: 400 30px 'Poppins',sans-serif;">Q/A<br></font></caption>
+         <tr>
+            <th></th>
+            <th style="width: 10%;">번호</th>
+            <th style="width: 50%;">제목</th>
+            <th style="width: 10%;">작성자</th>
+            <th style="width: 10%;">작성일</th>
+            <th style="width: 10%;">조회수</th>
+         </tr>
+         <c:forEach var="adminList" items="${adminList}">
       <tr>
-      	<td><input type="checkbox" name="checkBtn"></td>
+      <td><input type="checkbox" name="checkBtn"></td>
+         <td><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
+          
+         <td><a style="text-decoration: none;" class="title" href="view?bno=${adminList.bno}">
+         ${adminList.title }</a> </td>
+         <td>관리자</td>
+         <td style="font-size: 2px;">${adminList.regdate }</td>
+         <td>${adminList.viewcnt }</td>
+      </tr>
+      </c:forEach>
+       <c:forEach var="dto" items="${listAll}">
+      <tr>
+         <td><input type="checkbox" name="checkBtn"></td>
          <td>${dto.bno }</td>
          <td>
-         <a class="title" href="view?bno=${dto.bno}">
+         <a style="text-decoration: none;" class="title" href="view?bno=${dto.bno}">
          ${dto.title }</a></td>
          <td>${dto.writer }</td>
          <td style="font-size: 2px;">${dto.regdate }</td>
@@ -149,6 +161,7 @@ $(document).ready(function() {
       <tr>
          <td colspan="5" style="text-align: center;">
             <button type="button" id="Delbutton">글삭제</button>
+            <button type="button" onclick="location.href='acboardIns'">글등록</button>
          </td>
       </tr>
    </table>

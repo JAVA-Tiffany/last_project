@@ -56,7 +56,8 @@ public class ProjectService {
 			return false;
 		}
 	}
-	public void data(Model model,String type) {
+
+	public void data(Model model, String type) {
 		DataListDTO dto = new DataListDTO();
 		dto.setType(type);
 		List<DataListDTO> l = datalistdao.select(dto);
@@ -84,5 +85,10 @@ public class ProjectService {
 	public String header_review_list() {
 		List<DataListDTO> arr = datalistdao.selectAll();
 		return arr.get(0).getProduct();
+	}
+
+	public UserDTO buyInfo(String id) {
+
+		return userdao.select(id);
 	}
 }

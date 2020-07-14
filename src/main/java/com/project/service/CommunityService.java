@@ -22,6 +22,9 @@ public class CommunityService {
    public void view(CommnuityDTO dto, Model model) {
       model.addAttribute("view", dao.view(dto));
    }
+   public void adminview(CommnuityDTO dto, Model model) {
+      model.addAttribute("adminList",dao.adminlist(dto));
+   }
 
    public void count(CommnuityDTO dto) {
       dao.count(dto);

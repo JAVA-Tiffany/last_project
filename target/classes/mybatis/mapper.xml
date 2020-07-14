@@ -51,7 +51,11 @@
 	<!-- Q&A 게시물 관련 -->
 	<select id="selectAll_Commnuity" resultType="comdto">
 		select * from
-		board_sys order by bno desc
+		board_sys where writer !='관리자'order by bno desc
+	</select>
+	<select id="selectAdminAll_Commnuity" resultType="comdto">
+		select * from
+		board_sys where writer='관리자' order by bno desc
 	</select>
 	<select id="view_Commnuity" resultType="comdto">
 		select * from board_sys
@@ -74,6 +78,11 @@
 		delete from
 		board_sys where bno=#{bno}
 	</delete>
+	<insert id="Adinsert_Commnuity" parameterType="comdto">
+		insert into
+		board_sys (bno,title,content,writer) values((select
+		nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
+	</insert>
 
 
 
@@ -88,7 +97,7 @@
 	</select>
 	<insert id="insert_Userimg" parameterType="userimgdto">
 		insert into userimg
-		values(#{img},#{id},#{product},#{cancelok},#{money},1)
+		values(#{img},#{id},#{product},#{cancelok},#{money},1,#{type})
 	</insert>
 	<delete id="delete_Userimg" parameterType="userimgdto">
 		delete userimg where
@@ -142,27 +151,24 @@
 	</delete>
 
 	<!-- Notice 게시물 관련 -->
+	<select id="select_adminList" resultType="Noticedto">
+		select * from notice where writer='admin' order by bno desc
+	</select>
 	<select id="selectAll_Notice" resultType="Noticedto">
-		select * from notice
-		order by bno desc
+		select * from notice where writer!='admin' order by bno desc
 	</select>
 	<select id="view_Notice" resultType="Noticedto">
-		select * from notice where
-		bno=#{bno}
+		select * from notice where bno=#{bno}
 	</select>
 	<update id="count_Notice">
-		update notice set viewcnt = viewcnt + 1 where
-		bno=#{bno}
+		update notice set viewcnt = viewcnt + 1 where bno=#{bno}
 	</update>
 	<update id="update_Notice" parameterType="Noticedto">
-		update notice set
-		title=#{title},content=#{content} where bno=#{bno}
+		update notice set title=#{title},content=#{content} where bno=#{bno}
 	</update>
 	<insert id="insert_Notice">
-		insert into notice (bno,title,content,writer)
-		values((select
-		nvl(max(bno)+1,1)from notice),#{title},#{content},'관리자'
-		)
+		insert into notice (bno,title,content,writer) values((select
+		nvl(max(bno)+1,1)from notice),#{title},#{content},#{writer} )
 	</insert>
 	<delete id="delete_Notice">
 		delete from notice where bno=#{num}

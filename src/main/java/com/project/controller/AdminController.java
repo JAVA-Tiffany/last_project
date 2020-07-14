@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.project.dao.DataListDAO;
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
 import com.project.service.AdminService;
@@ -39,8 +40,21 @@ public class AdminController {
    }
    @RequestMapping("acboard")
    public String acboard(Model model,CommnuityDTO dto) {
+      serviceCom.adminview(dto, model);
        serviceCom.listAll(dto,model);
       return "admin/Acboard";
+   }
+   
+   @RequestMapping("acboardIns")
+   public String acboardIns() {
+      return "admin/acboardIns";
+   }
+   
+   @RequestMapping("save_acBoard")
+   public String save_acBoard(CommnuityDTO dto) {
+      serviceAdm.save_writeBoard(dto);
+      return "redirect:acboard";
+      
    }
    
    @RequestMapping("DelUser")
@@ -66,6 +80,7 @@ public class AdminController {
    
    @RequestMapping("acnotice")
    public String acnotice(Model model,AdminNoticeDTO dto) {
+      serviceAdm.adminList(dto,model);
       serviceAdm.listAll(dto, model);
       return "admin/AcNotice";
    }
@@ -77,7 +92,8 @@ public class AdminController {
    }
    
    @RequestMapping("save_Notice")
-   public String save_Notice(AdminNoticeDTO dto) {
+   public String save_Notice(AdminNoticeDTO dto,HttpSession session) {
+      dto.setWriter(session.getAttribute("id").toString());
        serviceAdm.save_write(dto);
       return "redirect:acnotice";
    }
@@ -130,7 +146,7 @@ public class AdminController {
    
    @RequestMapping("QuantityManage")
    public String QuantityManage(Model model) {
-//      serviceAdm.selectAllQuantity(model);
+      serviceAdm.selectAllQuantity(model);
       
       return "admin/QuantityManage";
       
@@ -138,9 +154,9 @@ public class AdminController {
    
    @RequestMapping(value = "modifyQuantity", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
-   public void modifyQuantity(@RequestParam String product,@RequestParam String quantity) {
-      System.out.println(product+ quantity);
-//      serviceAdm.updateQuantity(product, quantity);
+   public void modifyQuantity(@RequestParam String product,@RequestParam String quantity,@RequestParam String type) {
+      System.out.println(product+ quantity + type);
+      serviceAdm.updateQuantity(product, quantity,type);
       
    }
 

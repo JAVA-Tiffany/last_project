@@ -18,7 +18,7 @@ import com.project.dto.UserimgDTO;
 public class cartService {
 	@Autowired
 	private UserimgDAO dao;
-	public void cart_insert(HttpServletRequest request,@RequestParam String userimg_in,@RequestParam String imgname,@RequestParam String imgmoney) {
+	public void cart_insert(HttpServletRequest request,@RequestParam String userimg_in,@RequestParam String imgname,@RequestParam String imgmoney,String type) {
 
 		HttpSession session = request.getSession();
 		UserimgDTO dto = new UserimgDTO();
@@ -27,6 +27,7 @@ public class cartService {
 		dto.setImg("resources/userimg/"+userimg_in);
 		dto.setProduct(imgname);
 		dto.setCancelok("대기");
+		dto.setType(type);
 		dao.insert(dto);
 	}
 	public List<UserimgDTO> cart_select(Model model,String id) {
