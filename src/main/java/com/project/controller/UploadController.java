@@ -47,6 +47,7 @@ public class UploadController {
     @RequestMapping(value="fileUpload", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     @ResponseBody
     public String upload(MultipartFile file,Model model,HttpServletRequest request)throws Exception{
+    	System.out.println(file);
         //저장된 파일 이름
         String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
         MyimgDTO dto = new MyimgDTO();

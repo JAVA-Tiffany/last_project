@@ -40,7 +40,7 @@ public class cartService {
 		dto.setImg(img);
 		dao.delete(dto);
 		// 삭제할 파일 경로
-		File file = new File("C:\\Users\\Jang\\Desktop\\workspase-boot\\last_project\\src\\main\\webapp\\resources\\userimg\\"+img.split("/")[2]); 
+		File file = new File("D:\\deoksu_project\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\"+img.split("/")[2]); 
 		if( file.exists() ){ 
 			if(file.delete()) { 
 				System.out.println("파일삭제 성공"); 

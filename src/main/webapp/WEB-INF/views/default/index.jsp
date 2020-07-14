@@ -33,7 +33,6 @@
 <script type="text/javascript">
 	function data_move(d) {
 		$("#index_type_text").val(d);
-		alert($("#index_type_text").val());
 		index_form.submit();
 	}
 </script>

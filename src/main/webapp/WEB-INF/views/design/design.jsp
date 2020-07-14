@@ -1,3 +1,4 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@page import="java.net.URLDecoder"%>
@@ -101,7 +102,7 @@
    }
 // 	file창이 종료가 되면 실행
 	function changeValue(obj){
-		var form = $('form')[0];
+		var form = $('#form')[0];
 		var formData = new FormData(form);
 		$.ajax({
 			url : "fileUpload",
@@ -448,8 +449,8 @@
             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
          </div>
          <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
-      상품명<br>
-      가격<br><br>
+		상품명 : <label>${img_name}</label><br>
+      	가격 : <label>${img_money}</label><br><br>
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button>
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
       <br>
@@ -715,7 +716,7 @@
       <input type="button" value="품질보증/청약철회 안내" onclick="window.open('quality','배송안내','width=900,height=700')" style="width: 300px; height: 50px; margin-right: 80px;">
    </div>
       
-   <form id=form">
+   <form id="form">
    <input type="file" id="file" name="file" onchange="changeValue(this)" style="display:none; "/>
    </form>
    <!-- 일부분 부분-->
@@ -736,4 +737,3 @@
 	<jsp:include page="../default/footer.jsp"/>
 </body>
 </html>
-
