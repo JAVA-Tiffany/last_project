@@ -32,6 +32,27 @@ $(document).ready(function() {
 
 });
 
+// function title_search() {
+    
+//     alert($("#searchType").val());
+//     //타입 입력
+//     $("#type_result").val($("#searchType").val());
+    
+//     if($("#searchType").val()=="title"){
+//        $("#search_result").val($("#keyword").val());
+//        alert($("#search_result").val());
+//        list_form.submit();
+//     }else if($("#searchType").val()=="Content"){
+//        $("#search_result").val($("#keyword").val());
+//        alert($("#search_result").val());
+//        list_form.submit();
+//     }else{
+//        $("#search_result").val($("#keyword").val());
+//        alert($("#search_result").val());
+//        list_form.submit();
+//     }
+//  }
+
 </script>
 <style type="text/css">
 #floatMenu {
@@ -67,6 +88,13 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     border: none;
     vertical-align: top;
 }
+.form-group {
+   width: 90%;
+   margin: 10px auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 </style>
 </head>
 <body>
@@ -78,7 +106,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 플로팅 메뉴
 </div>
 <div align="center" class="div1">
-   <table border="1">
+   <table>
       <caption><font style="font: 400 30px 'Poppins',sans-serif;">Notice<br></font></caption>
          <tr>
             
@@ -103,23 +131,32 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
       </c:forEach>
    </table>
 
-        <p class="category displaynone"></p>
-        <p><select id="search_date" name="search_date">
-<option value="week">일주일</option>
-<option value="month">한달</option>
-<option value="month3">세달</option>
-<option value="all">전체</option>
-</select> <select id="search_key" name="search_key">
-<option value="subject">제목</option>
-<option value="content">내용</option>
-<option value="writer_name">글쓴이</option>
-<option value="member_id">아이디</option>
-<option value="nick_name">별명</option>
-<option value="product">상품정보</option>
-</select> <input id="search" name="search" class="inputTypeText" placeholder="" value="" type="text"  /> 
-<a href="#none" onclick="BOARD.form_submit('boardSearchForm');">search</a></p>
-</div>
-<jsp:include page="../default/footer.jsp"/>
+      <!-- 검색 form -->
+      <div id="acsearch" class="div2">
+         <!-- search{s} -->
+         <div class="form-group row justify-content-center"
+            style="padding-bottom: 20px;">
+            <div class="w100" style="padding-right: 10px">
+               <select class="form-control form-control-sm" name="searchType"
+                  id="searchType">
+                  <option value="title">제목</option>
+                  <option value="Content">본문</option>
+                  <option value="reg_id">작성자</option>
+               </select>
+            </div>
+            <div class="w300" style="padding-right: 10px">
+               <input type="text" class="form-control form-control-sm"
+                  name="keyword" id="keyword">
+            </div>
+            <div>
+               <button type="button" class="btn btn-sm btn-primary"
+                  name="btnSearch" id="btnSearch" onclick="title_search()">검색</button>
+            </div>
+         </div>
+         <!-- search{e} -->
+      </div>
+      </div>
+      <jsp:include page="../default/footer.jsp"/>
 <%-- <%@include file="footer.jsp"%> --%>
 </body>
-</html>>
+</html>

@@ -56,7 +56,6 @@ public class ProjectService {
 			return false;
 		}
 	}
-
 	public void data(Model model,String type) {
 		DataListDTO dto = new DataListDTO();
 		dto.setType(type);

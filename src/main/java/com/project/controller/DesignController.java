@@ -85,7 +85,6 @@ public class DesignController {
    }
    @RequestMapping(value = "change", method = {RequestMethod.GET, RequestMethod.POST})
    public String change(Model model, @RequestParam String change_val) {
-	   System.out.println("change_val : "+change_val);
       service.data(model,change_val);
       return "design/change";
    }

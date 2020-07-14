@@ -115,7 +115,7 @@ $(document).ready(function() {
 
 </script>
 </head>
-<body><c:if test="${sessionScope.id ne 'admin' }">
+<body><c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
 	alert("관리자만 접근가능합니다")
 	location.href="index"
