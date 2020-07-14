@@ -19,7 +19,14 @@ public class UserDAO {
 		return sqlSession.selectOne(namepasce+".select_User",num);
 	}
 	public int insert(UserDTO dto) {
-
+		System.out.println(dto.getAddr1());
+		System.out.println(dto.getAddr2());
+		System.out.println(dto.getAddr3());
+		System.out.println(dto.getEmail());
+		System.out.println(dto.getId());
+		System.out.println(dto.getName());
+		System.out.println(dto.getPhon());
+		System.out.println(dto.getPw());
 		return sqlSession.insert(namepasce+".insert_User",dto);
 	}
 	public int delete(String num) {
