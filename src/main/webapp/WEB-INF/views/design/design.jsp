@@ -218,7 +218,7 @@
    
    url='${img_name}'
    $(function(){
-       $("#zz").css("background-image", "url('resources/img/bag desgin/"+url+".png' )"); 
+       $("#zz").css("background-image", "url('resources/img/${img_goods} desgin/"+url+".png' )"); 
     });
    
 //    view 앞으로

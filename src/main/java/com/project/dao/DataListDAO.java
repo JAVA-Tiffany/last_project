@@ -24,6 +24,13 @@ public class DataListDAO {
 		sqlSession.update(namepasce + ".updateQuantity",dto);
 	}
    
-   
+   public List<DataListDTO> selectPick(String choice){
+	   if(choice.equals("All")) {
+		   return sqlSession.selectList(namepasce+".dataselectAll_List");
+	   }else {
+		   return sqlSession.selectList(namepasce + ".selectPick",choice);
+	   }
+	   
+   }
    
 }

@@ -108,7 +108,7 @@
                 $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
                          +"<input type='hidden' value='"+p+"' name='imgname'>"
                          +"<input type='hidden' value='"+uu+"' name='imgmoney'>"
-                         +"<input type='hidden' value='earring' name='imggoods'>"
+                         +"<input type='hidden' value='${list_type}' name='imggoods'>"
                          +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
                        +"</form>")
              

@@ -83,6 +83,13 @@ public class AdminService {
 		dao.save_writeBoard(dto);
 		
 	}
+	
+	public void choiceCategory(String choice,Model model) {
+		List<DataListDTO> data = datadao.selectPick(choice);
+		model.addAttribute("PickData",data);
+	}
+	
+	
 }
 
 

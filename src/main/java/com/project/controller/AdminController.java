@@ -179,10 +179,10 @@ public class AdminController {
 	      
 	   }
 	
-	@RequestMapping(value = "categorySelect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	@ResponseBody
-	public String categorySelect(@RequestParam String choice) {
-		serviceAdm.choiceCategory(choice);
+	@RequestMapping("categorySelect")
+	public String categorySelect(@RequestParam String choice,Model model) {
+		serviceAdm.choiceCategory(choice,model);
+		return "admin/QuantityManage";
 	}
 	
 

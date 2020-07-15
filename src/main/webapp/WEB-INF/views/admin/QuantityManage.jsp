@@ -80,47 +80,35 @@ $(document).ready(function() {
      
         });
     });
+   
+   $("#category").change(function(){ 
+	   var choice = document.getElementById("category").value
+	   console.log(choice)
+	  	location.href="categorySelect?choice="+choice;
+    
+       });
+   
 });
    
    function reloadList(){
       location.reload();
    }
    
-   function category(){
-	   
-	   var choice = document.getElementById("category")
-	   
-	   $.ajax({
-           url: "categorySelect",
-           type: "POST",
-           data: {choice:choice}
-	   ,
-           success: function(data){
-               reloadList();
-           },
-           error: function(){
-               alert("error");
-           }
-    
-       });
-	   
-	   
-	   
-   }
+   
 </script>
 <jsp:include page="AdminHeader.jsp"/>   
 
 <div align="center">
-	<select name="category" id="category" onchange="category()">
-
+	<select name="category" id="category">
 	<option>카테고리를 선택해주세요</option>
-<option value="bag">가방</option>
-<option value="dress">의류</option>
-<option value="earling">귀걸이/귀찌</option>
+	<option value="All">전체 목록</option>
+	<option value="bag">가방</option>
+	<option value="dress">의류</option>
+	<option value="earring">귀걸이/귀찌</option>
 </select>
+</div>
 
 <div align="center" class="div1">
-
    <table border="1" class="table" id="thetable">
       <caption><font style="font: 400 30px 'Poppins',sans-serif;">재고 관리<br></font></caption>
          <tr>
@@ -131,7 +119,17 @@ $(document).ready(function() {
             <th style="width: 10%;">재고수정</th>
             <th style="width: 10%;">수정</th>
          </tr>
-
+	<c:forEach var="datalist" items="${PickData}">
+      <tr>
+         <td><input type="checkbox" name="checkBtn"></td>
+         <td style="display:none;">${datalist.type }</td>
+         <td>${datalist.product }</td>
+         <td>${datalist.price }</td>
+         <td>${datalist.quantity }</td>
+         <td><input type="text" class="quantityData" placeholder="재고수정"></td>
+         <td><input type="button" class="Modifybtn1" value="수정"/></td>
+      </tr>
+      </c:forEach>
    <c:forEach var="datalist" items="${datalist}">
       <tr>
          <td><input type="checkbox" name="checkBtn"></td>

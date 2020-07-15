@@ -45,6 +45,10 @@
       select * from data_list
       where type=#{type}
    </select>
+   <select id="selectPick" resultType="datalistdto">
+   		select * from data_list where type=#{choice}
+   </select>
+   
    <update id="updateQuantity" parameterType="datalistdto">
 		update data_list set quantity=#{quantity} where product=#{product} and type=#{type}
 	</update>
