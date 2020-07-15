@@ -109,7 +109,6 @@
 		}
 	</script>
 
-
 	<script type="text/javascript">
 		function ch() {
 			if (document.getElementById("id").value == "") {
@@ -177,10 +176,10 @@
 			}
 		}
 		$(function() {
-			a="";
-			if('${NaverDto.id}'!=''){
+			a = "";
+			if ('${NaverDto.id}' != '') {
 				a = '${NaverDto.id}';
-			}else if('${GoogleId}'!=''){
+			} else if ('${GoogleId}' != '') {
 				a = '${GoogleId}';
 			}
 			$("#id").val(a);
@@ -221,7 +220,8 @@
 		}
 	</script>
 	<!--    회원가입 -->
-	<div class="limiter">
+	<jsp:include page="../default/header.jsp" />
+	<div class="limiter" style="margin-top: 50px;">
 		<div class="container-login100" align="center">
 			<div class="wrap-login100" align="center">
 				<h2>Self Design 계정 만들기</h2>
@@ -258,9 +258,9 @@
 						</div>
 						<div class="wrap-input100 validate-input">
 							<input type="text" id="name" placeholder="이름" class="input100"
-								name="name"> <span
-								class="focus-input100"></span> <span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								name="name"> <span class="focus-input100"></span> <span
+								class="symbol-input100"> <i class="fa fa-lock"
+								aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -333,8 +333,6 @@
 
 						<label style="margin-right: 95px;" id="pw1"></label><br> <label
 							style="margin-right: 95px;" id="pwc2"></label><br>
-
-
 
 					</form>
 				</div>

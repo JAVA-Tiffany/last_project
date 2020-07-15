@@ -40,10 +40,11 @@
 <body>
 <c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
-	alert("관리자만 접근가능합니다")
-	location.href="index"
+   alert("관리자만 접근가능합니다")
+   location.href="index"
 </script>
 </c:if>
+<jsp:include page="AdminHeader.jsp"/>   
 <div align="center" class="div1">
 <form method="post" action="update?bno=${view.bno}">
 <input type="hidden" value="${view.bno}" name="bno">
@@ -58,7 +59,7 @@
             <tr>
                 <th>제목</th>
                 <td style="size: 80px;">
-                	${view.title}
+                   ${view.title}
                 </td>
                 <th>조회수</th>
                 <td>${view.viewcnt }</td>

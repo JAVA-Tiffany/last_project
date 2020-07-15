@@ -22,7 +22,7 @@ public class restController {
    @ResponseBody
    public String unm_up(HttpServletRequest request, @RequestParam int num, @RequestParam String product) {
       HttpSession se = request.getSession();
-      cartservice.cart_update(se.getAttribute("id").toString(),num, product);
+//      cartservice.cart_update(se.getAttribute("id").toString(),num, product);
       return "뭐든되라";
    }
    
@@ -32,7 +32,7 @@ public class restController {
       System.out.println(product);
       HttpSession se = request.getSession();
       System.out.println(se.getAttribute("id"));
-      cartservice.cart_update2(se.getAttribute("id").toString(),num, product);
+//      cartservice.cart_update2(se.getAttribute("id").toString(),num, product);
       return "이거머임?2";
    }
 }

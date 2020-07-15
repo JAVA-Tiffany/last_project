@@ -50,48 +50,52 @@
 
    <script src="resources/jquery-3.2.1.min.js"></script>
    <script type="text/javascript">
-      var size= ${list_img.size()}
-      function number_click(age) {
-         sessionStorage.setItem("last", 9*age);
-         sessionStorage.setItem("start", sessionStorage.getItem("last")-9);
-      }
-      if(size>9){
-         $(function (){
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
-            for(i=0;i<size/9;i++){
-               $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</a></div>");
-            };
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
-         });
-      }else{
-         $(function (){
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>1</a></div>");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
-         });
-      }
+   var size= ${list_size}
+   function number_click(age) {
+ 	  $("#start"+age).val((parseInt(age)*9)-9);
+ 	  $("#last"+age).val(parseInt(age)*9);
+ 	  $("#numbtn"+age).trigger("click");
+   }
+   if(size>9){
+       $(function (){
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
+          for(i=0;i<size/9;i++){
+             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
+             			+"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
+             $("#num").append("<form action='change' method='post' name='numbtn"+(i+1)+"'>"
+                     +"<input type='hidden' value='${list_type}' name='change_val'>"
+                     +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
+                     +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
+                     +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
+                   +"</form>");
+          }
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
+       });
+    }else{
+       $(function (){
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>1</a></div>");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
+          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
+       });
+    }
       
-		$(function () {
-        	if(sessionStorage.getItem("last")==null){
-            	sessionStorage.setItem("last", 9);
-            	sessionStorage.setItem("start", 0);
-            }
-            c=0
-            a=0
-            l=${list_img}
-            r=${list_product}
-            u=${list_price}
-        	z=${list_count}
-		for(i=0;i<size;i++){
-            s=l[i]   //이미지
-            p=r[i]   //상품이름
-            uu=u[i]   //가격
-            zz=z[i]   //리뷰
-			if(i<sessionStorage.getItem("last") && i>=sessionStorage.getItem("start")){
+      $(function () {
+          c=0
+          a=0
+          l=${list_img}
+          r=${list_product}
+          u=${list_price}
+          z=${list_count}
+          size=${list_img.size()}
+          for(i=0;i<size;i++){
+             s=l[i]   //이미지
+             p=r[i]   //상품이름
+             uu=u[i]   //가격
+             zz=z[i]   //리뷰
                 a++;
                 if(i%3==0) {
                    c++;
@@ -100,13 +104,19 @@
                 $("#tr"+c).append("<td>"
                 +"<img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5;' style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick='imgin("+a+")'>"
                     +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+p+"</p> "
-                	+"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
-                	+"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
-                	+"</td>");
+                   +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
+                   +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
+                   +"</td>");
+                $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
+                         +"<input type='hidden' value='"+p+"' name='imgname'>"
+                         +"<input type='hidden' value='"+uu+"' name='imgmoney'>"
+                         +"<input type='hidden' value='earring' name='imggoods'>"
+                         +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
+                       +"</form>")
              
-            	}
-			}
-		});
+          }
+          
+       });
 	function imgin(z) {
 		ur=$("#imgname"+z).text();
 		$(opener.document).find("#op").val(ur);
@@ -151,6 +161,8 @@
 	<label onclick=""></label>
 	<form action="change" method="post" name="addch">
 		<input type="hidden" name="change_val" id="add">
+		<input type="hidden" name="start" id="add_start" value="0">
+		<input type="hidden" name="end" id="add_end" value="9">
 	</form>
 </body>
 </html>

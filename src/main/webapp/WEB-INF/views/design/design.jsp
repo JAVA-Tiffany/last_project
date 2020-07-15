@@ -385,12 +385,6 @@
             <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>
          </div>
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/previous.png" style="width: 50px;height: 50px;" onclick=""><br><font style="font-size: 10px;">취소</font>
-         </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/next.png" style="width: 50px;height: 50px;" onclick=""><br><font style="font-size: 10px;">다시실행</font>
-         </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
             <img src="resources/img/garbage.png" style="width: 50px;height: 50px;" onclick="view_garbage()"><br><font style="font-size: 10px;">삭제</font>
          </div>
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
@@ -480,7 +474,7 @@
       
 	<script type="text/javascript">
 		$(function() {
-			if("${img_goods}"!="dress"){
+			if("${img_goods}"!="dresss"){
 				$("#size_select").css("display","none");
 			}
 		})
@@ -626,6 +620,8 @@
    
    <form name="changeopen">
       <input type="hidden" name="change_val" id="change_val" value="${img_goods}">
+      <input type="hidden" name="start" value="0">
+      <input type="hidden" name="end" value="9">
    </form>
 	
 	<form name="design_review_form" method="post" action="review">

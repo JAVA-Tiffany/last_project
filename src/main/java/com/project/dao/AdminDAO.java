@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.ReplyDTO;
 
 @Repository
 public class AdminDAO {
@@ -26,6 +27,10 @@ public class AdminDAO {
    }
    public AdminNoticeDTO view(AdminNoticeDTO dto) {
       return sqlSession.selectOne(namepasce+".view_Notice",dto);
+   }
+   
+   public CommnuityDTO viewBoard(CommnuityDTO dto) {
+      return sqlSession.selectOne(namepasce+".view_Board",dto);
    }
 
    public void count(AdminNoticeDTO dto) {
@@ -47,6 +52,13 @@ public class AdminDAO {
    }
    
    public void deleteQA(int num) {
+      List<ReplyDTO> arr =sqlSession.selectList(namepasce+".select_reply",num);
+        for(int i=0;i<arr.size();i++) {
+           ReplyDTO reply = new ReplyDTO();
+           reply.setBno(arr.get(i).getBno());
+           reply.setRno(arr.get(i).getRno());
+           sqlSession.delete(namepasce+".delete_reply", reply);
+        }
       sqlSession.delete(namepasce+ ".delete_QA",num);
    }
    

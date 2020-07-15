@@ -7,7 +7,7 @@
 		<typeAlias alias="userdto" type="com.project.dto.UserDTO"/>
 		<typeAlias alias="datalistdto" type="com.project.dto.DataListDTO"/>
 		<typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
-		<typeAlias alias="userimgdto" type="com.project.dto.UserimgDTO"/>
+		<typeAlias alias="paydto" type="com.project.dto.PayDTO"/>
 		<typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
 		<typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
 		<typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>

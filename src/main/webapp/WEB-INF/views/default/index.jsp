@@ -33,6 +33,8 @@
 <script type="text/javascript">
 	function data_move(d) {
 		$("#index_type_text").val(d);
+		$("#index_type_text_start").val(0);
+		$("#index_type_text_end").val(9);
 		index_form.submit();
 	}
 </script>
@@ -103,6 +105,8 @@
 
 <form action="data" method="post" name="index_form">
 	<input type="hidden" name="type" id="index_type_text">
+	<input type="hidden" name="start" id="index_type_text_start">
+	<input type="hidden" name="end" id="index_type_text_end">
 </form>
 
 <%@include file="footer.jsp" %>

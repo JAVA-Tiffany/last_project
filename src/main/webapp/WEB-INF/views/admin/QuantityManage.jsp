@@ -31,30 +31,30 @@
       text-align: center;
     }
    
-  	.div1 {
-	padding-top: 200px;
-	padding-bottom: 100px;
-	}
-	.div2{
-	padding-top: 40px;
-	}
+     .div1 {
+   padding-top: 200px;
+   padding-bottom: 100px;
+   }
+   .div2{
+   padding-top: 40px;
+   }
 </style>
 </head>
 <body>
 <c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
-	alert("관리자만 접근가능합니다")
-	location.href="index"
+   alert("관리자만 접근가능합니다")
+   location.href="index"
 </script>
 </c:if>
 <script type="text/javascript">
 
 $(document).ready(function() {
-	index =0;
-	$(".Modifybtn1").click(function(){ 
-		index = $(this).closest('tr').prevAll().length-1; 
-		console.log('trNum : ' + index);
-		
+   index =0;
+   $(".Modifybtn1").click(function(){ 
+      index = $(this).closest('tr').prevAll().length-1; 
+      console.log('trNum : ' + index);
+      
         var str = ""
         var tdArr = new Array();    // 배열 선언
         var Modifybtn1 = $(this);
@@ -64,7 +64,7 @@ $(document).ready(function() {
        
        var quantity = document.getElementsByClassName("quantityData")[index].value;
        console.log(quantity)
-       	var type= td.eq(1).text();
+          var type= td.eq(1).text();
         var no = td.eq(2).text();
         
         $.ajax({
@@ -81,28 +81,29 @@ $(document).ready(function() {
         });
     });
 });
-	
-	function reloadList(){
-		location.reload();
-	}
+   
+   function reloadList(){
+      location.reload();
+   }
 </script>
+<jsp:include page="AdminHeader.jsp"/>   
 <div align="center" class="div1">
 
-	<table border="1" class="table" id="thetable">
-		<caption><font style="font: 400 30px 'Poppins',sans-serif;">재고 관리<br></font></caption>
-			<tr>
-				<th style="width: 3%;"></th>
-				<th style="width: 50%;">제목</th>
-				<th style="width: 10%;">가격</th>
-				<th style="width: 10%;">재고</th>
-				<th style="width: 10%;">재고수정</th>
-				<th style="width: 10%;">수정</th>
-			</tr>
+   <table border="1" class="table" id="thetable">
+      <caption><font style="font: 400 30px 'Poppins',sans-serif;">재고 관리<br></font></caption>
+         <tr>
+            <th style="width: 3%;"></th>
+            <th style="width: 50%;">제목</th>
+            <th style="width: 10%;">가격</th>
+            <th style="width: 10%;">재고</th>
+            <th style="width: 10%;">재고수정</th>
+            <th style="width: 10%;">수정</th>
+         </tr>
 
-	<c:forEach var="datalist" items="${datalist}">
+   <c:forEach var="datalist" items="${datalist}">
       <tr>
-      	<td><input type="checkbox" name="checkBtn"></td>
-      	<td style="display:none;">${datalist.type }</td>
+         <td><input type="checkbox" name="checkBtn"></td>
+         <td style="display:none;">${datalist.type }</td>
          <td>${datalist.product }</td>
          <td>${datalist.price }</td>
          <td>${datalist.quantity }</td>
@@ -117,5 +118,6 @@ $(document).ready(function() {
       </tr>
    </table>
 </div>
+<jsp:include page="../default/footer.jsp"/>
 </body>
 </html>

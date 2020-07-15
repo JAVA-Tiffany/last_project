@@ -1,5 +1,9 @@
 package com.project.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.ReplyDTO;
 import com.project.service.AdminService;
 import com.project.service.CommunityService;
 import com.project.service.ProjectService;
@@ -159,6 +164,23 @@ public class AdminController {
       serviceAdm.updateQuantity(product, quantity,type);
       
    }
+   
+    @RequestMapping("viewBoard")
+      public String viewBoard(CommnuityDTO dto, Model model, HttpServletRequest request,HttpSession session) {
+       if(session.getAttribute("id")==null) {
+          model.addAttribute("logstart","로그인 해주세요");
+          return "login&join/login";
+       }else {
+          model.addAttribute("id", session.getAttribute("id").toString());
+          serviceAdm.viewBoard(dto, model);
+          return "admin/AcBoardContent";
+       }
+         
+         
+      }
+   
+   
+   
 
 
 }

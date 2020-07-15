@@ -66,7 +66,7 @@ public class DesignController {
           model.addAttribute("logstart","로그인 해주세요");
           return "login&join/login";
        }else {
-         cartservice.cart_insert(request, userimg_in, imgname, imgmoney,type);
+//         cartservice.cart_insert(request, userimg_in, imgname, imgmoney,type);
          return "장바구니 저장 완료";
        }
    }
@@ -84,8 +84,8 @@ public class DesignController {
        }
    }
    @RequestMapping(value = "change", method = {RequestMethod.GET, RequestMethod.POST})
-   public String change(Model model, @RequestParam String change_val) {
-      service.data(model,change_val);
+   public String change(Model model, @RequestParam String change_val,@RequestParam String start,@RequestParam String end) {
+      service.data(model,change_val,start,end);
       return "design/change";
    }
    

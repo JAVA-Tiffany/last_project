@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.div1 {
+   padding-top: 200px;
+   padding-bottom: 100px;
+}
 .table {
       border-collapse: collapse;
       border-top: 3px solid #168;
@@ -37,13 +41,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	$("#Delbutton").click(function(){ 
-	
-		var rowData = new Array(); 
+   $("#Delbutton").click(function(){ 
+   
+      var rowData = new Array(); 
         var tdArr = new Array();
         var checkbox = $("input[name=checkBtn]:checked");
 
-	checkbox.each(function(i) {
+   checkbox.each(function(i) {
         var tr = checkbox.parent().parent().eq(i);
         var td = tr.children();
        
@@ -51,46 +55,48 @@ $(document).ready(function() {
         var userid = td.eq(1).text()+" ";
         tdArr.push(userid);
                 
-   		 });
-		var str = ""
-		for(var i=0; i<tdArr.length; i++) {
-			console.log(tdArr[i])
-			str +=tdArr[i]
-		}
-		
-		Swal.fire({
-			  title: '아이디를 삭제하시겠습니까?',
-			  text: '선택하신 아이디 : '+str+'를 정말 삭제하시겠습니까?',
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Yes, delete it!'
-		}).then((result) => {
-			  if (result.value) {
-			    Swal.fire({
-			    	title:'Deleted!',
-			    	text: '성공적으로 삭제되었습니다!',
-			    	icon: 'success',
-			      preConfirm:function(){
-				    	 location.href="DelUser?idval="+str
-				    }
-			    })
-			  }
-			})
-	});
+          });
+      var str = ""
+      for(var i=0; i<tdArr.length; i++) {
+         console.log(tdArr[i])
+         str +=tdArr[i]
+      }
+      
+      Swal.fire({
+           title: '아이디를 삭제하시겠습니까?',
+           text: '선택하신 아이디 : '+str+'를 정말 삭제하시겠습니까?',
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+           if (result.value) {
+             Swal.fire({
+                title:'Deleted!',
+                text: '성공적으로 삭제되었습니다!',
+                icon: 'success',
+               preConfirm:function(){
+                    location.href="DelUser?idval="+str
+                }
+             })
+           }
+         })
+   });
 
 });
-	
+   
 
 </script>
 </head>
 <body><c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
-	alert("관리자만 접근가능합니다")
-	location.href="index"
+   alert("관리자만 접근가능합니다")
+   location.href="index"
 </script>
-</c:if>계정조회 페이지<br>
+</c:if>
+<jsp:include page="AdminHeader.jsp"/>
+<div align="center" class="div1">
 <table align="center" class="table">
                               
    <tr>
@@ -101,31 +107,30 @@ $(document).ready(function() {
       <th>주소</th>   
       <th>전화번호</th>   
    </tr>
-   		<c:set var="doneLoop" value="false"/> 
-		<c:forEach var="list" items="${list}">
+         <c:set var="doneLoop" value="false"/> 
+      <c:forEach var="list" items="${list}">
    <tr>
    <c:choose>
-   	<c:when test="${list.id eq 'admin' }">
-   		<c:set var="doneLoop" value="true"/> 
-   	</c:when>
-   	<c:otherwise>
-   		<td><input type="checkbox" name="checkBtn"></td>
-   		<td>${list.id}</td>
-    	<td>${list.pw}</td>
-    	<td>${list.name}</td>
-    	<td>${list.addr1}&nbsp;${list.addr2 }&nbsp;${list.addr3 }</td>
-    	<td>${list.phon}</td>
-    	
-   	</c:otherwise>
+      <c:when test="${list.id eq 'admin' }">
+         <c:set var="doneLoop" value="true"/> 
+      </c:when>
+      <c:otherwise>
+         <td><input type="checkbox" name="checkBtn"></td>
+         <td>${list.id}</td>
+       <td>${list.pw}</td>
+       <td>${list.name}</td>
+       <td>${list.addr1}&nbsp;${list.addr2 }&nbsp;${list.addr3 }</td>
+       <td>${list.phon}</td>
+       
+      </c:otherwise>
    </c:choose>
    </tr>
    </c:forEach>   
    <tr>
-   	<td colspan="6" align="center"><button type="button" id="Delbutton">삭제</button></td>
+      <td colspan="6" align="center"><button type="button" id="Delbutton">삭제</button></td>
    </tr>
-		
-		
 </table>
-
+</div>
+<jsp:include page="../default/footer.jsp"/>
 </body>
 </html>
