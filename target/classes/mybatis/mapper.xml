@@ -60,6 +60,12 @@
 	<select id="view_Commnuity" resultType="comdto">
 		select * from board_sys where bno=#{bno}
 	</select>
+	<select id="view_Board" resultType="comdto">
+		select * from board_sys where bno=#{bno}
+	</select>
+	
+	
+	
 	<update id="count_Commnuity">
 		update board_sys set viewcnt = viewcnt + 1 where bno=#{bno}
 	</update>

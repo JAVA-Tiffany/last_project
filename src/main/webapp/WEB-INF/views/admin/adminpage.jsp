@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <!--    href="resources/css/main.css?after"> -->
 </head>
 <body>
+<script type="text/javascript" src="resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <c:if test="${sessionScope.id.split('_')[0] ne 'admin' }">
 <script type="text/javascript">
    alert("관리자만 접근가능합니다")
@@ -47,29 +49,9 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <!-- <button type="button" onclick="location.href ='acboard'" style="width:100px;height:70px;">게시물 관리</button><br><br> -->
 <!-- <button type="button" onclick="location.href ='acnotice'" style="width:100px;height:70px;">공지사항</button><br><br> -->
 <!-- <button type="button" style="width:100px;height:70px;">구매관리</button><br><br> -->
+<jsp:include page="AdminHeader.jsp"/>
 
-   <div style="float: left;">
-      <a href="index"><font color="blue" size="4" style="font-family: 나눔바른고딕;">홈페이지</font></a>
-   </div>
-   <div style="float: right;">
-      User : <a href="myinfo"><font color="red" style="font-family: 나눔바른고딕;">${id}</font></a> &nbsp; &nbsp;
-      <a href="logout"><font color="blue" size="4" style="font-family: 나눔바른고딕;">로그아웃</font></a>
-   </div>
 
-<div align="center" class="div1">
-<table style="width: 80%;">
-
-   <tr style="background-color: #007bff; text-align: center;"  >
-      
-      
-      <td><a href="acsearch"><font color="white" size="4">계정 관리</font></a></td>
-      <td><a href="QuantityManage"><font color="white" size="4">재고관리</font></a></td>
-      <td><a href="acboard"><font color="white" size="4">게시물 관리</font></a></td>
-      <td><a href="acnotice"><font color="white" size="4">공지사항</font></a></td>
-      <td><a href="#"><font color="white" size="4">구매관리</font></a></td>
-   </tr>
-</table>
-</div>
 <div class="div2" style="padding-top: 100px; text-align: center;" >
 
 <font size="10" color="#007bff" style="font-family: 나눔바른고딕;">관리자 페이지입니다. :)</font>
@@ -78,6 +60,6 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 
 
 
- 
+ <jsp:include page="../default/footer.jsp"/>
 </body>
 </html>

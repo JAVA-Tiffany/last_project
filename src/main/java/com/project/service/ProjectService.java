@@ -65,25 +65,29 @@ public class ProjectService {
 	}
 
 
-	public void data(Model model,String type) {
-		DataListDTO dto = new DataListDTO();
-		dto.setType(type);
-		List<DataListDTO> l = datalistdao.select(dto);
-		ArrayList<String> arr = new ArrayList<String>();
-		ArrayList<String> arr2 = new ArrayList<String>();
-		ArrayList<String> arr3 = new ArrayList<String>();
-		ArrayList<String> arr4 = new ArrayList<String>();
-		for (int i = 0; i < l.size(); i++) {
-			arr.add("'" + l.get(i).getImg() + "'");
-			arr2.add("'" + l.get(i).getProduct() + "'");
-			arr3.add("'" + l.get(i).getPrice() + "'");
-			arr4.add("'" + l.get(i).getCount() + "'");
-		}
-		model.addAttribute("list_img", arr);
-		model.addAttribute("list_product", arr2);
-		model.addAttribute("list_price", arr3);
-		model.addAttribute("list_count", arr4);
-	}
+	public void data(Model model, String type,String start, String end) {
+	      DataListDTO dto = new DataListDTO();
+	      dto.setType(type);
+	      List<DataListDTO> l = datalistdao.select(dto);
+	      ArrayList<String> arr = new ArrayList<String>();
+	      ArrayList<String> arr2 = new ArrayList<String>();
+	      ArrayList<String> arr3 = new ArrayList<String>();
+	      ArrayList<String> arr4 = new ArrayList<String>();
+	      for (int i = 0; i < l.size(); i++) {
+	         if(i>=Integer.valueOf(start) && i<Integer.valueOf(end)) {
+	            arr.add("'" + l.get(i).getImg() + "'");
+	            arr2.add("'" + l.get(i).getProduct() + "'");
+	            arr3.add("'" + l.get(i).getPrice() + "'");
+	            arr4.add("'" + l.get(i).getCount() + "'");
+	         }
+	      }
+	      model.addAttribute("list_size",l.size());
+	      model.addAttribute("list_img", arr);
+	      model.addAttribute("list_product", arr2);
+	      model.addAttribute("list_price", arr3);
+	      model.addAttribute("list_count", arr4);
+	      model.addAttribute("list_type",l.get(0).getType());
+	   }
 
 	public UserDTO buyInfo(String id) {
 		return userdao.select(id);

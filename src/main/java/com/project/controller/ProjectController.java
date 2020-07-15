@@ -204,14 +204,8 @@ public class ProjectController {
       }
       
       @RequestMapping("data")
-      public String data(Model model,@RequestParam String type) {
-         service.data(model,type);
-         if(type.equals("dress")) {
-            return "default/dress";
-         }else if(type.equals("bag")) {
-            return "default/dress";
-         }else {
-            return "default/earring";
-         }
+      public String data(Model model, @RequestParam String type, @RequestParam String start, @RequestParam String end) {
+         service.data(model, type, start, end);
+         return "default/data";
       }
 }

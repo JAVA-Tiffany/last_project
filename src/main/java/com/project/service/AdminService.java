@@ -38,6 +38,11 @@ public class AdminService {
 	public void view(AdminNoticeDTO dto, Model model) {
 		model.addAttribute("view",dao.view(dto));   
 	}
+	
+	public void viewBoard(CommnuityDTO dto, Model model) {
+		model.addAttribute("view",dao.viewBoard(dto));   
+	}
+	
 	public void count(AdminNoticeDTO dto) {
 		dao.count(dto);
 
