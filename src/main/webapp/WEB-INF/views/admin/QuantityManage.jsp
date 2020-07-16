@@ -18,6 +18,7 @@
       text-align: center;
     }
     .table th, .table td {
+    text-align:center;
       padding: 10px;
       border: 1px solid #ddd;
     }
@@ -88,6 +89,16 @@ $(document).ready(function() {
     
        });
    
+   
+   $("#AddProduct").click(function(){
+		window.open("AddProductPopup","상품등록","width=700px,height=500px");
+	   
+	   
+	   
+	   
+	   
+   })
+   
 });
    
    function reloadList(){
@@ -98,22 +109,24 @@ $(document).ready(function() {
 </script>
 <jsp:include page="AdminHeader.jsp"/>   
 
-<div align="center">
-	<select name="category" id="category">
-	<option>카테고리를 선택해주세요</option>
-	<option value="All">전체 목록</option>
-	<option value="bag">가방</option>
-	<option value="dress">의류</option>
-	<option value="earring">귀걸이/귀찌</option>
-</select>
-</div>
+<div><input type="button" id="AddProduct" value="상품등록"></div>
 
 <div align="center" class="div1">
    <table border="1" class="table" id="thetable">
       <caption><font style="font: 400 30px 'Poppins',sans-serif;">재고 관리<br></font></caption>
          <tr>
             <th style="width: 3%;"></th>
-            <th style="width: 50%;">제목</th>
+            <th style="width: 50%;padding-left: 200px;">제목
+            <div align="right" style="float:right;">
+			<select name="category" id="category">
+				<option>카테고리를 선택해주세요</option>
+				<option value="All">전체 목록</option>
+				<option value="bag">가방</option>
+				<option value="dress">의류</option>
+				<option value="earring">귀걸이/귀찌</option>
+			</select>
+			</div>
+            </th>
             <th style="width: 10%;">가격</th>
             <th style="width: 10%;">재고</th>
             <th style="width: 10%;">재고수정</th>
@@ -123,7 +136,7 @@ $(document).ready(function() {
       <tr>
          <td><input type="checkbox" name="checkBtn"></td>
          <td style="display:none;">${datalist.type }</td>
-         <td>${datalist.product }</td>
+         <td align="center">${datalist.product }</td>
          <td>${datalist.price }</td>
          <td>${datalist.quantity }</td>
          <td><input type="text" class="quantityData" placeholder="재고수정"></td>

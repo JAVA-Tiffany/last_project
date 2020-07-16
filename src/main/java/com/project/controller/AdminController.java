@@ -185,6 +185,9 @@ public class AdminController {
 		return "admin/QuantityManage";
 	}
 	
-
+	@RequestMapping("AddProductPopup")
+	public String AddProductPopup() {
+		return "admin/AddProductPopup";
+	}
 
 }

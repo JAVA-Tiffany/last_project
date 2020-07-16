@@ -27,6 +27,7 @@
 </head>
 <body>
 <iframe src="http://nid.naver.com/nidlogin.logout" style="visibility:hidden;display:none"></iframe>
+<iframe src="https://accounts.google.com/logout" style="visibility:hidden;display:none"></iframe>
    <div class="limiter">
       <div class="container-login100">
          <div class="wrap-login100">
