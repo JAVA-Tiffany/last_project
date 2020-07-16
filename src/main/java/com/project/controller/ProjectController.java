@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.dto.UserDTO;
-import com.project.dto.UserimgDTO;
+import com.project.dto.PayDTO;
 import com.project.dto.buyDTO;
 import com.project.service.ProjectService;
 import com.project.service.cartService;
@@ -101,17 +101,17 @@ public class ProjectController {
    @RequestMapping("cart")
       public String cart(Model model,HttpServletRequest request) {
          HttpSession session = request.getSession();
-         List<UserimgDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
+         List<PayDTO> arr = cartservice.cart_select(model,session.getAttribute("id").toString());
          ArrayList<Object> arrz= new ArrayList<Object>();
          for(int i=0;i<arr.size();i++) {
             String[] z=new String[7];
             z[0]=arr.get(i).getImg();
             z[1]=arr.get(i).getId();
             z[2]=arr.get(i).getProduct();
-            z[3]=arr.get(i).getCancelok();
-            z[4]=arr.get(i).getMoney();
+            z[3]=arr.get(i).getStatus();
+            z[4]=arr.get(i).getPrice();
             z[5]=String.valueOf(i);
-            z[6]=arr.get(i).getNum();
+            z[6]=arr.get(i).getCount();
             arrz.add(z);
          }
          model.addAttribute("cartlist",arrz);
@@ -140,7 +140,7 @@ public class ProjectController {
          , @RequestParam(value="sum", required=false) String sum) {
       HttpSession session = request.getSession();
 //      System.out.println(session.getAttribute("id"));
-      List<UserimgDTO> userimglist = new ArrayList<UserimgDTO>();
+      List<PayDTO> userimglist = new ArrayList<PayDTO>();
       userimglist = cartservice.cart_select(model, session.getAttribute("id").toString());
       model.addAttribute("userInfo", service.buyInfo(session.getAttribute("id").toString()));
       model.addAttribute("list", userimglist);
@@ -157,17 +157,17 @@ public class ProjectController {
    public String buy(Model model,buyDTO buydto) {
       Date date = new Date();
       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//      System.out.println(buydto.getName());
-//      System.out.println(buydto.getAddr1());
-//      System.out.println(buydto.getAddr2());
-//      System.out.println(buydto.getAddr3());
-//      System.out.println(buydto.getEmail());
-//      System.out.println(buydto.getPhon());
-//      System.out.println(buydto.getTotal());
-//      System.out.println(buydto.getSum());
-//      System.out.println(buydto.getDelRequest());
-//      System.out.println(buydto.getProRequest());
-//      System.out.println(buydto.getlPro());
+      System.out.println(buydto.getName());
+      System.out.println(buydto.getAddr1());
+      System.out.println(buydto.getAddr2());
+      System.out.println(buydto.getAddr3());
+      System.out.println(buydto.getEmail());
+      System.out.println(buydto.getPhon());
+      System.out.println(buydto.getTotal());
+      System.out.println(buydto.getSum());
+      System.out.println(buydto.getDelRequest());
+      System.out.println(buydto.getProRequest());
+      System.out.println(buydto.getlPro());
       String[] spType = buydto.getType().split(",");
       buydto.setType(spType[0]);
       System.out.println(buydto.getType());

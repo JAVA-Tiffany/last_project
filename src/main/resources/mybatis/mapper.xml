@@ -87,32 +87,36 @@
 	</insert>
 	
 	
-	<!-- 모든 유저 장바구니 리스트 -->
-	<select id="selectAll_Userimg" resultType="userimgdto" parameterType="userimgdto">		<!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
-		select * from userimg
-	</select>
-	<select id="select_Userimg" resultType="userimgdto"  parameterType="userimgdto">
-		select * from userimg where id=#{id}
-	</select>
-	
-	<delete id="delete_Userimg" parameterType="userimgdto">
-		delete userimg where id=#{id} and img=#{img}
-	</delete>
-	<update id="update_Userimg" parameterType="userimgdto">
-		update userimg set cancelok=#{cancelok} where id=#{id} and img=#{img}
-	</update>
-	<update id="update_Count" parameterType="userimgdto">
-      update userimg set
-      num=num+1 where id=#{id} and product=#{product}
-   </update>
-   <update id="update_Count-1" parameterType="userimgdto">
-      update userimg set
-      num=num-1 where id=#{id} and product=#{product}
-   </update>
-      <insert id="insert_Userimg" parameterType="userimgdto">
-      insert into userimg
-      values(#{img},#{id},#{product},#{cancelok},#{money},1,#{type})
+	   <!-- 모든 유저 장바구니 리스트 -->
+   <select id="selectAll_Userimg" resultType="Paydto" parameterType="Paydto">      <!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
+      select * from pay
+   </select>
+   <select id="select_Userimg" resultType="Paydto"
+      parameterType="Paydto">
+      select * from pay where id=#{id} and status='대기'
+   </select>
+   <insert id="insert_Userimg" parameterType="Paydto">
+      insert into pay(img,id,product,status,price,count,type)
+      values(#{img},#{id},#{product},#{status},#{price},1,#{type})
    </insert>
+   <delete id="delete_Userimg" parameterType="Paydto">
+      delete pay where
+      id=#{id} and img=#{img}
+   </delete>
+   <update id="update_Userimg" parameterType="Paydto">
+      update pay set order_id=#{order_id},status='완료'
+      ,day=#{day},totalprice=#{totalprice},method=#{method}
+      ,addr1=#{addr1},addr2=#{addr2},addr3=#{addr3}
+       where id=#{id} and status='대기'
+   </update>
+   <update id="update_Count" parameterType="Paydto">
+      update pay set
+      count=count+1 where id=#{id} and product=#{product}
+   </update>
+   <update id="update_Count-1" parameterType="Paydto">
+      update pay set
+      count=count-1 where id=#{id} and product=#{product}
+   </update>
    
 	<!-- 내 이미지 목록 -->
 	<select id="select_Myimg" resultType="myimgdto"  parameterType="myimgdto">

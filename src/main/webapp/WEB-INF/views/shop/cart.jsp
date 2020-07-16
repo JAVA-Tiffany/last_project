@@ -102,32 +102,7 @@
       location.href = "listdel?img=" + z;
       moneysum=0;
       result();
-   }
-//    function up(d) {
-//       z = parseInt($("#count" + d).text()) + 1;
-//       $("#count" + d).text(z);
-//       $("#mos" + d).text(
-//             parseInt($("#count" + d).text())
-//                   * parseInt($("#mo" + d).text()) + "");
-//       moneysum=0;
-//       countsum=0
-//       result();
-//    }
-//    function down(d) {
-//       a = $("#count" + d).text();
-//       if (parseInt($("#count" + d).text()) > 1) {
-//          a = parseInt($("#count" + d).text()) - 1;
-//       }
-//       $("#count" + d).text(a);
-//       $("#mos" + d).text(
-//             parseInt($("#count" + d).text())
-//                   * parseInt($("#mo" + d).text()) + "");
-//       moneysum=0;
-//       countsum=0
-//       result();
-//    }
-
-   
+   }  
 </script>
 </head>
 <body>
@@ -138,7 +113,7 @@
    z[1]=arr.get(i).getId();
    z[2]=arr.get(i).getProduct();
    z[3]=arr.get(i).getCancelok();
-   z[4]=arr.get(i).getMoney();
+   z[4]=arr.get(i).getPrice();
    z[5]=String.valueOf(i); 
 -->
    <%@include file="../default/header.jsp"%>

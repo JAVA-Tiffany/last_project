@@ -186,11 +186,11 @@
                         </div>
                         <div>
                            <div>
-                              수량 : <label>${dto.num }</label>
+                              수량 : <label>${dto.count }</label>
                            </div>
                         </div>
                         <div>
-                           가격 : <label>${dto.money}</label>
+                           가격 : <label>${dto.price}</label>
                         </div>
                      </div>
 

@@ -3,7 +3,35 @@
 <html>
 <head>
    <title>Home</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
    
+   function db() {
+      var order_id = '${order_id}';
+      var day = '${date}';
+      var totalprice ='${buydto.total}';
+      var method ='card';
+      var addr1 = '${buydto.addr1}';
+      var addr2 = '${buydto.addr2}';
+      var addr3 = '${buydto.addr3}';
+
+      
+      $.ajax({
+         url: "payin",
+         type : "POST",
+         data : {order_id:order_id, day:day, totalprice:totalprice, method:method, addr1:addr1, addr2:addr2, addr3:addr3},
+         success:function(data){
+            alert('성공');
+         },
+         error:function(data){
+            alert('실패');
+         }
+            
+      });
+   }
+
+
+</script>
 </head>
 
 <body>
@@ -33,7 +61,7 @@ BootPay.request({
    },
    order_id: '${order_id}', 
    params: {callback1: 'item_name', callback2: 'item_name', customvar1234: 'rechard'},
-   account_expire_at: '2020-07-20', 
+   account_expire_at: '${date}', 
    extra: {
        start_at: '${date}', 
       end_at: '2022-05-10', 
@@ -50,14 +78,14 @@ BootPay.request({
    console.log(data);
    var enable = true; 
    if (enable) {
-      alert('성공');
       BootPay.transactionConfirm(data); 
    } else {
-      alert('실패')
       BootPay.removePaymentWindow(); 
    }
 }).close(function (data) {
+
     console.log(data);
+   db();
     window.close();
 }).done(function (data) {
    console.log(data);

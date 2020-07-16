@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.dto.PayDTO;
 import com.project.service.cartService;
 
 @RestController
@@ -35,4 +38,13 @@ public class restController {
       cartservice.cart_update2(se.getAttribute("id").toString(),num, product);
       return "이거머임?2";
    }
+   
+   @PostMapping(value="payin", produces="application/text;charset=utf-8")
+   public String payin(PayDTO dto, HttpSession session) {
+      System.out.println(dto.getOrder_id());
+      dto.setId((String)session.getAttribute("id"));
+      cartservice.update(dto);
+      return "";
+   }
+   
 }

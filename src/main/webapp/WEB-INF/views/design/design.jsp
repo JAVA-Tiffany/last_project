@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.freeimg{
+   width: 100px;
+   height: 100px;
+   padding: 10px;
+}
+</style>
 </head>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -97,6 +104,8 @@
       
 //     img[1].src="resources/img/right.png";
 //     img[2].src="resources/img/abc.jpg";
+
+
     
     // 이미지 업로드시 실행되는 함수
     function uploadBtn() {
@@ -442,7 +451,7 @@
             <img src="resources/img/upload.png" style="width: 100px;height: 100px;" onclick="uploadBtn()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
             <img src="resources/img/myimg.png" style="width: 100px;height: 100px;" onclick="mying()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
             <img src="resources/img/text.png" style="width: 100px;height: 100px;" onclick="in_text()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
-            <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
+<!--             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'"> -->
          </div>
          <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
       상품명 : <label>${img_name}</label><br>
@@ -450,24 +459,122 @@
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button>
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
       <br>
-      색상 - 클릭되는 순간 바뀜<br>
-      <div style="display: flex; flex: row;">
-         <div style="background-color: #fefefe; border: 1px solid gray; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #ffee49; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;" ></div> 
-         <div style="background-color: #fa733c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #dc3c78; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #8bdfff; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #8be31b; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #06a132; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #1f5bbc; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>
+   <script type="text/javascript">
+   //무료이미지 업로드
+   function freer(ddd) {
+      alert("dd")
+      id="myCanvas"+count
+        $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+        $("#image"+count).draggable();
+           img[count] = new Image();
+            g=img[count];
+            img[count].addEventListener('load',function(){
+               ctx[count] = document.getElementById(id).getContext("2d");
+               ctx[count].drawImage(g,0,0,300,150);
+            },false);
+            img[count].src=$("#free_img"+ddd).attr("src");
+            count++;
+   }
+   </script>      
+      <script type="text/javascript">
+      var free_count=0;
+      var free_count_all=27;
+      var frees=0;
+      var freee=9;
+      $(function () {
+         for(i=0;i<9;i++){
+           if(i%3==0){
+              free_count++;
+              $("#design_free").append("<div style='display: flex; flex: row;' id='free_img_list"+free_count+"'></div>");
+           }
+           a=i+1;
+           $("#free_img_list"+free_count).append("<img onclick='freer("+i+")' class='freeimg' alt='로고' src='resources/img/free/"+a+".png' id='free_img"+i+"'>");
+        }
+   });
+         
+//          free_img_list();
+         function free_img_list() {
+            free_count=0;
+            for(i=frees;i<freee;i++){
+               if(i%3==0){
+                  free_count++;
+                  $("#design_free").append("<div style='display: flex; flex: row;' id='free_img_list"+free_count+"'></div>");
+               }
+               a=i+1;
+               $("#free_img_list"+free_count).append("<img onclick='freer("+i+")' class='freeimg' alt='로고' src='resources/img/free/"+a+".png' id='free_img"+i+"'>");
+            }
+      }
+      function freebtn1() {
+         if(frees!=0){
+            for(i=1;i<4;i++){
+               $("div").remove("#free_img_list"+i);
+            }
+            frees-=9;
+            freee-=9;
+            free_img_list();
+         }
+         alert("왼쪽으로\n"+frees+" , "+freee);
+      }
+         function freebtn2() {
+         if(freee!=free_count_all){
+            for(i=1;i<4;i++){
+               $("div").remove("#free_img_list"+i);
+            }
+            frees+=9;
+            freee+=9;
+            free_img_list();
+         }
+         alert("오른쪽으로\n"+frees+" , "+freee);
+      }
+      </script>
+      무료이미지
+      <div id="design_free">
+<!--          <div style="display: flex; flex: row;"> -->
+<!--             <img onclick="free(1)" class="freeimg" alt="로고" src="resources/img/free/1.png" id="free_img1"> -->
+<!--             <img onclick="free(2)" class="freeimg" alt="로고" src="resources/img/free/2.png"id="free_img2"> -->
+<!--             <img onclick="free(3)" class="freeimg" alt="로고" src="resources/img/free/3.png"id="free_img3"> -->
+<!--          </div> -->
+<!--          <div> -->
+<!--             <img onclick="free(4)" class="freeimg" alt="로고" src="resources/img/free/4.png"id="free_img4"> -->
+<!--             <img onclick="free(5)" class="freeimg" alt="로고" src="resources/img/free/5.png"id="free_img5"> -->
+<!--             <img onclick="free(6)" class="freeimg" alt="로고" src="resources/img/free/6.png"id="free_img6"> -->
+<!--          </div> -->
+<!--          <div> -->
+<!--             <img onclick="free(7)" class="freeimg" alt="로고" src="resources/img/free/4.png"id="free_img7"> -->
+<!--             <img onclick="free(8)" class="freeimg" alt="로고" src="resources/img/free/5.png"id="free_img8"> -->
+<!--             <img onclick="free(9)" class="freeimg" alt="로고" src="resources/img/free/6.png"id="free_img9"> -->
+<!--          </div> -->
+         <div align="center" style="margin-top: 10px;">
+         <label style="font-size: 40px; margin-right: 30px;" onclick="freebtn1()"> < </label> 
+         <label style="font-size: 40px; margin-left: 30px;" onclick="freebtn2()"> > </label>
+         </div>
+         
       </div>
-      <div style="display: flex; flex: row;">
-         <div style="background-color: #9d0d1c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #a5a5aa; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #0a1429; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #080808; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-         <div style="background-color: #f8d6d5; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> 
-      </div>
+      
+      
+      
+<!--       색상 - 클릭되는 순간 바뀜<br> -->
+<!--       <div style="display: flex; flex: row;"> -->
+<!--          <div style="background-color: #fefefe; border: 1px solid gray; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #ffee49; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;" ></div>  -->
+<!--          <div style="background-color: #fa733c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #dc3c78; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #8bdfff; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #8be31b; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #06a132; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #1f5bbc; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> -->
+<!--       </div> -->
+<!--       <div style="display: flex; flex: row;"> -->
+<!--          <div style="background-color: #9d0d1c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #a5a5aa; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #0a1429; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #080808; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--          <div style="background-color: #f8d6d5; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
+<!--       </div> -->
+      
+      
+      
+      
       <br>
       
       
