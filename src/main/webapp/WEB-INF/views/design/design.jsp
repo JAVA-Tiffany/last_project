@@ -343,7 +343,9 @@
       url=$("#op").val();
       console.log(url);
       $(function(){
-      $("#zz").css("background-image", "url('resources/img/desgin/"+url+".png' )"); 
+      $("#zz").css("background-image", "url('resources/img/${img_goods} desgin/"+url+".png' )"); 
+      $("#design_price").text($("#op_price").val())
+      $("#design_product").text(url)
       });
    }
    
@@ -454,8 +456,8 @@
 <!--             <img src="resources/img/design.png" style="width: 100px;height: 100px;" onclick="" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'"> -->
          </div>
          <div style="float: right; solid:red; height: 500px; margin: 0 auto; margin-left: 50px;">
-      상품명 : <label>${img_name}</label><br>
-         가격 : <label>${img_money}</label><br><br>
+      상품명 : <label id="design_product">${img_name}</label><br>
+         가격 : <label id="design_price">${img_money}</label><br><br>    
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button>
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
       <br>
@@ -472,7 +474,7 @@
                ctx[count] = document.getElementById(id).getContext("2d");
                ctx[count].drawImage(g,0,0,300,150);
             },false);
-            img[count].src=$("#free_img"+ddd).attr("src");
+            img[count].src=$("#free_img"+ddd).attr("src");                      
             count++;
    }
    </script>      
@@ -529,21 +531,6 @@
       </script>
       무료이미지
       <div id="design_free">
-<!--          <div style="display: flex; flex: row;"> -->
-<!--             <img onclick="free(1)" class="freeimg" alt="로고" src="resources/img/free/1.png" id="free_img1"> -->
-<!--             <img onclick="free(2)" class="freeimg" alt="로고" src="resources/img/free/2.png"id="free_img2"> -->
-<!--             <img onclick="free(3)" class="freeimg" alt="로고" src="resources/img/free/3.png"id="free_img3"> -->
-<!--          </div> -->
-<!--          <div> -->
-<!--             <img onclick="free(4)" class="freeimg" alt="로고" src="resources/img/free/4.png"id="free_img4"> -->
-<!--             <img onclick="free(5)" class="freeimg" alt="로고" src="resources/img/free/5.png"id="free_img5"> -->
-<!--             <img onclick="free(6)" class="freeimg" alt="로고" src="resources/img/free/6.png"id="free_img6"> -->
-<!--          </div> -->
-<!--          <div> -->
-<!--             <img onclick="free(7)" class="freeimg" alt="로고" src="resources/img/free/4.png"id="free_img7"> -->
-<!--             <img onclick="free(8)" class="freeimg" alt="로고" src="resources/img/free/5.png"id="free_img8"> -->
-<!--             <img onclick="free(9)" class="freeimg" alt="로고" src="resources/img/free/6.png"id="free_img9"> -->
-<!--          </div> -->
          <div align="center" style="margin-top: 10px;">
          <label style="font-size: 40px; margin-right: 30px;" onclick="freebtn1()"> < </label> 
          <label style="font-size: 40px; margin-left: 30px;" onclick="freebtn2()"> > </label>
@@ -724,6 +711,7 @@
       style="border: 1px solid #d3d3d3; display:none;">
    </canvas>
    <input type="hidden" id="op" value="">
+   <input type="hidden" id="op_price" value="">
    
    <form name="changeopen">
       <input type="hidden" name="change_val" id="change_val" value="${img_goods}">

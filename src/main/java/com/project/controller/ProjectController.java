@@ -208,4 +208,10 @@ public class ProjectController {
          service.data(model, type, start, end);
          return "default/data";
       }
+      
+      @RequestMapping("orderList")
+      public String orderList(Model model,HttpServletRequest request) {
+         service.orderlist(model,request);
+        return "shop/orderList";
+      }
 }

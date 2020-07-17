@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>재고관리 페이지</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style type="text/css">
 .table {
       border-collapse: collapse;
@@ -93,12 +94,54 @@ $(document).ready(function() {
    $("#AddProduct").click(function(){
 		window.open("AddProductPopup","상품등록","width=700px,height=500px");
 	   
-	   
-	   
-	   
-	   
    })
    
+   $(".Deletebtn1").click(function(){ 
+	  		 var str = ""
+			var tdArr = new Array();	// 배열 선언
+			var checkBtn = $(this);
+			
+			// checkBtn.parent() : checkBtn의 부모는 <td>이다.
+			// checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			
+			console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+			
+			var product = td.eq(3).text();
+	      
+	      Swal.fire({
+	           title: '상품을 삭제하시겠습니까?',
+	           text: '선택하신 상품 : '+product+' 을 정말 삭제하시겠습니까?',
+	           icon: 'warning',
+	           showCancelButton: true,
+	           confirmButtonColor: '#3085d6',
+	           cancelButtonColor: '#d33',
+	           confirmButtonText: 'Yes, delete it!'
+	      }).then((result) => {
+	           if (result.value) {
+	             Swal.fire({
+	                title:'Deleted!',
+	                text: '성공적으로 삭제되었습니다!',
+	                icon: 'success',
+	               preConfirm:function(){
+	            	   $.ajax({
+	                       url: "DelProduct",
+	                       type: "POST",
+	                       data: {product:product},
+	                       success: function(data){
+	                           reloadList();
+	                       },
+	                       error: function(){
+	                           alert("error");
+	                       }
+	                
+	                   });
+	                }
+	             })
+	           }
+	         })
+	   });
 });
    
    function reloadList(){
@@ -116,6 +159,7 @@ $(document).ready(function() {
       <caption><font style="font: 400 30px 'Poppins',sans-serif;">재고 관리<br></font></caption>
          <tr>
             <th style="width: 3%;"></th>
+            <th>이미지</th>
             <th style="width: 50%;padding-left: 200px;">제목
             <div align="right" style="float:right;">
 			<select name="category" id="category">
@@ -135,23 +179,25 @@ $(document).ready(function() {
 	<c:forEach var="datalist" items="${PickData}">
       <tr>
          <td><input type="checkbox" name="checkBtn"></td>
+         <td><img src="${datalist.img }" style="width:150px;height:100px;"></td>
          <td style="display:none;">${datalist.type }</td>
          <td align="center">${datalist.product }</td>
          <td>${datalist.price }</td>
          <td>${datalist.quantity }</td>
          <td><input type="text" class="quantityData" placeholder="재고수정"></td>
-         <td><input type="button" class="Modifybtn1" value="수정"/></td>
+         <td><input type="button" class="Modifybtn1" value="수정"/><input type="button" class="Deletebtn1" value="삭제"/></td>
       </tr>
       </c:forEach>
    <c:forEach var="datalist" items="${datalist}">
       <tr>
          <td><input type="checkbox" name="checkBtn"></td>
+         <td><img src="${datalist.img }" style="width:150px;height:100px;"></td>
          <td style="display:none;">${datalist.type }</td>
          <td>${datalist.product }</td>
          <td>${datalist.price }</td>
          <td>${datalist.quantity }</td>
          <td><input type="text" class="quantityData" placeholder="재고수정"></td>
-         <td><input type="button" class="Modifybtn1" value="수정"/></td>
+         <td><input type="button" class="Modifybtn1" value="수정"/><input type="button" class="Deletebtn1" value="삭제"/></td>
       </tr>
       </c:forEach>
       <tr>

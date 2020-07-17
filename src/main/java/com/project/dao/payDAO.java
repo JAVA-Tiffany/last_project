@@ -33,4 +33,7 @@ public class payDAO {
 	public int update_Countd(PayDTO dto) {
 		return sqlSession.update(namepasce+".update_Count-1", dto);
 	}
+	public List<PayDTO> order_list(PayDTO dto){
+		return sqlSession.selectList(namepasce+".select_orderList",dto);
+	}
 }

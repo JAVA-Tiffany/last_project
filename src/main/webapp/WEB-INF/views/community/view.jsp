@@ -209,9 +209,9 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     </table>
     
     <!-- 목록/수정/삭제 -->
-   <div>아래에 
-    <c:if test="${sessionScope.id == view.writer }">
+   <div>
     <a href="list" id="list" class="btn">목록으로</a>
+    <c:if test="${sessionScope.id == view.writer }">
     <input type="submit" value="수정하기" style="border: 0px;" >
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
     </c:if>

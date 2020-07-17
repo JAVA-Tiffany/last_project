@@ -21,7 +21,7 @@
          type : "POST",
          data : {order_id:order_id, day:day, totalprice:totalprice, method:method, addr1:addr1, addr2:addr2, addr3:addr3},
          success:function(data){
-            alert('성공');
+        	 window.close();
          },
          error:function(data){
             alert('실패');
@@ -83,12 +83,11 @@ BootPay.request({
       BootPay.removePaymentWindow(); 
    }
 }).close(function (data) {
-
     console.log(data);
-   db();
-    window.close();
+   
 }).done(function (data) {
-   console.log(data);
+	   db();
+	console.log(data);
 });
 </script>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.DataListDTO;
 import com.project.dto.ReplyDTO;
 
 @Repository
@@ -70,5 +71,13 @@ public class AdminDAO {
 	      sqlSession.insert(namepasce+".Adinsert_Commnuity",dto);
 	      
 	   }
+	
+	public void AddProduct(DataListDTO dto) {
+		sqlSession.insert(namepasce+".AddProduct",dto);
+	}
+	
+	public void DelProduct(String product) {
+		sqlSession.delete(namepasce+ ".DelProduct",product);
+	}
 
 }

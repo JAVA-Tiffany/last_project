@@ -51,37 +51,70 @@
    <script src="resources/jquery-3.2.1.min.js"></script>
    <script type="text/javascript">
    var size= ${list_size}
+   var ssize;
+   var zxc=1;
    function number_click(age) {
+      zxc=age;
       $("#start"+age).val((parseInt(age)*9)-9);
       $("#last"+age).val(parseInt(age)*9);
       $("#numbtn"+age).trigger("click");
    }
+   function number_onedown() {
+     
+     if('${Integer.valueOf(list_last/9)-1>1}')
+     number_click('${Integer.valueOf(list_last/9)-1}');
+     }
+   function number_oneup() {
+      var m;
+      if('${list_size%9>0}'=='true'){
+           m='${Integer.valueOf(list_size/9)+2}';
+        }else{
+           m='${Integer.valueOf(list_size/9+1)}';
+        }
+      if(parseInt('${Integer.valueOf(list_last/9)+1}')<parseInt(m))
+      number_click('${Integer.valueOf(list_last/9)+1}');
+     }
+   function number_up() {
+      if('${list_size%9>0}'=='true'){
+         number_click('${Integer.valueOf(list_size/9)+1}');
+      }else{
+         number_click('${Integer.valueOf(list_size/9)}');
+      }
+     }
+   function number_down() {
+      number_click(1);
+     }
    if(size>9){
-       $(function (){
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
-          for(i=0;i<size/9;i++){
-             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
-                      +"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
-             $("#num").append("<form action='change' method='post' name='numbtn"+(i+1)+"'>"
-                     +"<input type='hidden' value='${list_type}' name='change_val'>"
-                     +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
-                     +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
-                     +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
-                   +"</form>");
-          }
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
-       });
-    }else{
-       $(function (){
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><<</a></div> ");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'><</a></div> ");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>1</a></div>");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>></a></div> ");
-          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='' style='text-decoration: none;'>>></a></div>");
-       });
-    }
+      $(function (){
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_down();' style='text-decoration: none;'><<</a></div> ");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_onedown();' style='text-decoration: none;'><</a></div> ");
+         if('${list_size%9>0}'=='true'){
+            ssize='${Integer.valueOf(list_size/9)+1}';
+        }else{
+           ssize='${Integer.valueOf(list_size/9)}';
+        }
+         for(i=0;i<ssize;i++){
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
+                     +"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
+            $("#num").append("<form action='data' method='post' name='numbtn"+(i+1)+"'>"
+                    +"<input type='hidden' value='${list_type}' name='type'>"
+                    +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
+                    +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
+                    +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
+                  +"</form>");
+         }
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_oneup();' style='text-decoration: none;'>></a></div> ");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_up();' style='text-decoration: none;'>>></a></div>");
+      });
+   }else{
+      $(function (){
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'><<</a></div> ");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'><</a></div> ");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>1</a></div>");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>></a></div> ");
+         $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>>></a></div>");
+      });
+   }
       
       $(function () {
           c=0
@@ -119,7 +152,9 @@
        });
    function imgin(z) {
       ur=$("#imgname"+z).text();
+      urm=$("#imgmoney"+z).text();
       $(opener.document).find("#op").val(ur);
+      $(opener.document).find("#op_price").val(urm);
       $(opener.location).attr("href", "javascript:background_ch();");
       window.close();
     }

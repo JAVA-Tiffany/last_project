@@ -181,9 +181,18 @@
                         <a href="cart" style="color: black;">CART</a>
                         <a href="#" style="color: black;">MYSHOP</a>
                         <a href="#" style="color: black;">WISH LIST</a>
-                        <a href="#" style="color: black;">ORDER LIST</a>
+                        <a href="#" style="color: black;"><font size="3"><b>ORDER LIST</b></font></a>
                      </c:otherwise>
                   </c:choose>
+                 
+                  <c:choose>
+                     <c:when test="${sessionScope.id.split('_')[0] ne 'admin' }">
+                     </c:when>
+                     <c:otherwise>
+                     <a href="adminpage" style="color: black;">ADMIN</a>
+                     </c:otherwise>
+             </c:choose>
+
                </div>
             </div>
          </nav>

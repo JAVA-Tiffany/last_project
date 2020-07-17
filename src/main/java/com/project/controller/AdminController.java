@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.DataListDTO;
 import com.project.dto.ReplyDTO;
 import com.project.service.AdminService;
 import com.project.service.CommunityService;
@@ -188,6 +189,27 @@ public class AdminController {
 	@RequestMapping("AddProductPopup")
 	public String AddProductPopup() {
 		return "admin/AddProductPopup";
+	}
+	
+	@RequestMapping("AddProduct")
+	public String AddProduct(DataListDTO dto) {
+		System.out.println(dto.getImg());
+		System.out.println(dto.getProduct());
+		System.out.println(dto.getType());
+		
+		
+		return "";
+	}
+	
+	
+	@RequestMapping("DelProduct")
+	public String DelProduct(@RequestParam String product) {
+		System.out.println(product);
+		serviceAdm.DelProduct(product);
+		
+		return "redirect:QuantityManage";
+		
+		
 	}
 
 }

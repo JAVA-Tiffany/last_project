@@ -38,17 +38,20 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 </script>
 </c:if>
 
-   <div style="float: left;">
+  <div style="float: left;">
       <label><font color="#000000;" style="font-family: 윤고딕;" size="6">Brand</font></label>&nbsp; &nbsp;
+      <label><font color="#000000;" style="font-family: 윤고딕;" size="4">ADMINISTRATOR</font></label>&nbsp;
       <a href="index"><font color="blue" size="4" style="font-family: 나눔바른고딕;">홈페이지</font></a>
    </div>
+   
    <div style="float: right;">
-      User : <a href="myinfo"><font color="red" style="font-family: 나눔바른고딕;">${id}</font></a> &nbsp; &nbsp;
+      User : <a href="myinfo"><font color="red" style="font-family: 나눔바른고딕;">${id}</font></a>님 환영합니다. &nbsp; &nbsp;
+      <a href="adminpage"><font color="" size="4" style="font-family: 나눔바른고딕;">관리페이지</font></a> &nbsp; &nbsp;
       <a href="logout"><font color="blue" size="4" style="font-family: 나눔바른고딕;">로그아웃</font></a>
    </div>
 
 <div align="center" class="div1">
-<table style="width: 80%;">
+<table style="width: 80%;" class="table">
 
    <tr style="background-color: #007bff; text-align: center; height: 50px;"  >
       
@@ -61,6 +64,5 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    </tr>
 </table>
 </div>
-
 </body>
 </html>

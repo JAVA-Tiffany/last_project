@@ -44,11 +44,11 @@ if (ServletFileUpload.isMultipartContent(request)){
                 } else {
                      
                     //파일 기본경로
-                    String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-                    //String dftFilePath = "C:\\WorkSpace\\last_project\\src\\main\\webapp\\";
-                    System.out.println(dftFilePath);
+                    //String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+                    String filePath = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
+                    System.out.println(filePath);
                     //파일 기본경로 _ 상세경로
-                    String filePath = dftFilePath +"resources"+ File.separator +"smarteditor"+File.separator +"upload" + File.separator;
+                   // String filePath = dftFilePath +"smarteditor/upload";
                     System.out.println(filePath);
                     File file = null;
                     file = new File(filePath);
@@ -84,7 +84,7 @@ if (ServletFileUpload.isMultipartContent(request)){
                                 // img 태그의 title 옵션에 들어갈 원본파일명
                     return3 += "&sFileName="+ name;
                     return3 += "&sFileURL="+"resources/smarteditor/upload/"+realFileNm;
-                    
+                    System.out.println(return1+return2+return3);
                 }
             }else {
                   return3 += "&errstr=error";

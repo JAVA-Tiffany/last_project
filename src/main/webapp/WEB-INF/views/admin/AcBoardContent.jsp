@@ -170,6 +170,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="AdminHeader.jsp"/>
 <div align="center" class="div1">
 <form method="post" action="update?bno=${view.bno}">
 <input type="hidden" value="${view.bno}" name="bno">
@@ -206,12 +207,11 @@
     </table>
     
     <!-- 목록/수정/삭제 -->
-   <div>아래에 
-    <c:if test="${sessionScope.id == view.writer }">
+   <div>
+    
     <a href="list" id="list" class="btn">목록으로</a>
-    <input type="submit" value="수정하기" style="border: 0px;" >
+    <input type="submit" value="수정하기" style="border: 0px; background-color:transparent;" >
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
-    </c:if>
     </div>
     <input type="button" value="댓글" onclick="comment()" id="comment_btn">
     <input type="button" value="취소" onclick="comment_cel()" id="comment_cancel" style="display: none; margin-left: 10px;">

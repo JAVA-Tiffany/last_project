@@ -88,7 +88,13 @@ public class AdminService {
 		List<DataListDTO> data = datadao.selectPick(choice);
 		model.addAttribute("PickData",data);
 	}
+	public void AddProduct(DataListDTO dto) {
+		dao.AddProduct(dto);
+	}
 	
+	public void DelProduct(String product) {
+		dao.DelProduct(product);
+	}
 	
 }
 

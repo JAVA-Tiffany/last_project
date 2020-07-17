@@ -52,7 +52,12 @@
    <update id="updateQuantity" parameterType="datalistdto">
 		update data_list set quantity=#{quantity} where product=#{product} and type=#{type}
 	</update>
-	
+	<insert id="AddProduct" parameterType="datalistdto">
+	 insert into data_list (img,product,price,quantity,type) values(#{img},#{product},#{price},#{quantity},#{type} )
+	</insert>
+	<delete id="DelProduct" parameterType="datalistdto">
+	delete data_list where product=#{product}
+	</delete>
 	
 	<!-- Q&A 게시물 관련 -->
 	<select id="selectAll_Commnuity" resultType="comdto">
@@ -117,6 +122,9 @@
       update pay set
       count=count-1 where id=#{id} and product=#{product}
    </update>
+     <select id="select_orderList" resultType="Paydto">
+      select * from pay where id=#{id} and status='완료'
+   </select>
    
 	<!-- 내 이미지 목록 -->
 	<select id="select_Myimg" resultType="myimgdto"  parameterType="myimgdto">
