@@ -56,7 +56,6 @@ public class CommnuityDAO {
    }
 
    public void update_save(CommnuityDTO dto) {
-      
       sqlSession.update(namepasce+".update_Commnuity",dto);
    }
    

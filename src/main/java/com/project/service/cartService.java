@@ -25,7 +25,11 @@ public class cartService {
 		PayDTO dto = new PayDTO();
 		dto.setId(session.getAttribute("id").toString());
 		dto.setPrice(imgmoney);
-		dto.setImg("img/"+userimg_in);
+		if(type.equals("earring")) {
+			dto.setImg(userimg_in);
+		}else {
+			dto.setImg("img/"+userimg_in);
+		}
 		dto.setProduct(imgname);
 		dto.setStatus("대기");
 		dto.setType(type);

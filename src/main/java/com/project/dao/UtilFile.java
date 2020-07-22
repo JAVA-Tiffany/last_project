@@ -17,7 +17,7 @@ public class UtilFile {
 
 	//  fileUpload() 메소드에서 전체 경로를 DB에 경로 그대로 저장 한다.  
     public String fileUpload(MultipartHttpServletRequest request,
-    MultipartFile uploadFile, Object obj,HttpServletRequest reqest2,String type) {
+    MultipartFile uploadFile, Object obj,HttpServletRequest reqest2,String type,String product) {
         String path = "";
         String fileName = "";
 
@@ -25,19 +25,19 @@ public class UtilFile {
         PrintWriter printWriter = null;
 
         try {
-        	
-            fileName = uploadFile.getOriginalFilename();
+        	String name = uploadFile.getOriginalFilename().substring(uploadFile.getOriginalFilename().lastIndexOf(".")+1);
+        	System.out.println(name);
+        	fileName =product +"."+ name;
             byte[] bytes = uploadFile.getBytes();
-            type.replace("pitting", "desgin");
             path  ="C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" + type + "\\";
 
-            File file = new File(path);
+            File file = new File(path+ fileName);
 
             // 파일명이 중복체크
             if (fileName != null && !fileName.equals("")) {
                 if (file.exists()) {
             // 파일명 앞에 구분(예)업로드 시간 초 단위)을 주어 파일명 중복을 방지한다.
-                fileName = System.currentTimeMillis() + "_" + fileName;
+                	fileName =product +"."+ name;
                 file = new File(path + fileName);
                 }
             }
@@ -65,7 +65,7 @@ public class UtilFile {
     
     
     public String fileUpload2(MultipartHttpServletRequest request,
-    	    MultipartFile uploadFile, Object obj,HttpServletRequest reqest2,String type) {
+    	    MultipartFile uploadFile, Object obj,HttpServletRequest reqest2,String type,String product) {
     	        String path = "";
     	        String fileName = "";
 
@@ -74,18 +74,20 @@ public class UtilFile {
 
     	        try {
     	        	
-    	            fileName = uploadFile.getOriginalFilename();
+    	            
+    	            String name = uploadFile.getOriginalFilename().substring(uploadFile.getOriginalFilename().lastIndexOf(".")+1);
+    	        	System.out.println(name);
+    	        	fileName =product +"."+ name;
     	            byte[] bytes = uploadFile.getBytes();
-    	            String retype=type.replace("pitting", "desgin");
+    	            String retype=type.replace("pitting", "design");
     	            path  ="C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" + retype + "\\";
-
-    	            File file = new File(path);
+    	            File file = new File(path+ fileName);
 
     	            // 파일명이 중복체크
     	            if (fileName != null && !fileName.equals("")) {
     	                if (file.exists()) {
     	            // 파일명 앞에 구분(예)업로드 시간 초 단위)을 주어 파일명 중복을 방지한다.
-    	                fileName = System.currentTimeMillis() + "_" + fileName;
+    	                	fileName =product +"."+ name;
     	                file = new File(path + fileName);
     	                }
     	            }

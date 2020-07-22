@@ -111,9 +111,9 @@ $(document).ready(function() {
                preConfirm:function(){
                     location.href="DelBoard?num="+str
                 }
-             })
+             });
            }
-         })
+         });
    });
 
 });
@@ -143,8 +143,7 @@ $(document).ready(function() {
          <c:forEach var="adminList" items="${adminList}">
       <tr>
       <td><input type="checkbox" name="checkBtn"></td>
-         <td><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
-          
+         <td>${adminList.bno}</td>
          <td><a style="text-decoration: none;" class="title" href="viewBoard?bno=${adminList.bno}">
          ${adminList.title }</a> </td>
          <td>관리자</td>

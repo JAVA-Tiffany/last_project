@@ -66,8 +66,8 @@ $(document).ready(function() {
        
        var quantity = document.getElementsByClassName("quantityData")[index].value;
        console.log(quantity)
-          var type= td.eq(1).text();
-        var no = td.eq(2).text();
+          var type= td.eq(2).text();
+        var no = td.eq(3).text();
         
         $.ajax({
             url: "modifyQuantity",
@@ -94,7 +94,7 @@ $(document).ready(function() {
    $("#AddProduct").click(function(){
 		window.open("AddProductPopup","상품등록","width=700px,height=500px");
 	   
-   })
+   });
    
    $(".Deletebtn1").click(function(){ 
 	  		 var str = ""

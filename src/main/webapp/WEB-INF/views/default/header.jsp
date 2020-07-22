@@ -10,19 +10,50 @@
    href="resources/css/util.css?after">
 <link rel="stylesheet" type="text/css"
    href="resources/css/main.css?after">
+<link
+   href="https://fonts.googleapis.com/css?family=Roboto:400,700|Nunito:400,120"
+   rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+   href="resources/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/demo.css?aaa" />
+<link rel="stylesheet" type="text/css"
+   href="resources/css/style-adsila.css?aaa" />
+<link rel="stylesheet" type="text/css" href="resources/pater/pater.css" />
+<!-- <script src="resources/jquery-3.2.1.min.js"></script> -->
+<script>
+   document.documentElement.className = "js";
+   var supportsCssVars = function() {
+      var e, t = document.createElement("style");
+      return t.innerHTML = "root: { --tmp-var: bold; }", document.head
+            .appendChild(t),
+            e = !!(window.CSS && window.CSS.supports && window.CSS
+                  .supports("font-weight", "var(--tmp-var)")),
+            t.parentNode.removeChild(t), e
+   };
+   supportsCssVars()
+         || alert("Please view this demo in a modern browser that supports CSS Variables.");
+</script>
+<script type="text/javascript">
+   function data_move(d) {
+      $("#index_type_text2").val(d);
+      $("#index_type_text_start2").val(0);
+      $("#index_type_text_end2").val(9);
+      index_form2.submit();
+   }
+</script>
 
 <script type="text/javascript">
    $(function() {
       $.ajax({
-            url : "header_review",
-            type : "POST",
-            data : "0",
-            success : function(data) {
-               $("#review_text").val(data);
-            },
-            error : function() {
-               alert('review 발생')
-            }
+         url : "header_review",
+         type : "POST",
+         data : "0",
+         success : function(data) {
+            $("#review_text").val(data);
+         },
+         error : function() {
+            alert('review 발생')
+         }
       });
    })
    function review_in() {
@@ -34,167 +65,248 @@
    position: relative;
    display: inline-block;
 }
+
 .dropdown-content {
    display: none;
    position: absolute;
-   background-color: #f1f1f1;
+/*    background-color: #f1f1f1; */
    min-width: 80px;
-   min-height: 150px;
+   min-height: 95px;
    text-align: center;
-   right: 0px;
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+   left:-10px;
+   top:40px;
+/*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
    font-weight: normal;
    font-size: 20px;
-   font-family: 윤고딕;
+   font-family: Yu Gothic; font-weight: lighter;
    z-index: 1;
 }
+
 .dropdown-content a:hover {
-   background-color: #ddd;
+/*    background-color: #ddd; */
 }
+
 .dropdown:hover .dropdown-content {
    display: block;
 }
+
 .dropdown:hover .dropbtn {
    
 }
+
+
+
+.dropdown2 {
+   position: relative;
+   display: inline-block;
+}
+
+.dropdown-content2 {
+   display: none;
+   position: absolute;
+/*    background-color: #f1f1f1; */
+   min-width: 80px;
+   min-height: 95px;
+   text-align: center;
+   right: 0px;
+   top:40px;
+/*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+   font-weight: normal;
+   font-size: 20px;
+   font-family: Yu Gothic; font-weight: lighter;
+   z-index: 1;
+}
+
+.dropdown-content2 a:hover {
+/*    background-color: #ddd; */
+}
+
+.dropdown2:hover .dropdown-content2 {
+   display: block;
+}
+
+.dropdown1:hover .dropbtn1 {
+   
+}
+
+
+
+
+
+.fixed{
+z-index:1000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .dropdown1 {
    position: relative;
    display: inline-block;
 }
+
 .dropdown-content1 {
    display: none;
    position: absolute;
-   background-color: #f1f1f1;
-   min-width: 100px;
-   min-height: 150px;
+/*    background-color: #f1f1f1; */
+   min-width: 80px;
+   min-height: 95px;
    text-align: center;
    right: 0px;
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+   top:40px;
+/*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
    font-weight: normal;
    font-size: 20px;
    font-family: 윤고딕;
    z-index: 1;
 }
+
 .dropdown-content1 a:hover {
-   background-color: #ddd;
+/*    background-color: #ddd; */
 }
+
 .dropdown1:hover .dropdown-content1 {
-   display: block;
+/*    display: block; */
 }
+
 .dropdown1:hover .dropbtn1 {
    
 }
+
 .dropdown0 {
    position: relative;
    display: inline-block;
 }
+
 .dropdown-content0 {
    display: none;
    position: absolute;
-   background-color: #f1f1f1;
+/*    background-color: #f1f1f1; */
    min-width: 80px;
-   min-height: 120px;
+   min-height: 95px;
    text-align: center;
-   right: 0px;
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+   left:30px;
+   top:40px;
+/*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
    font-weight: normal;
    font-size: 20px;
-   font-family: 윤고딕;
+   font-family: Yu Gothic; font-weight: lighter;
    z-index: 1;
+   
 }
+
 .dropdown-content0 a:hover {
-   background-color: #ddd;
+/*    background-color: #ddd; */
 }
+
 .dropdown0:hover .dropdown-content0 {
    display: block;
 }
+
 .dropdown0:hover .dropbtn1 {
    
 }
 </style>
+<script type="text/javascript">
+   function login() {
+      location.href = 'login';
+   }
+
+   function cart() {
+      location.href = 'cart';
+   }
+</script>
 </head>
 
-<body>
-   <div id="fixed">
+<body class="demo-adsila">
+   <div id="fixed" >
       <div>
          <h1>
             <a href="index" style="color: black;">Brand</a>
          </h1>
       </div>
-      <div>
-         <nav>
+      <div style="margin-right: 150px;" class="content" >
+         <nav class="menu menu--adsila">
             <div class="dropdown">
-               <span class="dropbtn"><a href="#" style="color: black;">SHOP</a></span>&nbsp;&nbsp;
+               <span class="menu__item"><a class="menu__item-name" href="#"
+                  style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">SHOP</a></span>
                <div class="dropdown-content">
-                  <a href="#" style="color: black;">ALL</a><br> <a href="#"
-                     style="color: black;">RING</a> <a href="#" style="color: black;">EARRING</a>
-                  <a href="#" style="color: black;">NECKLACE</a> <a href="#"
-                     style="color: black;">BRACELET</a> <a href="#"
-                     style="color: black;">CLOTHES</a> <a href="#"
-                     style="color: black;">PANTS</a> <a href="#" style="color: black;">BAGS</a>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('')">ALL</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('earring')">EARRING</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('dress')">DRESS</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('bag')">BAG</a></span>
                </div>
             </div>
-
-            <span><a href="#" style="color: black;">COLLECTION</a></span>&nbsp;&nbsp;
-            <span><a href="#" style="color: black;">PROGECT</a></span>&nbsp;&nbsp;
-            <span><a href="#" style="color: black;">STOCKIST</a></span>&nbsp;&nbsp;
+<!--                         <span><a href="#" style="color: black;">COLLECTION</a></span>&nbsp;&nbsp; -->
+            <!--             <span><a href="#" style="color: black;">PROGECT</a></span>&nbsp;&nbsp; -->
+            <!--             <span><a href="#" style="color: black;">STOCKIST</a></span>&nbsp;&nbsp; -->
 
             <div class="dropdown0">
-               <span class="dropbtn0"><a href="#" style="color: black;">COMMUNITY</a></span>&nbsp;&nbsp;
+               <span class="dropbtn0 menu__item"><a class="menu__item-name"
+                  href="#"
+                  style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">COMMUNITY</a></span>
                <div class="dropdown-content0">
-                  <a href="notice" style="color: black;">NOTICE</a><br>
-                  <a href="list" style="color: black;">Q / A</a><br> 
-                  <a href="javascript:review_in()" style="color: black;">REVIEW</a>
+                  <span class="menu__item"><a class="menu__item-name" href="notice" style="color: black;">NOTICE</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="list" style="color: black;">Q / A</a></span>
                </div>
             </div>
-
             <div class="dropdown1">
-               <span class="dropbtn1"><a href="#" style="color: black;">ACCOUNT</a></span>
-               <div class="dropdown-content1">
-
-                  <c:choose>
-                     <c:when test="${sessionScope.id eq null}">
-
-                        <span><a href="login" style="color: black;" onclick="openChild()">LOGIN</a></span>
-                     </c:when>
-                     <c:otherwise>
-                        <span><a href="logout" style="color: black;">LOGOUT</a></span>
-                        <span><a href="myinfo" style="color: black;">MY INFO</a></span>
-                     </c:otherwise>
-                  </c:choose>
-
-                  <a href="join" style="color: black;">JOIN US</a>
-
-                  <c:choose>
-                     <c:when test="${sessionScope.id eq null}">
-                        <script type="text/javascript">
-                           function loginafter() {
-                              alert("로그인 후 이용바랍니다!")
-                           }
-                        </script>
-                        <a href="#" style="color: black;" onclick="loginafter()">CART</a>
-                        <a href="#" style="color: black;" onclick="loginafter()">MYSHOP</a>
-                        <a href="#" style="color: black;" onclick="loginafter()">WISH LIST</a>
-                        <a href="#" style="color: black;" onclick="loginafter()">ORDER LIST</a>
-                     </c:when>
-                     <c:otherwise>
-                        <a href="cart" style="color: black;">CART</a>
-                        <a href="#" style="color: black;">MYSHOP</a>
-                        <a href="#" style="color: black;">WISH LIST</a>
-                        <a href="#" style="color: black;"><font size="3"><b>ORDER LIST</b></font></a>
-                     </c:otherwise>
-                  </c:choose>
-                 
-                  <c:choose>
-                     <c:when test="${sessionScope.id.split('_')[0] ne 'admin' }">
-                     </c:when>
-                     <c:otherwise>
-                     <a href="adminpage" style="color: black;">ADMIN</a>
-                     </c:otherwise>
-             </c:choose>
-
+            <span class="menu__item">
+               <a class="menu__item-name"
+                  href="javascript:review_in()"
+                  style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">REVIEW</a>
+               </span>
                </div>
+
+
+            <div class="dropdown2">
+               <c:choose>
+                  <c:when test="${sessionScope.id eq null}">
+                     <img src="resources/images/icons/login.png"
+                        style="width: 40px; height: 40px; margin-bottom: -12px; margin-right: 10px;"
+                        onclick="login()">
+                  </c:when>
+                  <c:otherwise>
+                     <span class="dropbtn2"><img
+                        src="resources/images/icons/login.png"
+                        style="width: 40px; height: 40px; margin-bottom: -12px; margin-right: 10px;"></span>
+                     <div class="dropdown-content1">
+
+                        <span><a href="myinfo" style="color: black;">MY INFO</a></span>
+                        <a href="#" style="color: black;" onclick="loginafter()">ORDERLIST</a>
+                        <span><a href="logout" style="color: black;">LOGOUT</a></span>
+                     </div>
+                  </c:otherwise>
+               </c:choose>
             </div>
+
+
+            <c:choose>
+               <c:when test="${sessionScope.id eq null}">
+                  <img src="resources/images/icons/cart.png"
+                     style="width: 28px; height: 28px; margin-bottom: -5px;"
+                     onclick="login()">
+               </c:when>
+               <c:otherwise>
+                  <img src="resources/images/icons/cart.png"
+                     style="width: 28px; height: 28px; margin-bottom: -5px;"
+                     onclick="cart()">
+               </c:otherwise>
+            </c:choose>
          </nav>
       </div>
    </div>
@@ -203,5 +315,13 @@
       <input type="hidden" id="review_text" name="review_text">
    </form>
 
+   <form action="data" method="post" name="index_form2">
+      <input type="hidden" name="type" id="index_type_text2"> <input
+         type="hidden" name="start" id="index_type_text_start2"> <input
+         type="hidden" name="end" id="index_type_text_end2">
+   </form>
+
+
+   <script src="resources/js/demo.js"></script>
 </body>
 </html>

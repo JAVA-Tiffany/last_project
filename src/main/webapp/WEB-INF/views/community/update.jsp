@@ -10,10 +10,10 @@
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 // $(document).ready(function(){
-// 	$("btnDelete").click(function(){
-// 		document.form1.action = "delete";
-// 		document.form1.submit();
-// 	})
+//    $("btnDelete").click(function(){
+//       document.form1.action = "delete";
+//       document.form1.submit();
+//    })
 // })
 
 </script>
@@ -40,7 +40,7 @@ font: 400 14px 'Poppins',sans-serif;
  a { text-decoration:none;  color: #000; !important  } 
 a:link { color: #000; text-decoration: none; } <!-- link : 방문전 링크 상태 -->
 a:visited {
-	color: #000; text-decoration: none; } <!-- visited : 방문후 링크 상태 -->
+   color: #000; text-decoration: none; } <!-- visited : 방문후 링크 상태 -->
 a:hover { color: #000; text-decoration: none; } <!-- hover : 마우스 오버했을 때 링크 상태 -->
 a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 링크 상태 -->
  fieldset {
@@ -53,9 +53,10 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 <jsp:include page="../default/header.jsp"/>
 <div align="center" class="div1">
 <form method="post" action="update_save?bno=${view.bno}">
+
 <input type="hidden" value="${view.bno}" name="bno">
    <table class="board_view">
-   		
+         
         <caption>글 수정</caption>
         <colgroup>
             <col width="15%">
@@ -81,18 +82,28 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
             <tr style="height:300px;">
                 <th>내용</th>
                 <td colspan="3">
-                	<input type="text" name="content" id="content" style="height:200px;
-                	 width: 700px;" value="${view.content}" placeholder="내용을 입력해주세요.">
+                   <input type="text" name="content" id="content" style="height:200px;
+                    width: 700px;" value="${view.content}" placeholder="내용을 입력해주세요.">
    
                 </td>
             </tr>
         </tbody>
     </table>
+    <c:choose>
+    <c:when test="${sessionScope.id == 'admin'}">
+    <div class="div2">
+       <a href="acboard" >목록으로</a>
+       <input type="submit" value="완료">
+    </div>
+    </c:when>
+    <c:otherwise>
     <div class="div2">
     <a href="list" id="list" class="btn">목록으로</a>
     <input type="submit" value="완료">
-<%--     <a href="update?bno=${view.bno}" class="btn">수정하기</a>  --%>
-	</div>
+   </div>
+   </c:otherwise>
+   </c:choose>
+   
     </form>
  </div>       
 

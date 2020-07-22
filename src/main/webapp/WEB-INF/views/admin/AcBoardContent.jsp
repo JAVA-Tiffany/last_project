@@ -91,7 +91,6 @@
       }
    
       function reply_del(d) {
-         if("${sessionScope.id}"==$("#comment_writer"+d).text()){
             b='${bno_view}';
             $.ajax({
                url : "replydel",
@@ -108,9 +107,6 @@
                   alert('댓글 삭제 실패')
             }
          });
-         }else{
-            alert("본인이 올린 글만 삭제할 수 있습니다.");
-         }
    }
    function reply_ch(d) {
       $("#text").val($("#commare"+d).val());
@@ -171,6 +167,7 @@
 </head>
 <body>
 <jsp:include page="AdminHeader.jsp"/>
+
 <div align="center" class="div1">
 <form method="post" action="update?bno=${view.bno}">
 <input type="hidden" value="${view.bno}" name="bno">
@@ -206,11 +203,13 @@
         </tbody>
     </table>
     
+    
+    
+    
     <!-- 목록/수정/삭제 -->
    <div>
-    
-    <a href="list" id="list" class="btn">목록으로</a>
-    <input type="submit" value="수정하기" style="border: 0px; background-color:transparent;" >
+    <a href="acboard" id="list" class="btn">목록으로</a>
+    <input type="submit" value="수정하기" style="border: 0px; background-color: transparent;" >
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
     </div>
     <input type="button" value="댓글" onclick="comment()" id="comment_btn">

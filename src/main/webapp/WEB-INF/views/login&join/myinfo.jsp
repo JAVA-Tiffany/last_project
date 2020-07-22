@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/util.css?after">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css?after">
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -92,14 +93,33 @@ function pagereturn(){
           if (document.getElementById("id").value == "" || document.getElementById("pw").value == ""
                 ||document.getElementById("pwc").value == "" || document.getElementById("name").value == "" ||
                 document.getElementById("post_postcode").value == "" || document.getElementById("post_address").value == "" || document.getElementById("sample6_address2").value == "" || document.getElementById("phon").value == "" ||
-                document.getElementById("email").value == "" || document.getElementById("email_btn").value != "인증 메일 수정") {
+                document.getElementById("email").value == "") {
             if(document.getElementById("email_btn").value != "인증 메일 수정")
                alert("메일 인증이 필요합니다.")
              else
                 alert("비어있는 칸이 존재합니다.")
           } else {
-             user.submit()
-             opener.parent.location.reload();
+             Swal.fire({
+                  title: '개인정보를 삭제하시겠습니까?',
+                  text: '정말 삭제하시겠습니까?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, change it!'
+             }).then((result) => {
+                  if (result.value) {
+                    Swal.fire({
+                       title:'Success!',
+                       text: '성공적으로 수정되었습니다!',
+                       icon: 'success',
+                      preConfirm:function(){
+                         user.submit();
+                       }
+                    });
+                  }
+                }); 
+          
           }
        }
        function eamil_k() {
@@ -134,8 +154,75 @@ function pagereturn(){
           }
          
     }
+       
+       
+    function back() {
+       history.back();
+    }
    </script>
+   
+   
 <!--    정보 수정 -->
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
+function post() {
+   new daum.Postcode(
+         {
+            oncomplete : function(data) {
+               var fullAddr = '';
+               var extraAddr = '';
+
+               if (data.userSelectedType === 'R') {
+                  fullAddr = data.roadAddress;
+               } else {
+                  fullAddr = data.jibunAddress;
+               }
+
+               if (data.userSelectedType === 'R') {
+                  if (data.bname !== '') {
+                     extraAddr += data.bname;
+                  }
+                  if (data.buildingName !== '') {
+                     extraAddr += (extraAddr !== '' ? ', '
+                           + data.buildingName : data.buildingName);
+                  }
+                  fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+                        + ')' : '');
+               }
+
+               document.getElementById('post_postcode').value = data.zonecode;
+               alert(fullAddr)
+               document.getElementById('post_address').value = fullAddr;
+
+               document.getElementById('sample6_address2').focus();
+            }
+         }).open();
+}
+function deltoken(){
+   $.ajax({
+      url:"deltoken",
+      type:"GET",
+   success: function(){
+      location.href="nid.naver.com/oauth2.0/token?grant_type=delete&client_id=Kw8vD_2MRNtNf4TERrlM&client_secret=nfGVNN_nu7&access_token="
+         + "AAAAN_LCbVdhtfBQxzlMnQ2eqTVupLkpDvSCH4p7AzX6pOEu8Km7G0722fmlWmrn9haz_6BRsm_4X_DNGYoadZNOO7k&service_provider=NAVER";
+      
+   },error: function(){
+      alert("문제가 발생했습니다")
+   }
+   })
+}
+function pagereturn(){
+   
+   $.each(list,function(index,item){
+      
+   })
+   
+   $("#").html(html)
+   
+}
+
+</script>
 
 <div class="limiter">
       <div class="container-login100" align="center">
@@ -146,7 +233,7 @@ function pagereturn(){
 <!--          </div> -->
             <div align="center">
                
-               <form action="joinok" name="user" style="align:center;">
+               <form action="Infoupdata" name="user" style="align:center;">
       
                <div class="wrap-input100 validate-input" align="center">
                   <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly">
@@ -216,7 +303,7 @@ function pagereturn(){
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="email" placeholder="email@eamil" class="input100" name="email" id="email" value="${myinfo_list.email}">
+                  <input readonly="readonly" type="text" id="email" placeholder="email@eamil" class="input100" name="email" id="email" value="${myinfo_list.email}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
@@ -224,18 +311,17 @@ function pagereturn(){
                </div>
                <div style="display: flex; flex:row;">
                   <div class="wrap-input100 validate-input" style="width: 200px; margin-right: 20px;">
-                     <input type="text" placeholder="인증번호" class="input100" id="join_email_key" name="join_email_key" value="********">
-                     <span class="focus-input100"></span>
-                     <span class="symbol-input100">
-                        <i class="fa fa-lock" aria-hidden="true"></i>
-                     </span>
+<!--                      <span class="focus-input100"></span> -->
+<!--                      <span class="symbol-input100"> -->
+<!--                         <i class="fa fa-lock" aria-hidden="true"></i> -->
+<!--                      </span> -->
                   </div>
-                  <div align="center"><input type="button" id="email_btn" value="인증 메일 수정" class="input1001" onclick="eamil_k()" onmouseover="style='cursor:pointer;'"></div>
                </div>
                <div class="container-login100-form-btn">
-            <input type="button" class="login100-form-btn-login" onclick="al()" value="회원가입">
+            <input type="button" class="login100-form-btn-login" onclick="al()" value="정보수정">
          </div>
-         
+         <br>
+            <a class="login100-form-btn-login"  href="index"><font color="white">뒤로가기</font></a>
          <label style="margin-right: 95px;" id="pw1"></label><br>
          <label style="margin-right: 95px;" id="pwc2"></label><br>
          

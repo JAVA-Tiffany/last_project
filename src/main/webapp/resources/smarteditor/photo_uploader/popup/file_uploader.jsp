@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@page import="java.io.IOException"%>
+    <%@page import="java.io.FileNotFoundException"%>
+   <%@page import="java.io.FileInputStream"%> 
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.io.InputStream"%>
@@ -44,14 +46,17 @@ if (ServletFileUpload.isMultipartContent(request)){
                 } else {
                      
                     //파일 기본경로
-                    //String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-                    String filePath = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
+                    String filePath = request.getSession().getServletContext().getRealPath("/");
+                    String copyPath = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
+                    filePath += "src\\main\\webapp\\resources\\smarteditor\\upload\\";
                     System.out.println(filePath);
                     //파일 기본경로 _ 상세경로
                    // String filePath = dftFilePath +"smarteditor/upload";
                     System.out.println(filePath);
                     File file = null;
                     file = new File(filePath);
+                    
+                    
                     if(!file.exists()) {
                         file.mkdirs();
                     }
@@ -60,7 +65,8 @@ if (ServletFileUpload.isMultipartContent(request)){
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
                     String today= formatter.format(new java.util.Date());
                     realFileNm = today+UUID.randomUUID().toString() + name.substring(name.lastIndexOf("."));
-                     
+                   
+                    String locatlFileNm = copyPath+realFileNm;
                     String rlFileNm = filePath + realFileNm;
                     ///////////////// 서버에 파일쓰기 /////////////////
 
@@ -83,7 +89,42 @@ if (ServletFileUpload.isMultipartContent(request)){
                     return3 += "&bNewLine=true";
                                 // img 태그의 title 옵션에 들어갈 원본파일명
                     return3 += "&sFileName="+ name;
-                    return3 += "&sFileURL="+"resources/smarteditor/upload/"+realFileNm;
+                    return3 += "&sFileURL="+"upload/"+realFileNm;
+                    
+                    
+                    
+                    String oriFilePath = rlFileNm;
+                    //복사될 파일경로
+                    String copyFilePath = locatlFileNm;
+                    File oriFile = new File(oriFilePath);
+                    //복사파일객체생성
+                    File copyFile = new File(copyFilePath);
+                    
+                    try {
+                        
+                        FileInputStream fis = new FileInputStream(oriFile); //읽을파일
+                        FileOutputStream fos = new FileOutputStream(copyFile); //복사할파일
+                        
+                        int fileByte = 0; 
+                        // fis.read()가 -1 이면 파일을 다 읽은것
+                        while((fileByte = fis.read()) != -1) {
+                            fos.write(fileByte);
+                        }
+                        //자원사용종료
+                        fis.close();
+                        fos.close();
+                        
+                        
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                    //File target = new File(copyPath,realFileNm);
+                    //FileCopyUtils.copy(copyPath, target);
                     System.out.println(return1+return2+return3);
                 }
             }else {

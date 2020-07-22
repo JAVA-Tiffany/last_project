@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.project.dto.ReviewDTO;
 import com.project.service.ReviewService;
@@ -56,7 +60,25 @@ public class ReviewController {
    
    @RequestMapping(value="review_save" ,method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
-   public void review_save(ReviewDTO dto) {
+   public void review_save(ReviewDTO dto,MultipartHttpServletRequest request) {
+	   
+	   List<MultipartFile> List = request.getFiles("File");
+	   
+	   
+	   for(MultipartFile mf : List) {
+//	   String Filetype = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".")+1);
+		String orgFileName = dto.getName() + "."+"png";
+//		String path = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
+//				+ type + "\\" + orgFileName;
+	   
+	   
+	   }
+	   
+	   
+	   
+	   
+	   
+	   
       reviewService.save(dto);
    }
    

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -150,13 +151,17 @@ function pagereturn(){
                alert("비어있는 칸이 존재합니다.")
          } else {
             user.submit()
-            opener.parent.location.reload();
          }
       }
       $(function () {
-         a = '${NaverDto.id}';
-         a = '${GoogleId}';
-         $("#id").val(a);
+         a="";  
+         if('${NaverDto.id}'!=""){
+           a = '${NaverDto.id}';
+         }else if('${GoogleId}'!=""){
+            a='${GoogleId}';
+         }else{
+            $("#id").val(a);
+         }
       });
       function eamil_k() {
          alert("인증번호 보내는 중")

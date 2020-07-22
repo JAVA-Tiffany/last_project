@@ -1,9 +1,11 @@
 package com.project.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.MyimgDTO;
+import com.project.service.CookieUtils;
 import com.project.service.MyimgService;
 import com.project.service.ProjectService;
 import com.project.service.cartService;
@@ -30,11 +33,25 @@ public class DesignController {
    private ProjectService service;
    
    @PostMapping("design")
-   public String design(@RequestParam String imggoods,@RequestParam String imgname, @RequestParam String imgmoney, Model model) {
-      model.addAttribute("img_name", imgname);
-      model.addAttribute("img_money", imgmoney);
-      model.addAttribute("img_goods", imggoods);
-      return "design/design";
+   public String design(@RequestParam String imggoods,@RequestParam String imgname, @RequestParam String imgmoney, Model model,HttpServletRequest request, HttpServletResponse response) {
+      CookieUtils cook = new CookieUtils();
+      try {
+      cook.setCookie("text1", imgname, 1, request, response);
+   } catch (UnsupportedEncodingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+   }
+      if(!imggoods.equals("earring")) {
+         model.addAttribute("img_name", imgname);
+          model.addAttribute("img_money", imgmoney);
+          model.addAttribute("img_goods", imggoods);
+         return "design/design";
+      }
+      else {
+         service.earring_list(model,imgname);
+         model.addAttribute("img_goods", imggoods);
+         return "design/earring";
+      }
    }
    
    @RequestMapping("myimg")

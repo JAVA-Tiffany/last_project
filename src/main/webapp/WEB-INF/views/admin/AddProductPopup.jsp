@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 .table {
@@ -41,65 +42,86 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#SubBtn").click(function(){
-		var form =$("#FormData")[0];
-		var data = new FormData(form);
-		$.ajax({
-	            url: "AddProduct",
-	            type: "POST",
-	            data: data,
-	            contentType : false,
-	            processData : false,
-	            success: function(data){
-	                alert("success");
-	                opener.reload();
-	                window.close();
-	            },
-	            error: function(){
-	                alert("error");
-	                window.close();
-	            }
-	        });
-	})
+   $("#SubBtn").click(function(){
+      var form =$("#FormData")[0];
+      var data = new FormData(form);
+      $.ajax({
+               url: "AddProduct",
+               type: "POST",
+               data: data,
+               contentType : false,
+               processData : false,
+               success: function(data){
+                   alert("success");
+                   opener.parent.location.reload();
+                   window.close();
+               },
+               error: function(){
+                   alert("error");
+                   window.close();
+               }
+           });
+   })
+   
+   $("#type").change(function(){
+      var type = $("#type option:selected").val();
+      console.log(type)
+      if(type =='earring pitting'){
+    	  console.log(type)
+    	  $("#singleUpload").css('display','none');
+    	  $("#multiUpload").removeAttr('style');
+    	  
+      }else{
+    	  console.log(type)
+    	  $("#singleUpload").removeAttr('style');
+    	  $("#multiUpload").css('display','none');
+      }
+      
+   });
+   
 })
-	
 
 </script>
+
 </head>
 <body>
 
 
 
 <form method="post" enctype="multipart/form-data" id="FormData">
-	<table border="1" class="table">
-		<tr>
-			<th>상품 이름 </th><th><input type="text" name="product"></th>
-		</tr>
-		<tr>
-			<th>상품 가격 </th><th><input type="text" name="price"></th>
-		</tr>
-		<tr>
-			<th>상품 수량 </th><th><input type="text" name="quantity"></th>
-		</tr>
-		<tr>
-			<th>이미지 업로드</th>
-			<th><input type="file" id="File" name="File" />
-<!-- 			<th><input type="file" name="img"></th> -->
-		</tr>
-		<tr>
-			<th>상품 종류 </th>
-			<th><select name="type">
-			<option>종류를 선택하세요</option>
-			<option value="bag pitting">가방</option>
-			<option value="dress pitting">의류</option>
-			<option value="earring pitting">귀걸이/귀찌</option>
-</select></th>
-		</tr>
-		<tr>
-			<th colspan="5"><input type="button" value="등록" id="SubBtn"></th>
-		</tr>
-
+   <table border="1" class="table" id="hhh">
+      <tr>
+         <th>상품 이름 </th><th><input type="text" name="product"></th>
+      </tr>
+      <tr>
+         <th>상품 가격 </th><th><input type="text" name="price"></th>
+      </tr>
+      <tr>
+         <th>상품 수량 </th><th><input type="text" name="quantity"></th>
+      </tr>
+      <tr>
+         <th>상품 종류 </th>
+         <th><select name="type" id="type">
+         <option>종류를 선택하세요</option>
+         <option value="bag pitting">가방</option>
+         <option value="dress pitting">의류</option>
+         <option value="earring pitting">귀걸이/귀찌</option>
+         </select></th>
+      </tr>
+      <tr>
+         <th>피팅 이미지 업로드</th>
+         <th><input type="file" id="File" name="File"/>
+      </tr>
+            <tr id="singleUpload">
+            <th>디자인 이미지 업로드</th>
+            <th><input type="file" id="SingleDesignFile" name="SingleDesignFile"/>
+            </tr>
+      <tr style="display: none;" id="multiUpload">
+         <th>디자인 이미지 업로드</th>
+         <th><input type="file" id="DesignFile" name="DesignFile" multiple="multiple" />
+  	 </tr>
 </table>
+<input type="button" value="등록" id="SubBtn">
 </form>
 </body>
 </html>

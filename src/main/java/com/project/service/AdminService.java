@@ -66,6 +66,7 @@ public class AdminService {
 	
 	public void selectAllQuantity(Model model) {
 		List<DataListDTO> data = datadao.selectAll();
+		
 		model.addAttribute("datalist",data);
 	}
 	

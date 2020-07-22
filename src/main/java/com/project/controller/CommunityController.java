@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.AdminNoticeDTO;
 import com.project.dto.CommnuityDTO;
@@ -62,6 +63,7 @@ public class CommunityController {
                if(a==0) {
                   sum+=z[x];
                }else {
+                 sum+="\\n";
                   a=0;
                }
             }
@@ -117,34 +119,46 @@ public class CommunityController {
    }
    
    @RequestMapping("update_save")
-   public String update_sava(CommnuityDTO dto) {
+   public String update_sava(CommnuityDTO dto, HttpServletRequest request) {
       service.update_save(dto);
+      HttpSession session = request.getSession();
+      
+      if(session.getAttribute("id").equals("admin")) {
+         
+         return "forward:viewBoard"; 
+      }
       return "redirect:list";
    }
    
    @RequestMapping("delete")
-   public String delete(CommnuityDTO dto) {
+   public String delete(CommnuityDTO dto, HttpServletRequest request) {
       service.delete(dto);
+      HttpSession session = request.getSession();
+      
+      if(session.getAttribute("id").equals("admin")) {
+         return "redirect:acboard";
+      }
+      
       return "redirect:list";
    }
    
    
    @RequestMapping("notice")
    public String notice(AdminNoticeDTO dto,Model model) {
-	   serviceAdm.listAll(dto, model);
-		serviceAdm.adminList(dto, model);
+      serviceAdm.listAll(dto, model);
+      serviceAdm.adminList(dto, model);
       return "community/notice";
    }
    @RequestMapping("noticeview")
-	public String noticeview(AdminNoticeDTO dto, Model model,@RequestParam("bno") Integer bno) {
-		System.out.println(dto.getBno());
+   public String noticeview(AdminNoticeDTO dto, Model model,@RequestParam("bno") Integer bno) {
+      System.out.println(dto.getBno());
 
-		System.out.println(bno + "bno check");
-		dto.setBno(bno);
-		serviceAdm.count(dto);
-		serviceAdm.view(dto,model);
-		return "community/noticeview";
-	}
+      System.out.println(bno + "bno check");
+      dto.setBno(bno);
+      serviceAdm.count(dto);
+      serviceAdm.view(dto,model);
+      return "community/noticeview";
+   }
    
    @RequestMapping(value="search", method = RequestMethod.POST)
    public String title_search(CommnuityDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result) {

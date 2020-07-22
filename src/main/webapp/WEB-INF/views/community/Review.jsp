@@ -48,7 +48,7 @@
                text=$("#content"+d).val();
                if(s==0){
                   $("#infocount"+d).text(parseInt($("#infocount"+d).text())+1);
-                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:300px;'cols='1' >"+text+"</textarea>");
+                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:300px; ma'cols='1'>"+text+"</textarea>");
                   $("#dtr"+d).append("<input id='text_change"+d+"' onclick='review_change("+d+")' type='button' value='수정'>");
                   $("#open_btn"+d).val("▲");
                   $("#title"+d).removeAttr('disabled');
@@ -87,6 +87,17 @@
             }
       });
    }
+$(function() {
+   li=${review_listAll};
+   for(i=0;i<li.length;i++){
+      $("#review_product_list").append("<a id='a_ch"+i+"' href='javascript:type_ch("+i+")'style='font-size: 15px;' onmouseleave=style='font-size:15px;' onmouseover=style='color:red;font-size:15px;'>"+li[i]+"</a><br>");
+   }
+})
+function type_ch(t) {
+    $("#search_text").val($("#a_ch"+t).text());
+    $("#search_img").val($("#img").val());
+    search_form.submit();
+}
 </script>
 <style type="text/css">
 .div1 {
@@ -142,14 +153,15 @@ active : 클릭했을 때 링크 상태 -->fieldset {
    border: none;
    vertical-align: top;
 }
-textarea{width: 300px; height: 400px; resize: none; margin-top: 260px; text-align: center;}
 </style>
 </head>
 <body>
    <jsp:include page="../default/header.jsp"/>
    <div style="display: flex; flex: row; width: 1100px; margin: 0 auto;" align="center">
-      <textarea id="textarea_listAll" cols="1" readonly="readonly">${review_listAll}</textarea>
-      <div align="center" class="div1" style="margin-left: 30px">
+      <div id="review_product_list" style="overflow:scroll; width:350px; height:400px; margin-top: 260px; border: 1px solid black; ">
+      <label>상품 변경 가능 목록(클릭)</label><br><br>
+      </div>
+      <div align="center" class="div1" style="margin-left: 30px; ">
          <table>
             <caption>
                <font style="font: 400 30px 'Poppins', sans-serif;">Review <br></font>
@@ -216,7 +228,6 @@ textarea{width: 300px; height: 400px; resize: none; margin-top: 260px; text-alig
                <option value="subject">제목</option>
                <option value="content">내용</option>
                <option value="member_id">아이디</option>
-               <option value="product">상품 바꾸기</option>
             </select> 
             <input id="search" name="search" class="inputTypeText" placeholder="" value="" type="text" />
             <label onclick="review_search()" onmouseover="style='cursor:pointer'">search</label>

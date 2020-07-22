@@ -113,6 +113,7 @@
          }
    }
    function reply_ch(d) {
+      if("${sessionScope.id}"==$("#comment_writer"+d).text()){
       $("#text").val($("#commare"+d).val());
       b='${bno_view}';
       if($("#btn_change"+d).val()=="댓글 수정"){
@@ -134,6 +135,9 @@
             }
          });
       }
+      }else{
+           alert("본인이 올린 글만 수정할 수 있습니다.");
+       }
    }
    function reply_ch_cel(d) {
       $("#commare"+d).val($("#text").val());
@@ -212,6 +216,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    <div>
     <a href="list" id="list" class="btn">목록으로</a>
     <c:if test="${sessionScope.id == view.writer }">
+   
     <input type="submit" value="수정하기" style="border: 0px;" >
     <a href="delete?bno=${view.bno}" class="btn">삭제하기</a>
     </c:if>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.dao.UserDAO;
 import com.project.dto.UserDTO;
+import com.project.service.ProjectService;
 import com.test.tst.NaverLoginBO;
 
 import javafx.scene.control.Alert;
@@ -27,7 +28,8 @@ import javafx.scene.control.Alert;
 public class LoginController {
 	@Autowired
 	private UserDAO dao;
-	
+	@Autowired
+	private ProjectService service;
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -98,6 +100,12 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:index";
 	}
+	
+	  @RequestMapping("Infoupdata")
+	   public String infoUpdata(UserDTO dto) {
+	      service.update(dto);
+	      return "redirect:myinfo";
+	   }
 	
 }
 

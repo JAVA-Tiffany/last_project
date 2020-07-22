@@ -27,7 +27,7 @@ public class HomeController {
 		
 		
 		
-		return "home";
+		return "default/testindex";
 	}
 	
 }

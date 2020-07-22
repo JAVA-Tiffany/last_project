@@ -12,6 +12,12 @@ import com.project.dto.DataListDTO;
 public class DataListDAO {
    @Autowired private SqlSession sqlSession;
    public static final String namepasce="com.project.mybatis.myMapper";
+  
+   public List<DataListDTO> selectAll2() {
+	   return sqlSession.selectList(namepasce+".dataselectAll_List2");
+	}
+   
+   
    public List<DataListDTO> selectAll() {
       return sqlSession.selectList(namepasce+".dataselectAll_List");
    }

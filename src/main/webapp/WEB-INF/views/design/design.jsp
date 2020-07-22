@@ -154,11 +154,11 @@
    function in_text() {
       alert("in_text")
       id="myCanvas"+count;
-      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+count).draggable();
       ctx[count] = document.getElementById(id).getContext("2d");
-      ctx[count].font = '70px Arial';
-      ctx[count].fillText('입력', 50, 100);
+      ctx[count].font = '40px Arial';
+      ctx[count].fillText('입력', 0, 50);
       count++;
    }
    
@@ -172,11 +172,11 @@
       alert($("#textin").val())
       $("div").remove("#image"+d);
       new_id="myCanvas"+d;
-      $('#in').append("<div id='image"+d+"' style=' width: 200px; height: 70px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 200px; height: 70px;'></canvas></div>")
+      $('#in').append("<div id='image"+d+"' style='width: 50px; height: 50px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+d).draggable();
       ctx[count] = document.getElementById(new_id).getContext("2d");
-      ctx[count].font = '70px Arial';
-      ctx[count].fillText($("#textin").val(), 0, 100);
+      ctx[count].font = '40px Arial';
+      ctx[count].fillText($("#textin").val(), 0, 50);
       $("div").remove("#text_dblclick_event");
    }
    
@@ -227,7 +227,8 @@
    
    url='${img_name}'
    $(function(){
-       $("#zz").css("background-image", "url('resources/img/${img_goods} desgin/"+url+".png' )"); 
+       $("#zz").css("background-image", "url('resources/img/${img_goods} design/"+url+".png' )");
+       $("#zz").css("background-size", "600px 600px");
     });
    
 //    view 앞으로
@@ -332,7 +333,7 @@
       
       var popupX = (window.screen.width / 2) - (1300 / 2);
       var popupY= (window.screen.height /2) - (850 / 2);
-      openWin = window.open("",
+      chopenWin = window.open("",
          "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
       changeop.action="change";
       changeop.method="post";
@@ -340,13 +341,7 @@
       changeop.submit();
    }
     function background_ch() {
-      url=$("#op").val();
-      console.log(url);
-      $(function(){
-      $("#zz").css("background-image", "url('resources/img/${img_goods} desgin/"+url+".png' )"); 
-      $("#design_price").text($("#op_price").val())
-      $("#design_product").text(url)
-      });
+       design_fimg.submit();
    }
    
 //  왼쪽정렬
@@ -439,7 +434,7 @@
             </div>
          </div>
          <div style="background-color:green; width: 600px; height: 600px; border: 1px solid #eaedf0;" id="zz">
-            <div style="width:174px; height:261px; border: 2px solid black; margin-left: 160px; margin-top: 132px;" id="in">
+            <div style="width:174px; height:261px; margin-left: 160px; margin-top: 132px;" id="in">
 <!--                <div id="image1" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
 <!--                </div> -->
@@ -710,8 +705,6 @@
    <canvas id="canvas" width="900" height="600"
       style="border: 1px solid #d3d3d3; display:none;">
    </canvas>
-   <input type="hidden" id="op" value="">
-   <input type="hidden" id="op_price" value="">
    
    <form name="changeopen">
       <input type="hidden" name="change_val" id="change_val" value="${img_goods}">
@@ -721,6 +714,13 @@
    
    <form name="design_review_form" method="post" action="review">
       <input type="hidden" name="review_text" id="review_text" value="${img_name}">
+   </form>
+   
+   <form action='design' name='design_fimg' method='post'>"
+   <input type='hidden' name='imgname' id="op_product">
+   <input type='hidden' name='imgmoney' id="op_price">
+   <input type='hidden' name='imggoods' id="op_type">
+   <input type='submit' style='display:none;' id='bmit'>
    </form>
       
    <jsp:include page="../default/footer.jsp"/>

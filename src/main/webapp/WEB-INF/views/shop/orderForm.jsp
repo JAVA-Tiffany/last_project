@@ -46,7 +46,6 @@
 
    //체크박스 전체선택 및 전체 해제
    function cAll() {
-
       if ($("#chk_all").prop("checked") == true) {
          alert("체크 온")
          $("#chk2").attr("checked", true);

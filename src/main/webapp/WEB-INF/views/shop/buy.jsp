@@ -21,7 +21,8 @@
          type : "POST",
          data : {order_id:order_id, day:day, totalprice:totalprice, method:method, addr1:addr1, addr2:addr2, addr3:addr3},
          success:function(data){
-        	 window.close();
+            alert('성공');
+            window.close();
          },
          error:function(data){
             alert('실패');
@@ -70,8 +71,10 @@ BootPay.request({
    }
 }).error(function (data) {
    console.log(data);
+   window.close();
 }).cancel(function (data) {
    console.log(data);
+   window.close();
 }).ready(function (data) {
    console.log(data);
 }).confirm(function (data) {
@@ -81,13 +84,16 @@ BootPay.request({
       BootPay.transactionConfirm(data); 
    } else {
       BootPay.removePaymentWindow(); 
+      window.close();
    }
 }).close(function (data) {
+
     console.log(data);
    
+    
 }).done(function (data) {
-	   db();
-	console.log(data);
+   db();
+   console.log(data);
 });
 </script>
 </body>

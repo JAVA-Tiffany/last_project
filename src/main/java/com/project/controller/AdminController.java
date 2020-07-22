@@ -6,9 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +26,7 @@ import com.project.dto.ReplyDTO;
 import com.project.service.AdminService;
 import com.project.service.CommunityService;
 import com.project.service.ProjectService;
+import com.project.service.ReplyService;
 
 @Controller
 public class AdminController {
@@ -32,6 +37,8 @@ public class AdminController {
 	CommunityService serviceCom;
 	@Autowired
 	AdminService serviceAdm;
+	@Autowired
+	ReplyService replyService;
 	
 
 	@RequestMapping("adminpage")
@@ -166,20 +173,54 @@ public class AdminController {
 		
 	}
 	
-	 @RequestMapping("viewBoard")
+	@RequestMapping("viewBoard")
 	   public String viewBoard(CommnuityDTO dto, Model model, HttpServletRequest request,HttpSession session) {
-		 if(session.getAttribute("id")==null) {
-			 model.addAttribute("logstart","로그인 해주세요");
-			 return "login&join/login";
-		 }else {
-			 model.addAttribute("id", session.getAttribute("id").toString());
-			 serviceAdm.viewBoard(dto, model);
-			 return "admin/AcBoardContent";
-		 }
-	      
-	      
+
+	      if(session.getAttribute("id")==null) {
+	         model.addAttribute("logstart","로그인 해주세요");
+	         return "login&join/login";
+	      }else {
+	         model.addAttribute("id", session.getAttribute("id").toString());
+	         serviceAdm.viewBoard(dto, model);
+
+	         List<ReplyDTO> arr = replyService.select(dto.getBno());
+	         ArrayList<String> a1=new ArrayList<String>();
+	         ArrayList<String> a2=new ArrayList<String>();
+	         ArrayList<String> a3=new ArrayList<String>();
+	         ArrayList<String> a4=new ArrayList<String>();
+	         for(int i=0;i<arr.size();i++) {
+	            a1.add("'"+arr.get(i).getWriter()+"'");
+	            String[] z=arr.get(i).getContent().split("");
+	            String sum="";
+	            int a=0;
+	            for(int x=0;x<z.length-1;x++) {
+	               if(z[x+1].equals("\n")) {
+	                  sum+="'"+"\n+'";
+	                  a=1;
+	               }else {
+	                  if(a==0) {
+	                     sum+=z[x];
+	                  }else {
+	                     sum+="\\n";
+	                     a=0;
+	                  }
+	               }
+	            }
+	            arr.get(i).setContent(sum);
+	            a2.add("'"+arr.get(i).getContent()+"'");
+	            a3.add("'"+arr.get(i).getRno()+"'");
+	            a4.add("'"+arr.get(i).getRegDate()+"'");
+	         }
+	         model.addAttribute("writer_view", a1);
+	         model.addAttribute("comment_view", a2);
+	         model.addAttribute("bno_view", dto.getBno());
+	         model.addAttribute("regDate_view", a4);
+	         model.addAttribute("rno_view", a3);
+
+	         return "admin/AcBoardContent";
+	      }
 	   }
-	
+
 	@RequestMapping("categorySelect")
 	public String categorySelect(@RequestParam String choice,Model model) {
 		serviceAdm.choiceCategory(choice,model);
@@ -211,5 +252,15 @@ public class AdminController {
 		
 		
 	}
+	
+//	@PostMapping(value = "onchangeValue", produces = "application/text; charset=utf8")
+//	@RequestMapping("onchangeValue")
+//	public @ResponseBody String onchangeValue(@RequestBody String realtype, Model model) {
+//		
+//		model.addAttribute("realtype", realtype);
+//		System.out.println(realtype);
+//		 JSONParser parser = new //–JSON Parser 생성
+//		  JSONObject jsonObj = (JSONObject)parser.parse(paramData);
+//	}
 
 }

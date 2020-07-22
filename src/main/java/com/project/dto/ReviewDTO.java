@@ -8,8 +8,16 @@ public class ReviewDTO {
    private String regdat;
    private String img;
    private String title;
+   private String path;
    
-   public String getTitle() {
+   
+   public String getPath() {
+	return path;
+}
+public void setPath(String path) {
+	this.path = path;
+}
+public String getTitle() {
       return title;
    }
    public void setTitle(String title) {

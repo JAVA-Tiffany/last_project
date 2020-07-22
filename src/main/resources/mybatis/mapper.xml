@@ -36,21 +36,29 @@
       select * from self_design where id=#{id} and
       email=#{email}
    </select>
-   <!-- 상품 리스트 -->
-   <select id="dataselectAll_List" resultType="datalistdto">
+   
+   
+      <!-- 상품 리스트 -->
+   <select id="dataselectAll_List2" resultType="datalistdto">
       select * from
       data_list
    </select>
+   
+   <!-- 상품 리스트 -->
+   <select id="dataselectAll_List" resultType="datalistdto">
+      select * from
+      data_list where img like '%pitting%'
+   </select>
    <select id="dataselect_List" resultType="datalistdto">
       select * from data_list
-      where type=#{type}
+      where img like '%pitting%' and type=#{type} 
    </select>
    <select id="selectPick" resultType="datalistdto">
-   		select * from data_list where type=#{choice}
+   		select * from data_list where img like '%pitting%' and type=#{type} 
    </select>
    
    <update id="updateQuantity" parameterType="datalistdto">
-		update data_list set quantity=#{quantity} where product=#{product} and type=#{type}
+		update (select * from data_list where img like '%pitting%') set quantity=#{quantity} where product=#{product} and type=#{type}
 	</update>
 	<insert id="AddProduct" parameterType="datalistdto">
 	 insert into data_list (img,product,price,quantity,type) values(#{img},#{product},#{price},#{quantity},#{type} )

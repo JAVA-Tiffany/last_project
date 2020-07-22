@@ -96,8 +96,8 @@
          for(i=0;i<ssize;i++){
             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
                      +"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
-            $("#num").append("<form action='data' method='post' name='numbtn"+(i+1)+"'>"
-                    +"<input type='hidden' value='${list_type}' name='type'>"
+            $("#num").append("<form action='change' method='post' name='numbtn"+(i+1)+"'>"
+                    +"<input type='hidden' value='${list_type}' name='change_val'>"
                     +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
                     +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
                     +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
@@ -135,27 +135,26 @@
                    $('#table').append("<tr style='height:500px' id='tr"+c+"'></tr>");
                 }
                 $("#tr"+c).append("<td>"
-                +"<img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5;' style='width: 312px; height: 390px; margin-left: 10px;' src='"+s+"' onclick='imgin("+a+")'>"
-                    +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+p+"</p> "
-                   +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+uu+"</p>"
-                   +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+zz+"</p>"
+                +"<img onmouseleave=style='width:312px;height:390px;margin-left:10px;' onmouseover=style='width:312px;height:390px;margin-left:10px;opacity:0.5;' style='width: 312px; height: 390px; margin-left: 10px;' src='"+l[i]+"' onclick='imgin("+a+")'>"
+                    +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+r[i]+"</p> "
+                   +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+u[i]+"</p>"
+                   +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+z[i]+"</p>"
                    +"</td>");
                 $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
-                         +"<input type='hidden' value='"+p+"' name='imgname'>"
-                         +"<input type='hidden' value='"+uu+"' name='imgmoney'>"
-                         +"<input type='hidden' value='earring' name='imggoods'>"
-                         +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
-                       +"</form>")
+                        +"<input type='hidden' value='"+r[i]+"' name='imgname'>"
+                        +"<input type='hidden' value='"+u[i]+"' name='imgmoney'>"
+                        +"<input type='hidden' value='${list_type}' name='imggoods'>"
+                        +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
+                      +"</form>")
              
           }
           
        });
    function imgin(z) {
-      ur=$("#imgname"+z).text();
-      urm=$("#imgmoney"+z).text();
-      $(opener.document).find("#op").val(ur);
-      $(opener.document).find("#op_price").val(urm);
-      $(opener.location).attr("href", "javascript:background_ch();");
+      $(opener.document).find("#op_type").val('${list_type}');
+      $(opener.document).find("#op_price").val($("#imgmoney"+z).text());
+      $(opener.document).find("#op_product").val($("#imgname"+z).text());
+     $(opener.location).attr("href", "javascript:background_ch();");
       window.close();
     }
    var goods_list_count=0;
