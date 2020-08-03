@@ -160,8 +160,8 @@ public class CommunityController {
    
    @RequestMapping(value="replydel", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
-   public void reply_del(ReplyDTO dto) {
-      replyService.delete(dto);
+   public void reply_del(@RequestParam int rno) {
+      replyService.delete(rno);
    }
    
    @RequestMapping(value="replych", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -181,7 +181,11 @@ public class CommunityController {
    }
 
 
-   
+   @RequestMapping(value="Writerchk",produces = "application/text; charset=utf8") 
+   @ResponseBody
+   private String Writerchk(@RequestParam int rno) throws Exception{
+       return replyService.Writerchk(rno);
+   }
    
    
    

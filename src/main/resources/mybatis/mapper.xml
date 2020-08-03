@@ -207,7 +207,7 @@
    <!-- 댓글 -->
    <select id="select_reply" resultType="replydto"
       parameterType="replydto">
-      select * from reply where bno=#{bno}
+      select * from reply where bno=#{bno} order by rno desc
    </select>
    <insert id="insert_reply" parameterType="replydto">
       insert into reply(bno,
@@ -218,10 +218,12 @@
       update reply set
       content=#{content} where rno=#{rno}
    </update>
-   <delete id="delete_reply" parameterType="replydto">
-      delete reply where
-      bno=#{bno} and rno=#{rno}
+   <delete id="delete_reply" parameterType="int">
+      delete reply where rno=#{rno}
    </delete>
+   <select id="Writerchk" resultType="String">
+   	select writer from reply where rno=#{rno}
+   </select>
 
    <!-- Notice 게시물 관련 -->
    <select id="select_adminList" resultType="Noticedto">

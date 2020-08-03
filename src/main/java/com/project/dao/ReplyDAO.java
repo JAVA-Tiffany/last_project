@@ -18,13 +18,16 @@ public class ReplyDAO {
    public int insert(ReplyDTO dto) {
       return sqlSession.insert(namepasce+".insert_reply",dto);
    }
-   public int delete(ReplyDTO dto) {
-      return sqlSession.delete(namepasce+".delete_reply", dto);
+   public int delete(int rno) {
+      return sqlSession.delete(namepasce+".delete_reply", rno);
    }
    public int update(ReplyDTO dto) {
       return sqlSession.update(namepasce+".update_reply", dto);
    }
    public int last_reply() {
       return sqlSession.selectOne(namepasce+".max_rno");
+   }
+   public String Writerchk(int rno){
+	   return sqlSession.selectOne(namepasce+".Writerchk",rno);
    }
 }

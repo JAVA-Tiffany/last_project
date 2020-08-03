@@ -296,7 +296,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
       </div>
    </div>
          <form action="design" method="post" name="index_form">
-      <input type="hidden" name="imggoods" id="index_type_text"> <input
+      <input type="hidden" name="imggoods" id="index_imggoods_text"> <input
          type="hidden" name="imgname" id="index_imgname_text"> <input
          type="hidden" name="imgmoney" id="index_imgmoney_text">
    </form>

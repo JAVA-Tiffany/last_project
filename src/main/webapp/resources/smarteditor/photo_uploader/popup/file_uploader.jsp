@@ -19,7 +19,6 @@ String return1="";
 String return2="";
 String return3="";
 String name = "";
-
 if (ServletFileUpload.isMultipartContent(request)){
     ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
     uploadHandler.setHeaderEncoding("UTF-8");
@@ -50,7 +49,7 @@ if (ServletFileUpload.isMultipartContent(request)){
                     String filePath = request.getSession().getServletContext().getRealPath("/");
                     String copyPath = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
                     filePath += "src\\main\\webapp\\resources\\smarteditor\\upload\\";
-                    System.out.println(filePath);
+                    System.out.println("filePath : "+filePath);
                     //파일 기본경로 _ 상세경로
                    // String filePath = dftFilePath +"smarteditor/upload";
                     System.out.println(filePath);
@@ -90,7 +89,7 @@ if (ServletFileUpload.isMultipartContent(request)){
                     return3 += "&bNewLine=true";
                                 // img 태그의 title 옵션에 들어갈 원본파일명
                     return3 += "&sFileName="+ name;
-                    return3 += "&sFileURL="+"upload/"+realFileNm;
+                    return3 += "&sFileURL="+"smarteditor/"+realFileNm;
                     
                     
                     
@@ -126,7 +125,7 @@ if (ServletFileUpload.isMultipartContent(request)){
                     
                     //File target = new File(copyPath,realFileNm);
                     //FileCopyUtils.copy(copyPath, target);
-                    System.out.println(return1+return2+return3);
+                    System.out.println("return : "+return1+return2+return3);
                 }
             }else {
                   return3 += "&errstr=error";
@@ -134,7 +133,6 @@ if (ServletFileUpload.isMultipartContent(request)){
         }
     }
 }
-
 response.sendRedirect(return1+return2+return3);
  
 %>

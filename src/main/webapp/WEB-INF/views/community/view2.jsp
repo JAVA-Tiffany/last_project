@@ -53,97 +53,36 @@ width:700px;
   
 $(document).ready(function() {
 	var bno = ${view.bno}; 
-	
 	$("#insertBtn").click(function(){
 		console.log("a");
 		var insertData = $("#replyForm").serialize(); //commentInsertForm의 내용을 가져옴
 	    commentInsert(insertData); //Insert 함수호출(아래)
 	})
 	
-// 	$("#insertBtn").click(function(){
-// 		 var formData = $("#replyForm").serialize();
-// 	      $.ajax({
-// 	            url : "reply",
-// 	            type : "post",
-// 	            data : formData,
-// 	            success : function(result) {
-// 	            	alert(result)
-// 	            	alert("댓글 저장 성공")
-// // 	            	 reload()
-// // 	            	reload();
-// // 	            	$('#ajaxdata1').html(data);
-// // 	            	location.reload();
-// 	            },
-// 	            error : function() {
-// 	               alert('댓글 입력 실패')
-// 	         }
-// 	      });
-		
-		
-// 	});
-	
-	
-	function commentList(){
-	    $.ajax({
-	        url : 'commentlist',
-	        type : 'get',
-	        data : {'bno':bno},
-	        success : function(data){
-	            var a =''; 
-	            $.each(data, function(key, value){ 
-	                a += '<div class="replyWrap" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                a += '<div class="replyTitle">'+' 작성자 : '+value.writer;
-	                a += '<a onclick="commentUpdate('+value.rno+',\''+value.content+'\')"> 수정 </a>';
-	                a += '<a onclick="commentDelete('+value.rno+')"> 삭제 </a> </div>';
-	                a += '<div class="commentContent'+value.rno+'"> <p> 내용 : '+value.content +'</p>';
-	                a += '</div></div>';
 
-	            });
+// 	function commentList(){
+// 	    $.ajax({
+// 	        url : 'commentlist',
+// 	        type : 'get',
+// 	        data : {'bno':bno},
+// 	        success : function(data){
+// 	            var a =''; 
+// 	            $.each(data, function(key, value){ 
+// 	                a += '<div class="replyWrap" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+// 	                a += '<div class="replyTitle">'+' 작성자 : '+value.writer;
+// 	                a += '<a onclick="commentUpdate('+value.rno+',\''+value.content+'\')"> 수정 </a>';
+// 	                a += '<a onclick="commentDelete('+value.rno+')"> 삭제 </a> </div>';
+// 	                a += '<div class="commentContent'+value.rno+'"> <p> 내용 : '+value.content +'</p>';
+// 	                a += '</div></div>';
+
+// 	            });
 	            
-	            $(".commentList").html(a);
-	        }
-	    });
-	}
+// 	            $(".commentList").html(a);
+// 	        }
+// 	    });
+// 	}
 
-	function commentInsert(insertData){
-	    $.ajax({
-	        url : 'reply',
-	        type : 'post',
-	        data : insertData,
-	        success : function(data){
-	            if(data == 1) {
-	                commentList(); //댓글 작성 후 댓글 목록 reload
-	                $("#content").val('');
-	            }
-	        }
-	    });
-	}
-
-	function commentUpdate(rno, content){
-	    var a ='';
-	    
-	    a += '<div class="input-group">';
-	    a += '<textarea cols="1" id="content" name="content_'+rno+'">'+content+'</textarea>';
-	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+rno+');">수정</button> </span>';
-	    a += '</div>';
-	    
-	    $('.commentContent'+rno).html(a);
-	    
-	}
-	 
-	//댓글 수정
-	function commentUpdateProc(rno){
-	    var updateContent = $('[name=content_'+rno+']').val();
-	    console.log(updateContent)
-	    $.ajax({
-	        url : 'replyupdate',
-	        type : 'post',
-	        data : {'content' : updateContent, 'rno' : rno},
-	        success : function(data){
-	            if(data == 1) commentList(bno); //댓글 수정후 목록 출력 
-	        }
-	    });
-	}
+	
 	
 	
 });
@@ -151,11 +90,7 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
-	
-	
-	
 	var bno = ${view.bno}; 
-	
 	function commentList(){
 		
 	    $.ajax({
@@ -168,6 +103,7 @@ $(document).ready(function() {
 	            	var recontent = value.content.replace(/\n/gi,"<br>")
 	                a += '<div class="replyWrap" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 	                a += '<div class="replyTitle">'+' 작성자 : '+value.writer;
+	                console.log("작성자체크합니다 :"+value.writer)
 	                a += '<a onclick="commentUpdate('+value.rno+',\''+recontent+'\');"> 수정 </a>';
 	                a += '<a onclick="commentDelete('+value.rno+');"> 삭제 </a> </div>';
 	                console.log("리스트쪽 content:"+value.content)
@@ -196,16 +132,30 @@ $(document).ready(function() {
 	}
 
 	function commentUpdate(rno, content){
-	    var a ='';
-	    console.log(content)
-	    var recontent = content.replace(/<br>/gi,"\r\n")
-	    console.log(recontent)
-	    a += '<div class="input-group">';
-	    a += '<textarea cols="1" id="content" name="content_'+rno+'">'+recontent+'</textarea>';
-	    a += '<span class="input-group-btn"><button type="button" onclick="commentUpdateProc('+rno+');">수정</button> </span>';
-	    a += '</div>';
-	    
-	    $('.commentContent'+rno).html(a);
+		var sessionId = "<%=session.getAttribute("id")%>";
+		 $.ajax({
+		        url : 'Writerchk',
+		        type : 'post',
+		        data : {'rno' : rno},
+		        success : function(data){
+		        	if(sessionId!=data){
+		    			alert("해당 작성자만 댓글 수정이 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + data);
+		    			
+		    		}else{
+		    			 var a ='';
+		    			    console.log(content)
+		    			    var recontent = content.replace(/<br>/gi,"\r\n")
+		    			    console.log(recontent)
+		    			    a += '<div class="input-group">';
+		    			    a += '<textarea cols="1" id="content" name="content_'+rno+'">'+recontent+'</textarea>';
+		    			    a += '<span class="input-group-btn"><button type="button" onclick="commentUpdateProc('+rno+');">수정</button> </span>';
+		    			    a += '</div>';
+		    			    
+		    			    $('.commentContent'+rno).html(a);
+		    		}
+		          
+		        }
+		    });
 	    
 	}
 	 
@@ -223,7 +173,35 @@ $(document).ready(function() {
 	    });
 	}
 
-
+	function commentDelete(rno){
+		var sessionId = "<%=session.getAttribute("id")%>";
+		 $.ajax({
+		        url : 'Writerchk',
+		        type : 'post',
+		        data : {'rno' : rno},
+		        success : function(data){
+		        	if(sessionId!=data){
+		    			alert("해당 작성자만 댓글 삭제 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + data);
+		    		}else{
+		    			var delconfirm = confirm("해당 댓글을 정말 삭제하시겠습니까?");
+		    			if(delconfirm){
+		    			$.ajax({
+		    			        url : 'replydel',
+		    			        type : 'post',
+		    			        data : {'rno' : rno},
+		    			        success : function(data){
+		    			        	alert("댓글이 삭제되었습니다.")
+		    			            commentList(); //댓글 수정후 목록 출력 
+		    			        }
+		    			    });
+		    			}else{
+		    				alert("댓글삭제취소");
+		    			}
+		    		}
+		        }
+		    });
+		
+	}
         
      
 
@@ -317,30 +295,6 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 					<!-- 추가되는 댓글 들어갈공간 -->
 				</div>
 			</li>
-	    	
-<%-- 	    		<c:forEach var="reply" items="${reply}"> --%>
-<!-- 	    	<li> -->
-<!-- 			    <div class="replyTitle"> -->
-			          
-<%-- 			    	<span id="ajaxdata1">${reply.writer }</span><span id="ajaxdata2">${reply.regDate }</span> --%>
-			     
-<!-- 			     <span><input type="button" value="수정"></span><span><input type="button" value="삭제"></span> -->
-<!-- 			    </div> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 			    <div class="replyContent"> -->
-<%-- 			    	<span id="ajaxdata3">${reply.content }</span> --%>
-			    
-<!-- 			    </div> -->
-			   
-<!-- 			</li> -->
-<%-- 			</c:forEach> --%>
-<!-- 			<li> -->
-<!-- 				<div class="replyTitle"> -->
-<%-- 			    	<span id="ajaxdata1">${reply.writer }</span><span id="ajaxdata2">${reply.regDate }</span> --%>
-<!-- 			     <span><input type="button" value="수정"></span><span><input type="button" value="삭제"></span> -->
-<!-- 			    </div> -->
-<!-- 			</li> -->
 			
 			<li>
 				<div class="replyContentWrap">
@@ -348,20 +302,14 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 						<form id="replyForm">
 						<div class="input-group">
 			               <input type="hidden" name="bno" value="${view.bno}">
-			               <input type="hidden" name="writer" value="${view.writer }">
+			               <input type="hidden" name="writer" value="${sessionScope.id }">
 			               
 			               <textarea cols="1" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
-<!-- 			               <input type="text" id="content" name="content" placeholder="내용을 입력하세요."> -->
 			               <span>
 			                    <input type="button" id="insertBtn" value="등록"/>
 			               </span>
 			           </div>
-
 						
-<!-- 						<textarea cols="1" name="content"></textarea> -->
-<%-- 						<input type="hidden" name="bno" value="${view.bno }"> --%>
-<%-- 						<input type="hidden" name="writer" value="${view.writer }"> --%>
-<!-- 						<input type="button" id="insertBtn" value="등록"> -->
 						</form>
 					</div>
 					

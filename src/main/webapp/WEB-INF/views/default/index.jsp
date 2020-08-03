@@ -62,6 +62,7 @@
          $("#index_imggoods_text").val(cookie_type[d]);
          $("#index_imgname_text").val(cookie_product[d]);
          $("#index_imgmoney_text").val(cookie_price[d]);
+         alert($("#index_imggoods_text").val());
          index_form.submit();
       }
    var cookie_img=${newsee_list}
@@ -169,7 +170,7 @@ img.height = options.size;
 img.style.bottom = options.bottom + 'px';
 img.style.right = options.right + 'px';
 img.style.position = 'fixed';
-img.style.zIndex = 9999;
+img.style.zIndex = 99999;
 img.style.cursor = 'pointer';
 img.style.borderRadius = options.circle ? '50%' : '';
 img.style.boxShadow = options.shadow ? '0 0 4px rgba(0,0,0,.16), 0 4px 4px rgba(0,0,0,.24)' : '';
@@ -805,7 +806,3 @@ d.getElementsByTagName('html')[0].appendChild(img);
       <jsp:include page="footer.jsp" />
 </body>
 </html>
-
-
-
-e

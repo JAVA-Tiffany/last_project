@@ -18,13 +18,16 @@ public class ReplyService {
    public int insert(ReplyDTO dto) {
       return replydao.insert(dto);
    }
-   public int delete(ReplyDTO dto) {
-      return replydao.delete(dto);
+   public int delete(int rno) {
+      return replydao.delete(rno);
    }
    public int update(ReplyDTO dto) {
       return replydao.update(dto);
    }
    public int last() {
       return replydao.last_reply();
+   }
+   public String Writerchk(int rno) {
+	   return replydao.Writerchk(rno);
    }
 }
