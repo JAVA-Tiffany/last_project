@@ -528,7 +528,7 @@
          </div>
       </div>
    </div>
-   <div><jsp:include page="../default/footer.jsp" /></div>
+   
 
    <form name="changeopen">
       <input type="hidden" name="change_val" id="change_val"
@@ -545,6 +545,6 @@
       <input type="hidden" name="review_text" id="review_text"
          value="${earring_list_product.get(0)}">
    </form>
-   
+   <div><jsp:include page="../default/footer.jsp" /></div>
 </body>
 </html>

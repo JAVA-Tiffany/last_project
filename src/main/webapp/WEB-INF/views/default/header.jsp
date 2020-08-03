@@ -108,8 +108,8 @@
    min-width: 80px;
    min-height: 95px;
    text-align: center;
-   right: 0px;
    top:40px;
+   left: -40px;
 /*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
    font-weight: normal;
    font-size: 20px;
@@ -133,9 +133,7 @@
 
 
 
-.fixed{
-z-index:1000;
-}
+
 
 
 
@@ -249,6 +247,7 @@ z-index:1000;
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('earring')">EARRING</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('dress')">DRESS</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('bag')">BAG</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('phon')">PHON</a></span>
                </div>
             </div>
 <!--                         <span><a href="#" style="color: black;">COLLECTION</a></span>&nbsp;&nbsp; -->
@@ -263,6 +262,11 @@ z-index:1000;
                   <span class="menu__item"><a class="menu__item-name" href="notice" style="color: black;">NOTICE</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="list" style="color: black;">Q / A</a></span>
                </div>
+            </div>
+            <div class="dropdown0">
+               <span class="dropbtn0 menu__item"><a class="menu__item-name"
+                  href="helpCenter?type=order_pay"
+                  style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">HELP</a></span>
             </div>
             <div class="dropdown1">
             <span class="menu__item">
@@ -284,13 +288,16 @@ z-index:1000;
                      <span class="dropbtn2"><img
                         src="resources/images/icons/login.png"
                         style="width: 40px; height: 40px; margin-bottom: -12px; margin-right: 10px;"></span>
-                     <div class="dropdown-content1">
-
-                        <span><a href="myinfo" style="color: black;">MY INFO</a></span>
-                        <a href="#" style="color: black;" onclick="loginafter()">ORDERLIST</a>
-                        <span><a href="logout" style="color: black;">LOGOUT</a></span>
+                     <div class="dropdown-content2">
+                        <span class="menu__item"><a class="menu__item-name" href="myinfo" style="color: black;">MY INFO</a></span>
+                        <span class="menu__item"><a class="menu__item-name" href="orderList" style="color: black;">ORDERLIST</a></span>
+                        <span class="menu__item"><a class="menu__item-name" href="logout" style="color: black;">LOGOUT</a></span>
+                        <c:if test="${sessionScope.id.split('_')[0] eq 'admin' }">
+                           <span class="menu__item"><a class="menu__item-name" href="adminpage" style="color: black;">ADMIN</a></span>
+                        </c:if>
                      </div>
                   </c:otherwise>
+           
                </c:choose>
             </div>
 

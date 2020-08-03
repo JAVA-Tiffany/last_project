@@ -35,49 +35,17 @@ public class CommunityController {
    private AdminService serviceAdm;
    
    @RequestMapping("list")
-   public String list(CommnuityDTO dto, Model model) {
+   public String list(CommnuityDTO dto, Model model,ReplyDTO redto) {
       service.listAll(dto,model);
       service.adminview(dto,model);
+      
       return "community/list";
    }
    
-   @RequestMapping(value="view", method = {RequestMethod.GET, RequestMethod.POST})
+   @RequestMapping("view")
    public String view(CommnuityDTO dto, Model model, HttpServletRequest request) {
       service.count(dto);
       service.view(dto,model);
-      List<ReplyDTO> arr = replyService.select(dto.getBno());
-      ArrayList<String> a1=new ArrayList<String>();
-      ArrayList<String> a2=new ArrayList<String>();
-      ArrayList<String> a3=new ArrayList<String>();
-      ArrayList<String> a4=new ArrayList<String>();
-      for(int i=0;i<arr.size();i++) {
-         a1.add("'"+arr.get(i).getWriter()+"'");
-         String[] z=arr.get(i).getContent().split("");
-         String sum="";
-         int a=0;
-         for(int x=0;x<z.length-1;x++) {
-            if(z[x+1].equals("\n")) {
-               sum+="'"+"\n+'";
-               a=1;
-            }else {
-               if(a==0) {
-                  sum+=z[x];
-               }else {
-                 sum+="\\n";
-                  a=0;
-               }
-            }
-         }
-         arr.get(i).setContent(sum);
-         a2.add("'"+arr.get(i).getContent()+"'");
-         a3.add("'"+arr.get(i).getRno()+"'");
-         a4.add("'"+arr.get(i).getRegDate()+"'");
-      }
-      model.addAttribute("writer_view", a1);
-      model.addAttribute("comment_view", a2);
-      model.addAttribute("bno_view", dto.getBno());
-      model.addAttribute("regDate_view", a4);
-      model.addAttribute("rno_view", a3);
       HttpSession session = request.getSession();
       
       if(session.getAttribute("id")==null) {
@@ -85,21 +53,45 @@ public class CommunityController {
           return "login&join/login";
        }else {
       model.addAttribute("id", session.getAttribute("id").toString());
-      return "community/view";
+      return "community/view2";
        }
    }
    
-   @RequestMapping(value="reply", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+   @RequestMapping("reply")
    @ResponseBody
-   public String reply(@RequestParam String bno,@RequestParam String comnet,@RequestParam String writer) {
+   public int reply(@RequestParam int bno,@RequestParam String writer,@RequestParam String content,Model model) {
       ReplyDTO dto = new ReplyDTO();
+      
+      
+      System.out.println(bno);
+      System.out.println(content);
+      System.out.println(writer);
       dto.setBno(Integer.valueOf(bno));
-      dto.setContent(comnet);
+      dto.setContent(content.replaceAll("\\r\\n","<br>"));
       dto.setWriter(writer);
-      replyService.insert(dto);
-      return String.valueOf(replyService.last());
+      
+      return replyService.insert(dto);
    }
 
+   
+   @RequestMapping("commentlist") //댓글 리스트
+   @ResponseBody
+   private List<ReplyDTO> mCommentServiceList(Model model,@RequestParam int bno) throws Exception{
+//	   List<ReplyDTO> arr = 
+			   
+//	   for (ReplyDTO value : arr) {
+//		String change = value.getContent().replaceAll("\n","<br>");
+//		value.setContent(change);
+//	}
+	   
+       return replyService.select(bno);
+   }
+
+
+   
+   
+   
+   
    
    @RequestMapping("write")
    public String write() {
@@ -177,4 +169,23 @@ public class CommunityController {
    public void replych(ReplyDTO dto) {
       replyService.update(dto);
    }
+   
+   @RequestMapping("replyupdate") //댓글 수정  
+   @ResponseBody
+   private int mCommentServiceUpdateProc(@RequestParam int rno, @RequestParam String content) throws Exception{
+	   ReplyDTO dto = new ReplyDTO();
+       dto.setRno(rno);
+       dto.setContent(content.replaceAll("\\r\\n","<br>"));
+       
+       return replyService.update(dto);
+   }
+
+
+   
+   
+   
+   
+   
+   
+   
 }

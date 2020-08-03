@@ -148,10 +148,11 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
          <td>${adminList.viewcnt }</td>
       </tr>
 		</c:forEach>
-      <c:forEach var="dto" items="${listAll}">
+		
+      <c:forEach var="dto" items="${listAll}" varStatus="status">
       <tr>
          <td>${dto.bno }</td>
-         <td onclick="totle_click(${dto.bno})"><label> ${dto.title} </label> </td>
+         <td onclick="totle_click(${dto.bno})"><label> ${dto.title} </label></td>
          <td>${dto.writer }</td>
          <td style="font-size: 2px;">${dto.regdate}</td>
          <td>${dto.viewcnt }</td>

@@ -9,7 +9,7 @@
 <style type="text/css">
 .div1 {
 padding-top: 100px;
-padding-bottom: 100px;
+padding-bottom: 50px;
 
 }
 .div1 a:hover {
@@ -61,6 +61,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
       <td><a href="acboard"><font color="white" size="4">게시물 관리</font></a></td>
       <td><a href="acnotice"><font color="white" size="4">공지사항</font></a></td>
       <td><a href="#"><font color="white" size="4">구매관리</font></a></td>
+      <td><a href="adminpage"><font color="white" size="4">메인페이지</font></a></td>
    </tr>
 </table>
 </div>

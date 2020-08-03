@@ -12,5 +12,6 @@
 		<typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>
 		<typeAlias alias="reviewdto" type="com.project.dto.ReviewDTO"/>
 		<typeAlias alias="datalistdto" type="com.project.dto.DataListDTO"/>
+		<typeAlias alias="Helpdto" type="com.project.dto.HelpDTO"/>
    </typeAliases>
 </configuration>

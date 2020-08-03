@@ -29,19 +29,6 @@
            $("#To" + d).text(parseInt($("#count" + d).text())*parseInt($("#mo" + d).text()));
            result();
    }
-//  function down(d) {
-//  a = $("#count" + d).text();
-//  if (parseInt($("#count" + d).text()) > 1) {
-//     a = parseInt($("#count" + d).text()) - 1;
-//  }
-//  $("#count" + d).text(a);
-//  $("#mos" + d).text(
-//        parseInt($("#count" + d).text())
-//              * parseInt($("#mo" + d).text()) + "");
-//  moneysum=0;
-//  countsum=0
-//  result();
-//}
    function numDown(d) {
       var num = $("#count"+d).text();
       var product = $("#Pname"+d).text();
@@ -115,29 +102,31 @@
    z[3]=arr.get(i).getCancelok();
    z[4]=arr.get(i).getPrice();
    z[5]=String.valueOf(i); 
+   z[6] = arr.get(i).getCount();
+   z[7] = arr.get(i).getType();
 -->
    <%@include file="../default/header.jsp"%>
    <fmt:requestEncoding value="utf-8" />
    <div style="padding-top: 80px;" align="center">
       <font size="4"><b>CART</b></font>
-      <table style="margin-top: 20px;" border="1">
+      <table style="margin-top: 20px; border-top: 1px solid black;">
          <tr>
             <th style="width: 100px; font-size: 20px;">사진</th>
-            <th style="width: 300px; font-size: 20px;">상품명</th>
+            <th style="width: 400px; font-size: 20px;">상품명</th>
             <th style="width: 100px; font-size: 20px;">가격</th>
-            <th style="width: 100px; font-size: 20px;">결제결과</th>
-            <th style="height: 50px; width: 100px; font-size: 30px;">수량</th>
+            <th style="width: 50px; font-size: 20px;">결제결과</th>
+            <th style="height: 50px; width: 100px; font-size: 20px;">수량</th>
             <th style="width: 100px; font-size: 20px;">기타</th>
          </tr>
          <c:forEach var="dto" items="${cartlist}">
-            <tr>
+            <tr style="border-top: 1px solid #d5dbe0;">
                <td style="height: 50px; width: 200px;" align="center"><img style="height: 100px; width: 100px;" src="${dto[0]}" id="url${dto[5]}"></td>
                <td style="height: 50px;"><label id="Pname${dto[5]}">${dto[2]}</label></td>
-               <td style="height: 50px; width: 200px;">
+               <td style="height: 50px; width: 200px; text-align: center;">
                         단가 : <label id="mo${dto[5]}">${dto[4]}</label><br> 
                         총합 : <label id="To${dto[5]}">${dto[4] * dto[6]}</label>
                </td>
-               <td style="height: 50px; width: 200px;"><label id="cancelok">${dto[3]}</label></td>
+               <td style="height: 50px; width: 200px;  text-align: center;"><label id="cancelok">${dto[3]}</label></td>
                <td style="height: 50px; width: 100px;" align="center"><input
                   type="button" value="-"  onclick="numDown('${dto[5]}')"> <label
                   style="margin-left: 10px; margin-right: 10px;" id="count${dto[5]}">${dto[6]}</label>
@@ -154,17 +143,17 @@
    
    
 <!--    바로결제로가는 div -->
-   <div align="center" style="margin-top: 30px;">
+   <div align="center" style="margin-top: 100px; height: 70px;">
       <form action="orderForm">
          <input type="hidden" name="list" value="${cartlist}">
       <input type="hidden" id="total" name="total">
       <input type="hidden" id="sum" name="sum">
-         <table>
+         <table style="border-top:1px solid black; width: 1219px; ">
             <tr>
-               <th colspan="5">총수량 : <input type="text" value="0"name="sum2" id="sum2" style="border: none;" disabled="disabled">
-               가격:<input type="text" value="0" name="moneyTotal" id="moneyTotal" style="border: none;" disabled="disabled"> 
-               배송비 : <input type="text" value="2500" name="coopang" style="border: none;" disabled="disabled"> 
-               합계 : <input type="text" value="0" name="total2" id="total2" style="border: none;" disabled="disabled">
+               <th colspan="5" style="height: 50px; font-size: 20px; padding-left: 70px;">총수량 : <input type="text" value="0"name="sum2" id="sum2" style="border: none; width: 200px;" disabled="disabled">
+               가격:<input type="text" value="0" name="moneyTotal" id="moneyTotal" style="border: none; width: 200px;" disabled="disabled"> 
+               배송비 : <input type="text" value="2500" name="coopang" style="border: none; width: 200px; margin-right: 40px;" disabled="disabled"> 
+               합계 : <input type="text" value="0" name="total2" id="total2" style="border: none; width: 200px;" disabled="disabled">
                </th>
             </tr>
          </table>
@@ -172,6 +161,5 @@
       </form>
          
    </div>
-
 </body>
 </html>

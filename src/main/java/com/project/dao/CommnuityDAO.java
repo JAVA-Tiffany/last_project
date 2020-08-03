@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,9 +21,15 @@ public class CommnuityDAO {
    public static final String namepasce="com.project.mybatis.myMapper";
    
    public List<CommnuityDTO> listAll(CommnuityDTO dto) {
-      
       return sqlSession.selectList(namepasce+".selectAll_Commnuity",dto);
    }
+   
+//   public List<Object> replycount(){
+//	   return sqlSession.selectList(namepasce+".countReply");
+//   }
+//	   
+   
+   
    
    public List<CommnuityDTO> adminlist(CommnuityDTO dto) {
 	   return sqlSession.selectList(namepasce+".selectAdminAll_Commnuity",dto);
@@ -64,6 +71,10 @@ public class CommnuityDAO {
    }
    
    
+   
+   public int countreply(CommnuityDTO dto) {
+	   return sqlSession.selectOne(namepasce+".countReply",dto);
+   }
 }
    
    

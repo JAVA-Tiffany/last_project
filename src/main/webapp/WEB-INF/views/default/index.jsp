@@ -14,7 +14,7 @@
    display: none;
    position: fixed;
    right: 30px;
-   bottom: 50px;
+   bottom: 100px;
    z-index: 1030;
    font-size: 1.875rem;
    color: #868e96;
@@ -35,11 +35,14 @@
 #li_bag{
    height:50px;
 }
+#li_phon{
+   height:50px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-   var li_type=["earring","dress","bag"];
-   var type=["Earring","Dress","Bag"];
+   var li_type=["earring","dress","bag","phon"];
+   var type=["Earring","Dress","Bag","Phon"];
    var num=0;
    $(function () {
       playAlert = setInterval(function() {
@@ -47,23 +50,25 @@
             $("li").remove("#li_"+li_type[num]);
             $("#ul_type").append("<li id='li_"+li_type[num]+"' style'opacity: 1;'><a href='javascript:data_move("+li_type[num]+")' style='text-decoration: none;'>"+type[num]+"</a></li>");
             num++;
-            if(num==3){ num=0; }
+            if(num==4){ num=0; }
          });
       }, 1000);
    });
    
+   var cookie_type=${newsee_type}
+   var cookie_price=${newsee_price}
+   var cookie_product=${newsee_product}
    function data_movee(d) {
-         $("#index_type_text").val(d);
-         $("#index_type_text_start").val(0);
-         $("#index_type_text_end").val(9);
+         $("#index_imggoods_text").val(cookie_type[d]);
+         $("#index_imgname_text").val(cookie_product[d]);
+         $("#index_imgmoney_text").val(cookie_price[d]);
          index_form.submit();
       }
-   var cookie_type=${newsee_type}
    var cookie_img=${newsee_list}
    $(function() {
       for(i=0;i<cookie_img.length;i++){
          $("#index_cookie_ul").append("<li style='list-style: none;'>"
-          +"<a href='javascript:data_movee(\""+cookie_type[i]+"\")' style='float: left; text-decoration: none; color: #000;'>"
+          +"<a href='javascript:data_movee(\""+i+"\")' style='float: left; text-decoration: none; color: #000;'>"
           +"<img style='width: 64px; height: 80px; padding: 2px 2px 2px 2px; text-align: center; border: none; vertical-align: top;'"
           +"src='"+cookie_img[i]+"'></a>"
           +"</li>");
@@ -110,7 +115,7 @@ body {
       });
     </script>
    <jsp:include page="header.jsp" />
-	
+
 
    <!--    옆에 메뉴바 -->
    <div style="position: fixed; width: 160px; height: 100%; background-color: #eeeeee; top: 0; right: 0; box-shadow: 0px 0px 2px #d8d8d8;
@@ -126,6 +131,9 @@ body {
             <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="data_move('earring')">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
                   <b style="font-weight: bold;">Earring</b></a></li>
+            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="data_move('phon')">
+               <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
+                  <b style="font-weight: bold;">Phon</b></a></li>
             <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="location.href='notice'">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">Notice</a></li>
             <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="location.href='list'">
@@ -161,7 +169,7 @@ img.height = options.size;
 img.style.bottom = options.bottom + 'px';
 img.style.right = options.right + 'px';
 img.style.position = 'fixed';
-img.style.zIndex = 99999;
+img.style.zIndex = 9999;
 img.style.cursor = 'pointer';
 img.style.borderRadius = options.circle ? '50%' : '';
 img.style.boxShadow = options.shadow ? '0 0 4px rgba(0,0,0,.16), 0 4px 4px rgba(0,0,0,.24)' : '';
@@ -200,8 +208,6 @@ window.open('https://talk.naver.com/' + options.partnerId + '?ref=' + encodeURIC
 d.getElementsByTagName('html')[0].appendChild(img);
 })(document);
 </script>
-
-
       <div style="position: absolute; width: 35px; height: 70px; top: 30%; left: -35px; margin-top: 0; cursor: pointer; z-index: 2;">
          <img style="border: none; vertical-align: top;" onclick="menubar_open()"
          src="resources/img/menubar.png">
@@ -211,7 +217,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
 
       <div style="margin-top: 200px;">
          <!--       메인부분 -->
-         <jsp:include page="Banner.jsp" />
+         <jsp:include page="Banner.jsp"/>
 
          <div
             style="background-color: #fafafa; border-top: 1px solid #d5dbe0; border-bottom: 1px solid #d5dbe0; text-align: center;">
@@ -235,6 +241,9 @@ d.getElementsByTagName('html')[0].appendChild(img);
                      <li id="li_bag" style="opacity: 1;"><a
                         href="javascript:data_move('bag')"
                         style="text-decoration: none;">Bag</a></li>
+                     <li id="li_phon" style="opacity: 1;"><a
+                        href="javascript:data_move('phon')"
+                        style="text-decoration: none;">Phon</a></li>
                   </ul>
                </h1>
                <h2
@@ -252,7 +261,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
                   <li
                      style="width: auto; display: inline-block; vertical-align: top; text-align: left; position: relative;">
                      <div
-                        style="background-image: url(resources/img/02.png); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                        style="background-image: url(resources/img/Aa.png); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
                      <div
                         style="vertical-align: top; margin-top: 6px; display: inline-block;">
                         <div
@@ -267,7 +276,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
                   <li
                      style="margin: 0 90px; width: auto; display: inline-block; vertical-align: top; text-align: left; position: relative;">
                      <div
-                        style="background-image: url(resources/img/03.png); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                        style="background-image: url(resources/img/Ab.png); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
                      <div
                         style="vertical-align: top; margin-top: 6px; display: inline-block;">
                         <div
@@ -282,7 +291,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
                   <li
                      style="width: auto; display: inline-block; vertical-align: top; text-align: left; position: relative;">
                      <div
-                        style="background-image: url(resources/img/04.jpg); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                        style="background-image: url(resources/img/Ac.png); width: 112px; height: 80px; margin: 0 24px 0 0; vertical-align: top; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
                      <div
                         style="vertical-align: top; margin-top: 6px; display: inline-block;">
                         <div
@@ -314,24 +323,24 @@ d.getElementsByTagName('html')[0].appendChild(img);
                   style="width: 590px; height: 368px; margin-right: 16px; margin-bottom: 16px; display: inline-block; vertical-align: top; position: relative; font-size: 0; background-color: #f6f6f8;">
                   <a href="javascript:data_move('dress')"> <img
                      style="height: 100%; width: 100%; border: 0;"
-                     src="//s3.marpple.co/files/u_1247619/2020/6/original/27250562e20e0fb9a39518e92441626d7b71c5ad06b0a19.jpg"></a>
+                     src="resources/img/banner7.jpg"></a>
                </li>
                <li
                   style="width: 590px; height: 368px; margin-right: 16px; margin-bottom: 16px; display: inline-block; vertical-align: top; position: relative; font-size: 0; background-color: #f6f6f8;">
                   <a href="javascript:data_move('bag')"> <img
                      style="height: 100%; width: 100%; border: 0;"
-                     src="//s3.marpple.co/files/u_1247619/2020/7/original/3151488254c46f8f9699e4df58388c931cce77b1ed1cc41.jpg"></a>
+                     src="resources/img/banner8.jpg"></a>
                </li>
                <li
                   style="width: 590px; height: 368px; margin-right: 16px; margin-bottom: 16px; display: inline-block; vertical-align: top; position: relative; font-size: 0; background-color: #f6f6f8;">
                   <a href="javascript:data_move('earring')"> <img
                      style="height: 100%; width: 100%; border: 0;"
-                     src="//s3.marpple.co/files/u_1247619/2020/7/original/3179973d9a11ed6d718fe6dbd1b9c576822254688a019fe.jpg"></a>
+                     src="resources/img/banner10.jpg"></a>
                </li>
                <li
                   style="width: 590px; height: 368px; margin-right: 16px; margin-bottom: 16px; display: inline-block; vertical-align: top; position: relative; font-size: 0; background-color: #f6f6f8;">
-                  <a href=""> <img style="height: 100%; width: 100%; border: 0;"
-                     src="//s3.marpple.co/files/u_1150555/2020/7/original/31587538a9e3eda44a4e4eb90e2636d232369bc8f47342f.jpg"></a>
+                  <a href="javascript:data_move('phon')"> <img style="height: 100%; width: 100%; border: 0;"
+                     src="resources/img/banner9_1.jpg"></a>
                </li>
             </ul>
          </div>
@@ -368,15 +377,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(0)}">
+                                       src="${img.get(8)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(0)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(8)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(0)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(8)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -390,15 +399,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(1)}">
+                                       src="${img.get(9)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(1)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(9)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(1)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(9)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -411,15 +420,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(2)}">
+                                       src="${img.get(10)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(2)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(10)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(2)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(10)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -432,15 +441,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(3)}">
+                                       src="${img.get(11)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(3)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(11)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(3)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(11)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -584,15 +593,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(8)}">
+                                       src="${img.get(0)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(8)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(0)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(8)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(0)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -606,15 +615,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(9)}">
+                                       src="${img.get(1)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(9)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(1)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(9)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(1)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -627,15 +636,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(10)}">
+                                       src="${img.get(2)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(10)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(2)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(10)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(2)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -648,15 +657,15 @@ d.getElementsByTagName('html')[0].appendChild(img);
                                     style="width: 300px; height: 300px; font-size: 0; position: relative;">
                                     <img
                                        style="height: 100%; opacity: 1; border: 0; width: 300px;"
-                                       src="${img.get(11)}">
+                                       src="${img.get(3)}">
                                  </div>
                                  <div
                                     style="height: 50px; margin-left: 5px; position: relative;">
                                     <div
-                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(11)}</div>
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(3)}</div>
                                     <div
                                        style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
-                                       <fmt:formatNumber value="${price.get(11)}" pattern="#,###" />
+                                       <fmt:formatNumber value="${price.get(3)}" pattern="#,###" />
                                        원
                                     </div>
                                  </div>
@@ -667,7 +676,112 @@ d.getElementsByTagName('html')[0].appendChild(img);
                </div>
 
 
-
+<!--                         폰케이스 -->
+               <div style="margin-bottom: 40px;">
+                  <div style="position: relative;">
+                     <div>
+                        <h2
+                           style="text-align: left; font-size: 24px; margin: 0; margin-bottom: 24px; font-weight: 400; display: block;">
+                           <a href="javascript:data_move('phon')"
+                              style="text-decoration: none; color: black;">폰케이스 커스텀</a>
+                        </h2>
+                     </div>
+                     <a href="javascript:data_move('phon')"
+                        style="position: absolute; right: 0; bottom: 0; height: 16px; color: #868e96;">전체보기</a>
+                  </div>
+                  <div style="position: relative;">
+                     <div
+                        style="overflow: visible; margin: 0 auto; position: relative; list-style: none; padding: 0; z-index: 1;">
+                        <ul style="position: relative; margin: 0; padding: 0;">
+                           <li
+                              style="margin-left: 0; display: inline-block; vertical-align: top; width: 300px; height: 350px; overflow: hidden; background-color: #fff;">
+                              <a href="javascript:data_move('phon')"
+                              style="text-decoration: none; color: #000;">
+                                 <div
+                                    style="width: 300px; height: 300px; font-size: 0; position: relative;">
+                                    <img
+                                       style="height: 100%; opacity: 1; border: 0; width: 300px;"
+                                       src="${img.get(12)}">
+                                 </div>
+                                 <div
+                                    style="height: 50px; margin-left: 5px; position: relative;">
+                                    <div
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(12)}</div>
+                                    <div
+                                       style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
+                                       <fmt:formatNumber value="${price.get(12)}" pattern="#,###" />
+                                       원
+                                    </div>
+                                 </div>
+                           </a>
+                           </li>
+                           <li
+                              style="margin-left: 0; display: inline-block; vertical-align: top; width: 300px; height: 350px; overflow: hidden; background-color: #fff;"><a
+                              href="javascript:data_move('phon')"
+                              style="text-decoration: none; color: #000;">
+                                 <div
+                                    style="width: 300px; height: 300px; font-size: 0; position: relative;">
+                                    <img
+                                       style="height: 100%; opacity: 1; border: 0; width: 300px;"
+                                       src="${img.get(13)}">
+                                 </div>
+                                 <div
+                                    style="height: 50px; margin-left: 5px; position: relative;">
+                                    <div
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(13)}</div>
+                                    <div
+                                       style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
+                                       <fmt:formatNumber value="${price.get(13)}" pattern="#,###" />
+                                       원
+                                    </div>
+                                 </div>
+                           </a></li>
+                           <li
+                              style="margin-left: 0; display: inline-block; vertical-align: top; width: 300px; height: 350px; overflow: hidden; background-color: #fff;"><a
+                              href="javascript:data_move('phon')"
+                              style="text-decoration: none; color: #000;">
+                                 <div
+                                    style="width: 300px; height: 300px; font-size: 0; position: relative;">
+                                    <img
+                                       style="height: 100%; opacity: 1; border: 0; width: 300px;"
+                                       src="${img.get(14)}">
+                                 </div>
+                                 <div
+                                    style="height: 50px; margin-left: 5px; position: relative;">
+                                    <div
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(14)}</div>
+                                    <div
+                                       style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
+                                       <fmt:formatNumber value="${price.get(14)}" pattern="#,###" />
+                                       원
+                                    </div>
+                                 </div>
+                           </a></li>
+                           <li
+                              style="margin-left: 0; display: inline-block; vertical-align: top; width: 300px; height: 350px; overflow: hidden; background-color: #fff;"><a
+                              href="javascript:data_move('phon')"
+                              style="text-decoration: none; color: #000;">
+                                 <div
+                                    style="width: 300px; height: 300px; font-size: 0; position: relative;">
+                                    <img
+                                       style="height: 100%; opacity: 1; border: 0; width: 300px;"
+                                       src="${img.get(15)}">
+                                 </div>
+                                 <div
+                                    style="height: 50px; margin-left: 5px; position: relative;">
+                                    <div
+                                       style="margin-top: 5px; left: 0; bottom: 48px; font-size: 15px; font-weight: bold;">${product.get(15)}</div>
+                                    <div
+                                       style="left: 0; bottom: 24px; height: 14px; color: #868e96;">
+                                       <fmt:formatNumber value="${price.get(15)}" pattern="#,###" />
+                                       원
+                                    </div>
+                                 </div>
+                           </a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
 
 
             </div>
@@ -682,10 +796,10 @@ d.getElementsByTagName('html')[0].appendChild(img);
       <a id="backToTop" class="scrolltop" href="#"> <i
          class="fas fa-chevron-circle-up"></i>
       </a>
-      <form action="data" method="post" name="index_form">
-      <input type="hidden" name="type" id="index_type_text"> <input
-         type="hidden" name="start" id="index_type_text_start"> <input
-         type="hidden" name="end" id="index_type_text_end">
+      <form action="design" method="post" name="index_form">
+      <input type="hidden" name="imggoods" id="index_imggoods_text"> <input
+         type="hidden" name="imgname" id="index_imgname_text"> <input
+         type="hidden" name="imgmoney" id="index_imgmoney_text">
    </form>
 
       <jsp:include page="footer.jsp" />
@@ -694,6 +808,4 @@ d.getElementsByTagName('html')[0].appendChild(img);
 
 
 
-
-
-
+e

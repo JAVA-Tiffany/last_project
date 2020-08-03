@@ -106,7 +106,6 @@ public class UploadController {
 
 		System.out.println(product);
 		System.out.println(type);
-	
 		MultipartFile defaultFile = request.getFile("File");
 		MultipartFile singleDesignFile = request.getFile("SingleDesignFile");
 		System.out.println(singleDesignFile);

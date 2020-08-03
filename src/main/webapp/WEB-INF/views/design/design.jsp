@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <style type="text/css">
 .freeimg{
    width: 100px;
@@ -16,11 +19,16 @@
 </style>
 </head>
 
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="resources/jquery-3.2.1.min.js"></script>
 <script src="resources/jquery.form.min.js"></script>
 <script src="resources/jquery-1.12.1-ui.js"></script>
 <script src="resources/html2canvas.js"></script>
+
+
+
+
 <script type="text/javascript">
    function partShot() { //특정부분 스크린샷 
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
@@ -136,6 +144,7 @@
             id="myCanvas"+count
             $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
             $("#image"+count).draggable();
+            $("#image"+count).resizable();
                img[count] = new Image();
                 g=img[count];
                 img[count].addEventListener('load',function(){
@@ -156,6 +165,7 @@
       id="myCanvas"+count;
       $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+count).draggable();
+      $("#image"+count).resizable();
       ctx[count] = document.getElementById(id).getContext("2d");
       ctx[count].font = '40px Arial';
       ctx[count].fillText('입력', 0, 50);
@@ -174,6 +184,7 @@
       new_id="myCanvas"+d;
       $('#in').append("<div id='image"+d+"' style='width: 50px; height: 50px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+d).draggable();
+      $("#image"+d).resizable();
       ctx[count] = document.getElementById(new_id).getContext("2d");
       ctx[count].font = '40px Arial';
       ctx[count].fillText($("#textin").val(), 0, 50);
@@ -183,6 +194,10 @@
    // 이미지 클릭시 화면 투명도 절반으로 줄이는 함수
     function imgclick(d) {
         ch=d;
+        $("#myCanvas"+d).resizable({
+            minWidth: 50,
+            minHeight: 50,
+        });
         for(i=1;i<count+1;i++){
            $("#image"+i).css("opacity", "1");
         }
@@ -215,6 +230,7 @@
       id="myCanvas"+count
       $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
+      $("#image"+count).resizable();
       img[count] = new Image();
       g=img[count]
       img[count].addEventListener('load',function(){
@@ -334,7 +350,7 @@
       var popupX = (window.screen.width / 2) - (1300 / 2);
       var popupY= (window.screen.height /2) - (850 / 2);
       chopenWin = window.open("",
-         "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+         "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, status=no,toolbar=no,scrollbars=no");    
       changeop.action="change";
       changeop.method="post";
       changeop.target="changeopen";
@@ -368,6 +384,7 @@
     function view_down() {
        $("#image"+ch).css("top", "210px");
     }
+    
     
     //배송안내
     function delivery(){
@@ -482,7 +499,7 @@
          for(i=0;i<9;i++){
            if(i%3==0){
               free_count++;
-              $("#design_free").append("<div style='display: flex; flex: row;' id='free_img_list"+free_count+"'></div>");
+              $("#design_free").append("<div style='display: flex; flex: row; cursor:pointer' id='free_img_list"+free_count+"'></div>");
            }
            a=i+1;
            $("#free_img_list"+free_count).append("<img onclick='freer("+i+")' class='freeimg' alt='로고' src='resources/img/free/"+a+".png' id='free_img"+i+"'>");
@@ -495,7 +512,7 @@
             for(i=frees;i<freee;i++){
                if(i%3==0){
                   free_count++;
-                  $("#design_free").append("<div style='display: flex; flex: row;' id='free_img_list"+free_count+"'></div>");
+                  $("#design_free").append("<div style='display: flex; flex: row; cursor:pointer' id='free_img_list"+free_count+"'></div>");
                }
                a=i+1;
                $("#free_img_list"+free_count).append("<img onclick='freer("+i+")' class='freeimg' alt='로고' src='resources/img/free/"+a+".png' id='free_img"+i+"'>");
@@ -527,8 +544,8 @@
       무료이미지
       <div id="design_free">
          <div align="center" style="margin-top: 10px;">
-         <label style="font-size: 40px; margin-right: 30px;" onclick="freebtn1()"> < </label> 
-         <label style="font-size: 40px; margin-left: 30px;" onclick="freebtn2()"> > </label>
+         <label style="font-size: 40px; margin-right: 30px; cursor:pointer" onclick="freebtn1()"> < </label> 
+         <label style="font-size: 40px; margin-left: 30px; cursor:pointer" onclick="freebtn2()"> > </label>
          </div>
          
       </div>

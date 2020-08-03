@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import com.project.dao.CommnuityDAO;
 import com.project.dto.CommnuityDTO;
+import com.project.dto.ReplyDTO;
 
 @Service
 public class CommunityService {
@@ -17,6 +18,8 @@ public class CommunityService {
 
    public void listAll(CommnuityDTO dto, Model model) {
       model.addAttribute("listAll", dao.listAll(dto));
+//      model.addAttribute("replycount",dao.replycount());
+      
    }
 
    public void view(CommnuityDTO dto, Model model) {
@@ -69,6 +72,11 @@ public class CommunityService {
          }
       }
       model.addAttribute("listAll",newarr);
+   }
+   
+   
+   public void countreply(CommnuityDTO dto, Model model) {
+	   int replycount = dao.countreply(dto);
    }
 
 }

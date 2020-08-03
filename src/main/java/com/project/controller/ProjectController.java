@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.dto.UserDTO;
 import com.project.dao.DataListDAO;
+import com.project.dto.CookieDTO;
 import com.project.dto.DataListDTO;
 import com.project.dto.PayDTO;
 import com.project.dto.buyDTO;
@@ -37,30 +38,50 @@ public class ProjectController {
    private DataListDAO datalistdao;
 
    @RequestMapping("index")
-   public String index_run(Model model,HttpServletRequest request) {
+   public String index_run(Model model, HttpServletRequest request) {
       service.index(model);
+      CookieDTO dto = new CookieDTO();
       CookieUtils cook = new CookieUtils();
-      List<DataListDTO> img_list = datalistdao.selectAll2();
-      
-         ArrayList<String> newarr = new ArrayList<String>();
-         ArrayList<String> newtype = new ArrayList<String>();
-         try {
-            List<String> arr=cook.getValueList("text1", request);
-            for(int x=0;x<arr.size();x++) {
-               for(int i=0;i<img_list.size();i++) {
-                  if(img_list.get(i).getImg().contains("pitting") && img_list.get(i).getProduct().equals(arr.get(x))) {
-                     newarr.add("'"+img_list.get(i).getImg()+"'");
-                     newtype.add("'"+img_list.get(i).getType()+"'");
-                     break;
-                  }
-               }
-            }
-            System.out.println();
-            for(int i=0;i<newarr.size();i++) {
-               System.out.println(newarr.get(i));
-            }
-         model.addAttribute("newsee_list",newarr);
-         model.addAttribute("newsee_type",newtype);
+      List<DataListDTO> img_list;
+
+      ArrayList<String> newarr = new ArrayList<String>();
+      ArrayList<String> newtype = new ArrayList<String>();
+      ArrayList<String> newprice = new ArrayList<String>();
+      ArrayList<String> newproduct = new ArrayList<String>();
+      try {
+         List<String> arr = cook.getValueList("text1", request);
+         if (arr.size() == 1) {
+            dto.setProduct1(arr.get(0));
+            img_list = datalistdao.select_cookie_one(dto);
+         } else if (arr.size() == 2) {
+            dto.setProduct1(arr.get(0));
+            dto.setProduct2(arr.get(1));
+            img_list = datalistdao.select_cookie_two(dto);
+         } else if (arr.size() == 3) {
+            dto.setProduct1(arr.get(0));
+            dto.setProduct2(arr.get(1));
+            dto.setProduct3(arr.get(2));
+            img_list = datalistdao.select_cookie_three(dto);
+         } else if (arr.size() == 4) {
+            dto.setProduct1(arr.get(0));
+            dto.setProduct2(arr.get(1));
+            dto.setProduct3(arr.get(2));
+            dto.setProduct4(arr.get(3));
+            img_list = datalistdao.select_cookie_four(dto);
+         } else {
+            img_list = new ArrayList<DataListDTO>();
+         }
+         for (int x = 0; x < img_list.size(); x++) {
+            System.out.println(img_list.get(x).getImg());
+            newarr.add("'" + img_list.get(x).getImg() + "'");
+            newtype.add("'" + img_list.get(x).getType() + "'");
+            newprice.add("'" + img_list.get(x).getPrice() + "'");
+            newproduct.add("'" + img_list.get(x).getProduct() + "'");
+         }
+         model.addAttribute("newsee_list", newarr);
+         model.addAttribute("newsee_type", newtype);
+         model.addAttribute("newsee_price", newprice);
+         model.addAttribute("newsee_product", newproduct);
       } catch (UnsupportedEncodingException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -240,31 +261,61 @@ public class ProjectController {
       }
       
       @RequestMapping("data")
-      public String data(Model model, @RequestParam String type, @RequestParam String start, @RequestParam String end,HttpServletRequest request) {
+      public String data(Model model, @RequestParam String type, @RequestParam String start, @RequestParam String end,
+            HttpServletRequest request) {
+         CookieDTO dto = new CookieDTO();
          CookieUtils cook = new CookieUtils();
-         List<DataListDTO> img_list = datalistdao.selectAll2();
-         
-            ArrayList<String> newarr = new ArrayList<String>();
-            ArrayList<String> newtype = new ArrayList<String>();
-            try {
-               List<String> arr=cook.getValueList("text1", request);
-               for(int x=0;x<arr.size();x++) {
-                  for(int i=0;i<img_list.size();i++) {
-                     if(img_list.get(i).getImg().contains("pitting") && img_list.get(i).getProduct().equals(arr.get(x))) {
-                        newarr.add("'"+img_list.get(i).getImg()+"'");
-                        newtype.add("'"+img_list.get(i).getType()+"'");
-                        break;
-                     }
-                  }
-               }
-            model.addAttribute("newsee_list",newarr);
-            model.addAttribute("newsee_type",newtype);
+         List<DataListDTO> img_list;
+
+         ArrayList<String> newarr = new ArrayList<String>();
+         ArrayList<String> newtype = new ArrayList<String>();
+         ArrayList<String> newprice = new ArrayList<String>();
+         ArrayList<String> newproduct = new ArrayList<String>();
+         try {
+            List<String> arr = cook.getValueList("text1", request);
+            if (arr.size() == 1) {
+               dto.setProduct1(arr.get(0));
+               img_list = datalistdao.select_cookie_one(dto);
+            } else if (arr.size() == 2) {
+               dto.setProduct1(arr.get(0));
+               dto.setProduct2(arr.get(1));
+               img_list = datalistdao.select_cookie_two(dto);
+            } else if (arr.size() == 3) {
+               dto.setProduct1(arr.get(0));
+               dto.setProduct2(arr.get(1));
+               dto.setProduct3(arr.get(2));
+               img_list = datalistdao.select_cookie_three(dto);
+            } else if (arr.size() == 4) {
+               dto.setProduct1(arr.get(0));
+               dto.setProduct2(arr.get(1));
+               dto.setProduct3(arr.get(2));
+               dto.setProduct4(arr.get(3));
+               img_list = datalistdao.select_cookie_four(dto);
+            } else {
+               img_list = new ArrayList<DataListDTO>();
+            }
+            for (int x = 0; x < img_list.size(); x++) {
+               System.out.println(img_list.get(x).getImg());
+               newarr.add("'" + img_list.get(x).getImg() + "'");
+               newtype.add("'" + img_list.get(x).getType() + "'");
+               newprice.add("'" + img_list.get(x).getPrice() + "'");
+               newproduct.add("'" + img_list.get(x).getProduct() + "'");
+            }
+            model.addAttribute("newsee_list", newarr);
+            model.addAttribute("newsee_type", newtype);
+            model.addAttribute("newsee_price", newprice);
+            model.addAttribute("newsee_product", newproduct);
          } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
          }
          service.data(model, type, start, end);
          return "default/data";
+      }
+      
+      @RequestMapping("company_profile")
+      public String company_profile() {
+         return "default/company_profile";
       }
 
 }

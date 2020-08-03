@@ -7,9 +7,37 @@ public class DataListDTO {
    private int count;
    private int quantity;
    private String type;
+   private String start;
+   private String end;
+   private String num;
+   private String cnt;
    
    
-   public String getType() {
+   public String getCnt() {
+	return cnt;
+}
+public void setCnt(String cnt) {
+	this.cnt = cnt;
+}
+public String getStart() {
+	return start;
+}
+public void setStart(String start) {
+	this.start = start;
+}
+public String getEnd() {
+	return end;
+}
+public void setEnd(String end) {
+	this.end = end;
+}
+public String getNum() {
+	return num;
+}
+public void setNum(String num) {
+	this.num = num;
+}
+public String getType() {
       return type;
    }
    public void setType(String type) {

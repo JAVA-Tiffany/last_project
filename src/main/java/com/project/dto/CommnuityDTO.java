@@ -12,8 +12,15 @@ public class CommnuityDTO {
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
+	private String replycount;
 	
 	
+	public String getReplycount() {
+		return replycount;
+	}
+	public void setReplycount(String replycount) {
+		this.replycount = replycount;
+	}
 	public int getBno() {
 		return bno;
 	}

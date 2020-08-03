@@ -46,9 +46,14 @@
             data : {rno:$("#rno"+d).text()},
             success : function(data) {
                text=$("#content"+d).val();
+               fileimg=$("#fileimg"+d).val();
+               alert(fileimg);
                if(s==0){
                   $("#infocount"+d).text(parseInt($("#infocount"+d).text())+1);
-                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:300px; ma'cols='1'>"+text+"</textarea>");
+                  $("#dtr"+d).append("<textarea id='area"+d+"' style='resize: none; width: 50%; height:150px; margin-top: 75px; ma'cols='1'>"+text+"</textarea>");
+                  if(fileimg!="''"){
+                  $("#dtr"+d).append("<img src="+fileimg+" id='fileimg"+d+"' style='width: 300px; height: 300px;'>");
+                  }
                   $("#dtr"+d).append("<input id='text_change"+d+"' onclick='review_change("+d+")' type='button' value='수정'>");
                   $("#open_btn"+d).val("▲");
                   $("#title"+d).removeAttr('disabled');
@@ -56,6 +61,7 @@
                }else{
                   s=0;
                   $("textarea").remove("#area"+d);
+                  $("img").remove("#fileimg"+d);
                   $("input").remove("#text_change"+d);
                   $("#open_btn"+d).val("▼");
                   $("#title"+d).attr("disabled","disabled");
@@ -113,7 +119,6 @@ table {
 }
 
 th, td {
-
    padding: 10px;
    text-align: center;
 }
@@ -156,16 +161,21 @@ active : 클릭했을 때 링크 상태 -->fieldset {
 </style>
 </head>
 <body>
-   <jsp:include page="../default/header.jsp"/>
-   <div style="display: flex; flex: row; width: 1100px; margin: 0 auto;" align="center">
-      <div id="review_product_list" style="overflow:scroll; width:350px; height:400px; margin-top: 260px; border: 1px solid black; ">
-      <label>상품 변경 가능 목록(클릭)</label><br><br>
+   <jsp:include page="../default/header.jsp" />
+   <div style="display: flex; flex: row; width: 1100px; margin: 0 auto;"
+      align="center">
+      <div id="review_product_list"
+         style="overflow: scroll; width: 350px; height: 400px; margin-top: 260px; border: 1px solid black;">
+         <label>상품 변경 가능 목록(클릭)</label><br>
+         <br>
       </div>
-      <div align="center" class="div1" style="margin-left: 30px; ">
+      <div align="center" class="div1" style="margin-left: 30px;">
          <table>
             <caption>
                <font style="font: 400 30px 'Poppins', sans-serif;">Review <br></font>
-               현재 선택 상품 : <input type="text" style="width: 300px; text-align: center;" value="${review_img}" id="img" disabled="disabled">
+               현재 선택 상품 : <input type="text"
+                  style="width: 300px; text-align: center;" value="${review_img}"
+                  id="img" disabled="disabled">
             </caption>
             <tr>
                <th style="width: 8%;">번호</th>
@@ -186,65 +196,65 @@ active : 클릭했을 때 링크 상태 -->fieldset {
                </c:when>
                <c:otherwise>
                   <c:forEach var="dto" items="${review_list}">
-                     
-                     <input id="content${dto.rno}" type="hidden" value="${dto.content}">
+
+                     <input id="content${dto.rno}" type="hidden"
+                        value="${dto.content}">
+                     <input id="fileimg${dto.rno}" type="hidden" value="'${dto.fileimg}'">
+                        
                      <tr id="rtr${dto.rno}" style="border-top: 1px solid #444444;">
                         <td style="height: 50px; width: 100px;" align="center">
-                           <label id="rno${dto.rno}">${dto.rno}</label>
+                        <label id="rno${dto.rno}">${dto.rno}</label></td>
+                        <td style="height: 50px; width: 100px;"><input type="text"
+                           id="title${dto.rno}" value="${dto.title}" disabled='disabled'>
                         </td>
-                        <td style="height: 50px; width: 100px;">
-                           <input type="text" id="title${dto.rno}" value="${dto.title}" disabled='disabled'>
-                        </td>
-                        <td style="height: 50px; width: 100px;">
-                           <label id="name${dto.rno}">${dto.name}</label>
-                        </td>
-                        <td style="height: 50px; width: 200px;">
-                           <label id="regdat${dto.rno}">${dto.regdat}</label>
-                        </td>
-                        <td style="height: 50px; width: 100px;">
-                           <label id="infocount${dto.rno}">${dto.infocount}</label>
-                        </td>
-                        <td style="height: 50px; width: 100px;">
-                           <label onclick="del(${dto.rno})">삭제</label>
-                        </td>
-                        <td>
-                           <input id="open_btn${dto.rno}" type="button" onclick="review_op(${dto.rno})" value="▼">
-                        </td>
+                        <td style="height: 50px; width: 100px;"><label
+                           id="name${dto.rno}">${dto.name}</label></td>
+                        <td style="height: 50px; width: 200px;"><label
+                           id="regdat${dto.rno}">${dto.regdat}</label></td>
+                        <td style="height: 50px; width: 100px;"><label
+                           id="infocount${dto.rno}">${dto.infocount}</label></td>
+                        <td style="height: 50px; width: 100px;"><label
+                           onclick="del(${dto.rno})">삭제</label></td>
+                        <td><input id="open_btn${dto.rno}" type="button"
+                           onclick="review_op(${dto.rno})" value="▼"></td>
                      </tr>
                      <tr id="rrtr${dto.rno}" align="center">
-                        <td id="dtr${dto.rno}" style="width: 70%;" colspan="7">
-                           
-                        </td>
+                        <td id="dtr${dto.rno}" style="width: 70%; " colspan="7"></td>
+                        
                      </tr>
                   </c:forEach>
-                     <tr style="border-top: 1px solid #444444;"><td style="width: 70%;" colspan="7"></td></tr>
+                  <tr style="border-top: 1px solid #444444;">
+                     <td style="width: 70%;" colspan="7"></td>
+                  </tr>
                </c:otherwise>
             </c:choose>
          </table>
-         
+
          <p class="category displaynone"></p>
          <p>
             <select id="search_key" name="search_key">
                <option value="subject">제목</option>
                <option value="content">내용</option>
                <option value="member_id">아이디</option>
-            </select> 
-            <input id="search" name="search" class="inputTypeText" placeholder="" value="" type="text" />
-            <label onclick="review_search()" onmouseover="style='cursor:pointer'">search</label>
-            <label onclick="review_insert()" onmouseover="style='cursor:pointer'">등록</label>
+            </select> <input id="search" name="search" class="inputTypeText"
+               placeholder="" value="" type="text" /> <label
+               onclick="review_search()" onmouseover="style='cursor:pointer'">search</label>
+<!--             <label onclick="review_insert()" -->
+<!--                onmouseover="style='cursor:pointer'">등록</label> -->
          </p>
       </div>
    </div>
-   <jsp:include page="../default/footer.jsp"/>
-<form action="review_write" method="post" name="review_write">
-   <input type="hidden" id="review_img" name="review_img" value="${review_img}">
-</form>
+   <jsp:include page="../default/footer.jsp" />
+<!--    <form action="review_write" method="post" name="review_write"> -->
+<!--       <input type="hidden" id="review_img" name="review_img" -->
+<%--          value="${review_img}"> --%>
+<!--    </form> -->
 
-<form action="review_search" method="post" name="search_form">
-   <input type="hidden" id="search_img" name="search_img">
-   <input type="hidden" id="type" name="type">
-   <input type="hidden" id="search_text" name="search_text">
-</form>
+   <form action="review_search" method="post" name="search_form">
+      <input type="hidden" id="search_img" name="search_img"> <input
+         type="hidden" id="type" name="type"> <input type="hidden"
+         id="search_text" name="search_text">
+   </form>
 
 </body>
 </html>

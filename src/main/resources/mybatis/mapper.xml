@@ -3,8 +3,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.mybatis.myMapper"> 
-	<select id="selectAll_User" resultType="userdto"
+<mapper namespace="com.project.mybatis.myMapper">
+
+   <!-- 상품 리스트 -->
+   <select id="dataselectAll_List2" resultType="datalistdto">
+      select * from
+      data_list
+   </select>
+   <select id="dataselectAll_List" resultType="datalistdto">
+      select * from
+      data_list where img like '%pitting%'
+   </select>
+   <select id="dataselect_List" resultType="datalistdto">
+      select * from data_list
+      where img like '%pitting%' and type=#{type}
+   </select>
+   <select id="selectPick" resultType="datalistdto"
+      parameterType="String">
+      select count(*) from data_list where type=#{type} and img like '%pitting%'
+   </select>
+   <select id="select_count" resultType="String">
+      select count(*) from data_list where type=#{type} and img like '%pitting%'
+   </select>
+   <select id="select_number_ran" resultType="datalistdto">
+      select * from (select * from (select * from data_list where type=#{type} and
+      img like '%pitting%') order by dbms_random.value) where rownum &lt;
+      #{cnt}
+   </select>
+   <select id="select_number" resultType="datalistdto"
+      parameterType="datalistdto">
+      select * from (select rownum num, a.* from (select * from data_list where
+      type=#{type} and img like '%pitting%') a ) where num between #{start}
+      and #{end}
+   </select>
+
+   <select id="select_cookie_one" resultType="datalistdto">
+      select * from data_list where img like '%pitting%' and product=#{product1}
+   </select>
+   <select id="select_cookie_two" resultType="datalistdto">
+      select * from data_list where img like '%pitting%' and (product=#{product1}
+      or product=#{product2})
+   </select>
+   <select id="select_cookie_three" resultType="datalistdto">
+      select * from data_list where img like '%pitting%' and (product=#{product1}
+      or product=#{product2} or product=#{product3})
+   </select>
+   <select id="select_cookie_four" resultType="datalistdto">
+      select * from data_list where img like '%pitting%' and (product=#{product1}
+      or product=#{product2} or product=#{product3} or product=#{product4})
+   </select>
+
+   <update id="updateQuantity" parameterType="datalistdto">
+      update (select * from data_list where img like '%pitting%') set
+      quantity=#{quantity} where product=#{product} and type=#{type}
+   </update>
+   <insert id="AddProduct" parameterType="datalistdto">
+      insert into data_list (img,product,price,quantity,type)
+      values(#{img},#{product},#{price},#{quantity},#{type} )
+   </insert>
+   <delete id="DelProduct" parameterType="datalistdto">
+      delete data_list where product=#{product}
+   </delete>
+
+   <!-- 유저 정보 -->
+   <select id="selectAll_User" resultType="userdto"
       parameterType="userdto">      <!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
       select * from self_design
    </select>
@@ -36,72 +98,56 @@
       select * from self_design where id=#{id} and
       email=#{email}
    </select>
-   
-   
-      <!-- 상품 리스트 -->
-   <select id="dataselectAll_List2" resultType="datalistdto">
+
+
+
+   <!-- Q&A 게시물 관련 -->
+   <select id="selectAll_Commnuity" resultType="comdto">
       select * from
-      data_list
+      board_sys where writer !='관리자'order by bno desc
    </select>
-   
-   <!-- 상품 리스트 -->
-   <select id="dataselectAll_List" resultType="datalistdto">
+   <select id="selectAdminAll_Commnuity" resultType="comdto">
       select * from
-      data_list where img like '%pitting%'
+      board_sys where writer='관리자' order by bno desc
    </select>
-   <select id="dataselect_List" resultType="datalistdto">
-      select * from data_list
-      where img like '%pitting%' and type=#{type} 
+   <select id="view_Commnuity" resultType="comdto">
+      select * from board_sys
+      where bno=#{bno}
    </select>
-   <select id="selectPick" resultType="datalistdto">
-   		select * from data_list where img like '%pitting%' and type=#{type} 
+   <select id="view_Board" resultType="comdto">
+      select * from board_sys where
+      bno=#{bno}
    </select>
-   
-   <update id="updateQuantity" parameterType="datalistdto">
-		update (select * from data_list where img like '%pitting%') set quantity=#{quantity} where product=#{product} and type=#{type}
-	</update>
-	<insert id="AddProduct" parameterType="datalistdto">
-	 insert into data_list (img,product,price,quantity,type) values(#{img},#{product},#{price},#{quantity},#{type} )
-	</insert>
-	<delete id="DelProduct" parameterType="datalistdto">
-	delete data_list where product=#{product}
-	</delete>
-	
-	<!-- Q&A 게시물 관련 -->
-	<select id="selectAll_Commnuity" resultType="comdto">
-		select * from board_sys where writer !='관리자'order by bno desc
-	</select>
-	<select id="selectAdminAll_Commnuity" resultType="comdto">
-		select * from board_sys where writer='관리자' order by bno desc
-	</select>
-	<select id="view_Commnuity" resultType="comdto">
-		select * from board_sys where bno=#{bno}
-	</select>
-	<select id="view_Board" resultType="comdto">
-		select * from board_sys where bno=#{bno}
-	</select>
-	
-	
-	
-	<update id="count_Commnuity">
-		update board_sys set viewcnt = viewcnt + 1 where bno=#{bno}
-	</update>
-	<update id="update_Commnuity" parameterType="comdto">
-		update board_sys set title=#{title},content=#{content} where bno=#{bno}
-	</update>
-	<insert id="insert_Commnuity" parameterType="comdto">
-		insert into board_sys (bno,title,content,writer) values((select nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
-	</insert>
-	<delete id="delete_Commnuity" parameterType="comdto">
-		delete from board_sys where bno=#{bno}
-	</delete>
-	<insert id="Adinsert_Commnuity" parameterType="comdto">
-		insert into board_sys (bno,title,content,writer) values((select nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
-	</insert>
-	
-	
-	   <!-- 모든 유저 장바구니 리스트 -->
-   <select id="selectAll_Userimg" resultType="Paydto" parameterType="Paydto">      <!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
+
+
+
+   <update id="count_Commnuity">
+      update board_sys set viewcnt = viewcnt + 1 where
+      bno=#{bno}
+   </update>
+   <update id="update_Commnuity" parameterType="comdto">
+      update board_sys set
+      title=#{title},content=#{content} where bno=#{bno}
+   </update>
+   <insert id="insert_Commnuity" parameterType="comdto">
+      insert into
+      board_sys (bno,title,content,writer) values((select
+      nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
+   </insert>
+   <delete id="delete_Commnuity" parameterType="comdto">
+      delete from
+      board_sys where bno=#{bno}
+   </delete>
+   <insert id="Adinsert_Commnuity" parameterType="comdto">
+      insert into
+      board_sys (bno,title,content,writer) values((select
+      nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
+   </insert>
+
+
+   <!-- 모든 유저 장바구니 리스트 -->
+   <select id="selectAll_Userimg" resultType="Paydto"
+      parameterType="Paydto">      <!-- com.care.mybatis.myMapper.listAll을 통해 경로 설정이 가능 -->
       select * from pay
    </select>
    <select id="select_Userimg" resultType="Paydto"
@@ -109,19 +155,31 @@
       select * from pay where id=#{id} and status='대기'
    </select>
    <insert id="insert_Userimg" parameterType="Paydto">
-      insert into pay(img,id,product,status,price,count,type)
-      values(#{img},#{id},#{product},#{status},#{price},1,#{type})
+      insert into
+      pay(img,id,product,status,price,count,type,review_ch,rno)
+      values(#{img},#{id},#{product},#{status},#{price},1,#{type},0,(select
+      nvl(max(rno)+1,1)from pay))
    </insert>
    <delete id="delete_Userimg" parameterType="Paydto">
       delete pay where
       id=#{id} and img=#{img}
    </delete>
    <update id="update_Userimg" parameterType="Paydto">
-      update pay set order_id=#{order_id},status='완료'
+      update pay set
+      order_id=#{order_id},status='완료'
       ,day=#{day},totalprice=#{totalprice},method=#{method}
       ,addr1=#{addr1},addr2=#{addr2},addr3=#{addr3}
-       where id=#{id} and status='대기'
+      where id=#{id} and
+      status='대기'
    </update>
+   <update id="update_review_ch" parameterType="Paydto">
+      update pay set review_ch=1 where rno=#{rno}
+   </update>
+   <select id="select_orderList" resultType="Paydto">
+      select * from pay where
+      id=#{id} and status='완료'
+   </select>
+
    <update id="update_Count" parameterType="Paydto">
       update pay set
       count=count+1 where id=#{id} and product=#{product}
@@ -130,81 +188,118 @@
       update pay set
       count=count-1 where id=#{id} and product=#{product}
    </update>
-     <select id="select_orderList" resultType="Paydto">
-      select * from pay where id=#{id} and status='완료'
+
+
+   <!-- 내 이미지 목록 -->
+   <select id="select_Myimg" resultType="myimgdto"
+      parameterType="myimgdto">
+      select * from my_img where id=#{id}
    </select>
-   
-	<!-- 내 이미지 목록 -->
-	<select id="select_Myimg" resultType="myimgdto"  parameterType="myimgdto">
-		select * from my_img where id=#{id}
-	</select>
-	<insert id="insert_Myimg" parameterType="myimgdto">
-		insert into my_img values(#{img},#{id})
-	</insert>
-	<delete id="delete_Myimg" parameterType="myimgdto">
-		delete my_img where id=#{id} and img=#{img}
-	</delete>
-	
-	<!-- 댓글  -->
-	<select id="select_reply" resultType="replydto"  parameterType="replydto">
-		select * from reply where bno=#{bno}
-	</select>
-	<insert id="insert_reply" parameterType="replydto">
-		insert into reply(bno, rno, content, writer) values(#{bno}, (select nvl(max(rno)+1,1)from reply), #{content}, #{writer})
-	</insert>
-	<update id="update_reply" parameterType="replydto">
-		update reply set content=#{content} where bno=#{bno} and rno=#{rno}
-	</update>
-	<delete id="delete_reply" parameterType="replydto">
-		delete reply where bno=#{bno} and rno=#{rno}
-	</delete>
-	 <select id="max_rno" parameterType="replydto" resultType="int">
-      select max(rno) from reply
-  	 </select>
-	
-	<!-- Notice 게시물 관련 -->
-	<select id="select_adminList" resultType="Noticedto">
-		select * from notice where writer='admin' order by bno desc
-	</select>
-	<select id="selectAll_Notice" resultType="Noticedto">
-		select * from notice where writer!='admin' order by bno desc
-	</select>
-	<select id="view_Notice" resultType="Noticedto">
-		select * from notice where bno=#{bno}
-	</select>
-	<update id="count_Notice">
-		update notice set viewcnt = viewcnt + 1 where bno=#{bno}
-	</update>
-	<update id="update_Notice" parameterType="Noticedto">
-		update notice set title=#{title},content=#{content} where bno=#{bno}
-	</update>
-	<insert id="insert_Notice">
-		insert into notice (bno,title,content,writer) values((select nvl(max(bno)+1,1)from notice),#{title},#{content},#{writer} )
-	</insert>
-	<delete id="delete_Notice">
-		delete from notice where bno=#{num}
-	</delete>
-	<delete id="delete_QA">
-		delete from board_sys where bno=#{num}
-	</delete>
-	
-	  <!-- 리뷰 -->
-   <insert id="insert_Review">
-      insert into review(rno,name,content,infocount,img,title) values((select nvl(max(rno)+1,1)from review),#{name},#{content},#{infocount},#{img},#{title})
+   <insert id="insert_Myimg" parameterType="myimgdto">
+      insert into my_img
+      values(#{img},#{id})
    </insert>
-   <select id="selectAll_Review" resultType="reviewdto" parameterType="reviewdto">
+   <delete id="delete_Myimg" parameterType="myimgdto">
+      delete my_img where
+      id=#{id} and product=#{product}
+   </delete>
+
+   <!-- 댓글 -->
+   <select id="select_reply" resultType="replydto"
+      parameterType="replydto">
+      select * from reply where bno=#{bno}
+   </select>
+   <insert id="insert_reply" parameterType="replydto">
+      insert into reply(bno,
+      rno, content, writer) values(#{bno}, (select nvl(max(rno)+1,1)from
+      reply), #{content}, #{writer})
+   </insert>
+   <update id="update_reply" parameterType="replydto">
+      update reply set
+      content=#{content} where rno=#{rno}
+   </update>
+   <delete id="delete_reply" parameterType="replydto">
+      delete reply where
+      bno=#{bno} and rno=#{rno}
+   </delete>
+
+   <!-- Notice 게시물 관련 -->
+   <select id="select_adminList" resultType="Noticedto">
+      select * from notice
+      where writer='admin' order by bno desc
+   </select>
+   <select id="selectAll_Notice" resultType="Noticedto">
+      select * from notice
+      where writer!='admin' order by bno desc
+   </select>
+   <select id="view_Notice" resultType="Noticedto">
+      select * from notice where
+      bno=#{bno}
+   </select>
+   <update id="count_Notice">
+      update notice set viewcnt = viewcnt + 1 where
+      bno=#{bno}
+   </update>
+   <update id="update_Notice" parameterType="Noticedto">
+      update notice set
+      title=#{title},content=#{content} where bno=#{bno}
+   </update>
+   <insert id="insert_Notice">
+      insert into notice (bno,title,content,writer)
+      values((select
+      nvl(max(bno)+1,1)from
+      notice),#{title},#{content},#{writer} )
+   </insert>
+   <delete id="delete_Notice">
+      delete from notice where bno=#{num}
+   </delete>
+   <delete id="delete_QA">
+      delete from board_sys where bno=#{num}
+   </delete>
+
+   <!-- 리뷰 -->
+   <insert id="insert_Review">
+      insert into
+      review(rno,name,content,infocount,img,title,fileimg,type,pay_rno) values((select
+      nvl(max(rno)+1,1)from
+      review),#{name},#{content},#{infocount},#{img},#{title},#{fileimg},#{type},#{pay_rno})
+   </insert>
+   <select id="selectAll_Review" resultType="reviewdto"
+      parameterType="reviewdto">
       select * from review where img=#{img}
    </select>
-   <update id="update_Review" parameterType="reviewdto">
-      update review set title=#{title}, content=#{content} where rno=#{rno}
+   <select id="select_Review" resultType="reviewdto"
+      parameterType="reviewdto">
+      select * from review where pay_rno=#{pay_rno}
+   </select>
+  <update id="update_Review" parameterType="reviewdto">
+      update review set
+      title=#{title}, content=#{content},fileimg=#{fileimg} where rno=#{rno}
+   </update>
+   <update id="update_Review_nofileimg" parameterType="reviewdto">
+      update review set
+      title=#{title}, content=#{content} where rno=#{rno}
    </update>
    <update id="update_Review_infocount" parameterType="reviewdto">
-      update review set infocount=infocount + 1 where rno=#{rno}
+      update review
+      set infocount=infocount + 1 where rno=#{rno}
    </update>
    <delete id="delect_Review" parameterType="reviewdto">
-      delete from review where rno=#{rno}
+      delete from review
+      where rno=#{rno}
    </delete>
    <delete id="delect_Review_img" parameterType="reviewdto">
-      delete from review where img=#{img}
+      delete from review
+      where img=#{img}
    </delete>
+
+   <select id="max_rno" parameterType="replydto" resultType="int">
+      select
+      max(rno) from reply
+   </select>
+
+   <select id="selectChart" resultType="Paydto">
+      select * from pay where status='완료'
+   </select>
+
 </mapper>

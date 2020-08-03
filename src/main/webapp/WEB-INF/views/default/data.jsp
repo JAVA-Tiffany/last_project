@@ -7,23 +7,25 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function data_movee(d) {
-    $("#index_type_text").val(d);
-    $("#index_type_text_start").val(0);
-    $("#index_type_text_end").val(9);
-    index_form.submit();
- }
 var cookie_type=${newsee_type}
+var cookie_price=${newsee_price}
+var cookie_product=${newsee_product}
+function data_movee(d) {
+         $("#index_imggoods_text").val(cookie_type[d]);
+         $("#index_imgname_text").val(cookie_product[d]);
+         $("#index_imgmoney_text").val(cookie_price[d]);
+         index_form.submit();
+      }
 var cookie_img=${newsee_list}
 $(function() {
- for(i=0;i<cookie_img.length;i++){
-      $("#index_cookie_ul").append("<li style='list-style: none;'>"
-     +"<a href='javascript:data_movee(\""+cookie_type[i]+"\")' style='float: left; text-decoration: none; color: #000;'>"
-     +"<img style='width: 64px; height: 80px; padding: 2px 2px 2px 2px; text-align: center; border: none; vertical-align: top;'"
-     +"src='"+cookie_img[i]+"'></a>"
-     +"</li>");
- }
-});
+      for(i=0;i<cookie_img.length;i++){
+         $("#index_cookie_ul").append("<li style='list-style: none;'>"
+          +"<a href='javascript:data_movee(\""+i+"\")' style='float: left; text-decoration: none; color: #000;'>"
+          +"<img style='width: 64px; height: 80px; padding: 2px 2px 2px 2px; text-align: center; border: none; vertical-align: top;'"
+          +"src='"+cookie_img[i]+"'></a>"
+          +"</li>");
+      }
+   });
 var menucount=0;
 function menubar_open() {
 if(menucount==0)
@@ -81,15 +83,18 @@ if(menucount==2)
             margin: 0px; padding: 0px; z-index: 99999; right: 0px;" id="menubar">
       <div style="float: left; width: 160px; margin: 70px 0 30px 0; padding: 0 0 px 0px 0;">
          <ul style="display: block; list-style-type: disc;">
-            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer; onclick="data_move('bag')">
+            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="data_move('bag')">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
                   <b style="font-weight: bold;">Bag</b></a></li>
-            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="data_move('bag')">
+            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="data_move('dress')">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
                   <b style="font-weight: bold;">Dress</b></a></li>
-            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="data_move('bag')">
+            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="data_move('earring')">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
                   <b style="font-weight: bold;">Earring</b></a></li>
+            <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer;" onclick="data_move('phon')">
+               <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">
+                  <b style="font-weight: bold;">Phon</b></a></li>
             <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="location.href='notice'">
                <a style="font: 400 12px 'Poppins',sans-serif; letter-spacing: 0.9px; text-align: center; color: #252525; text-decoration: none;">Notice</a></li>
             <li style="padding: 8px 0px 8px 0px; text-align: center; width: 120px; margin: 10px auto; background-color: #ffffff; box-shadow: 0px 0px 2px #d8d8d8; list-style: none;cursor:pointer" onclick="location.href='list'">
@@ -208,37 +213,41 @@ d.getElementsByTagName('html')[0].appendChild(img);
      }
       if(size>9){
          $(function (){
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_down();' style='text-decoration: none;'><<</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_onedown();' style='text-decoration: none;'><</a></div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer' onclick='number_down()'><<</div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer' onclick='number_onedown()'><</div> ");
             if('${list_size%9>0}'=='true'){
                ssize='${Integer.valueOf(list_size/9)+1}';
            }else{
               ssize='${Integer.valueOf(list_size/9)}';
            }
             for(i=0;i<ssize;i++){
-               $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
-                        +"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
+               $('#num').append("<div id='a"+(i+1)+"' style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer' onclick='number_click("+(i+1)+")'>"+(i+1)+"</div>");
                $("#num").append("<form action='data' method='post' name='numbtn"+(i+1)+"'>"
                        +"<input type='hidden' value='${list_type}' name='type'>"
                        +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
                        +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
                        +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
                      +"</form>");
+               if(i+1=='${Integer.valueOf(list_last/9)}'){
+                  $("#a"+(i+1)).css("background-color","#383838f2");
+                  $("#a"+(i+1)).css("color","#fff");
+               }
             }
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_oneup();' style='text-decoration: none;'>></a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_up();' style='text-decoration: none;'>>></a></div>");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='javascript:number_oneup();' style='text-decoration: none;'>></a></div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='javascript:number_up();' style='text-decoration: none;'>>></a></div>");
          });
       }else{
          $(function (){
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'><<</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'><</a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>1</a></div>");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>></a></div> ");
-            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='#' style='text-decoration: none;'>>></a></div>");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='#' style='text-decoration: none;'><<</a></div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='#' style='text-decoration: none;'><</a></div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='#' style='text-decoration: none;'>1</a></div>");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='#' style='text-decoration: none;'>></a></div> ");
+            $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer'><a href='#' style='text-decoration: none;'>>></a></div>");
          });
       }
       
       $(function () {
+         
           c=0
           a=0
           l=${list_img}
@@ -258,7 +267,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
                 }
                 $("#tr"+c).append("<td onmouseleave=style='' onmouseover=style='opacity:0.5;'>"
                 +"<div style='width:312px; height:390px;margin-left:10px;background-image:url("+"\""+s+"\""+");background-size:312px 390px;' onclick='imgin("+a+")' ></div>"
-                    +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+r[i]+"</p> "
+                +"<div style='width:312px; overflow: hidden;'><p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgname"+a+"'>"+r[i]+"</p> </div>"
                    +"<p align='center' style='margin-top: 5px; font-family:궁서체;' id='imgmoney"+a+"'>"+"가격 : &nbsp;"+u[i]+"</p>"
                    +"<p align='center' style='margin-top: 5px; color:gray;' >"+"리뷰 : &nbsp;"+z[i]+"</p>"
                    +"</td>");
@@ -283,18 +292,19 @@ d.getElementsByTagName('html')[0].appendChild(img);
       <div style="margin-top: 150px;">
          <table id="table"></table>
       </div>
-      <div id="num" style="display: flex; flex-flow:low; width: 600px;">
+      <div id="num" style="display: flex; flex-flow:low; width: 600px; margin-top: 20px;">
       </div>
    </div>
-         <form action="data" method="post" name="index_form">
-         <input type="hidden" name="type" id="index_type_text"> <input
-            type="hidden" name="start" id="index_type_text_start"> <input
-            type="hidden" name="end" id="index_type_text_end">
-      </form>
+         <form action="design" method="post" name="index_form">
+      <input type="hidden" name="imggoods" id="index_type_text"> <input
+         type="hidden" name="imgname" id="index_imgname_text"> <input
+         type="hidden" name="imgmoney" id="index_imgmoney_text">
+   </form>
  <!-- top버튼 -->
 <a id="backToTop" class="scrolltop" href="#">
       <i class="fas fa-chevron-circle-up"></i>
 </a>
+<br><br><br>
 <%@include file="footer.jsp" %>
 
    

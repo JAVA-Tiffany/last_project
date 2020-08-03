@@ -6,37 +6,61 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.CookieDTO;
 import com.project.dto.DataListDTO;
 
 @Repository
 public class DataListDAO {
-   @Autowired private SqlSession sqlSession;
-   public static final String namepasce="com.project.mybatis.myMapper";
-  
-   public List<DataListDTO> selectAll2() {
-	   return sqlSession.selectList(namepasce+".dataselectAll_List2");
+	@Autowired private SqlSession sqlSession;
+	public static final String namepasce="com.project.mybatis.myMapper";
+
+	public List<DataListDTO> selectAll2() {
+		return sqlSession.selectList(namepasce+".dataselectAll_List2");
 	}
-   
-   
-   public List<DataListDTO> selectAll() {
-      return sqlSession.selectList(namepasce+".dataselectAll_List");
-   }
-   public List<DataListDTO> select(DataListDTO dto) {
-      // TODO Auto-generated method stub
-      return sqlSession.selectList(namepasce+".dataselect_List",dto);
-   }
-   
-   public void updateQuantity(DataListDTO dto) {
+
+
+	public List<DataListDTO> selectAll() {
+		return sqlSession.selectList(namepasce+".dataselectAll_List");
+	}
+	public List<DataListDTO> select(DataListDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namepasce+".dataselect_List",dto);
+	}
+
+	public void updateQuantity(DataListDTO dto) {
 		sqlSession.update(namepasce + ".updateQuantity",dto);
 	}
-   
-   public List<DataListDTO> selectPick(String choice){
-	   if(choice.equals("All")) {
-		   return sqlSession.selectList(namepasce+".dataselectAll_List");
-	   }else {
-		   return sqlSession.selectList(namepasce + ".selectPick",choice);
-	   }
-	   
-   }
-   
+
+	public List<DataListDTO> selectPick(String choice){
+		if(choice.equals("All")) {
+			return sqlSession.selectList(namepasce+".dataselectAll_List");
+		}else {
+			return sqlSession.selectList(namepasce + ".selectPick",choice);
+		}
+
+	}
+	public List<DataListDTO> select_number_ran(DataListDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_number_ran",dto);
+	}
+	public List<DataListDTO> select_number(DataListDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_number",dto);
+	}
+
+	public String select_count(DataListDTO dto) {
+		return sqlSession.selectOne(namepasce + ".select_count",dto);
+	}
+
+	public List<DataListDTO>  select_cookie_two(CookieDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_cookie_two",dto);
+	}
+	public List<DataListDTO>  select_cookie_one(CookieDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_cookie_one",dto);
+	}
+	public List<DataListDTO>  select_cookie_three(CookieDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_cookie_three",dto);
+	}
+	public List<DataListDTO> select_cookie_four(CookieDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_cookie_four",dto);
+	}
+
 }

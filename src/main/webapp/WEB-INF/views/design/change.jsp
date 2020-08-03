@@ -163,8 +163,10 @@
          bag="bag";
          dress="dress";
          earring="earring";
+         phon="phon";
          $("#goods_list").append("<div id='delch'> <label onclick='addchange("+bag+")' onmouseover=style='cursor:pointer;'>가방</label> &nbsp;&nbsp;"
                +"<label onclick='addchange("+dress+")' onmouseover=style='cursor:pointer;'>옷</label> &nbsp;&nbsp; "
+               +"<label onclick='addchange("+phon+")' onmouseover=style='cursor:pointer;'>핸드폰케이스</label> &nbsp;&nbsp; "
                +"<label onclick='addchange("+earring+")' onmouseover=style='cursor:pointer;'>귀걸이</label> </div>");
       }else{
          $("div").remove("#delch");

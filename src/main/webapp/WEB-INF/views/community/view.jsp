@@ -7,6 +7,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	textarea {
+	width:100%;
+	height:100px;
+	margin-top:10px;
+	resize: none;
+	border-bottom: 1px solid #e9e9e9;
+	}
+
+.replyTitle{
+border-top: 1px solid #e9e9e9;
+	overflow: hidden;
+    padding: 12px 0 10px 20px;
+    border-bottom: 1px solid #e9e9e9;
+	text-align: left;
+}
+.modifybtn_cel{
+	display: none;
+	color:red;
+}
+
+
+</style>
 <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="resources/jquery.form.min.js"></script>
 <script type="text/javascript">
@@ -19,11 +42,10 @@
    bno_view=${bno_view};
    $(function() {
       for(i=0;i<size;i++){
-         $("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; '> 작성자 &nbsp; : &nbsp;<label id='comment_writer"+comment_count+"'>"+writer_view[i]+"</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성시간 &nbsp;:&nbsp;"+regDate_view[i]+""
-               +"<br><textarea id='commare"+comment_count+"' cols='1' style='width:420px;height:100px; margin-top:10px; resize: none;' name='comment_contents'> "+comment_view[i]+"</textarea> </div>");
-         $("#comment_list").append("<input id='btn_del"+comment_count+"' type='button' value='댓글 삭제' onclick='reply_del("+comment_count+")'>");
-         $("#comment_list").append("<input id='btn_change"+comment_count+"' type='button' value='댓글 수정' onclick='reply_ch("+comment_count+")'>");
-         $("#comment_list").append("<input id='btn_change_cel"+comment_count+"' style='display: none' type='button' value='댓글 수정 취소' onclick='reply_ch_cel("+comment_count+")'>");
+         $("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; '><div class='replyTitle'>작성자 &nbsp; : &nbsp;<label id='comment_writer"+comment_count+"'>"+writer_view[i]
+         +"</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성시간 &nbsp;:&nbsp;"+regDate_view[i]+"<input id='btn_del"+comment_count+"' type='button' value='삭제' onclick='reply_del('+comment_count+')'>" +"<input id='btn_change"+comment_count+"' type='button' value='수정' onclick='reply_ch("+comment_count+")'>"+ "</div>"
+               +"<textarea id='commare"+comment_count+"' cols='1' name='comment_contents'> "+comment_view[i]+"</textarea> </div>");
+         $("#comment_list").append("<div class='modifybtn_cel'><input id='btn_change_cel"+comment_count+"' type='button' value='댓글 수정 취소' onclick='reply_ch_cel("+comment_count+")'></div>");
          $("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view+"'>")
          $("#comment_list").append("<input type='hidden' id='rno_out"+comment_count+"' value='"+rno[i]+"'>");
          $("#commare"+comment_count).attr('disabled', true);
@@ -34,11 +56,11 @@
       if($("#comment_btn").val()=='댓글'){
          $("#commare"+comment_count).attr('disabled', false);
          $("#comment_btn").val("등록");
-         $("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; '> 작성자 &nbsp; : &nbsp;<label id='comment_writer"+comment_count+"'>${id}</label>"
-               +"<br><textarea id='commare"+comment_count+"' cols='1' style='width:420px;height:100px; margin-top:10px; resize: none;' name='comment_contents'> </textarea> </div>");
-         $("#comment_list").append("<input id='btn_del"+comment_count+"' type='button' value='댓글 삭제' onclick='reply_del("+comment_count+")'>");
-         $("#comment_list").append("<input id='btn_change"+comment_count+"' type='button' value='댓글 수정' onclick='reply_ch("+comment_count+")'>");
-         $("#comment_list").append("<input id='btn_change_cel"+comment_count+"' style='display: none' type='button' value='댓글 수정 취소' onclick='reply_ch_cel("+comment_count+")'>");
+         $("#comment_list").append("<div id='canc"+comment_count+"' style='margin-top:20px; width:60%; '><div class='replyTitle'>작성자 &nbsp; : &nbsp;<label id='comment_writer"+comment_count+"'>"+writer_view[i]
+         +"</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성시간 &nbsp;:&nbsp;"+regDate_view[i]+"<input id='btn_del"+comment_count+"' type='button' value='삭제' onclick='reply_del('"+comment_count+"')'>" +"<input id='btn_change"+comment_count+"' type='button' value='수정' onclick='reply_ch("+comment_count+")'>"+ "</div>"
+               +"<textarea id='commare"+comment_count+"' cols='1' name='comment_contents'> "+comment_view[i]+"</textarea> </div>");
+         
+         $("#comment_list").append("<div class='modifybtn_cel'><input id='btn_change_cel"+comment_count+"' type='button' value='댓글 수정 취소' onclick='reply_ch_cel("+comment_count+")'></div>");
          $("#comment_list").append("<input type='hidden' id='bno_out"+comment_count+"' value='"+bno_view+"'>");
          
          $("#comment_cancel").css("display","");
@@ -224,9 +246,13 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     <input type="button" value="댓글" onclick="comment()" id="comment_btn">
     <input type="button" value="취소" onclick="comment_cel()" id="comment_cancel" style="display: none; margin-left: 10px;">
     
-    <div id="comment_list">
-    </div>
-
+    
+    <ul>
+    	<li>
+		    <div id="comment_list">
+		    </div>
+		</li>
+	</ul>
     </form>
     
  </div>
