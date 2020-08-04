@@ -19,6 +19,10 @@ color:red; background-color: black;
 body {
    font: 400 14px 'Poppins',sans-serif;
 }
+.img1 {
+    margin-block-start: 0em; 
+     margin-block-end: 0em;
+}
 
 
 a { text-decoration:none;  color: #000; !important  } 
@@ -39,7 +43,12 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 </c:if>
 
   <div style="float: left;">
-      <label><font color="#000000;" style="font-family: 윤고딕;" size="6">Brand</font></label>&nbsp; &nbsp;
+        
+      <a href="index" style="color: black;">
+            <img class="img1" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+        </a>      
+      
+      &nbsp; &nbsp;
       <label><font color="#000000;" style="font-family: 윤고딕;" size="4">ADMINISTRATOR</font></label>&nbsp;
       <a href="index"><font color="blue" size="4" style="font-family: 나눔바른고딕;">홈페이지</font></a>
    </div>

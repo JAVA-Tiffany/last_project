@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.project.dao.CommnuityDAO;
+import com.project.dao.ReplyDAO;
 import com.project.dto.CommnuityDTO;
 import com.project.dto.ReplyDTO;
 
@@ -16,17 +17,30 @@ public class CommunityService {
    @Autowired
    private CommnuityDAO dao;
 
+   @Autowired
+   private ReplyDAO replydao;
+   
    public void listAll(CommnuityDTO dto, Model model) {
-      model.addAttribute("listAll", dao.listAll(dto));
-//      model.addAttribute("replycount",dao.replycount());
-      
+      List<CommnuityDTO> list = dao.listAll(dto);
+     for (CommnuityDTO value : list) {
+		int num = value.getBno();
+		value.setReplycount(replydao.replycount(num));
+	}
+     model.addAttribute("listAll", list);
    }
+   
+   
 
    public void view(CommnuityDTO dto, Model model) {
       model.addAttribute("view", dao.view(dto));
    }
    public void adminview(CommnuityDTO dto, Model model) {
-	   model.addAttribute("adminList",dao.adminlist(dto));
+	   List<CommnuityDTO> list = dao.adminlist(dto);
+	     for (CommnuityDTO value : list) {
+			int num = value.getBno();
+			value.setReplycount(replydao.replycount(num));
+		}
+	     model.addAttribute("adminList", list);
    }
 
    public void count(CommnuityDTO dto) {
@@ -75,8 +89,8 @@ public class CommunityService {
    }
    
    
-   public void countreply(CommnuityDTO dto, Model model) {
-	   int replycount = dao.countreply(dto);
+   public int countreplyadd(int bno) {
+	   return dao.countreply(bno);
    }
 
 }

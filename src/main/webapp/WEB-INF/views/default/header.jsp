@@ -218,6 +218,7 @@
 .dropdown0:hover .dropbtn1 {
    
 }
+
 </style>
 <script type="text/javascript">
    function login() {
@@ -234,7 +235,9 @@
    <div id="fixed" >
       <div>
          <h1>
-            <a href="index" style="color: black;">Brand</a>
+            <a href="index" style="color: black;">
+            <img class="img0" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+            </a>
          </h1>
       </div>
       <div style="margin-right: 150px;" class="content" >

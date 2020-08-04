@@ -8,43 +8,105 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+/* body { */
+/* 	font: 12px Poppins,Lato,arial,Nanum Gothic,AppleGothic,sans-serif; */
+/*     font-weight: normal; */
+/* } */
 	textarea {
-	width:600px;
-	height:100px;
+	width:100%;
+	height:50px;
 	margin-top:10px;
 	resize: none;
-	border-bottom: 1px solid #e9e9e9;
+	overflow:auto !important;
+/*  	border-bottom: 1px solid #e9e9e9;  */
+	border:0;
+	padding-left: 30px;
+	padding-top: 10px;
 	}
 
 .replyWrap{
-	width:70%;
+	width:84%;
+	margin-top: 10px;
+}
+.replyWrap2{
+	width:79%;
+	border:1px solid #e9e9e9;
+	margin-top: 10px;
 }
 
 .replyTitle{
-border-top: 1px solid #e9e9e9;
+/* border-top: 1px solid #e9e9e9; */
 	overflow: hidden;
     padding: 12px 0 10px 20px;
-    border-bottom: 1px solid #e9e9e9;
+/*     border-bottom: 1px solid #e9e9e9; */
     text-align: left;
     background-color: #efefef;
+	
+}
+
+
+.replyTitleRe{
+
+/* 	border-top: 1px solid #e9e9e9; */
+	overflow: hidden;
+    padding: 12px 0 10px 20px;
+/*     border-bottom: 1px solid #e9e9e9; */
+    text-align: left;
+    background-color: #white;
+   
+
 
 }
+
 .replyContent{
 	text-align: left;
     clear: both;
     padding: 20px 0 20px 25px;
     word-break: break-all;
-    border-bottom: 1px solid #e9e9e9;
+     border:10px solid;
+/*     border-bottom: 1px solid #e9e9e9; */
 }
 .textareazone{
+width:84%;
 	border-color: #efefef;
     background-color: #efefef;
 }
 
-.textareazone textarea{
-width:700px;
-    background-color: white;
+ .textareazone textarea{ 
+ overflow: hidden;
+ width:700px; 
+     background-color: #efefef;
+     
+ } 
+
+.replyWrap input[value="1"]{
+	margin-left: 40px;
 }
+
+
+ .date{ 
+ font: 12px Poppins,Lato,arial,Nanum Gothic,AppleGothic,sans-serif;
+    font-weight: normal;
+ } 
+
+.alink{
+	float: right; 
+ 	padding-right: 10px; 
+    top: 7px;
+    right: 20px;
+}
+
+textarea[value="false"]{
+overflow:auto !important;
+background-color: white;
+
+}
+textarea[value="true"]{
+border:1px solid #000;
+
+}
+
+
 
 </style>
 <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -91,6 +153,8 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 	var bno = ${view.bno}; 
+	var sessionId = "<%=session.getAttribute("id")%>";
+	var ch=0;
 	function commentList(){
 		
 	    $.ajax({
@@ -98,25 +162,86 @@ $(document).ready(function() {
 	        type : 'get',
 	        data : {'bno':bno},
 	        success : function(data){
-	            var a =''; 
+	            var a ='';
 	            $.each(data, function(key, value){ 
-	            	var recontent = value.content.replace(/\n/gi,"<br>")
-	                a += '<div class="replyWrap" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                a += '<div class="replyTitle">'+' 작성자 : '+value.writer;
+	            	var recontent = value.content.replace(/<br>/gi,"\r\n");
+	            	console.log("리컨텐츠 : "+recontent)
+	            	console.log(value.rno)
+	            	if(value.rno==0){
+	            		
+	                a += '<div class="replyWrap2">';
+	                a += '<div class="replyTitleRe">'+'<img class="imgclass" src="http://img.echosting.cafe24.com/skin/admin_ko_KR/board/ico_comment.gif"><b>&nbsp'+value.writer.substring(0,2)+'****</b>&nbsp<b class="date">'+value.regDate.substring(0,10)+'</b>';
 	                console.log("작성자체크합니다 :"+value.writer)
-	                a += '<a onclick="commentUpdate('+value.rno+',\''+recontent+'\');"> 수정 </a>';
-	                a += '<a onclick="commentDelete('+value.rno+');"> 삭제 </a> </div>';
-	                console.log("리스트쪽 content:"+value.content)
-	                a += '<div class="commentContent'+value.rno+'"> <p> 내용 : '+recontent+'</p>';
+	                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+recontent+'\');"> 수정 </a>';
+	                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
 	                a += '</div></div>';
-
+	                a += '<div class="commentContent'+value.rno+'"> <textarea readonly value="false" cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+	                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정</button> </span>';
+	                a += '<input type="hidden" value="'+value.brno+'">';
+	                a += '</div></div>';
+	                	
+	            	}else{
+	            		if(ch!=0)
+	            			a += '</div>'
+	            		a += '<div id="replyWrap'+value.p_rno+'">'
+	            		a += '<div class="replyWrap" style="border-top:1px solid darkgray;">';
+		                a += '<div class="replyTitle">'+'<b>'+value.writer.substring(0,2)+"****</b>&nbsp<b class='date'>"+value.regDate.substring(0,10)+'</b>';
+		                console.log("작성자체크합니다 :"+value.writer)
+		                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+recontent+'\');"> 수정 </a>';
+		                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
+		                a += '<a onclick="commentAdd('+value.p_rno+');"> 답글 </a> </div></div>';
+		                a += '<div class="commentContent'+value.rno+'"> <textarea readonly  value="false" cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+		                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정 완료</button> </span>';
+		                a += '<input type="hidden" value="'+value.brno+'">';
+		                a += '</div></div>';
+		                
+		                
+	            	}
+	            	ch ++;
 	            });
-	            
+	            a += '</div>'
 	            $(".commentList").html(a);
 	        }
+	        
 	    });
 	}
 
+	
+	function commentAdd(p_rno){
+			 var a ='';
+			 a +='<form id="commentAdd'+p_rno+'">';
+		    a += '<div class="input-group">';
+		    a += '<textarea cols="1" id="content" value="true" name="content_Add'+p_rno+'"></textarea>';
+		    a += '<span class="input-group-btn"><button type="button" onclick="commentAddInsert('+p_rno+');">등록완료</button> </span>';
+		    a += '</div>';
+		    a += '</form>';
+		    
+		    $('#replyWrap'+p_rno).append(a);
+	}
+	
+	
+	function commentAddInsert(rno){
+		var content_Add = $('[name=content_Add'+rno+']').val();
+			
+		$.ajax({
+	        url : 'replyAddInsert',
+	        type : 'post',
+	        data : {'content':content_Add,'rno':rno,'bno':bno,'writer':sessionId},
+	        success : function(data){
+	          
+	                commentList(); //댓글 작성 후 댓글 목록 reload
+	                $('[name=content_Add'+rno+']').val('');
+	            
+	        },error:function(){
+				alert("에러")	        	
+	        }
+	    });
+	
+	}
+	
+	
+	
+	
 	function commentInsert(insertData){
 	    $.ajax({
 	        url : 'reply',
@@ -131,75 +256,73 @@ $(document).ready(function() {
 	    });
 	}
 
-	function commentUpdate(rno, content){
+	function commentUpdate(rno,brno,writer,content){
 		var sessionId = "<%=session.getAttribute("id")%>";
-		 $.ajax({
-		        url : 'Writerchk',
-		        type : 'post',
-		        data : {'rno' : rno},
-		        success : function(data){
-		        	if(sessionId!=data){
-		    			alert("해당 작성자만 댓글 수정이 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + data);
-		    			
-		    		}else{
-		    			 var a ='';
-		    			    console.log(content)
-		    			    var recontent = content.replace(/<br>/gi,"\r\n")
-		    			    console.log(recontent)
-		    			    a += '<div class="input-group">';
-		    			    a += '<textarea cols="1" id="content" name="content_'+rno+'">'+recontent+'</textarea>';
-		    			    a += '<span class="input-group-btn"><button type="button" onclick="commentUpdateProc('+rno+');">수정</button> </span>';
-		    			    a += '</div>';
-		    			    
-		    			    $('.commentContent'+rno).html(a);
+		
+		if(sessionId!=writer){
+			alert("해당 작성자만 댓글 삭제 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + writer);
+		}else{
+// 		     var a ='';
+// 		      console.log(content)
+// 		      var recontent = content.replace(/<br>/gi,"\r\n")
+// 		     	console.log(recontent)
+// 		     	a += '<div class="input-group">';
+// 		    	a += '<textarea cols="1" id="content" name="content_'+rno+'">'+recontent+'</textarea>';
+// 		    	a += '<span class="input-group-btn"><button type="button" onclick="commentUpdateProc('+rno+','+brno+');">수정</button> </span>';
+// 		    	a += '</div>';
+// 		    	$('#replyWrap'+rno).html(a);
+				$("#content"+rno+'_'+brno).removeAttr("readonly")
+				$("#content"+rno+'_'+brno).attr("value",'true');
+				$(".input-group-btn"+rno+'-'+brno).css("display","block");
 		    		}
 		          
-		        }
-		    });
-	    
 	}
 	 
 	//댓글 수정
-	function commentUpdateProc(rno){
-	    var updateContent = $('[name=content_'+rno+']').val();
+	function commentUpdateProc(rno,brno){
+	    var updateContent = $("#content"+rno+"_"+brno).val();
 	    console.log(updateContent)
+	    console.log(rno)
+	    console.log(brno)
+	    if(brno!=0)
+		re={'rno' : rno,'brno':brno,'content':updateContent}
+		else
+		re={'rno' : rno,'content':updateContent}
 	    $.ajax({
 	        url : 'replyupdate',
 	        type : 'post',
-	        data : {'content' : updateContent, 'rno' : rno},
+	        data : re,
 	        success : function(data){
+	        	$("#content"+rno+'_'+brno).attr("value",'false');
 	            if(data == 1) commentList(); //댓글 수정후 목록 출력 
 	        }
 	    });
 	}
 
-	function commentDelete(rno){
+	function commentDelete(rno,brno,writer){
 		var sessionId = "<%=session.getAttribute("id")%>";
-		 $.ajax({
-		        url : 'Writerchk',
-		        type : 'post',
-		        data : {'rno' : rno},
-		        success : function(data){
-		        	if(sessionId!=data){
-		    			alert("해당 작성자만 댓글 삭제 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + data);
-		    		}else{
-		    			var delconfirm = confirm("해당 댓글을 정말 삭제하시겠습니까?");
-		    			if(delconfirm){
-		    			$.ajax({
-		    			        url : 'replydel',
-		    			        type : 'post',
-		    			        data : {'rno' : rno},
-		    			        success : function(data){
-		    			        	alert("댓글이 삭제되었습니다.")
-		    			            commentList(); //댓글 수정후 목록 출력 
-		    			        }
-		    			    });
-		    			}else{
-		    				alert("댓글삭제취소");
-		    			}
-		    		}
-		        }
-		    });
+		if(brno!=0)
+		re={'rno' : rno,'brno':brno}
+		else
+		re={'rno' : rno}
+		if(sessionId!=writer){
+			alert("해당 작성자만 댓글 삭제 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + writer);
+		}else{
+			var delconfirm = confirm("해당 댓글을 정말 삭제하시겠습니까?");
+			if(delconfirm){
+			$.ajax({
+			        url : 'replydel',
+			        type : 'post',
+			        data : re,
+			        success : function(data){
+			        	alert("댓글이 삭제되었습니다.")
+			            commentList(); //댓글 수정후 목록 출력 
+			        }
+			    });
+			}else{
+				alert("댓글삭제취소");
+			}
+		}
 		
 	}
         
@@ -233,6 +356,9 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
     border: none;
     vertical-align: top;
 }
+
+
+
 </style>
 </head>
 <body onload="commentList()">
@@ -287,6 +413,8 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 	    <ul>
 	    	<li>
 	    		<div class="commentList">
+	    			
+	    		
 	    		<!-- 여기에 댓글 목록들어간다 -->
 	    		</div>
 			</li>

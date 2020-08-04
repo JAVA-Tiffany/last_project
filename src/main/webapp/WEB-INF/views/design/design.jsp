@@ -165,7 +165,6 @@
       id="myCanvas"+count;
       $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+count).draggable();
-      $("#image"+count).resizable();
       ctx[count] = document.getElementById(id).getContext("2d");
       ctx[count].font = '40px Arial';
       ctx[count].fillText('입력', 0, 50);
@@ -184,7 +183,6 @@
       new_id="myCanvas"+d;
       $('#in').append("<div id='image"+d+"' style='width: 50px; height: 50px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 350px; height: 100px;'></canvas></div>")
       $("#image"+d).draggable();
-      $("#image"+d).resizable();
       ctx[count] = document.getElementById(new_id).getContext("2d");
       ctx[count].font = '40px Arial';
       ctx[count].fillText($("#textin").val(), 0, 50);
@@ -198,6 +196,7 @@
             minWidth: 50,
             minHeight: 50,
         });
+        
         for(i=1;i<count+1;i++){
            $("#image"+i).css("opacity", "1");
         }
@@ -230,7 +229,6 @@
       id="myCanvas"+count
       $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
-      $("#image"+count).resizable();
       img[count] = new Image();
       g=img[count]
       img[count].addEventListener('load',function(){
@@ -350,7 +348,7 @@
       var popupX = (window.screen.width / 2) - (1300 / 2);
       var popupY= (window.screen.height /2) - (850 / 2);
       chopenWin = window.open("",
-         "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, status=no,toolbar=no,scrollbars=no");    
+         "changeopen", 'status=no, height=750, width=1100, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ",  = no, status=no,toolbar=no,scrollbars=noresizable");    
       changeop.action="change";
       changeop.method="post";
       changeop.target="changeopen";
@@ -402,7 +400,7 @@
 <body >
    
    <jsp:include page="../default/header.jsp"/>
-   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" >
+   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" onclick="imgclick('0')">
       <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
          <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
             <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>

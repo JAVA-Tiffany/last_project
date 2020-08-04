@@ -160,14 +160,14 @@ html, body{
    <div class="wrap">
          
          <div class="footer_menu_Logo">
-            <img class="img0" src="resources/img/MAKE2.png" style="width:150px; height: 70PX; color:#F6F6F6;">
+            <img class="img0" src="resources/img/MAKE2.PNG" style="width:150px; height: 70PX; color:#F6F6F6;">
          </div>
    
       <div class="footer_menus">
       
          
          <div class="footer_menu">
-            <h4>IkeHale</h4>
+            <h4>MAKE</h4>
             <ul>
                <li><a href="company_profile">회사소개</a></li>
                <li><a href="#">리뷰</a></li>

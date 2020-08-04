@@ -46,6 +46,7 @@ public class CommunityController {
    public String view(CommnuityDTO dto, Model model, HttpServletRequest request) {
       service.count(dto);
       service.view(dto,model);
+      System.out.println(dto.getBno());
       HttpSession session = request.getSession();
       
       if(session.getAttribute("id")==null) {
@@ -69,6 +70,7 @@ public class CommunityController {
       dto.setBno(Integer.valueOf(bno));
       dto.setContent(content.replaceAll("\\r\\n","<br>"));
       dto.setWriter(writer);
+      dto.setBrno(0);
       
       return replyService.insert(dto);
    }
@@ -160,8 +162,15 @@ public class CommunityController {
    
    @RequestMapping(value="replydel", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
-   public void reply_del(@RequestParam int rno) {
-      replyService.delete(rno);
+   public void reply_del(@RequestParam int rno, @RequestParam(required = false) String brno) {
+	   if(brno==null) {
+		   replyService.delete(rno);
+	   }else {
+		   System.out.println(rno);
+		   System.out.println(brno);
+		   replyService.delete_Add(rno,brno);
+	   }
+
    }
    
    @RequestMapping(value="replych", method = RequestMethod.POST, produces = "application/text; charset=utf8")
@@ -172,12 +181,26 @@ public class CommunityController {
    
    @RequestMapping("replyupdate") //댓글 수정  
    @ResponseBody
-   private int mCommentServiceUpdateProc(@RequestParam int rno, @RequestParam String content) throws Exception{
-	   ReplyDTO dto = new ReplyDTO();
-       dto.setRno(rno);
-       dto.setContent(content.replaceAll("\\r\\n","<br>"));
-       
-       return replyService.update(dto);
+   private int mCommentServiceUpdateProc(@RequestParam int rno,@RequestParam(required = false) String brno, @RequestParam String content) throws Exception{
+	   if(brno==null) {
+		   System.out.println(rno+"ss");
+		   ReplyDTO dto = new ReplyDTO();
+	       dto.setP_rno(rno);
+	       dto.setContent(content.replaceAll("\\r\\n","<br>"));
+	       
+	       return replyService.update(dto);
+	   }else {
+		   System.out.println(rno);
+		   System.out.println(brno);
+		   ReplyDTO dto = new ReplyDTO();
+	       dto.setP_rno(rno);
+	       dto.setBrno(Integer.valueOf(brno));
+	       dto.setContent(content.replaceAll("\\r\\n","<br>"));
+	       
+	       return replyService.update_Add(dto);
+	   }
+	   
+	  
    }
 
 
@@ -187,7 +210,23 @@ public class CommunityController {
        return replyService.Writerchk(rno);
    }
    
-   
+   @RequestMapping(value="replyAddInsert",method = RequestMethod.POST,produces = "application/text; charset=utf8") 
+   @ResponseBody
+   private String replyAddInsert(@RequestParam int rno,@RequestParam int bno,@RequestParam String content,@RequestParam String writer) throws Exception{
+       
+	   ReplyDTO dto = new ReplyDTO();
+	   dto.setBno(bno);
+	   dto.setContent(content);
+	   dto.setP_rno(rno);
+	   dto.setWriter(writer);
+	   System.out.println(dto.getWriter());
+	   System.out.println(dto.getBno());
+	   System.out.println(dto.getContent());
+	   System.out.println(dto.getP_rno());
+	   
+	   
+	   return String.valueOf(replyService.insertAddRe(dto));
+   }
    
    
    

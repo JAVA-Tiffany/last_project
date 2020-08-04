@@ -62,7 +62,6 @@
          $("#index_imggoods_text").val(cookie_type[d]);
          $("#index_imgname_text").val(cookie_product[d]);
          $("#index_imgmoney_text").val(cookie_price[d]);
-         alert($("#index_imggoods_text").val());
          index_form.submit();
       }
    var cookie_img=${newsee_list}
@@ -175,7 +174,7 @@ img.style.cursor = 'pointer';
 img.style.borderRadius = options.circle ? '50%' : '';
 img.style.boxShadow = options.shadow ? '0 0 4px rgba(0,0,0,.16), 0 4px 4px rgba(0,0,0,.24)' : '';
 img.onclick = function(e) {
-window.open('https://lc-api.lunasoft.co.kr/lunachat/api-connect/@윙블링/main/no_gid' + options.partnerId + '?ref=' + encodeURIComponent(location.href) + '#nafullscreen', 'talktalk', 'scrollbars=1, resizable=1, width=486, height=745');
+   window.open('https://open.kakao.com/o/swBlNxoc', 'talktalk', 'scrollbars=1, resizable=1, width='+window.screen.width+', height='+window.screen.height+'');
 }
 d.getElementsByTagName('html')[0].appendChild(img);
 })(document);
@@ -204,7 +203,7 @@ img.style.cursor = 'pointer';
 img.style.borderRadius = options.circle ? '50%' : '';
 img.style.boxShadow = options.shadow ? '0 0 4px rgba(0,0,0,.16), 0 4px 4px rgba(0,0,0,.24)' : '';
 img.onclick = function(e) {
-window.open('https://talk.naver.com/' + options.partnerId + '?ref=' + encodeURIComponent(location.href) + '#nafullscreen', 'talktalk', 'scrollbars=1, resizable=1, width=486, height=745');
+   window.open('https://talk.naver.com/W4UJZ0', 'talktalk', 'scrollbars=1, resizable=1, width='+window.screen.width+', height='+window.screen.height+'');
 }
 d.getElementsByTagName('html')[0].appendChild(img);
 })(document);

@@ -72,8 +72,8 @@ public class CommnuityDAO {
    
    
    
-   public int countreply(CommnuityDTO dto) {
-	   return sqlSession.selectOne(namepasce+".countReply",dto);
+   public int countreply(int bno) {
+	   return sqlSession.insert(namepasce+".count_reply",bno);
    }
 }
    

@@ -6,7 +6,21 @@ public class ReplyDTO {
 	private String content;
 	private String writer;
 	private String regDate;
+	private int p_rno;
+	private int brno;
 	
+	public int getBrno() {
+		return brno;
+	}
+	public void setBrno(int brno) {
+		this.brno = brno;
+	}
+	public int getP_rno() {
+		return p_rno;
+	}
+	public void setP_rno(int p_rno) {
+		this.p_rno = p_rno;
+	}
 	public int getBno() {
 		return bno;
 	}

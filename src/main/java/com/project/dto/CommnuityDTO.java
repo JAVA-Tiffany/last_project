@@ -12,13 +12,13 @@ public class CommnuityDTO {
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
-	private String replycount;
+	private int replycount;
 	
 	
-	public String getReplycount() {
+	public int getReplycount() {
 		return replycount;
 	}
-	public void setReplycount(String replycount) {
+	public void setReplycount(int replycount) {
 		this.replycount = replycount;
 	}
 	public int getBno() {

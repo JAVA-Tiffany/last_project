@@ -143,7 +143,9 @@
       board_sys (bno,title,content,writer) values((select
       nvl(max(bno)+1,1)from board_sys),#{title},#{content},#{writer} )
    </insert>
-
+<!-- 	<insert id="countReply"> -->
+<!-- 		update board_sys set replycount=replycount+1 where bno=#{bno}; -->
+<!-- 	</insert> -->
 
    <!-- 모든 유저 장바구니 리스트 -->
    <select id="selectAll_Userimg" resultType="Paydto"
@@ -207,24 +209,40 @@
    <!-- 댓글 -->
    <select id="select_reply" resultType="replydto"
       parameterType="replydto">
-      select * from reply where bno=#{bno} order by rno desc
+      select * from reply where bno=#{bno} order by p_rno asc,brno asc
    </select>
    <insert id="insert_reply" parameterType="replydto">
       insert into reply(bno,
-      rno, content, writer) values(#{bno}, (select nvl(max(rno)+1,1)from
-      reply), #{content}, #{writer})
+      rno, content, writer, p_rno,brno) values(#{bno}, (select nvl(max(rno)+1,1)from
+      reply), #{content}, #{writer},(select nvl(max(rno)+1,1)from
+      reply),0)
    </insert>
    <update id="update_reply" parameterType="replydto">
       update reply set
-      content=#{content} where rno=#{rno}
+      content=#{content} where rno=#{p_rno}
+   </update>
+   <update id="update_reply_Add" parameterType="replydto">
+      update reply set
+      content=#{content} where p_rno=#{p_rno} and brno=#{brno}
    </update>
    <delete id="delete_reply" parameterType="int">
-      delete reply where rno=#{rno}
+      delete reply where p_rno=#{rno}
+   </delete>
+   <delete id="delete_reply_Add" parameterType="replydto">
+      delete reply where p_rno=#{p_rno} and brno=#{brno}
    </delete>
    <select id="Writerchk" resultType="String">
    	select writer from reply where rno=#{rno}
    </select>
-
+   <insert id="insert_Addreply" parameterType="replydto">
+   		   insert into reply(bno
+      , content, writer,p_rno,brno) values(#{bno},#{content}, #{writer},#{p_rno},(select nvl(max(brno)+1,1)from
+      reply where p_rno=#{p_rno}))
+   </insert>
+   <select id="count_reply" resultType="int">
+   		select count(*) from reply where bno=#{bno}
+   </select>
+	
    <!-- Notice 게시물 관련 -->
    <select id="select_adminList" resultType="Noticedto">
       select * from notice

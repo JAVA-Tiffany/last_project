@@ -8,15 +8,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 .div1 {
-padding-top: 200px;
+padding-top: 50px;
 padding-bottom: 100px;
 }
 .div2{
 padding-top: 40px;
 }
 body {
-font: 400 15px 'Poppins',sans-serif;
+font: 12px Poppins,Lato,arial,Nanum Gothic,AppleGothic,sans-serif;
+    font-weight: normal;
 }
   table {
     width: 60%;
@@ -44,7 +46,16 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
    justify-content: center;
    align-items: center;
 }
-
+.replycount{
+	color:red;
+}
+.div0 {
+padding-top: 180px;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   
+}
 </style>
 </head>
 <body>
@@ -126,12 +137,16 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
       }
    }
 </script>
+
+
 <jsp:include page="../default/header.jsp"/>
 <%-- <%@include file="header.jsp"%> --%>
-
+<div class="div0">
+<font color="333333" style="font: 400 30px 'Poppins',sans-serif;" >Q/A<br></font>
+</div>
 <div align="center" class="div1">
    <table border="0">
-      <caption><font color="333333" style="font: 400 30px 'Poppins',sans-serif;">Q/A<br></font></caption>
+      
          <tr>
             <th style="width: 10%;">번호</th>
             <th style="width: 50%;">제목</th>
@@ -142,17 +157,17 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 		<c:forEach var="adminList" items="${adminList}">
 		<tr>
          <td><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
-         <td onclick="totle_click(${adminList.bno})"><label> ${adminList.title} </label> </td>
+         <td onclick="totle_click(${adminList.bno})"><label> ${adminList.title} </label><label class="replycount"> [${adminList.replycount}]</label> </td>
          <td>관리자</td>
          <td style="font-size: 2px;">${adminList.regdate }</td>
          <td>${adminList.viewcnt }</td>
       </tr>
 		</c:forEach>
 		
-      <c:forEach var="dto" items="${listAll}" varStatus="status">
+      <c:forEach var="dto" items="${listAll}">
       <tr>
          <td>${dto.bno }</td>
-         <td onclick="totle_click(${dto.bno})"><label> ${dto.title} </label></td>
+         <td onclick="totle_click(${dto.bno})"><label> ${dto.title} </label><label class="replycount"> [${dto.replycount}] </label></td>
          <td>${dto.writer }</td>
          <td style="font-size: 2px;">${dto.regdate}</td>
          <td>${dto.viewcnt }</td>
