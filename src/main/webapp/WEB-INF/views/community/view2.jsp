@@ -8,16 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-/* body { */
-/* 	font: 12px Poppins,Lato,arial,Nanum Gothic,AppleGothic,sans-serif; */
-/*     font-weight: normal; */
-/* } */
+
 	textarea {
 	width:100%;
 	height:50px;
 	margin-top:10px;
 	resize: none;
-	overflow:auto !important;
+	overflow:auto ;
 /*  	border-bottom: 1px solid #e9e9e9;  */
 	border:0;
 	padding-left: 30px;
@@ -52,7 +49,7 @@
     padding: 12px 0 10px 20px;
 /*     border-bottom: 1px solid #e9e9e9; */
     text-align: left;
-    background-color: #white;
+    background-color: white;
    
 
 
@@ -97,7 +94,7 @@ width:84%;
 }
 
 textarea[value="false"]{
-overflow:auto !important;
+overflow:auto;
 background-color: white;
 
 }
@@ -153,7 +150,7 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 	var bno = ${view.bno}; 
-	var sessionId = "<%=session.getAttribute("id")%>";
+	var sessionId = '${sessionScope.id}'
 	var ch=0;
 	function commentList(){
 		
@@ -175,7 +172,7 @@ $(document).ready(function() {
 	                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+recontent+'\');"> 수정 </a>';
 	                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
 	                a += '</div></div>';
-	                a += '<div class="commentContent'+value.rno+'"> <textarea readonly value="false" cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+	                a += '<div class="commentContent'+value.rno+'"> <textarea readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
 	                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정</button> </span>';
 	                a += '<input type="hidden" value="'+value.brno+'">';
 	                a += '</div></div>';
@@ -187,10 +184,10 @@ $(document).ready(function() {
 	            		a += '<div class="replyWrap" style="border-top:1px solid darkgray;">';
 		                a += '<div class="replyTitle">'+'<b>'+value.writer.substring(0,2)+"****</b>&nbsp<b class='date'>"+value.regDate.substring(0,10)+'</b>';
 		                console.log("작성자체크합니다 :"+value.writer)
-		                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+recontent+'\');"> 수정 </a>';
+		                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+value.content+'\');"> 수정 </a>';
 		                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
 		                a += '<a onclick="commentAdd('+value.p_rno+');"> 답글 </a> </div></div>';
-		                a += '<div class="commentContent'+value.rno+'"> <textarea readonly  value="false" cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+		                a += '<div class="commentContent'+value.rno+'"> <textarea readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
 		                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정 완료</button> </span>';
 		                a += '<input type="hidden" value="'+value.brno+'">';
 		                a += '</div></div>';
@@ -211,7 +208,7 @@ $(document).ready(function() {
 			 var a ='';
 			 a +='<form id="commentAdd'+p_rno+'">';
 		    a += '<div class="input-group">';
-		    a += '<textarea cols="1" id="content" value="true" name="content_Add'+p_rno+'"></textarea>';
+		    a += '<textarea cols="1" id="content" name="content_Add'+p_rno+'"></textarea>';
 		    a += '<span class="input-group-btn"><button type="button" onclick="commentAddInsert('+p_rno+');">등록완료</button> </span>';
 		    a += '</div>';
 		    a += '</form>';
@@ -257,7 +254,7 @@ $(document).ready(function() {
 	}
 
 	function commentUpdate(rno,brno,writer,content){
-		var sessionId = "<%=session.getAttribute("id")%>";
+		var sessionId = '${sessionScope.id}'
 		
 		if(sessionId!=writer){
 			alert("해당 작성자만 댓글 삭제 가능합니다.\n"+"로그인한아이디 : "+ sessionId +"\n댓글작성자 : " + writer);
@@ -271,8 +268,8 @@ $(document).ready(function() {
 // 		    	a += '<span class="input-group-btn"><button type="button" onclick="commentUpdateProc('+rno+','+brno+');">수정</button> </span>';
 // 		    	a += '</div>';
 // 		    	$('#replyWrap'+rno).html(a);
-				$("#content"+rno+'_'+brno).removeAttr("readonly")
 				$("#content"+rno+'_'+brno).attr("value",'true');
+				$("#content"+rno+'_'+brno).removeAttr("readonly")
 				$(".input-group-btn"+rno+'-'+brno).css("display","block");
 		    		}
 		          

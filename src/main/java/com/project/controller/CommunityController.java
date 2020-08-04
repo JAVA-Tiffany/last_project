@@ -186,16 +186,17 @@ public class CommunityController {
 		   System.out.println(rno+"ss");
 		   ReplyDTO dto = new ReplyDTO();
 	       dto.setP_rno(rno);
-	       dto.setContent(content.replaceAll("\\r\\n","<br>"));
-	       
+	       System.out.println(content);
+	       dto.setContent(content.replaceAll("\n","<br>"));
+	       System.out.println(dto.getContent());
 	       return replyService.update(dto);
 	   }else {
-		   System.out.println(rno);
-		   System.out.println(brno);
+		   System.out.println(rno + "11");
+		   System.out.println(brno + "22");
 		   ReplyDTO dto = new ReplyDTO();
 	       dto.setP_rno(rno);
 	       dto.setBrno(Integer.valueOf(brno));
-	       dto.setContent(content.replaceAll("\\r\\n","<br>"));
+	       dto.setContent(content.replaceAll("\n","<br>"));
 	       
 	       return replyService.update_Add(dto);
 	   }
