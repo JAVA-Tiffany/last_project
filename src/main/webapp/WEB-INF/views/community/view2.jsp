@@ -11,14 +11,14 @@
 
 	textarea {
 	width:100%;
-	height:50px;
+	height:70px;
 	margin-top:10px;
-	resize: none;
-	overflow:auto ;
-/*  	border-bottom: 1px solid #e9e9e9;  */
+	overflow:hidden !important ;
 	border:0;
 	padding-left: 30px;
 	padding-top: 10px;
+	resize: none; 
+
 	}
 
 .replyWrap{
@@ -102,22 +102,39 @@ textarea[value="true"]{
 border:1px solid #000;
 
 }
+.input-group{
+width:84%;
 
+}
+#replyForm{
+	
+	margin-top: 15px;
+}
 
 
 </style>
 <script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="resources/jquery.form.min.js"></script>
+<script src="resources/js/autosize.min.js"></script>
+
 <script type="text/javascript">
+  
+
+  
+  
   
 $(document).ready(function() {
 	var bno = ${view.bno}; 
+
+	
+	
+	
+	
 	$("#insertBtn").click(function(){
 		console.log("a");
 		var insertData = $("#replyForm").serialize(); //commentInsertForm의 내용을 가져옴
 	    commentInsert(insertData); //Insert 함수호출(아래)
 	})
-	
 
 // 	function commentList(){
 // 	    $.ajax({
@@ -172,7 +189,7 @@ $(document).ready(function() {
 	                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+recontent+'\');"> 수정 </a>';
 	                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
 	                a += '</div></div>';
-	                a += '<div class="commentContent'+value.rno+'"> <textarea readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+	                a += '<div class="commentContent'+value.rno+'"> <textarea class="textclass" readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
 	                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정</button> </span>';
 	                a += '<input type="hidden" value="'+value.brno+'">';
 	                a += '</div></div>';
@@ -187,7 +204,7 @@ $(document).ready(function() {
 		                a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+value.content+'\');"> 수정 </a>';
 		                a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';
 		                a += '<a onclick="commentAdd('+value.p_rno+');"> 답글 </a> </div></div>';
-		                a += '<div class="commentContent'+value.rno+'"> <textarea readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
+		                a += '<div class="commentContent'+value.rno+'"> <textarea class="textclass" readonly cols="1" id="content'+value.p_rno+'_'+value.brno+'" name="content_'+value.rno+'">'+recontent+'</textarea>';
 		                a += '<span class="input-group-btn'+value.p_rno+'-'+value.brno+'" style="display:none;"><button type="button" onclick="commentUpdateProc('+value.p_rno+','+value.brno+');">수정 완료</button> </span>';
 		                a += '<input type="hidden" value="'+value.brno+'">';
 		                a += '</div></div>';
@@ -203,12 +220,12 @@ $(document).ready(function() {
 	    });
 	}
 
-	
+	//답글 텍스트생성 메소드
 	function commentAdd(p_rno){
 			 var a ='';
 			 a +='<form id="commentAdd'+p_rno+'">';
 		    a += '<div class="input-group">';
-		    a += '<textarea cols="1" id="content" name="content_Add'+p_rno+'"></textarea>';
+		    a += '<textarea cols="1" id="content" value="true" name="content_Add'+p_rno+'"></textarea>';
 		    a += '<span class="input-group-btn"><button type="button" onclick="commentAddInsert('+p_rno+');">등록완료</button> </span>';
 		    a += '</div>';
 		    a += '</form>';
@@ -216,7 +233,7 @@ $(document).ready(function() {
 		    $('#replyWrap'+p_rno).append(a);
 	}
 	
-	
+	//답글 DB등록
 	function commentAddInsert(rno){
 		var content_Add = $('[name=content_Add'+rno+']').val();
 			
@@ -238,7 +255,7 @@ $(document).ready(function() {
 	
 	
 	
-	
+	//댓글 insert 메소드
 	function commentInsert(insertData){
 	    $.ajax({
 	        url : 'reply',
@@ -252,7 +269,8 @@ $(document).ready(function() {
 	        }
 	    });
 	}
-
+	
+	//readonly푸는 메소드
 	function commentUpdate(rno,brno,writer,content){
 		var sessionId = '${sessionScope.id}'
 		
@@ -275,9 +293,13 @@ $(document).ready(function() {
 		          
 	}
 	 
-	//댓글 수정
+	//댓글 수정DB
 	function commentUpdateProc(rno,brno){
 	    var updateContent = $("#content"+rno+"_"+brno).val();
+	    var count = updateContent.length;
+	    if(count > 200)
+	    
+	    
 	    console.log(updateContent)
 	    console.log(rno)
 	    console.log(brno)
@@ -323,7 +345,8 @@ $(document).ready(function() {
 		
 	}
         
-     
+	
+
 
 </script>
 
@@ -429,7 +452,7 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
 			               <input type="hidden" name="bno" value="${view.bno}">
 			               <input type="hidden" name="writer" value="${sessionScope.id }">
 			               
-			               <textarea cols="1" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
+			               <textarea cols="1" id="content" class="textclass" name="content" placeholder="내용을 입력하세요."></textarea>
 			               <span>
 			                    <input type="button" id="insertBtn" value="등록"/>
 			               </span>
@@ -450,7 +473,8 @@ a:active { text-decoration: none; color: #000; } <!-- active : 클릭했을 때 
  </div>
 <input type="hidden" id="text">
 <jsp:include page="../default/footer.jsp"/>
-
-
+<script type="text/javascript">
+autosize(document.querySelectorAll('textarea'));
+</script>
 </body>
 </html>

@@ -17,10 +17,24 @@
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>Insert title here</title>
+<style type="text/css">
+#Progress_Loading
+{
+ position: absolute;
+ left: 40%;
+ top:10px;
+ background: none;
+ width: 200px;
+ height: 200px;
+}
+</style>
 </head>
 <body>
 <iframe src="http://nid.naver.com/nidlogin.logout" style="visibility:hidden;display:none"></iframe>
 <script type="text/javascript">
+$(document).ready(function(){
+      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+   })
 function deltoken(){
    $.ajax({
       url:"deltoken",
@@ -100,8 +114,8 @@ function pagereturn(){
                 alert("비어있는 칸이 존재합니다.")
           } else {
              Swal.fire({
-                  title: '개인정보를 삭제하시겠습니까?',
-                  text: '정말 삭제하시겠습니까?',
+                  title: '개인정보를 수정하시겠습니까?',
+                  text: '정말 수정하시겠습니까?',
                   icon: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: '#3085d6',
@@ -125,16 +139,19 @@ function pagereturn(){
        function eamil_k() {
           alert("인증번호 보내는 중")
           if($("#email_btn").val()=="인증 발급"){
+             $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
              $.ajax({
                    url : "mailSending",
                    type : "POST",
                    data : {email:$("#email").val()},
                    success : function(data) {
+                      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
                       alert("인증번호 보내졌습니다.")
                       $("#join_key_text").val(data);
                       $("#email_btn").val("인증 확인");
                    },
                    error : function() {
+                      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
                       alert('보내기 실패')
                    }
               })
@@ -223,7 +240,9 @@ function pagereturn(){
 }
 
 </script>
-
+   <div id = "Progress_Loading"><!-- 로딩바 -->
+      <img style="width: 200px; height: 200px;" src="resources/img/Progress_Loading.gif"/>
+   </div>
 <div class="limiter">
       <div class="container-login100" align="center">
          <div class="wrap-login100" align="center">
@@ -233,7 +252,7 @@ function pagereturn(){
 <!--          </div> -->
             <div align="center">
                
-               <form action="Infoupdata" name="user" style="align:center;">
+               <form action="info_change" name="user" style="align:center;">
       
                <div class="wrap-input100 validate-input" align="center">
                   <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly">
@@ -245,14 +264,14 @@ function pagereturn(){
                
                   
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw" value="${myinfo_list.pw}">
+                  <input type="password" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()" value="${myinfo_list.pw}">
+                  <input type="password" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>

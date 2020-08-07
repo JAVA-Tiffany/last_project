@@ -52,8 +52,15 @@ public class ProjectService {
 		userdao.delete(num);
 	}
 	public void update(UserDTO dto) {
-		userdao.update(dto);
-	}
+	      Sha sha = new Sha();
+	      try {
+	         dto.setPw(sha.sha256(dto.getPw()));
+	         userdao.update(dto);
+	      } catch (NoSuchAlgorithmException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	   }
 	public void select(Model model) {
 		model.addAttribute("list",userdao.selectAll());
 	}
@@ -183,4 +190,10 @@ public class ProjectService {
 
 
 	}
+	
+	public String select_price(Model model, String product) {
+	      String a = datalistdao.select_price(product);
+	      model.addAttribute("price", a);
+	      return a;
+	   }
 }

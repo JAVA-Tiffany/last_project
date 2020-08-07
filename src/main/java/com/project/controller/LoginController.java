@@ -56,7 +56,12 @@ public class LoginController {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		System.out.println(oauthToken);
+//		System.out.println(oauthToken.getAccessToken());
+//		System.out.println(code);
+//		System.out.println(state);
+//		session.setAttribute("code", code);
+//		session.setAttribute("state", state);
+//		session.setAttribute("naverTokenId", oauthToken.getAccessToken());
 		//1. 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
 		/** apiResult json 구조

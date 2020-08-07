@@ -35,8 +35,8 @@
             <c:forEach var="dto" items="${order_list}">
                
                <tr>
-                  <td style="height: 50px; width: 200px;" align="center"><img
-                     style="height: 100px; width: 100px;" src="${dto.img}" ></td>
+                  <td style="height: 50px; width: 200px;" align="center">
+                  <img style="height: 100px; width: 100px;" src="${dto.img}" ></td>
                   <td style="height: 50px;"><label>${dto.product}</label>
                      
                      <input type="hidden" id="review_img${dto.rno}" value="${dto.product}">
@@ -65,6 +65,9 @@
             </c:forEach>
          </table>
    </div>
+   
+   
+   <jsp:include page="../default/footer.jsp"/>
    <form action="review_write" method="post" name="orderlist_form">
       <input type="hidden" name="type" id="type">
       <input type="hidden" name="review_img" id="review_img">
