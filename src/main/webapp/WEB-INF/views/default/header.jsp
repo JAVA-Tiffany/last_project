@@ -217,7 +217,7 @@
       <div>
          <h1>
             <a href="index" style="color: black;">
-            <img class="img0" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+            <img src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
             </a>
          </h1>
       </div>
