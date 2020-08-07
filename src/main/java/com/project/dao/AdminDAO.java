@@ -80,4 +80,8 @@ public class AdminDAO {
 		sqlSession.delete(namepasce+ ".DelProduct",product);
 	}
 
+	 public String notice_select_count() {
+	      return sqlSession.selectOne(namepasce + ".notice_select_count");
+	   }
+	 
 }

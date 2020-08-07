@@ -72,7 +72,6 @@ public class ProjectController {
             img_list = new ArrayList<DataListDTO>();
          }
          for (int x = 0; x < img_list.size(); x++) {
-            System.out.println(img_list.get(x).getImg());
             newarr.add("'" + img_list.get(x).getImg() + "'");
             newtype.add("'" + img_list.get(x).getType() + "'");
             newprice.add("'" + img_list.get(x).getPrice() + "'");

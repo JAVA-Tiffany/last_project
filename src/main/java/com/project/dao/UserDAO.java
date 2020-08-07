@@ -34,4 +34,7 @@ public class UserDAO {
 	public List<UserDTO> selectpw(UserDTO dto){
 		return sqlSession.selectList(namepasce+".select_UserPw", dto);
 	}
+	public int pw_update(UserDTO dto) {
+	      return sqlSession.update(namepasce+".update_User_pw", dto);
+	   }
 }

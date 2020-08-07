@@ -110,13 +110,14 @@ public class UploadController {
 		MultipartFile singleDesignFile = request.getFile("SingleDesignFile");
 		System.out.println(singleDesignFile);
 		List<MultipartFile> List = request.getFiles("DesignFile");
+		System.out.println(List);
 		int i=1;
 		if(defaultFile !=null) {
 			System.out.println("기본피팅 업로드시작");
 			String Filetype = defaultFile.getOriginalFilename().substring(defaultFile.getOriginalFilename().lastIndexOf(".")+1);
 			//String orginFileName = mf.getOriginalFilename();
 			String orgFileName = product + "."+"png";
-			String path = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
+			String path = "D:\\yoo\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
 					+ type + "\\" + orgFileName;
 			try {
 				defaultFile.transferTo(new File(path));
@@ -138,14 +139,14 @@ public class UploadController {
 		
 		}
 		
-		if(List.get(0)!=null || !List.isEmpty()) {
+		if(!List.isEmpty()) {
 			System.out.println("if문시작");
 			for(MultipartFile mf : List) {
 				String Filetype = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".")+1);
 				//String orginFileName = mf.getOriginalFilename();
 				String orgFileName = product + i + "."+"png";
 				String retype=type.replace("pitting", "design");
-				String path = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
+				String path = "D:\\yoo\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
 						+ retype + "\\" + orgFileName;
 
 				try {
@@ -183,30 +184,7 @@ public class UploadController {
 			}
 		}
 		
-		//UtilFile 객체 생성
-//		UtilFile utilFile = new UtilFile();
-		//UtilFile utilFile2 = new UtilFile();
-		//파일 업로드 결과값을 path로 받아온다
-//		String uploadPath=utilFile.fileUpload(request,uploadFile, uploadProductImg, request,type,product);
-		// String uploadPath2=utilFile2.fileUpload2(request,uploadFile, uploadProductImg, request,type,product);
-//		System.out.println(uploadPath);
-		// System.out.println(uploadPath2);
-//		DataListDTO dto = new DataListDTO();
-//		String[] arr = uploadProductImg.split("\\\\webapp\\\\");
-//		String str1 = arr[1].replaceAll("\\\\", "/");
-//		System.out.println(str1 + "여기1");
-//		String[] arr2 = type.split(" ");
-//		String str2 = arr2[0].replaceAll("\\\\", "/");
-//		System.out.println(str2 + "여기2");
-//
-//
-//
-//		dto.setImg(str1);dto.setProduct(product);dto.setType(str2);
-//		dto.setPrice(Integer.parseInt(price));dto.setQuantity(Integer.parseInt(quantity));
-//		adminservice.AddProduct(dto);
-
-		// 해당 경로만 받아 db에 저장한다.
-		//     int n = rewardService.reAddServ(uploadPath, reward);
+		
 		return "admin/QuantityManage";
 	}
 

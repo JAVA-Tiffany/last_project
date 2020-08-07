@@ -1,5 +1,7 @@
 package com.project.dto;
 
+import java.util.ArrayList;
+
 public class ReviewDTO {
    private int rno;
    private String name;
@@ -11,11 +13,36 @@ public class ReviewDTO {
    private String fileimg;
    private String type;
    private String pay_rno;
+   private String fileimg2;
+   
+   
+   
+   
+   
+   public String getFileimg2() {
+	   
+	   String[] dd=null;
+	   fileimg2 = "[";
+	   if(fileimg!=null) {
+	      dd=fileimg.split(",");
+	      for(int i =0;i < dd.length;i++) {
+	            if(i == dd.length-1) {
+	               fileimg2 +="'"+dd[i]+"']";
+	            }else {
+	               fileimg2 += "'"+dd[i]+"',";
+	            }
+	         }
+	   }else {
+	      fileimg2+="]";
+	   }
+	   return fileimg2;
+	}
 
-   
-   
-   
-   public String getPay_rno() {
+public void setFileimg2(String fileimg2) {
+   this.fileimg2 = fileimg2;
+}
+
+public String getPay_rno() {
       return pay_rno;
    }
 
@@ -94,5 +121,7 @@ public class ReviewDTO {
    public void setRegdat(String regdat) {
       this.regdat = regdat;
    }
+
+   
 
 }

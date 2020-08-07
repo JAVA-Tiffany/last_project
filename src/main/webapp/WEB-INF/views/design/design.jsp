@@ -31,12 +31,17 @@
 
 <script type="text/javascript">
    function partShot() { //특정부분 스크린샷 
+	   if('${sessionScope.id}'!=''){
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
       .then(function (canvas) { //jpg 결과값
          drawImg(canvas.toDataURL('image/jpeg')); //이미지 저장
          saveAs(canvas.toDataURL(), 'file-name.jpg'); 
          alert("장바구니 담는중")
       })
+	   }else{
+		   alert("로그인 해주세요.")
+		   location.href='login'
+	   }
    } 
    function drawImg(imgData) { 
 //       console.log(imgData); //imgData의 결과값을 console 로그롤 보실 수 있습니다. 
@@ -117,7 +122,12 @@
     
     // 이미지 업로드시 실행되는 함수
     function uploadBtn() {
+    	if('${sessionScope.id}'!=''){
       $('#file').click();
+    	}else{
+    		alert("로그인 해주세요.")
+    		location.href='login'
+    	}
    }
 //    file창이 종료가 되면 실행
    function changeValue(obj){
@@ -217,11 +227,16 @@
    
     // 내이미지 클릭시 함수 실행
     function mying() {
+    	if('${sessionScope.id}'!=''){
         window.name = "parentForm";
         var popupX = (window.screen.width / 2) - (1300 / 2);
         var popupY= (window.screen.height /2) - (850 / 2);
         openWin = window.open("myimg",
                 "logindForm", 'status=no, height=750, width=800, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
+    	}else{
+    		alert("로그인 해주세요")
+    		location.href="login"
+    	}
     }
    
    function d_fun() {
@@ -547,30 +562,6 @@
          </div>
          
       </div>
-      
-      
-      
-<!--       색상 - 클릭되는 순간 바뀜<br> -->
-<!--       <div style="display: flex; flex: row;"> -->
-<!--          <div style="background-color: #fefefe; border: 1px solid gray; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #ffee49; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;" ></div>  -->
-<!--          <div style="background-color: #fa733c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #dc3c78; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #8bdfff; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #8be31b; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #06a132; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #1f5bbc; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div> -->
-<!--       </div> -->
-<!--       <div style="display: flex; flex: row;"> -->
-<!--          <div style="background-color: #9d0d1c; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #a5a5aa; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #0a1429; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #080808; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--          <div style="background-color: #f8d6d5; border: 1px solid transparent; width: 30px; height: 30px; border-radius:30px; box-sizing:border-box; cursor:pointer; margin: 5px;"></div>  -->
-<!--       </div> -->
-      
-      
-      
       
       <br>
       

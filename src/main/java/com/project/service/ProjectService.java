@@ -52,8 +52,15 @@ public class ProjectService {
 		userdao.delete(num);
 	}
 	public void update(UserDTO dto) {
-		userdao.update(dto);
-	}
+	      Sha sha = new Sha();
+	      try {
+	         dto.setPw(sha.sha256(dto.getPw()));
+	         userdao.update(dto);
+	      } catch (NoSuchAlgorithmException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	   }
 	public void select(Model model) {
 		model.addAttribute("list",userdao.selectAll());
 	}
@@ -123,14 +130,21 @@ public class ProjectService {
 		ArrayList<String> arr2 = new ArrayList<String>();
 		ArrayList<String> arr3 = new ArrayList<String>();
 		ArrayList<String> arr4 = new ArrayList<String>();
-		List<DataListDTO> l = datalistdao.select_number(dto);
+		List<DataListDTO> l=null;
+		if(type.equals("all")) {
+			l = datalistdao.select_all_number(dto);
+			model.addAttribute("list_size", datalistdao.selectall_count(dto));
+		}else {
+			l = datalistdao.select_number(dto);
+			model.addAttribute("list_size", datalistdao.select_count(dto));
+		}
 		for (int i = 0; i < l.size(); i++) {
 			arr.add("'" + l.get(i).getImg() + "'");
 			arr2.add("'" + l.get(i).getProduct() + "'");
 			arr3.add("'" + l.get(i).getPrice() + "'");
 			arr4.add("'" + l.get(i).getCount() + "'");
 		}
-		model.addAttribute("list_size", datalistdao.select_count(dto));
+		
 
 		model.addAttribute("list_img", arr);
 		model.addAttribute("list_product", arr2);
@@ -183,4 +197,10 @@ public class ProjectService {
 
 
 	}
+	
+	public String select_price(Model model, String product) {
+	      String a = datalistdao.select_price(product);
+	      model.addAttribute("price", a);
+	      return a;
+	   }
 }
