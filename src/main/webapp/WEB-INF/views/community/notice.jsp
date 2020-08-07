@@ -211,7 +211,7 @@ font: 400 14px 'Nanum Gothic',Arial,sans serif;
                   <option value="Content">본문</option>
                </select>
             </div>
-            <div class="w300" style="padding-right: 10px; border: 1px solid #d9d9d9">
+            <div class="w300" style="padding-right: 10px;">
                <input type="text" class="form-control form-control-sm"
                   name="keyword" id="keyword">
             </div>
