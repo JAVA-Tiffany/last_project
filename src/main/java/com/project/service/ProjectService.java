@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +30,7 @@ public class ProjectService {
 	private DataListDAO datalistdao;
 	@Autowired
 	private payDAO dao;
-
+	
 	public void insert(UserDTO dto) {
 		UserDTO newdto = new UserDTO();
 		Sha sha = new Sha();

@@ -172,31 +172,28 @@
    // 텍스트 추가
    function in_text() {
       alert("in_text")
-      id="myCanvas"+count;
-      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 350px; height: 100px;'></canvas></div>")
+      $('#zz').append("<div id='image"+count+"' style='z-index:"+count+" position: relative; left: 63px; top: -373px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><p style='font-size:30px;' id='image_label"+count+"'>입력</p></div>")
       $("#image"+count).draggable();
-      ctx[count] = document.getElementById(id).getContext("2d");
-      ctx[count].font = '40px Arial';
-      ctx[count].fillText('입력', 0, 50);
       count++;
    }
    
 //    텍스트 더블 클릭시 실행
-    function test_dblclick() {
+    function test_dblclick(d) {
        alert("텍스트 더블클릭")
        $("div").remove("#text_dblclick_event");
-       $("#left_menu").append("<div id='text_dblclick_event' style='margin-top:30px'><input id='textin' type='text' placeholder='입력할 글자 입력' onchange='dblclick_end("+ch+")'></div>");
+       $("#left_menu").append("<div id='text_dblclick_event_text' style='margin-top:30px;'><input id='textin' type='text' placeholder='입력할 글자 입력' onchange='dblclick_end("+d+")'></div>");
+       $("#left_menu").append("<div id='text_dblclick_event_size' style='margin-top:30px;'><input id='sizein' type='text' placeholder='크기 입력(px)' onchange='dblclick_end("+d+")'></div>");
    }
    function dblclick_end(d) {
-      alert($("#textin").val())
-      $("div").remove("#image"+d);
-      new_id="myCanvas"+d;
-      $('#in').append("<div id='image"+d+"' style='width: 50px; height: 50px; z-index:"+d+"' ondblclick='test_dblclick("+d+")' onclick='imgclick("+d+")'><canvas id='myCanvas"+d+"'style='width: 350px; height: 100px;'></canvas></div>")
-      $("#image"+d).draggable();
-      ctx[count] = document.getElementById(new_id).getContext("2d");
-      ctx[count].font = '40px Arial';
-      ctx[count].fillText($("#textin").val(), 0, 50);
-      $("div").remove("#text_dblclick_event");
+	   alert($("#sizein").val())
+	   alert($("#textin").val())
+      if($("#sizein").val()!="")
+      $("#image_label"+d).css("font-size",$("#sizein").val()+"px");
+      if($("#textin").val()!="")
+      $("#image_label"+d).text($("#textin").val());
+      
+      $("div").remove("#text_dblclick_event_text");
+      $("div").remove("#text_dblclick_event_size");
    }
    
    // 이미지 클릭시 화면 투명도 절반으로 줄이는 함수
@@ -205,6 +202,7 @@
         $("#myCanvas"+d).resizable({
             minWidth: 50,
             minHeight: 50,
+            autoHide:true,
         });
         
         for(i=1;i<count+1;i++){

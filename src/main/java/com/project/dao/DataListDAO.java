@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Repository;
 import com.project.dto.CookieDTO;
 import com.project.dto.DataListDTO;
 
+import oracle.sql.SQLName;
+
 @Repository
 public class DataListDAO {
 	@Autowired private SqlSession sqlSession;
 	public static final String namepasce="com.project.mybatis.myMapper";
-
+	
 	public List<DataListDTO> selectAll2() {
 		return sqlSession.selectList(namepasce+".dataselectAll_List2");
 	}
