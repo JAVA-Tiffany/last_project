@@ -1,4 +1,3 @@
-  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@page import="java.net.URLDecoder"%>
@@ -31,17 +30,17 @@
 
 <script type="text/javascript">
    function partShot() { //특정부분 스크린샷 
-	   if('${sessionScope.id}'!=''){
+      if('${sessionScope.id}'!=''){
       html2canvas(document.getElementById("zz")) //id container 부분만 스크린샷 
       .then(function (canvas) { //jpg 결과값
          drawImg(canvas.toDataURL('image/jpeg')); //이미지 저장
          saveAs(canvas.toDataURL(), 'file-name.jpg'); 
          alert("장바구니 담는중")
       })
-	   }else{
-		   alert("로그인 해주세요.")
-		   location.href='login'
-	   }
+      }else{
+         alert("로그인 해주세요.")
+         location.href='login'
+      }
    } 
    function drawImg(imgData) { 
 //       console.log(imgData); //imgData의 결과값을 console 로그롤 보실 수 있습니다. 
@@ -117,17 +116,15 @@
       
 //     img[1].src="resources/img/right.png";
 //     img[2].src="resources/img/abc.jpg";
-
-
     
     // 이미지 업로드시 실행되는 함수
     function uploadBtn() {
-    	if('${sessionScope.id}'!=''){
+       if('${sessionScope.id}'!=''){
       $('#file').click();
-    	}else{
-    		alert("로그인 해주세요.")
-    		location.href='login'
-    	}
+       }else{
+          alert("로그인 해주세요.")
+          location.href='login'
+       }
    }
 //    file창이 종료가 되면 실행
    function changeValue(obj){
@@ -152,9 +149,8 @@
 //          alert(e.target.result)
 //          alert(obj)
             id="myCanvas"+count
-            $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+            $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
             $("#image"+count).draggable();
-            $("#image"+count).resizable();
                img[count] = new Image();
                 g=img[count];
                 img[count].addEventListener('load',function(){
@@ -172,7 +168,7 @@
    // 텍스트 추가
    function in_text() {
       alert("in_text")
-      $('#zz').append("<div id='image"+count+"' style='z-index:"+count+" position: relative; left: 63px; top: -373px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><p style='font-size:30px;' id='image_label"+count+"'>입력</p></div>")
+      $('#zz').append("<div id='image"+count+"' style='z-index:"+count+"; position: relative; left: 63px; top: -4px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><p style='font-size:30pt;' id='image_label"+count+"'>입력</p></div>")
       $("#image"+count).draggable();
       count++;
    }
@@ -185,10 +181,10 @@
        $("#left_menu").append("<div id='text_dblclick_event_size' style='margin-top:30px;'><input id='sizein' type='text' placeholder='크기 입력(px)' onchange='dblclick_end("+d+")'></div>");
    }
    function dblclick_end(d) {
-	   alert($("#sizein").val())
-	   alert($("#textin").val())
+      alert($("#sizein").val())
+      alert($("#textin").val())
       if($("#sizein").val()!="")
-      $("#image_label"+d).css("font-size",$("#sizein").val()+"px");
+      $("#image_label"+d).css("font-size",$("#sizein").val()+"pt");
       if($("#textin").val()!="")
       $("#image_label"+d).text($("#textin").val());
       
@@ -196,8 +192,10 @@
       $("div").remove("#text_dblclick_event_size");
    }
    
+   var imgclick_ch=0;
    // 이미지 클릭시 화면 투명도 절반으로 줄이는 함수
     function imgclick(d) {
+       imgclick_ch=1;
         ch=d;
         $("#myCanvas"+d).resizable({
             minWidth: 50,
@@ -208,9 +206,7 @@
         for(i=1;i<count+1;i++){
            $("#image"+i).css("opacity", "1");
         }
-        $(function(){
-           $("#image"+d).css("opacity", "0.5");
-       });
+        $("#image"+d).css("opacity", "0.5");
       }
     
    // 디자인하는방법 클릭시 함수 실행
@@ -225,22 +221,22 @@
    
     // 내이미지 클릭시 함수 실행
     function mying() {
-    	if('${sessionScope.id}'!=''){
+       if('${sessionScope.id}'!=''){
         window.name = "parentForm";
         var popupX = (window.screen.width / 2) - (1300 / 2);
         var popupY= (window.screen.height /2) - (850 / 2);
         openWin = window.open("myimg",
                 "logindForm", 'status=no, height=750, width=800, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY + ", resizable = no, scrollbars = no");    
-    	}else{
-    		alert("로그인 해주세요")
-    		location.href="login"
-    	}
+       }else{
+          alert("로그인 해주세요")
+          location.href="login"
+       }
     }
    
    function d_fun() {
 //       alert($("#op").val()+" 사진 선택")
       id="myCanvas"+count
-      $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
       img[count] = new Image();
       g=img[count]
@@ -409,47 +405,56 @@
     function re_view() {
        design_review_form.submit();
    }
+    function imgclick_maindiv() {
+      if(imgclick_ch==1){
+         imgclick_ch=0;
+      }else{
+         for(i=1;i<count+1;i++){
+                 $("#image"+i).css("opacity", "1");
+              }
+      }
+   }
 </script>
 <body >
    
    <jsp:include page="../default/header.jsp"/>
-   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" onclick="imgclick('0')">
+   <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" onclick="imgclick_maindiv()">
       <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center;">
-            <img src="resources/img/reset.png" style="width: 50px;height: 50px;" onclick="view_reset()"><br><font style="font-size: 10px; text-align: center">처음으로</font>
+         <div style="text-align: center;cursor:pointer;" onclick="view_reset()">
+            <img src="resources/img/reset.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px; text-align: center">처음으로</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/garbage.png" style="width: 50px;height: 50px;" onclick="view_garbage()"><br><font style="font-size: 10px;">삭제</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_garbage()">
+            <img src="resources/img/garbage.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">삭제</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/forward.png" style="width: 50px;height: 50px;" onclick="view_forward()"><br><font style="font-size: 10px;">앞으로</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_forward()">
+            <img src="resources/img/forward.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">앞으로</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/front.png" style="width: 50px;height: 50px;" onclick="view_front()"><br><font style="font-size: 10px;">뒤로</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_front()">
+            <img src="resources/img/front.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">뒤로</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/left_right.png" style="width: 50px;height: 50px;" onclick="view_left_right()"><br><font style="font-size: 10px;">좌우반전</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_left_right()">
+            <img src="resources/img/left_right.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">좌우반전</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/up_down.png" style="width: 50px;height: 50px;" onclick="view_up_down()"><br><font style="font-size: 10px;">상하반전</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_up_down()">
+            <img src="resources/img/up_down.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">상하반전</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/left.png" style="width: 50px;height: 50px;" onclick="view_left()"><br><font style="font-size: 10px;">왼쪽</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_left()">
+            <img src="resources/img/left.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">왼쪽</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/left_right_center.png" style="width: 50px;height: 50px;" onclick="view_left_right_center()"><br><font style="font-size: 10px;">가운데</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_left_right_center()">
+            <img src="resources/img/left_right_center.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">가운데</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/right.png" style="width: 50px;height: 50px;" onclick="view_right()"><br><font style="font-size: 10px;">오른쪽</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_right()">
+            <img src="resources/img/right.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">오른쪽</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/up.png" style="width: 50px;height: 50px;" onclick="view_up()"><br><font style="font-size: 10px;">위</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_up()">
+            <img src="resources/img/up.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">위</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/up_down_center.png" style="width: 50px;height: 50px;" onclick="view_up_down_center()"><br><font style="font-size: 10px;">가운데</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_up_down_center()">
+            <img src="resources/img/up_down_center.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">가운데</font>
          </div>
-         <div onmouseover="style='cursor:pointer;text-align: center;'" style="text-align: center">
-            <img src="resources/img/down.png" style="width: 50px;height: 50px;" onclick="view_down()"><br><font style="font-size: 10px;">아래</font>
+         <div style="text-align: center;cursor:pointer;"onclick="view_down()">
+            <img src="resources/img/down.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">아래</font>
          </div>
          
       </div>
@@ -462,14 +467,14 @@
             </div>
          </div>
          <div style="background-color:green; width: 600px; height: 600px; border: 1px solid #eaedf0;" id="zz">
-            <div style="width:174px; height:261px; margin-left: 160px; margin-top: 132px;" id="in">
+<!--             <div style="width:174px; height:261px; margin-left: 160px; margin-top: 132px;" id="in"> -->
 <!--                <div id="image1" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
 <!--                </div> -->
 <!--                <div id="image2" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas2" style='width: 50px; height: 50px;'></canvas> -->
 <!--                </div> -->
-            </div>
+<!--             </div> -->
          </div>
          <div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
             <img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="change()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
@@ -489,7 +494,7 @@
    function freer(ddd) {
       alert("dd")
       id="myCanvas"+count
-        $('#in').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+"' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+        $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
         $("#image"+count).draggable();
            img[count] = new Image();
             g=img[count];

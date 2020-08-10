@@ -26,6 +26,7 @@
    
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+
 var size= ${list_size}
 var ssize;
 var zxc=1;
@@ -129,7 +130,6 @@ font-family: 'Nanum Gothic',Arial,sans serif;
 }
 .div1 {
 padding-top: 100px;
-padding-bottom: 30px;
 font: 400 14px 'Nanum Gothic',Arial,sans serif;
 }
 
@@ -149,7 +149,7 @@ font: 400 14px 'Nanum Gothic',Arial,sans serif;
 <body>
 
 <jsp:include page="../default/header.jsp"/>
-<br>
+
  <div class="limiter">
       <div class="container-table100">
          <div class="wrap-table100">
@@ -191,7 +191,7 @@ font: 400 14px 'Nanum Gothic',Arial,sans serif;
                      <td class="cell" data-title="작성일">
                         ${adminList.regdate }
                      </td>
-                     <td class="cell" data-title="조회수" style="width:10%;">
+                     <td class="cell" data-title="조회수">
                         ${adminList.viewcnt }
                      </td>
                   </tr>
@@ -211,7 +211,7 @@ font: 400 14px 'Nanum Gothic',Arial,sans serif;
                   <option value="Content">본문</option>
                </select>
             </div>
-            <div class="w300" style="padding-right: 10px;">
+            <div class="w300" style="padding-right: 10px">
                <input type="text" class="form-control form-control-sm"
                   name="keyword" id="keyword">
             </div>
