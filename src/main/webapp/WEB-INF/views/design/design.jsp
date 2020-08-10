@@ -150,7 +150,7 @@
 //          alert(e.target.result)
 //          alert(obj)
             id="myCanvas"+count
-            $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+            $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
             $("#image"+count).draggable();
                img[count] = new Image();
                 g=img[count];
@@ -169,7 +169,8 @@
    // 텍스트 추가
    function in_text() {
       alert("in_text")
-      $('#zz').append("<div id='image"+count+"' style='z-index:"+count+"; position: relative; left: 63px; top: -4px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><p style='font-size:30pt;' id='image_label"+count+"'>입력</p></div>")
+      $('#in').append("<div id='image"+count+"' style=' z-index:"+count+"; position: relative; left: 63px; top: -4px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><font style='font-size:30pt;' id='image_label"+count+"'>입력</font></div>")
+      $("#image"+count).css("width",$("#image_label"+count).css("width"));
       $("#image"+count).draggable();
       count++;
    }
@@ -189,7 +190,7 @@
       $("#image_label"+d).css("font-size",$("#sizein").val()+"pt");
       if($("#textin").val()!="")
       $("#image_label"+d).text($("#textin").val());
-      
+      $("#image"+count).css("width",$("#image_label"+count).css("width"))
       $("div").remove("#text_dblclick_event_text");
       $("div").remove("#text_dblclick_event_size");
    }
@@ -238,7 +239,7 @@
    function d_fun() {
       alert($("#op").val()+" 사진 선택")
       id="myCanvas"+count
-      $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $('#in').append("<div id='image"+count+"' style='z-index:"+count+";'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
       img[count] = new Image();
       g=img[count]
@@ -375,15 +376,17 @@
     }
 //     오른쪽 정렬
     function view_right() {
-       $("#image"+ch).css("left", "124px");
+ 		$("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
+       	$("#image"+ch).css("left", parseInt(318)-parseInt($("#image"+ch).css("width").split("px")[0])+"px");
     }
 //     왼쪽,오른쪽 가운데
-   function view_left_right_center() {
-       $("#image"+ch).css("left", "62px");
-    }
+   	function view_left_right_center() {
+	   	$("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
+       	$("#image"+ch).css("left", parseInt(159)-parseInt($("#image"+ch).css("width").split("px")[0])/2+"px");
+	}
 //     위,아래 가운데
     function view_up_down_center() {
-       $("#image"+ch).css("top", "105px");
+       $("#image"+ch).css("top", parseInt(209)-parseInt($("#image"+ch).css("height").split("px")[0])/2+"px");
     }
 //     위쪽정렬
     function view_up() {
@@ -391,7 +394,7 @@
     }
 //     아래쪽정렬
     function view_down() {
-       $("#image"+ch).css("top", "210px");
+       $("#image"+ch).css("top", parseInt(418)-parseInt($("#image"+ch).css("height").split("px")[0])+"px");
     }
     
     
@@ -469,14 +472,14 @@
             </div>
          </div>
          <div style="background-color:green; width: 600px; height: 600px; border: 1px solid #eaedf0;" id="zz">
-<!--             <div style="width:174px; height:261px; margin-left: 160px; margin-top: 132px;" id="in"> -->
+            <div style="width:320px; height:420px; margin-left: 120px; margin-top: 132px;" id="in">
 <!--                <div id="image1" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas" style='width: 50px; height: 50px;'></canvas> -->
 <!--                </div> -->
 <!--                <div id="image2" style="width: 50px; height: 50px;"> -->
 <!--                   <canvas id="myCanvas2" style='width: 50px; height: 50px;'></canvas> -->
 <!--                </div> -->
-<!--             </div> -->
+            </div>
          </div>
          <div style="display: flex; flex-flow:column; margin-left: 25px;" align="center">
             <img src="resources/img/change.png" style="width: 100px;height: 100px;" onclick="change()" onmouseover="style='cursor:pointer;width: 100px;height: 100px;'">
@@ -489,14 +492,14 @@
       상품명 : <label id="design_product">${img_name}</label><br>
          가격 : <label id="design_price">${img_money}</label><br><br>    
       <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="change()"> 상품 변경</button>
-      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
+      <button style="border: 1px solid gray; background-color: rgba(0,0,0,0); color: black; background-color:none; padding: 5px;" type="button" onclick="re_view()"> 리뷰 보기 및 등록</button><br>
       <br>
    <script type="text/javascript">
    //무료이미지 업로드
    function freer(ddd) {
       alert("dd")
       id="myCanvas"+count
-        $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+        $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;background-color:none'></canvas></div>")
         $("#image"+count).draggable();
            img[count] = new Image();
             g=img[count];

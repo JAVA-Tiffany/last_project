@@ -156,11 +156,16 @@
             list_form.submit();
          }
       }
-      function totle_click(d) {
+      function totle_click(d,w) {
+    	  if('${sessionScope.id}'==w || w.split("_")[0]=="/admin/" || ${sessionScope.id.split('_')[0] eq '/admin/' }){
          console.log(d);
          ch = d;
          $("#bno_result").val(d);
          bno_form.submit();
+    	  }
+    	  else{
+    		  alert("본인 작성글만 확인할 수 있습니다.")
+    	  }
       }
    </script>
    <jsp:include page="../default/header.jsp" />
@@ -184,14 +189,14 @@
                      <tr class="row" data-title="번호">
 
                         <c:choose>
-                           <c:when test="${adminList.writer.split('_')[0]=='/admin/'}">
+                           <c:when test="${adminList.writer=='/admin/'}">
                               <td class="cell" data-title="번호"><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
                            </c:when>
                            <c:otherwise>
                               <td class="cell" data-title="번호">${adminList.bno}</td>
                            </c:otherwise>
                         </c:choose>
-                        <td class="cell" data-title="제목"><a class="title" onclick="totle_click(${adminList.bno})"> ${adminList.title} 
+                        <td class="cell" data-title="제목"><a class="title" onclick="totle_click(${adminList.bno},'${adminList.writer}')"> ${adminList.title} 
                         <label class="replycount"> [${adminList.replycount}] </label>
                         </a> </td>
                         <c:choose>

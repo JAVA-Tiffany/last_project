@@ -179,9 +179,14 @@ font: 400 14px 'Nanum Gothic',Arial,sans serif;
         
                   <c:forEach var="adminList" items="${listAll}">
                   <tr class="row">
-                     <td class="cell" data-title="번호">
-                        <img src="https://attrangs.co.kr/asset/img/board/icon_notice.png">
-                     </td>
+                     <c:choose>
+                           <c:when test="${adminList.writer=='/admin/'}">
+                              <td class="cell" data-title="번호"><img src="https://attrangs.co.kr/asset/img/board/icon_notice.png"></td>
+                           </c:when>
+                           <c:otherwise>
+                              <td class="cell" data-title="번호">${adminList.bno}</td>
+                           </c:otherwise>
+                        </c:choose>
                      <td class="cell" data-title="제목">
                         <a class="title" href="noticeview?bno=${adminList.bno}">${adminList.title }</a>
                      </td>

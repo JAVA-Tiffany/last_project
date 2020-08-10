@@ -59,10 +59,13 @@ public class AdminService {
    }
 
    public void save_write(AdminNoticeDTO dto) {
-	   String title = "<b style='color:black;'>[공지]" + dto.getTitle() + "</b>";
-	     dto.setTitle(title);
-      dao.save_write(dto);
-   }
+	      if(dto.getWriter().equals("/admin/")){
+	         String title = "<b style='color:black;'>[공지]" + dto.getTitle() + "</b>";
+	           dto.setTitle(title);
+	      }
+	      
+	      dao.save_write(dto);
+	   }
 
    public void delete(int num) {
       dao.delete(num);

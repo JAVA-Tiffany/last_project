@@ -115,7 +115,17 @@ $(document).ready(function() {
    
    
    $("#AddProduct").click(function(){
-      window.open("AddProductPopup","상품등록","width=700px,height=500px");
+      
+      var _width = '600';
+       var _height = '400';
+    
+       // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+       var _left = Math.ceil(( window.screen.width - _width )/2);
+       var _top = Math.ceil(( window.screen.height - _height )/2); 
+    
+       window.open('AddProductPopup', '상품등록', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top ,'location=no');
+
+      
       
    });
    
@@ -171,9 +181,9 @@ $(document).ready(function() {
       location.reload();
    }
    function ad(d) {
-	   $("form[name=adminHeader_form]").attr("action",d);
-	   adminHeader_form.submit();
-	}
+      $("form[name=adminHeader_form]").attr("action",d);
+      adminHeader_form.submit();
+   }
    
 </script>
 
@@ -197,8 +207,8 @@ $(document).ready(function() {
                 <div class="top-left-part">
                     <!-- Logo -->
                     <a href="index" style="color: black;">
-            			<img class="img1" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
-        			</a>  
+                     <img class="img1" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+                 </a>  
                 </div>
                 <!-- /Logo -->
                 <ul class="nav navbar-top-links navbar-right pull-right">
@@ -269,7 +279,7 @@ $(document).ready(function() {
                         <div class="white-box">
                             <h3 class="box-title">PRODUCT MANAGE</h3>
 <!-- 여기서 부터 내용 -->
-					<div><input type="button" id="AddProduct" value="상품등록"></div>
+               <div><input type="button" id="AddProduct" value="상품등록"></div>
 
 <div align="center" class="div1">
    <table border="1" class="table" id="thetable">
@@ -284,6 +294,7 @@ $(document).ready(function() {
             <option value="bag">가방</option>
             <option value="dress">의류</option>
             <option value="earring">귀걸이/귀찌</option>
+            <option value="phon">폰케이스</option>
          </select>
          </div>
             </th>
@@ -353,9 +364,9 @@ $(document).ready(function() {
     <script src="resources/adjs/dashboard1.js"></script>
     <script src="resources/plugins/bower_components/toast-master/js/jquery.toast.js?a"></script>
 
-	<form name="adminHeader_form" method="post">
-	<input type="hidden" id="adminHeader_form_start" name="start" value="1">
-	<input type="hidden" id="adminHeader_form_end" name="end" value="10">
-	</form>
+   <form name="adminHeader_form" method="post">
+   <input type="hidden" id="adminHeader_form_start" name="start" value="1">
+   <input type="hidden" id="adminHeader_form_end" name="end" value="10">
+   </form>
 </body>
 </html>
