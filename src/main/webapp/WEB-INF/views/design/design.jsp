@@ -82,6 +82,7 @@
          data : {userimg_in:data,imgname:n,imgmoney:m,type:ty},
          success : function(result) {
             alert(result)
+            location.href="cart"
          },
          error : function() {
             alert('장바구니 저장 실패')
@@ -176,7 +177,8 @@
 //    텍스트 더블 클릭시 실행
     function test_dblclick(d) {
        alert("텍스트 더블클릭")
-       $("div").remove("#text_dblclick_event");
+       $("div").remove("#text_dblclick_event_text");
+       $("div").remove("#text_dblclick_event_size");
        $("#left_menu").append("<div id='text_dblclick_event_text' style='margin-top:30px;'><input id='textin' type='text' placeholder='입력할 글자 입력' onchange='dblclick_end("+d+")'></div>");
        $("#left_menu").append("<div id='text_dblclick_event_size' style='margin-top:30px;'><input id='sizein' type='text' placeholder='크기 입력(px)' onchange='dblclick_end("+d+")'></div>");
    }
@@ -234,7 +236,7 @@
     }
    
    function d_fun() {
-//       alert($("#op").val()+" 사진 선택")
+      alert($("#op").val()+" 사진 선택")
       id="myCanvas"+count
       $('#zz').append("<div id='image"+count+"' style='width: 50px; height: 50px; z-index:"+count+";'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
@@ -244,7 +246,7 @@
          ctx[count] = document.getElementById(id).getContext("2d");
          ctx[count].drawImage(g,0,0,300,150);
       },false);
-      img[count].src=$("#op").val();
+      img[count].src=$("#op_product").val();
       count++
    }
    
@@ -724,7 +726,6 @@
    <form name="design_review_form" method="post" action="review">
       <input type="hidden" name="review_text" id="review_text" value="${img_name}">
    </form>
-   
    <form action='design' name='design_fimg' method='post'>"
    <input type='hidden' name='imgname' id="op_product">
    <input type='hidden' name='imgmoney' id="op_price">

@@ -175,7 +175,7 @@ public class UploadController {
 			//String orginFileName = mf.getOriginalFilename();
 			String orgFileName = product + "."+"png";
 			String retype=type.replace("pitting", "design");
-			String path = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
+			String path = "D:\\yoo\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" 
 					+ retype + "\\" + orgFileName;
 			try {
 				singleDesignFile.transferTo(new File(path));

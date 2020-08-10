@@ -24,7 +24,9 @@
 	href="resources/css/main.css?after">
 <script type="text/javascript"
 	src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+
 <title>Insert title here</title>
+
 <style type="text/css">
 #Progress_Loading {
 	position: absolute;
@@ -58,27 +60,6 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript">
-		function Special() {
-			var cut = document.getElementById("id").value.split("")
-			var sp = 0;
-			for (i = 0; i < cut.length; i++) {
-				if (('!' <= cut[i] && cut[i] <= '/')
-						|| (':' <= cut[i] && cut[i] <= '@')
-						|| ('[' <= cut[i] && cut[i] <= '\'')
-						|| ('{' <= cut[i] && cut[i] <= '~')) {
-					sp = 1
-				}
-			}
-			if (sp == 0) {
-				document.getElementById("pw1").innerHTML = ""
-				document.getElementById("pw1").style.color = "black"
-			} else {
-
-				document.getElementById("pw1").innerHTML = "ID 특수문자를 사용 불가"
-				document.getElementById("pw1").style.color = "red"
-				document.getElementById("id").value = ""
-			}
-		}
 		function post() {
 			new daum.Postcode(
 					{
@@ -273,7 +254,7 @@
 
 						<div class="wrap-input100 validate-input" align="center">
 							<input type="text" id="id" placeholder="아이디" class=input100
-								name="id" onchange="Special()"> <span
+								name="id"> <span
 								class="focus-input100"></span> <span class="symbol-input100">
 								<i class="fa fa-lock" aria-hidden="true"
 								style="text-align: right;"></i>

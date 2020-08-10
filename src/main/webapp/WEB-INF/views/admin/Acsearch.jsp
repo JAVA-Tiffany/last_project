@@ -35,7 +35,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	
+	$("#savebutton").click(function() {
+		if('${sessionScope.id eq "/admin/" }'){
+			location.href="adminjoin"
+		}else{
+			alert("메인 관리자만 생성 가능합니다.")
+		}
+	})
 	 
    $("#Delbutton").click(function(){ 
    
@@ -246,7 +252,10 @@ function ad(d) {
 					   </tr>
 					   </c:forEach>   
 					   <tr>
-					      <td colspan="6" align="center"><button type="button" id="Delbutton">삭제</button></td>
+					      <td colspan="6" align="center">
+					      	<button type="button" id="Delbutton">삭제</button>
+					      	<button type="button" id="savebutton">추가</button>
+					      </td>
 					   </tr>
 					</table>
 					</div>

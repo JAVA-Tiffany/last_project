@@ -14,15 +14,11 @@
 		select * from
 		data_list where img like '%pitting%'
 	</select>
-	<select id="dataselect_List" resultType="datalistdto">
-		select * from data_list
-		where img like '%pitting%' and type=#{type}
-	</select>
 	<select id="selectPick" resultType="datalistdto"
-		parameterType="String">
-		select count(*) from data_list where type=#{type} and
-		img like '%pitting%'
-	</select>
+      parameterType="String">
+       select * from data_list
+      where img like '%pitting%' and type=#{type}
+   </select>
 	<select id="select_count" resultType="String">
 		select count(*) from
 		data_list where type=#{type} and img like '%pitting%'

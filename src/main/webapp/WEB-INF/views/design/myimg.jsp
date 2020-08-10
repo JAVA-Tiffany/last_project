@@ -43,7 +43,7 @@
 		for(x=0;x<size1;x++){
 			if($("input:checkbox[id='check"+x+"']").is(":checked") == true) {
 				s=$("#src"+x).prop("src");
-				$(opener.document).find("#op").val(s);
+				$(opener.document).find("#op_product").val(s);
 				$(opener.location).attr("href", "javascript:d_fun();");
 				window.close();
 				break;

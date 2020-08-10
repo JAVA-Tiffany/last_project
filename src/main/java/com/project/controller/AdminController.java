@@ -87,11 +87,18 @@ public class AdminController {
    public String DelUser(@RequestParam String idval) {
       System.out.println(idval);
       String[] arr = idval.split(" ");
-      for(int i=0;i<arr.length;i++) {
-         service.delete(arr[i]);
+      if(arr[0].split(",")[1].equals("myinfo")) {
+    	  service.delete(arr[0].split(",")[0]);
+      }else {
+	      for(int i=0;i<arr.length;i++) {
+	         service.delete(arr[i]);
+	      }
       }
-      
-      return "redirect:acsearch";
+      if(arr[0].split(",")[1].equals("myinfo")) {
+    	  return "redirect:index";
+      }else {
+    	  return "redirect:acsearch";
+      }
    }
    
    @RequestMapping("DelBoard")
@@ -231,6 +238,10 @@ public class AdminController {
        return "redirect:QuantityManage";
        
        
+    }
+    @RequestMapping("adminjoin")
+    public String adminjoin() {
+       return "admin/adminjoin";
     }
 
 }
