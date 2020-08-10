@@ -244,7 +244,7 @@
 	</insert>
 	<delete id="delete_Userimg" parameterType="Paydto">
 		delete pay where
-		id=#{id} and img=#{img}
+		id=#{id} and rno=#{rno}
 	</delete>
 	<update id="update_Userimg" parameterType="Paydto">
 		update pay set
@@ -410,25 +410,29 @@
 		delete from board_sys where bno=#{num}
 	</delete>
 
-	<select id="noticeSearch_title" resultType="comdto" parameterType="comdto">
+	<select id="noticeSearch_title" resultType="comdto"
+		parameterType="comdto">
 		select * from (select rownum num, a.* from (select *
 		from notice where title
 		LIKE '%'||#{title}||'%'
 		order by writer asc, bno
 		desc) a ) where num between #{start} and #{end}
 	</select>
-	<select id="noticeSearch_Content" resultType="comdto" parameterType="comdto">
+	<select id="noticeSearch_Content" resultType="comdto"
+		parameterType="comdto">
 		select * from (select rownum num, a.* from (select *
 		from notice where
 		content like '%'||#{content}||'%'
 		order by writer asc,
 		bno desc) a ) where num between #{start} and #{end}
 	</select>
-	<select id="noticeSearch_title_count" resultType="String" parameterType="comdto">
+	<select id="noticeSearch_title_count" resultType="String"
+		parameterType="comdto">
 		select count(*) from notice where title like
 		'%'||#{title}||'%'
 	</select>
-	<select id="noticeSearch_Content_count" resultType="String" parameterType="comdto">
+	<select id="noticeSearch_Content_count" resultType="String"
+		parameterType="comdto">
 		select count(*) from notice where content like
 		'%'||#{content}||'%'
 	</select>
@@ -441,14 +445,16 @@
 		nvl(max(rno)+1,1)from
 		review),#{name},#{content},#{infocount},#{img},#{title},#{fileimg},#{type},#{pay_rno})
 	</insert>
-	<select id="selectAll_Review" resultType="reviewdto" parameterType="reviewdto">
+	<select id="selectAll_Review" resultType="reviewdto"
+		parameterType="reviewdto">
 		select * from review order by rno desc
 	</select>
 	<select id="selectType_Review" resultType="reviewdto">
 		select * from review
 		where type=#{type}
 	</select>
-	<select id="select_Review" resultType="reviewdto" parameterType="reviewdto">
+	<select id="select_Review" resultType="reviewdto"
+		parameterType="reviewdto">
 		select * from review where pay_rno=#{pay_rno}
 	</select>
 	<update id="update_Review" parameterType="reviewdto">
