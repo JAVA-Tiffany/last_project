@@ -63,7 +63,13 @@ public class DataListDAO {
 		return sqlSession.selectList(namepasce + ".select_cookie_four",dto);
 	}
 	public String select_price(String product) {
-		   return sqlSession.selectOne(namepasce + ".select_price", product);
-		}
+		return sqlSession.selectOne(namepasce + ".select_price", product);
+	}
+	public List<DataListDTO> select_all_number(DataListDTO dto) {
+		return sqlSession.selectList(namepasce + ".select_all_number",dto);
+	}
 
+	public String selectall_count(DataListDTO dto) {
+		return sqlSession.selectOne(namepasce + ".selectall_count",dto);
+	}
 }

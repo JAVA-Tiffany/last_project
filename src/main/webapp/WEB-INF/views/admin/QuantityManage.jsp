@@ -284,6 +284,7 @@ $(document).ready(function() {
             <option value="bag">가방</option>
             <option value="dress">의류</option>
             <option value="earring">귀걸이/귀찌</option>
+            <option value="phon">폰케이스</option>
          </select>
          </div>
             </th>

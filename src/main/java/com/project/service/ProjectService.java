@@ -121,32 +121,38 @@ public class ProjectService {
 
 
 	public void data(Model model, String type, String start, String end) {
-		DataListDTO dto = new DataListDTO();
-		dto.setType(type);
-		dto.setStart(String.valueOf((Integer.valueOf(start) + 1)));
-		dto.setEnd(end);
+	      DataListDTO dto = new DataListDTO();
+	      dto.setType(type);
+	      dto.setStart(String.valueOf((Integer.valueOf(start) + 1)));
+	      dto.setEnd(end);
 
-		ArrayList<String> arr = new ArrayList<String>();
-		ArrayList<String> arr2 = new ArrayList<String>();
-		ArrayList<String> arr3 = new ArrayList<String>();
-		ArrayList<String> arr4 = new ArrayList<String>();
-		List<DataListDTO> l = datalistdao.select_number(dto);
-		for (int i = 0; i < l.size(); i++) {
-			arr.add("'" + l.get(i).getImg() + "'");
-			arr2.add("'" + l.get(i).getProduct() + "'");
-			arr3.add("'" + l.get(i).getPrice() + "'");
-			arr4.add("'" + l.get(i).getCount() + "'");
-		}
-		model.addAttribute("list_size", datalistdao.select_count(dto));
+	      ArrayList<String> arr = new ArrayList<String>();
+	      ArrayList<String> arr2 = new ArrayList<String>();
+	      ArrayList<String> arr3 = new ArrayList<String>();
+	      ArrayList<String> arr4 = new ArrayList<String>();
+	      List<DataListDTO> l=null;
+	      if(type.equals("all")) {
+	         l = datalistdao.select_all_number(dto);
+	         model.addAttribute("list_size", datalistdao.selectall_count(dto));
+	      }else {
+	         l = datalistdao.select_number(dto);
+	         model.addAttribute("list_size", datalistdao.select_count(dto));
+	      }
+	      for (int i = 0; i < l.size(); i++) {
+	         arr.add("'" + l.get(i).getImg() + "'");
+	         arr2.add("'" + l.get(i).getProduct() + "'");
+	         arr3.add("'" + l.get(i).getPrice() + "'");
+	         arr4.add("'" + l.get(i).getCount() + "'");
+	      }
+	      
 
-		model.addAttribute("list_img", arr);
-		model.addAttribute("list_product", arr2);
-		model.addAttribute("list_price", arr3);
-		model.addAttribute("list_count", arr4);
-		model.addAttribute("list_type", type);
-		model.addAttribute("list_last", end);
-	}
-
+	      model.addAttribute("list_img", arr);
+	      model.addAttribute("list_product", arr2);
+	      model.addAttribute("list_price", arr3);
+	      model.addAttribute("list_count", arr4);
+	      model.addAttribute("list_type", type);
+	      model.addAttribute("list_last", end);
+	   }
 	public void earring_list(Model model,String imgname) {
 		List<DataListDTO> arr=datalistdao.selectAll2();
 		ArrayList<String> newarr1=new ArrayList<String>();
@@ -196,4 +202,6 @@ public class ProjectService {
 	      model.addAttribute("price", a);
 	      return a;
 	   }
+	
+	
 }

@@ -62,6 +62,27 @@ function pagereturn(){
 
 
    <script type="text/javascript">
+   function Special() {
+      var cut = document.getElementById("id").value.split("")
+      var sp = 0;
+      for (i = 0; i < cut.length; i++) {
+         if (('!' <= cut[i] && cut[i] <= '/')
+               || (':' <= cut[i] && cut[i] <= '@')
+               || ('[' <= cut[i] && cut[i] <= '\'')
+               || ('{' <= cut[i] && cut[i] <= '~')) {
+            sp = 1
+         }
+      }
+      if (sp == 0) {
+         document.getElementById("pw1").innerHTML = ""
+         document.getElementById("pw1").style.color = "black"
+      } else {
+
+         document.getElementById("pw1").innerHTML = "ID 특수문자를 사용 불가"
+         document.getElementById("pw1").style.color = "red"
+         document.getElementById("id").value = ""
+      }
+   }
       function ch() {
          if (document.getElementById("id").value == "") {
             alert("아이디 칸이 비어있습니다.")
@@ -143,7 +164,7 @@ function pagereturn(){
              $.ajax({
                    url : "mailSending",
                    type : "POST",
-                   data : {email:$("#email").val()},
+                   data : {email:$("#email").val(),ch:"인증"},
                    success : function(data) {
                       $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
                       alert("인증번호 보내졌습니다.")
@@ -255,7 +276,7 @@ function pagereturn(){
                <form action="info_change" name="user" style="align:center;">
       
                <div class="wrap-input100 validate-input" align="center">
-                  <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly">
+                  <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly" onchange="Special()">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"  style="text-align:right;"></i>

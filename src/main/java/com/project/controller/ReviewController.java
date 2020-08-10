@@ -117,7 +117,7 @@ public class ReviewController {
       
       List<MultipartFile> fileList = request.getFiles("fileimg");
       
-      String path = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\Review\\";
+      String path = "D:\\workspace-project\\last_project\\src\\main\\webapp\\resources\\Review\\";
       String img_list="";
       if(fileList.size()==0) {
          dto.setFileimg("");

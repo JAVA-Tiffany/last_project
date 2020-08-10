@@ -52,8 +52,8 @@
                 <div class="top-left-part">
                     <!-- Logo -->
                     <a href="index" style="color: black;">
-            			<img class="img1" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
-        			</a>  
+                     <img class="img1" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+                 </a>  
                 </div>
                 <!-- /Logo -->
                 <ul class="nav navbar-top-links navbar-right pull-right">
@@ -147,53 +147,53 @@
 </script>
 <!-- 차트 내용 -->
 <div style="display: flex; flex: row;" id="chart">
-	<div align="center" style="margin-right: 100px;">
-		<div id="chart_div"></div>
-		<div id="chart_div_to"></div>
-	</div>
-	<div>
-		<table border="1" style="width: 700px; height: 500px;">
-			<tr style="background-color: #66666694;">
-				<th class="wi"></th><th class="wi">귀걸이</th><th class="wi">가방</th><th class="wi">옷</th><th class="wi">폰</th><th class="wi">총합</th>
-			</tr>
-			<tr>
-				<th>1월</th><th>${chart1mon.split(",")[0]}</th><th>${chart1mon.split(",")[1]}</th><th>${chart1mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart1mont}</th>
-			</tr>
-			<tr>
-				<th>2월</th><th>${chart2mon.split(",")[0]}</th><th>${chart2mon.split(",")[1]}</th><th>${chart2mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart2mont}</th>
-			</tr>
-			<tr>
-				<th>3월</th><th>${chart3mon.split(",")[0]}</th><th>${chart3mon.split(",")[1]}</th><th>${chart3mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart3mont}</th>
-			</tr>
-			<tr>
-				<th>4월</th><th>${chart4mon.split(",")[0]}</th><th>${chart4mon.split(",")[1]}</th><th>${chart4mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart4mont}</th>
-			</tr>
-			<tr>
-				<th>5월</th><th>${chart5mon.split(",")[0]}</th><th>${chart5mon.split(",")[1]}</th><th>${chart5mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart5mont}</th>
-			</tr>
-			<tr>
-				<th>6월</th><th>${chart6mon.split(",")[0]}</th><th>${chart6mon.split(",")[1]}</th><th>${chart6mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart6mont}</th>
-			</tr>
-			<tr>
-				<th>7월</th><th>${chart7mon.split(",")[0]}</th><th>${chart7mon.split(",")[1]}</th><th>${chart7mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart7mont}</th>
-			</tr>
-			<tr>
-				<th>8월</th><th>${chart8mon.split(",")[0]}</th><th>${chart8mon.split(",")[1]}</th><th>${chart8mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart8mont}</th>
-			</tr>
-			<tr>
-				<th>9월</th><th>${chart9mon.split(",")[0]}</th><th>${chart9mon.split(",")[1]}</th><th>${chart9mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart9mont}</th>
-			</tr>
-			<tr>
-				<th>10월</th><th>${chart10mon.split(",")[0]}</th><th>${chart10mon.split(",")[1]}</th><th>${chart10mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart10mont}</th>
-			</tr>
-			<tr>
-				<th>11월</th><th>${chart11mon.split(",")[0]}</th><th>${chart11mon.split(",")[1]}</th><th>${chart11mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart11mont}</th>
-			</tr>
-			<tr>
-				<th>12월</th><th>${chart12mon.split(",")[0]}</th><th>${chart12mon.split(",")[1]}</th><th>${chart12mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart12mont}</th>
-			</tr>
-		</table>
-	</div>
+   <div align="center" style="margin-right: 100px;">
+      <div id="chart_div"></div>
+      <div id="chart_div_to"></div>
+   </div>
+   <div>
+      <table border="1" style="width: 700px; height: 500px;">
+         <tr style="background-color: #66666694;">
+            <th class="wi"></th><th class="wi">귀걸이</th><th class="wi">가방</th><th class="wi">옷</th><th class="wi">폰</th><th class="wi">총합</th>
+         </tr>
+         <tr>
+            <th>1월</th><th>${chart1mon.split(",")[0]}</th><th>${chart1mon.split(",")[1]}</th><th>${chart1mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart1mont}</th>
+         </tr>
+         <tr>
+            <th>2월</th><th>${chart2mon.split(",")[0]}</th><th>${chart2mon.split(",")[1]}</th><th>${chart2mon.split(",")[2]}</th><th>${chart2mon.split(",")[3]}</th><th>${chart2mont}</th>
+         </tr>
+         <tr>
+            <th>3월</th><th>${chart3mon.split(",")[0]}</th><th>${chart3mon.split(",")[1]}</th><th>${chart3mon.split(",")[2]}</th><th>${chart3mon.split(",")[3]}</th><th>${chart3mont}</th>
+         </tr>
+         <tr>
+            <th>4월</th><th>${chart4mon.split(",")[0]}</th><th>${chart4mon.split(",")[1]}</th><th>${chart4mon.split(",")[2]}</th><th>${chart4mon.split(",")[3]}</th><th>${chart4mont}</th>
+         </tr>
+         <tr>
+            <th>5월</th><th>${chart5mon.split(",")[0]}</th><th>${chart5mon.split(",")[1]}</th><th>${chart5mon.split(",")[2]}</th><th>${chart5mon.split(",")[3]}</th><th>${chart5mont}</th>
+         </tr>
+         <tr>
+            <th>6월</th><th>${chart6mon.split(",")[0]}</th><th>${chart6mon.split(",")[1]}</th><th>${chart6mon.split(",")[2]}</th><th>${chart6mon.split(",")[3]}</th><th>${chart6mont}</th>
+         </tr>
+         <tr>
+            <th>7월</th><th>${chart7mon.split(",")[0]}</th><th>${chart7mon.split(",")[1]}</th><th>${chart7mon.split(",")[2]}</th><th>${chart7mon.split(",")[3]}</th><th>${chart7mont}</th>
+         </tr>
+         <tr>
+            <th>8월</th><th>${chart8mon.split(",")[0]}</th><th>${chart8mon.split(",")[1]}</th><th>${chart8mon.split(",")[2]}</th><th>${chart8mon.split(",")[3]}</th><th>${chart8mont}</th>
+         </tr>
+         <tr>
+            <th>9월</th><th>${chart9mon.split(",")[0]}</th><th>${chart9mon.split(",")[1]}</th><th>${chart9mon.split(",")[2]}</th><th>${chart9mon.split(",")[3]}</th><th>${chart9mont}</th>
+         </tr>
+         <tr>
+            <th>10월</th><th>${chart10mon.split(",")[0]}</th><th>${chart10mon.split(",")[1]}</th><th>${chart10mon.split(",")[2]}</th><th>${chart10mon.split(",")[3]}</th><th>${chart10mont}</th>
+         </tr>
+         <tr>
+            <th>11월</th><th>${chart11mon.split(",")[0]}</th><th>${chart11mon.split(",")[1]}</th><th>${chart11mon.split(",")[2]}</th><th>${chart11mon.split(",")[3]}</th><th>${chart11mont}</th>
+         </tr>
+         <tr>
+            <th>12월</th><th>${chart12mon.split(",")[0]}</th><th>${chart12mon.split(",")[1]}</th><th>${chart12mon.split(",")[2]}</th><th>${chart12mon.split(",")[3]}</th><th>${chart12mont}</th>
+         </tr>
+      </table>
+   </div>
 </div>
 
 <%-- <label id="c1">${yer}</label> --%>
@@ -213,9 +213,9 @@ ${chart_date}
 <!-- </div> -->
 <script>
 function ad(d) {
-	   $("form[name=adminHeader_form]").attr("action",d);
-	   adminHeader_form.submit();
-	}
+      $("form[name=adminHeader_form]").attr("action",d);
+      adminHeader_form.submit();
+   }
 // 로딩 완료시 함수 실행하여 차트 생성
 google.charts.setOnLoadCallback(drawChart);
 google.charts.setOnLoadCallback(drawChart_to);
@@ -366,8 +366,8 @@ function yerch() {
     <script src="resources/adjs/dashboard1.js"></script>
     <script src="resources/plugins/bower_components/toast-master/js/jquery.toast.js?aa"></script>
 <form name="adminHeader_form" method="post">
-	<input type="hidden" id="adminHeader_form_start" name="start" value="1">
-	<input type="hidden" id="adminHeader_form_end" name="end" value="10">
+   <input type="hidden" id="adminHeader_form_start" name="start" value="1">
+   <input type="hidden" id="adminHeader_form_end" name="end" value="10">
 </form>
 
 

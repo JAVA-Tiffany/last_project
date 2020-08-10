@@ -169,22 +169,7 @@ public class ProjectController {
          model.addAttribute("cartlist",arrz);
          return "shop/cart";
       }
-      @RequestMapping("listdel")
-      public String cart_delect(HttpServletRequest request, @RequestParam String img) {
-         System.out.println("img : " + img);
-         String[] c = img.split("/");
-         String m="";
-         for(int i=4;i<c.length;i++) {
-            m+=c[i];
-            if(c.length-1!=i) {
-               System.out.println(m);
-               m+="/";
-            }
-         }
-         System.out.println("m : "+m);
-         cartservice.cart_delete(request,m);
-         return "redirect:cart";
-      }
+      
 
    
       @RequestMapping(value ="orderForm", method = {RequestMethod.GET, RequestMethod.POST})
@@ -318,4 +303,20 @@ public class ProjectController {
          return "default/company_profile";
       }
 
+      @RequestMapping("listdel")
+      public String cart_delect(HttpServletRequest request, @RequestParam String img, @RequestParam String rno) {
+         System.out.println("img : " + img);
+         String[] c = img.split("/");
+         String m="";
+         for(int i=4;i<c.length;i++) {
+            m+=c[i];
+            if(c.length-1!=i) {
+               System.out.println(m);
+               m+="/";
+            }
+         }
+         System.out.println("m : "+m);
+         cartservice.cart_delete(request,img,rno);
+         return "redirect:cart";
+      }
 }

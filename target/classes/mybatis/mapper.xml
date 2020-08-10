@@ -14,13 +14,11 @@
       select * from
       data_list where img like '%pitting%'
    </select>
-   <select id="dataselect_List" resultType="datalistdto">
-      select * from data_list
-      where img like '%pitting%' and type=#{type}
-   </select>
+   
    <select id="selectPick" resultType="datalistdto"
       parameterType="String">
-      select count(*) from data_list where type=#{type} and img like '%pitting%'
+       select * from data_list
+      where img like '%pitting%' and type=#{type}
    </select>
    <select id="select_count" resultType="String">
       select count(*) from data_list where type=#{type} and img like '%pitting%'
@@ -66,6 +64,14 @@
    </delete>
 	 <select id="select_price" parameterType="String" resultType="String">
       select price from data_list where product=#{product}      
+   </select>
+   <select id="selectall_count" resultType="String">
+      select count(*) from data_list where img like '%pitting%'
+   </select>
+<select id="select_all_number" resultType="datalistdto"
+      parameterType="datalistdto">
+      select * from (select rownum num, a.* from (select * from data_list where img like
+      '%pitting%') a ) where num between #{start} and #{end}
    </select>
    <!-- 유저 정보 -->
    <select id="selectAll_User" resultType="userdto"
@@ -192,9 +198,9 @@
       values(#{img},#{id},#{product},#{status},#{price},1,#{type},0,(select
       nvl(max(rno)+1,1)from pay))
    </insert>
-   <delete id="delete_Userimg" parameterType="Paydto">
+     <delete id="delete_Userimg" parameterType="Paydto">
       delete pay where
-      id=#{id} and img=#{img}
+      id=#{id} and rno=#{rno}
    </delete>
    <update id="update_Userimg" parameterType="Paydto">
       update pay set
@@ -220,8 +226,8 @@
       update pay set
       count=count-1 where id=#{id} and product=#{product}
    </update>
-   <select id="selectAll_Userimg_number" resultType="Paydto">
-      select * from (select rownum num, a.* from (select * from pay) a ) where num between #{start} and #{end}
+     <select id="selectAll_Userimg_number" resultType="Paydto">
+      select * from (select rownum num, a.* from (select * from pay order by rno asc) a ) where num between #{start} and #{end}
    </select>
    <select id="selectAll_Userimg_count" resultType="String">
       select count(*) from pay

@@ -29,7 +29,7 @@ public class UtilFile {
         	System.out.println(name);
         	fileName =product +"."+ name;
             byte[] bytes = uploadFile.getBytes();
-            path  ="C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\img\\" + type + "\\";
+            path  ="D:\\workspace-project\\last_project\\src\\main\\webapp\\resources\\img\\" + type + "\\";
 
             File file = new File(path+ fileName);
 
