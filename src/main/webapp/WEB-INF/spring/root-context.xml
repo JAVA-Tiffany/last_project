@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Google 소셜 로그인 연결 설정 -->
+	<bean id="googleOAuth2Template"
+		class="org.springframework.social.google.connect.GoogleOAuth2Template">
+		<constructor-arg
+			value="597123786701-nq2v8nmsmh11pil1ad10cnmlm8tsp8um.apps.googleusercontent.com" />
+		<constructor-arg value="9FSNMaQrCneJEenxGyZkVLSz" />
+	</bean>
+
+
+	<bean id="googleOAuth2Parameters"
+		class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope"
+			value="https://www.googleapis.com/auth/userinfo.email"></property>
+		<property name="redirectUri"
+			value="http://localhost:9999/controller/googlecallback" />
+	</bean>
+
+	<bean id="authInfo" class="com.project.dto.AuthInfo">
+		<constructor-arg
+			value="597123786701-nq2v8nmsmh11pil1ad10cnmlm8tsp8um.apps.googleusercontent.com" />
+		<constructor-arg value="9FSNMaQrCneJEenxGyZkVLSz" />
+
+	</bean>
+
+	<!-- 메일보내기 -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ejrtn153@gmail.com" />
+		<property name="password" value="@a1235645" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
