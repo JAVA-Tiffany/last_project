@@ -292,7 +292,7 @@ function pagereturn(){
 <div class="limiter">
       <div class="container-login100" align="center">
          <div class="wrap-login100" align="center">
-         <h2>Self Design 정보 변경하기</h2><br>
+         <h2>MAKE 정보 변경하기</h2><br>
 <!--          <div class="login100-pic js-tilt" data-tilt> -->
 <!--             <img src="resources/images/80678738_2416624028588147_5452304186879982403_n.jpg" alt="IMG"> -->
 <!--          </div> -->

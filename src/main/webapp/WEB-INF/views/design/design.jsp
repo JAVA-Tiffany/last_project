@@ -178,11 +178,18 @@
 //    텍스트 더블 클릭시 실행
     function test_dblclick(d) {
        alert("텍스트 더블클릭")
-       $("div").remove("#text_dblclick_event_text");
-       $("div").remove("#text_dblclick_event_size");
-       $("#left_menu").append("<div id='text_dblclick_event_text' style='margin-top:30px;'><input id='textin' type='text' placeholder='입력할 글자 입력' onchange='dblclick_end("+d+")'></div>");
-       $("#left_menu").append("<div id='text_dblclick_event_size' style='margin-top:30px;'><input id='sizein' type='text' placeholder='크기 입력(px)' onchange='dblclick_end("+d+")'></div>");
+       $("div").remove("#text_dblclick_event");
+       $("#left_menu").append("<div id='text_dblclick_event' style='width:192px; height:92px; margin-top:30px;'>"
+       +"<div style='display: flex; flex-flow:row; width: 20px; padding-left:74px;'>"
+       +"<input type='button' style='width:50px; height:20px; cursor: pointer;' onclick='text_dblclick_event_del()' value='X'>"
+       +"<input type='button' style='margin-left:5px; width:50px; height:20px; cursor: pointer;;' onclick='dblclick_end("+d+")' value='O'>"
+       +"</div>"
+       +"<div style='margin-top:10px;'><input id='textin' type='text' placeholder='입력할 글자 입력'></div>"
+       +"<div style='margin-top:10px;'><input id='sizein' type='text' placeholder='크기 입력(px)'></div></div>");
    }
+   function text_dblclick_event_del() {
+	   $("div").remove("#text_dblclick_event");
+}
    function dblclick_end(d) {
       alert($("#sizein").val())
       alert($("#textin").val())
@@ -191,8 +198,7 @@
       if($("#textin").val()!="")
       $("#image_label"+d).text($("#textin").val());
       $("#image"+count).css("width",$("#image_label"+count).css("width"))
-      $("div").remove("#text_dblclick_event_text");
-      $("div").remove("#text_dblclick_event_size");
+      $("div").remove("#text_dblclick_event");
    }
    
    var imgclick_ch=0;
@@ -426,7 +432,7 @@
    <div style="width: 1500px; margin: 0 auto; margin-top: 100px;" onclick="imgclick_maindiv()">
       <div style="display: flex; flex-flow:row; width: 700px; margin: 0 auto; " align="left">
          <div style="text-align: center;cursor:pointer;" onclick="view_reset()">
-            <img src="resources/img/reset.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px; text-align: center">처음으로</font>
+            <img src="resources/img/reset.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px; text-align: center;">처음으로</font>
          </div>
          <div style="text-align: center;cursor:pointer;"onclick="view_garbage()">
             <img src="resources/img/garbage.png" style="width: 50px;height: 50px;" ><br><font style="font-size: 10px;">삭제</font>

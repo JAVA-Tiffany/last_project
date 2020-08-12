@@ -27,7 +27,7 @@
    <style type="text/css">
      
       .div1 {
-      font: 400 14px 'Nanum Gothic',Arial,sans serif;
+      font: 400 14px "Roboto","Arial","Nanum Gothic","돋움","Dotum","Apple Gothic","Apple SD Gothic Neo",sans-serif;
          padding-top: 100px;
 /*          padding-bottom: 100px; */
       }
@@ -37,7 +37,7 @@
       }
 
       body,html{
-      font-family: 'Nanum Gothic',Arial,sans serif;
+      font-family: "Roboto","Arial","Nanum Gothic","돋움","Dotum","Apple Gothic","Apple SD Gothic Neo",sans-serif;
       }
 
       .form-group {
@@ -51,6 +51,37 @@
       .replycount {
          color: red;
       }
+     .btn{
+font-family: "Roboto","Arial","Nanum Gothic","돋움","Dotum","Apple Gothic","Apple SD Gothic Neo",sans-serif;
+    color: #7d7d7d;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    cursor: pointer;
+    outline: none;
+    align-items: right;
+    float:right;
+    padding: 0px 8px 0 9px;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+   
+}
+.btn:hover{
+background: #7d7d7d;
+   color:white;
+   transition: all 0.12s ease-in-out;
+}
    </style>
 </head>
 
@@ -157,15 +188,14 @@
          }
       }
       function totle_click(d,w) {
-    	  if('${sessionScope.id}'==w || w.split("_")[0]=="/admin/" || ${sessionScope.id.split('_')[0] eq '/admin/' }){
-         console.log(d);
+         if('${sessionScope.id}'==w || w.split("_")[0]=="/admin/" || '${sessionScope.id}'.split("_")[0]=='/admin/'){
          ch = d;
          $("#bno_result").val(d);
          bno_form.submit();
-    	  }
-    	  else{
-    		  alert("본인 작성글만 확인할 수 있습니다.")
-    	  }
+         }
+         else{
+            alert("본인 작성글만 확인할 수 있습니다.")
+         }
       }
    </script>
    <jsp:include page="../default/header.jsp" />
@@ -196,7 +226,7 @@
                               <td class="cell" data-title="번호">${adminList.bno}</td>
                            </c:otherwise>
                         </c:choose>
-                        <td class="cell" data-title="제목"><a class="title" onclick="totle_click(${adminList.bno},'${adminList.writer}')"> ${adminList.title} 
+                        <td class="cell" data-title="제목"><a class="title" onclick="totle_click('${adminList.bno}','${adminList.writer}')"> ${adminList.title} 
                         <label class="replycount"> [${adminList.replycount}] </label>
                         </a> </td>
                         <c:choose>
@@ -211,13 +241,18 @@
                         <td class="cell" data-title="조회수" >${adminList.viewcnt }</td>
                      </tr>
                   </c:forEach>
-
+               <tr>
+                  <td colspan="5"><button type="button" onclick="location.href='write'"class="btn">글 작성</button></td>
+                  
+               </tr>
                </table>
+               
             </div>
+            
          </div>
       </div>
    </div>
-
+   
       <!-- 검색 form -->
       <div id="search" class="div2">
          <!-- search{s} -->

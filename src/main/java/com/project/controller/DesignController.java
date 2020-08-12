@@ -36,7 +36,7 @@ public class DesignController {
    public String design(@RequestParam String imggoods,@RequestParam String imgname, @RequestParam String imgmoney, Model model,HttpServletRequest request, HttpServletResponse response) {
       CookieUtils cook = new CookieUtils();
       try {
-      cook.setCookie("text1", imgname, 1, request, response);
+      cook.setCookie("text3", imgname, 1, request, response);
    } catch (UnsupportedEncodingException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

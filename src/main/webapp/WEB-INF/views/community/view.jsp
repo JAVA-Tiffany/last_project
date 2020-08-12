@@ -124,14 +124,6 @@ width:84%;
   
 $(document).ready(function() {
    var bno = ${view.bno}; 
-   var sessionId = '${sessionScope.id}'
-   console.log("작성자누구냐:"+writer)
-   if(sessionId.split('_')[0] != '/admin/' ){
-      alert("작성자만 게시글을 볼수있습니다");
-      location.href="list";
-   }
-   
-   
    
    $("#insertBtn").click(function(){
       console.log("a");

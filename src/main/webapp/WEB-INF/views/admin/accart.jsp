@@ -68,6 +68,12 @@ padding-top: 40px;
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
+function ad(d) {
+      $("form[name=adminHeader_form]").attr("action",d);
+      adminHeader_form.submit();
+   }
+</script>
+<script type="text/javascript">
 $(document).ready(function() {
    $("#Delbutton").click(function(){ 
       var rowData = new Array(); 
@@ -214,16 +220,13 @@ function title_search() {
     }
  }
  
-function ad(d) {
-      $("form[name=adminHeader_form]").attr("action",d);
-      adminHeader_form.submit();
-   }
+
    
    $(function() {
       var ta=0;
       for(i=1;i<'${paylist.get(paylist.size()-1).rno+1}';i++){
          if($("#prict_text"+i).text()!=""){
-         	ta+=parseInt($("#prict_text"+i).text());
+            ta+=parseInt($("#prict_text"+i).text());
          }
       }
       $("#total").text(ta)
@@ -284,23 +287,23 @@ function ad(d) {
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
                 </div>
                 <ul class="nav" id="side-menu">
-                    <li style="padding: 70px 0 0;">
+                     <li style="padding: 70px 0 0;">
                         <a href="adminindex" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>관리자 메인</a>
                     </li>
                     <li>
-                        <a href="acsearch" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>계정 관리</a>
+                        <a href="javascript:ad('acsearch');" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>계정 관리</a>
                     </li>
                     <li>
-                        <a href="acboard" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Q & A 관리</a>
+                        <a href="javascript:ad('acboard');" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Q & A 관리</a>
                     </li>
                     <li>
-                        <a href="acnotice" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>공지사항 관리</a>
+                        <a href="javascript:ad('acnotice');" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>공지사항 관리</a>
                     </li>
                     <li>
-                        <a href="QuantityManage" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>재고 관리</a>
+                        <a href="javascript:ad('QuantityManage');" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>재고 관리</a>
                     </li>
                     <li>
-                        <a href="javascript:ad('accart')" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>구매내역 관리</a>
+                        <a href="javascript:ad('accart');" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>구매내역 관리</a>
                     </li>
                     <li>
                         <a href="index" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>메인으로 나가기</a>
@@ -428,10 +431,10 @@ function ad(d) {
     <script src="resources/adjs/dashboard1.js"></script>
     <script src="resources/plugins/bower_components/toast-master/js/jquery.toast.js?a"></script>
 
-<!-- <form name="adminHeader_form" method="post"> -->
-<!--    <input type="hidden" id="adminHeader_form_start" name="start" value="1"> -->
-<!--    <input type="hidden" id="adminHeader_form_end" name="end" value="10"> -->
-<!-- </form> -->
+<form name="adminHeader_form" method="post">
+   <input type="hidden" id="adminHeader_form_start" name="start" value="1">
+   <input type="hidden" id="adminHeader_form_end" name="end" value="10">
+</form>
 </body>
 
 </html>

@@ -54,14 +54,14 @@ $(document).ready(function() {
       var quantity = $("#quantityInput").val();
       
       if(product =="" || price=="" || quantity==""){
-         Swal.fire({
-            icon:'warning',
-            title:'양식을 채워주세요!'
-         });
-            
+    	  Swal.fire({
+    		  icon:'warning',
+    		  title:'양식을 채워주세요!'
+    	  });
+    		  
       }else{
-         
-         Swal.fire({
+    	  
+    	  Swal.fire({
               title: '상품을 등록하시겠습니까?',
               text: product+" "+price+"원 "+quantity+"개",
               icon: 'question',
@@ -71,40 +71,40 @@ $(document).ready(function() {
               confirmButtonText: '등록'
          }).then((result) => {
               if (result.value) {
-                 $.ajax({
+            	  $.ajax({
                       url: "AddProduct",
                       type: "POST",
                       data: data,
                       contentType : false,
                       processData : false,
                       success: function(data){
-                         Swal.fire({
+                    	  Swal.fire({
                               title:'success',
                               text: '상품이 성공적으로 등록되었습니다!',
                               icon: 'success',
                              preConfirm:function(){
-                                window.close();
+                            	 window.close();
                               }
                            });
                           
                       },
                       error: function(){
-                         Swal.fire({
-                            title:'Fail',
+                    	  Swal.fire({
+                    		  title:'Fail',
                               text: '상품 등록중 오류가 발생하였습니다!',
                               icon: 'error',
                               preConfirm:function(){
-                                 window.close();
+                             	 window.close();
                                }
-                         });
+                    	  });
                           
                       }
-                 
-                 
-                
+            	  
+            	  
+            	 
               });
             };
-        
+    	 
       });
       
      
@@ -112,20 +112,20 @@ $(document).ready(function() {
    });
    
    $("#type").change(function(){
-         var type = $("#type option:selected").val();
-         console.log(type)
-         if(type =='earring pitting'){
-            console.log(type)
-            $("#singleUpload").css('display','none');
-            $("#multiUpload").removeAttr('style');
-            
-         }else{
-            console.log(type)
-            $("#singleUpload").removeAttr('style');
-            $("#multiUpload").css('display','none');
-         }
-         
-      });
+	      var type = $("#type option:selected").val();
+	      console.log(type)
+	      if(type =='earring pitting'){
+	    	  console.log(type)
+	    	  $("#singleUpload").css('display','none');
+	    	  $("#multiUpload").removeAttr('style');
+	    	  
+	      }else{
+	    	  console.log(type)
+	    	  $("#singleUpload").removeAttr('style');
+	    	  $("#multiUpload").css('display','none');
+	      }
+	      
+	   });
    
    
   
@@ -174,10 +174,10 @@ $(document).ready(function() {
       <tr style="display: none;" id="multiUpload">
          <th>디자인 이미지 업로드</th>
          <th><input type="file" id="DesignFile" name="DesignFile" multiple="multiple" />
-      </tr>
-      <tr>
+  	 </tr>
+  	 <tr>
          <th colspan="2"><input type="button" value="등록" id="SubBtn"></th>
-      </tr>
+  	 </tr>
 </table>
 
 </form>
