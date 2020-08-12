@@ -35,10 +35,8 @@ public class CommunityController {
    private AdminService serviceAdm;
    
    @RequestMapping("list")
-   public String list(CommnuityDTO dto, Model model,ReplyDTO redto) {
+   public String list(CommnuityDTO dto, Model model) {
       service.listAll(dto,model);
-      service.adminview(dto,model);
-      
       return "community/list";
    }
    
@@ -54,7 +52,7 @@ public class CommunityController {
           return "login&join/login";
        }else {
       model.addAttribute("id", session.getAttribute("id").toString());
-      return "community/view2";
+      return "community/view";
        }
    }
    
@@ -79,27 +77,14 @@ public class CommunityController {
    @RequestMapping("commentlist") //댓글 리스트
    @ResponseBody
    private List<ReplyDTO> mCommentServiceList(Model model,@RequestParam int bno) throws Exception{
-//	   List<ReplyDTO> arr = 
-			   
-//	   for (ReplyDTO value : arr) {
-//		String change = value.getContent().replaceAll("\n","<br>");
-//		value.setContent(change);
-//	}
-	   
        return replyService.select(bno);
    }
 
-
-   
-   
-   
-   
    
    @RequestMapping("write")
    public String write() {
       return "community/write";
    }
-   
    @RequestMapping("save_write")
    public String save_write(CommnuityDTO dto) {
       service.save_write(dto);
@@ -140,13 +125,13 @@ public class CommunityController {
    @RequestMapping("notice")
    public String notice(AdminNoticeDTO dto,Model model) {
       serviceAdm.listAll(dto, model);
-      serviceAdm.adminList(dto, model);
       return "community/notice";
    }
    @RequestMapping("noticeview")
-   public String noticeview(AdminNoticeDTO dto, Model model,@RequestParam("bno") Integer bno) {
+   public String noticeview(AdminNoticeDTO dto, Model model,@RequestParam("bno") Integer bno ,@RequestParam("maxSize") Integer maxSize) {
       System.out.println(dto.getBno());
-
+      System.out.println(maxSize);
+      model.addAttribute("maxSize", maxSize);
       System.out.println(bno + "bno check");
       dto.setBno(bno);
       serviceAdm.count(dto);
@@ -155,21 +140,26 @@ public class CommunityController {
    }
    
    @RequestMapping(value="search", method = RequestMethod.POST)
-   public String title_search(CommnuityDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result) {
-     service.title_search(dto,model,type_result,search_result);
+   public String title_search(CommnuityDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result,
+         @RequestParam String start_result,@RequestParam String end_result) {
+     service.title_search(dto,model,type_result,search_result,start_result,end_result);
       return "community/list";
+   }
+   @RequestMapping(value="notice_search", method = RequestMethod.POST)
+   public String notice_search(CommnuityDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result,
+         @RequestParam String start_result,@RequestParam String end_result) {
+     service.notice_search(dto,model,type_result,search_result,start_result,end_result);
+      return "community/notice";
    }
    
    @RequestMapping(value="replydel", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
    public void reply_del(@RequestParam int rno, @RequestParam(required = false) String brno) {
-	   if(brno==null) {
-		   replyService.delete(rno);
-	   }else {
-		   System.out.println(rno);
-		   System.out.println(brno);
-		   replyService.delete_Add(rno,brno);
-	   }
+      if(brno==null) {
+         replyService.delete(rno);
+      }else {
+         replyService.delete_Add(rno,brno);
+      }
 
    }
    
@@ -178,58 +168,40 @@ public class CommunityController {
    public void replych(ReplyDTO dto) {
       replyService.update(dto);
    }
-   
    @RequestMapping("replyupdate") //댓글 수정  
    @ResponseBody
    private int mCommentServiceUpdateProc(@RequestParam int rno,@RequestParam(required = false) String brno, @RequestParam String content) throws Exception{
-	   if(brno==null) {
-		   System.out.println(rno+"ss");
-		   ReplyDTO dto = new ReplyDTO();
-	       dto.setP_rno(rno);
-	       System.out.println(content);
-	       dto.setContent(content.replaceAll("\n","<br>"));
-	       System.out.println(dto.getContent());
-	       return replyService.update(dto);
-	   }else {
-		   System.out.println(rno + "11");
-		   System.out.println(brno + "22");
-		   ReplyDTO dto = new ReplyDTO();
-	       dto.setP_rno(rno);
-	       dto.setBrno(Integer.valueOf(brno));
-	       dto.setContent(content.replaceAll("\n","<br>"));
-	       
-	       return replyService.update_Add(dto);
-	   }
-	   
-	  
+      if(brno==null) {
+         ReplyDTO dto = new ReplyDTO();
+          dto.setP_rno(rno);
+          dto.setContent(content.replaceAll("\n","<br>"));
+          return replyService.update(dto);
+      }else {
+         ReplyDTO dto = new ReplyDTO();
+          dto.setP_rno(rno);
+          dto.setBrno(Integer.valueOf(brno));
+          dto.setContent(content.replaceAll("\n","<br>"));
+          
+          return replyService.update_Add(dto);
+      }
+      
+     
    }
-
-
-   @RequestMapping(value="Writerchk",produces = "application/text; charset=utf8") 
-   @ResponseBody
-   private String Writerchk(@RequestParam int rno) throws Exception{
-       return replyService.Writerchk(rno);
-   }
-   
    @RequestMapping(value="replyAddInsert",method = RequestMethod.POST,produces = "application/text; charset=utf8") 
    @ResponseBody
    private String replyAddInsert(@RequestParam int rno,@RequestParam int bno,@RequestParam String content,@RequestParam String writer) throws Exception{
        
-	   ReplyDTO dto = new ReplyDTO();
-	   dto.setBno(bno);
-	   dto.setContent(content);
-	   dto.setP_rno(rno);
-	   dto.setWriter(writer);
-	   System.out.println(dto.getWriter());
-	   System.out.println(dto.getBno());
-	   System.out.println(dto.getContent());
-	   System.out.println(dto.getP_rno());
-	   
-	   
-	   return String.valueOf(replyService.insertAddRe(dto));
+      ReplyDTO dto = new ReplyDTO();
+      dto.setBno(bno);
+      dto.setContent(content);
+      dto.setP_rno(rno);
+      dto.setWriter(writer);
+      System.out.println(dto.getWriter());
+      System.out.println(dto.getBno());
+      System.out.println(dto.getContent());
+      System.out.println(dto.getP_rno());
+      
+      
+      return String.valueOf(replyService.insertAddRe(dto));
    }
-   
-   
-   
-   
 }

@@ -84,6 +84,7 @@
    function number_down() {
       number_click(1);
      }
+   var y=${list_type}
    if(size>9){
       $(function (){
          $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'><a href='javascript:number_down();' style='text-decoration: none;'><<</a></div> ");
@@ -97,7 +98,7 @@
             $('#num').append("<div style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px;'>"
                      +"<label onclick='number_click("+(i+1)+")' style='text-decoration: none;' id='a"+(i+1)+"'>"+(i+1)+"</label></div>");
             $("#num").append("<form action='change' method='post' name='numbtn"+(i+1)+"'>"
-                    +"<input type='hidden' value='${list_type}' name='change_val'>"
+                    +"<input type='hidden' value='"+y[i]+"' name='change_val'>"
                     +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
                     +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
                     +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"
@@ -143,7 +144,7 @@
                 $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
                         +"<input type='hidden' value='"+r[i]+"' name='imgname'>"
                         +"<input type='hidden' value='"+u[i]+"' name='imgmoney'>"
-                        +"<input type='hidden' value='${list_type}' name='imggoods'>"
+                        +"<input type='hidden' value='"+y[i]+"' name='imggoods'>"
                         +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
                       +"</form>")
              

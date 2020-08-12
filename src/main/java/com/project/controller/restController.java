@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.dto.PayDTO;
+import com.project.service.ProjectService;
 import com.project.service.cartService;
 
 @RestController
@@ -20,7 +21,8 @@ public class restController {
    
    @Autowired
    private cartService cartservice;
-   
+   @Autowired
+   private ProjectService projectservice;
    @GetMapping(value="num_up", produces="application/text;charset=utf-8")
    @ResponseBody
    public String unm_up(HttpServletRequest request, @RequestParam int num, @RequestParam String product) {
@@ -45,6 +47,10 @@ public class restController {
       dto.setId((String)session.getAttribute("id"));
       cartservice.update(dto);
       return "";
+   }
+   @PostMapping(value="pricedb", produces="application/text;charset=utf-8")
+   public String pricedb(Model model, @RequestParam String product) {
+      return projectservice.select_price(model ,product);
    }
    
 }

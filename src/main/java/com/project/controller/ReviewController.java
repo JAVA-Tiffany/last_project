@@ -31,20 +31,21 @@ public class ReviewController {
    @Autowired
    private ReviewDAO reviewdao;
    
-   @RequestMapping(value="review" ,method = RequestMethod.POST)
-   public String review(Model model, @RequestParam() String review_text) {
-      reviewService.selectAll(model,review_text);
+   @RequestMapping(value="review" )
+   public String review(Model model) {
+      reviewService.selectAll(model);
+      
       return "community/Review";
    }
    
-   @RequestMapping(value="review_search", method = RequestMethod.POST)
-   public String search(Model model,@RequestParam String search_img, @RequestParam String type, @RequestParam String search_text) {
-      reviewService.select(model,search_img,type,search_text);
+//   @RequestMapping(value="review_search", method = RequestMethod.POST)
+//   public String search(Model model,@RequestParam String search_img, @RequestParam String type, @RequestParam String search_text) {
+//      reviewService.select(model,search_img,type,search_text);
 //      System.out.println("search_img : "+search_img);
 //      System.out.println("type : "+type);
 //      System.out.println("search_text : "+search_text);
-      return "community/Review";
-   }
+//      return "community/Review";
+//   }
    
    @RequestMapping(value="review_delect", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
@@ -116,7 +117,7 @@ public class ReviewController {
       
       List<MultipartFile> fileList = request.getFiles("fileimg");
       
-      String path = "D:\\yoo\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\Review\\";
+      String path = "C:\\Users\\Jang\\Desktop\\workspase-boot\\last_project\\src\\main\\webapp\\resources\\Review\\";
       String img_list="";
       if(fileList.size()==0) {
          dto.setFileimg("");
@@ -175,6 +176,8 @@ public class ReviewController {
       }
    }
    
+   
+   
    @RequestMapping(value="infocount_up", method = RequestMethod.POST, produces = "application/text; charset=utf8")
    @ResponseBody
    public void infocount_up(@RequestParam String rno) {
@@ -187,10 +190,12 @@ public class ReviewController {
       reviewService.update(dto);
    }
    
-   @RequestMapping("review2")
-   public String review2() {
-      
-      
-      return "community/review2";
+   @RequestMapping(value="category_list", produces = "application/text; charset=utf8")
+   public String category_list(Model model,@RequestParam String type) {
+      reviewService.categoryList(model,type);
+
+      return "community/Review";
    }
+   
+   
 }

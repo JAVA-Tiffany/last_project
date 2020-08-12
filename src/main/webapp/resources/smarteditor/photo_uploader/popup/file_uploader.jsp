@@ -47,7 +47,7 @@ if (ServletFileUpload.isMultipartContent(request)){
                      
                     //파일 기본경로
                     String filePath = request.getSession().getServletContext().getRealPath("/");
-                    String copyPath = "C:\\Users\\KGITBank\\Desktop\\WorkSpace\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
+                    String copyPath = "C:\\Users\\Jang\\Desktop\\workspase-boot\\last_project\\src\\main\\webapp\\resources\\smarteditor\\upload\\";
                     filePath += "src\\main\\webapp\\resources\\smarteditor\\upload\\";
                     System.out.println("filePath : "+filePath);
                     //파일 기본경로 _ 상세경로

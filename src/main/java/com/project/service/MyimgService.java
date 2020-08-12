@@ -26,7 +26,7 @@ public class MyimgService {
 		dto.setImg("'"+img+"'");
 		myimgdao.delect(dto);
 		// 삭제할 파일 경로
-		File file = new File("D:\\Programming\\Workspace\\last_project\\src\\main\\webapp\\resources\\userimg\\"+img); 
+		File file = new File("C:\\Users\\Jang\\Desktop\\workspase-boot\\last_project\\src\\main\\webapp\\resources\\userimg\\"+img); 
 		if( file.exists() ){ 
 			if(file.delete()) { 
 				System.out.println("내 이미지 파일삭제 성공"); 

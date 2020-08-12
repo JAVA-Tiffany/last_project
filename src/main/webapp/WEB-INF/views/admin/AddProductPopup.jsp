@@ -5,12 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
+
 .table {
       border-collapse: collapse;
       border-top: 3px solid #168;
+      width:100%;
+      height:100%;
     }  
     .table th {
       color: #168;
@@ -40,49 +42,101 @@
    padding-top: 40px;
    }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
    $("#SubBtn").click(function(){
       var form =$("#FormData")[0];
       var data = new FormData(form);
-      $.ajax({
-               url: "AddProduct",
-               type: "POST",
-               data: data,
-               contentType : false,
-               processData : false,
-               success: function(data){
-                   alert("success");
-                   opener.parent.location.reload();
-                   window.close();
-               },
-               error: function(){
-                   alert("error");
-                   window.close();
-               }
-           });
-   })
-   
-   $("#type").change(function(){
-      var type = $("#type option:selected").val();
-      console.log(type)
-      if(type =='earring pitting'){
-    	  console.log(type)
-    	  $("#singleUpload").css('display','none');
-    	  $("#multiUpload").removeAttr('style');
-    	  
-      }else{
-    	  console.log(type)
-    	  $("#singleUpload").removeAttr('style');
-    	  $("#multiUpload").css('display','none');
-      }
+      var product = $("#productInput").val();
+      var price = $("#priceInput").val();
+      var quantity = $("#quantityInput").val();
       
+      if(product =="" || price=="" || quantity==""){
+    	  Swal.fire({
+    		  icon:'warning',
+    		  title:'양식을 채워주세요!'
+    	  });
+    		  
+      }else{
+    	  
+    	  Swal.fire({
+              title: '상품을 등록하시겠습니까?',
+              text: product+" "+price+"원 "+quantity+"개",
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '등록'
+         }).then((result) => {
+              if (result.value) {
+            	  $.ajax({
+                      url: "AddProduct",
+                      type: "POST",
+                      data: data,
+                      contentType : false,
+                      processData : false,
+                      success: function(data){
+                    	  Swal.fire({
+                              title:'success',
+                              text: '상품이 성공적으로 등록되었습니다!',
+                              icon: 'success',
+                             preConfirm:function(){
+                            	 window.close();
+                              }
+                           });
+                          
+                      },
+                      error: function(){
+                    	  Swal.fire({
+                    		  title:'Fail',
+                              text: '상품 등록중 오류가 발생하였습니다!',
+                              icon: 'error',
+                              preConfirm:function(){
+                             	 window.close();
+                               }
+                    	  });
+                          
+                      }
+            	  
+            	  
+            	 
+              });
+            };
+    	 
+      });
+      
+     
+   }
    });
    
-})
+   $("#type").change(function(){
+	      var type = $("#type option:selected").val();
+	      console.log(type)
+	      if(type =='earring pitting'){
+	    	  console.log(type)
+	    	  $("#singleUpload").css('display','none');
+	    	  $("#multiUpload").removeAttr('style');
+	    	  
+	      }else{
+	    	  console.log(type)
+	    	  $("#singleUpload").removeAttr('style');
+	    	  $("#multiUpload").css('display','none');
+	      }
+	      
+	   });
+   
+   
+  
+   $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
+
+   
+   
+});
+   
 
 </script>
-
 </head>
 <body>
 
@@ -91,13 +145,13 @@ $(document).ready(function() {
 <form method="post" enctype="multipart/form-data" id="FormData">
    <table border="1" class="table" id="hhh">
       <tr>
-         <th>상품 이름 </th><th><input type="text" name="product"></th>
+         <th>상품 이름 </th><th><input type="text" id="productInput" name="product"></th>
       </tr>
       <tr>
-         <th>상품 가격 </th><th><input type="text" name="price"></th>
+         <th>상품 가격 </th><th><input type="text" id="priceInput" name="price" numberonly="true"></th>
       </tr>
       <tr>
-         <th>상품 수량 </th><th><input type="text" name="quantity"></th>
+         <th>상품 수량 </th><th><input type="text" id="quantityInput" name="quantity" numberonly="true"></th>
       </tr>
       <tr>
          <th>상품 종류 </th>
@@ -106,6 +160,7 @@ $(document).ready(function() {
          <option value="bag pitting">가방</option>
          <option value="dress pitting">의류</option>
          <option value="earring pitting">귀걸이/귀찌</option>
+         <option value="phon pitting">폰케이스</option>
          </select></th>
       </tr>
       <tr>
@@ -120,8 +175,11 @@ $(document).ready(function() {
          <th>디자인 이미지 업로드</th>
          <th><input type="file" id="DesignFile" name="DesignFile" multiple="multiple" />
   	 </tr>
+  	 <tr>
+         <th colspan="2"><input type="button" value="등록" id="SubBtn"></th>
+  	 </tr>
 </table>
-<input type="button" value="등록" id="SubBtn">
+
 </form>
 </body>
 </html>

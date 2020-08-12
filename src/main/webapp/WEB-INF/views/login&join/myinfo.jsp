@@ -17,10 +17,50 @@
 <script type="text/javascript" src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>Insert title here</title>
+<style type="text/css">
+#Progress_Loading
+{
+ position: absolute;
+ left: 40%;
+ top:10px;
+ background: none;
+ width: 200px;
+ height: 200px;
+}
+</style>
 </head>
 <body>
 <iframe src="http://nid.naver.com/nidlogin.logout" style="visibility:hidden;display:none"></iframe>
 <script type="text/javascript">
+$(function () {
+   $("#Delbutton").click(function(){ 
+         
+       Swal.fire({
+            title: '아이디를 삭제하시겠습니까?',
+            text: '선택하신 아이디 : ${myinfo_list.id}를 정말 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+       }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                 title:'Deleted!',
+                 text: '성공적으로 삭제되었습니다!',
+                 icon: 'success',
+                preConfirm:function(){
+                     location.href="DelUser?idval=${myinfo_list.id},myinfo"
+                 }
+              })
+            }
+          })
+    });
+})
+
+$(document).ready(function(){
+      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+   })
 function deltoken(){
    $.ajax({
       url:"deltoken",
@@ -48,6 +88,27 @@ function pagereturn(){
 
 
    <script type="text/javascript">
+   function Special() {
+      var cut = document.getElementById("id").value.split("")
+      var sp = 0;
+      for (i = 0; i < cut.length; i++) {
+         if (('!' <= cut[i] && cut[i] <= '/')
+               || (':' <= cut[i] && cut[i] <= '@')
+               || ('[' <= cut[i] && cut[i] <= '\'')
+               || ('{' <= cut[i] && cut[i] <= '~')) {
+            sp = 1
+         }
+      }
+      if (sp == 0) {
+         document.getElementById("pw1").innerHTML = ""
+         document.getElementById("pw1").style.color = "black"
+      } else {
+
+         document.getElementById("pw1").innerHTML = "ID 특수문자를 사용 불가"
+         document.getElementById("pw1").style.color = "red"
+         document.getElementById("id").value = ""
+      }
+   }
       function ch() {
          if (document.getElementById("id").value == "") {
             alert("아이디 칸이 비어있습니다.")
@@ -100,8 +161,8 @@ function pagereturn(){
                 alert("비어있는 칸이 존재합니다.")
           } else {
              Swal.fire({
-                  title: '개인정보를 삭제하시겠습니까?',
-                  text: '정말 삭제하시겠습니까?',
+                  title: '개인정보를 수정하시겠습니까?',
+                  text: '정말 수정하시겠습니까?',
                   icon: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: '#3085d6',
@@ -123,18 +184,20 @@ function pagereturn(){
           }
        }
        function eamil_k() {
-          alert("인증번호 보내는 중")
           if($("#email_btn").val()=="인증 발급"){
+             $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
              $.ajax({
                    url : "mailSending",
                    type : "POST",
-                   data : {email:$("#email").val()},
+                   data : {email:$("#email").val(),ch:"인증"},
                    success : function(data) {
+                      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
                       alert("인증번호 보내졌습니다.")
                       $("#join_key_text").val(data);
                       $("#email_btn").val("인증 확인");
                    },
                    error : function() {
+                      $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
                       alert('보내기 실패')
                    }
               })
@@ -223,7 +286,9 @@ function pagereturn(){
 }
 
 </script>
-
+   <div id = "Progress_Loading"><!-- 로딩바 -->
+      <img style="width: 200px; height: 200px;" src="resources/img/Progress_Loading.gif"/>
+   </div>
 <div class="limiter">
       <div class="container-login100" align="center">
          <div class="wrap-login100" align="center">
@@ -233,10 +298,10 @@ function pagereturn(){
 <!--          </div> -->
             <div align="center">
                
-               <form action="Infoupdata" name="user" style="align:center;">
+               <form action="info_change" name="user" style="align:center;">
       
                <div class="wrap-input100 validate-input" align="center">
-                  <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly">
+                  <input type="text" id="id" placeholder="아이디" class=input100 name="id" value="${myinfo_list.id}" readonly="readonly" onchange="Special()">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"  style="text-align:right;"></i>
@@ -245,14 +310,14 @@ function pagereturn(){
                
                   
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw" value="${myinfo_list.pw}">
+                  <input type="password" id="pw" placeholder="비밀번호" class="input100" onchange="pwlengthch()" name="pw" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
                   </span>
                </div>
                <div class="wrap-input100 validate-input">
-                  <input type="text" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()" value="${myinfo_list.pw}">
+                  <input type="password" id="pwc" placeholder="비밀번호 확인" class="input100"  onchange="pwch()" value="${myinfo_list.pw}">
                   <span class="focus-input100"></span>
                   <span class="symbol-input100">
                      <i class="fa fa-lock" aria-hidden="true"></i>
@@ -317,8 +382,13 @@ function pagereturn(){
 <!--                      </span> -->
                   </div>
                </div>
+               <div style="display: flex; flex: row;">
                <div class="container-login100-form-btn">
             <input type="button" class="login100-form-btn-login" onclick="al()" value="정보수정">
+         </div>
+         <div class="container-login100-form-btn">
+            <input type="button" class="login100-form-btn-login" id="Delbutton" value="회원탈퇴">
+         </div>
          </div>
          <br>
             <a class="login100-form-btn-login"  href="index"><font color="white">뒤로가기</font></a>

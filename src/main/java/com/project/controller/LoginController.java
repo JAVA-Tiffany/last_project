@@ -1,7 +1,10 @@
 package com.project.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.dao.UserDAO;
 import com.project.dto.UserDTO;
+import com.project.service.CookieUtils;
 import com.project.service.ProjectService;
 import com.test.tst.NaverLoginBO;
 
@@ -39,7 +43,7 @@ public class LoginController {
 	}
 	//로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, HttpSession session) {
+	public String login(Model model, HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&

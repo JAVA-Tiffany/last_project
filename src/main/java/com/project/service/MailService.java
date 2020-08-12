@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Random;
 
@@ -21,7 +22,9 @@ public class MailService {
    @Autowired
    private UserDAO userdao;
    
-   public String mailSending(String eamil) {
+   public String mailSending(String eamil, String m,String id) {
+      Sha sha = new Sha();
+      UserDTO dto = new UserDTO();
       String setfrom = "ejrtn153@gmail.com";
       String keye=null;
       try {
@@ -30,12 +33,22 @@ public class MailService {
 
          messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
          messageHelper.setTo(eamil); // 받는사람 이메일
-         messageHelper.setSubject("self design 인증번호");
+         
          keye=key();
-         String msg="<h1>인증 번호를 입력해 주세요.</h1><br>"
+         String msg="";
+         if(m.equals("인증")) {
+            messageHelper.setSubject("MAKE 인증번호");
+         msg="<h1>인증 번호를 입력해 주세요.</h1><br>"
                + "<h1>인증번호 : "+keye+"</h1>";
+         }else {
+            messageHelper.setSubject("MAKE 임시 비밀 번호");
+            msg="<h1>임시 비밀 번호를 입력해 주세요.</h1><br>"
+                     + "<h1>임시 비밀 번호 : "+keye+"</h1>";
+            dto.setPw(sha.sha256(keye));
+            dto.setId(id);
+            userdao.pw_update(dto);
+         }
          messageHelper.setText(msg,true); // 메일 내용
-
          mailSender.send(message);
       } catch (Exception e) {
          System.out.println(e);
@@ -71,10 +84,11 @@ public class MailService {
       UserDTO dto =new UserDTO();
       dto.setId(name);
       dto.setEmail(mail);
+      
       List<UserDTO> arr = userdao.selectpw(dto);
       for(int i=0;i<arr.size();i++) {
-         s+="ID : "+arr.get(i).getId()+"\n";
-      }
+          s+="PW : "+arr.get(i).getId()+"\n";
+       }
       return s;
    }
    public void myinfo(Model model, String id) {

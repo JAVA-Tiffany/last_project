@@ -40,6 +40,10 @@
       $("#index_type_text_end2").val(9);
       index_form2.submit();
    }
+   function ad(d) {
+      $("form[name=header_form]").attr("action",d);
+      header_form.submit();
+   }
 </script>
 
 <script type="text/javascript">
@@ -129,29 +133,6 @@
    
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .dropdown1 {
    position: relative;
    display: inline-block;
@@ -236,7 +217,7 @@
       <div>
          <h1>
             <a href="index" style="color: black;">
-            <img class="img0" src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
+            <img src="resources/img/MAKE1.PNG" style="width:200px; height: 69PX; color:#F6F6F6;">
             </a>
          </h1>
       </div>
@@ -246,7 +227,7 @@
                <span class="menu__item"><a class="menu__item-name" href="#"
                   style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">SHOP</a></span>
                <div class="dropdown-content">
-                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('')">ALL</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('all')">ALL</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('earring')">EARRING</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('dress')">DRESS</a></span>
                   <span class="menu__item"><a class="menu__item-name" href="#" style="color: black;" onclick="data_move('bag')">BAG</a></span>
@@ -262,8 +243,8 @@
                   href="#"
                   style="color: black; font-size: 20px; font-family: Yu Gothic; font-weight: lighter; margin-right: 15px;">COMMUNITY</a></span>
                <div class="dropdown-content0">
-                  <span class="menu__item"><a class="menu__item-name" href="notice" style="color: black;">NOTICE</a></span>
-                  <span class="menu__item"><a class="menu__item-name" href="list" style="color: black;">Q / A</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="javascript:ad('notice')" style="color: black;">NOTICE</a></span>
+                  <span class="menu__item"><a class="menu__item-name" href="javascript:ad('list')" style="color: black;">Q / A</a></span>
                </div>
             </div>
             <div class="dropdown0">
@@ -295,8 +276,8 @@
                         <span class="menu__item"><a class="menu__item-name" href="myinfo" style="color: black;">MY INFO</a></span>
                         <span class="menu__item"><a class="menu__item-name" href="orderList" style="color: black;">ORDERLIST</a></span>
                         <span class="menu__item"><a class="menu__item-name" href="logout" style="color: black;">LOGOUT</a></span>
-                        <c:if test="${sessionScope.id.split('_')[0] eq 'admin' }">
-                           <span class="menu__item"><a class="menu__item-name" href="adminpage" style="color: black;">ADMIN</a></span>
+                        <c:if test="${sessionScope.id.split('_')[0] eq '/admin/' }">
+                           <span class="menu__item"><a class="menu__item-name" href="adminindex" style="color: black;">ADMIN</a></span>
                         </c:if>
                      </div>
                   </c:otherwise>
@@ -330,7 +311,10 @@
          type="hidden" name="start" id="index_type_text_start2"> <input
          type="hidden" name="end" id="index_type_text_end2">
    </form>
-
+   <form name="header_form" method="post">
+   <input type="hidden" id="adminHeader_form_start" name="start" value="1">
+   <input type="hidden" id="adminHeader_form_end" name="end" value="10">
+</form>
 
    <script src="resources/js/demo.js"></script>
 </body>

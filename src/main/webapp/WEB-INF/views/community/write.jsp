@@ -11,6 +11,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+   if('${sessionScope.id.split("_")[0]}'=="/admin/"){
+         location.href="acboardIns"
+   }
    $("#btnSave").click(function(){
       var title = $("#title").val();
       var content = $("#content").val();
@@ -61,6 +64,13 @@ font: 400 14px 'Poppins',sans-serif;
 </style>
 </head>
 <body>
+<c:if test="${sessionScope.id eq null }">
+<script type="text/javascript">
+   alert("로그인 해주세요.")
+   location.href="login"
+   
+</script>
+</c:if>
 <jsp:include page="../default/header.jsp"/>
 <div align="center" class="div1">
    <form name="form1" action="save_write" method="post">
@@ -98,11 +108,11 @@ font: 400 14px 'Poppins',sans-serif;
    </tr>
 
    </table>
+   </form>
    <div class="div2">
       <button type="button" id="btnSave">확인</button>
       <button type="reset">취소</button>
    </div>
-   </form>
 </div>
 <jsp:include page="../default/footer.jsp"/>
 </body>

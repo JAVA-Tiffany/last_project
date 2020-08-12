@@ -4,14 +4,14 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>
-		<typeAlias alias="userdto" type="com.project.dto.UserDTO"/>
-		<typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
-		<typeAlias alias="Paydto" type="com.project.dto.PayDTO"/>
-		<typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
-		<typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
-		<typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>
-		<typeAlias alias="reviewdto" type="com.project.dto.ReviewDTO"/>
-		<typeAlias alias="datalistdto" type="com.project.dto.DataListDTO"/>
-		<typeAlias alias="Helpdto" type="com.project.dto.HelpDTO"/>
+      <typeAlias alias="userdto" type="com.project.dto.UserDTO"/>
+      <typeAlias alias="comdto" type="com.project.dto.CommnuityDTO"/>
+      <typeAlias alias="paydto" type="com.project.dto.PayDTO"/>
+      <typeAlias alias="myimgdto" type="com.project.dto.MyimgDTO"/>
+      <typeAlias alias="replydto" type="com.project.dto.ReplyDTO"/>
+      <typeAlias alias="Noticedto" type="com.project.dto.AdminNoticeDTO"/>
+      <typeAlias alias="reviewdto" type="com.project.dto.ReviewDTO"/>
+      <typeAlias alias="datalistdto" type="com.project.dto.DataListDTO"/>
+      <typeAlias alias="bannerdto" type="com.project.dto.bannerDTO"/>
    </typeAliases>
 </configuration>
