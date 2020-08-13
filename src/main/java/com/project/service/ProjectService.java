@@ -128,9 +128,7 @@ public class ProjectService {
    public void select(Model model,UserDTO dto) {
       model.addAttribute("listAll",userdao.selectAll(dto));
       model.addAttribute("list_size",userdao.user_count());
-     
-       model.addAttribute("list_last", dto.getEnd());
-      
+      model.addAttribute("list_last", dto.getEnd());
    }
 
    // 회원가입시 ID 확인
