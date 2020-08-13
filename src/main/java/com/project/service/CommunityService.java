@@ -70,7 +70,6 @@ public class CommunityService {
       String s=null;
       dto.setStart(start_result);
       dto.setEnd(end_result);
-      System.out.println(search_result);
      if(type_result.equals("title")){
         dto.setTitle(search_result);
         arr=dao.listSearch_title(dto);
@@ -99,7 +98,6 @@ public class CommunityService {
       String s=null;
       dto.setStart(start_result);
       dto.setEnd(end_result);
-      System.out.println(search_result);
      if(type_result.equals("title")){
         dto.setTitle(search_result);
         arr=dao.noticeSearch_title(dto);
@@ -124,7 +122,6 @@ public class CommunityService {
       String s=null;
       dto.setStart(start_result);
       dto.setEnd(end_result);
-      System.out.println(search_result);
      if(type_result.equals("id")){
         dto.setId(search_result);
         arr=paydao.cartSearch_id(dto);

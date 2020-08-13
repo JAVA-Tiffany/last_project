@@ -5,6 +5,12 @@
 
 <mapper namespace="com.project.mybatis.myMapper">
 
+<!--    배너 관리     -->
+   <select id="bannerAll" resultType="bannerdto">
+      select * from main_img
+   </select>
+   
+   
    <!-- 상품 리스트 -->
    <select id="dataselectAll_List2" resultType="datalistdto">
       select * from
@@ -140,10 +146,11 @@
    </select>
 
 
-   <!-- Q&A 게시물 관련 -->
+
+
+<!-- Q&A 게시물 관련 -->
    <select id="selectAll_Commnuity" resultType="comdto">
-      select * from (select rownum num, a.* from (select * from board_sys
-      order by writer asc, bno desc) a ) where num between #{start} and #{end}
+      select * from (select rownum num, a.* from (select * from board_sys order by case when writer like '/admin/' then writer end asc,bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="selectAdminAll_Commnuity" resultType="comdto">
       select * from
@@ -163,15 +170,15 @@
    
    <select id="listSearch_title" resultType="comdto" parameterType="comdto">
       select * from (select rownum num, a.* from (select * from board_sys where title LIKE '%'||#{title}||'%'
-      order by writer desc, bno desc) a ) where num between #{start} and #{end}
+      order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch_Content" resultType="comdto" parameterType="comdto">
-      select * from (select rownum num, a.* from (select * from board_sys where content like '%'||#{content}||'%'
-      order by writer desc, bno desc) a ) where num between #{start} and #{end}
+      select * from (select rownum num, a.* from (select * from board_sys where title LIKE '%'||#{title}||'%'
+      order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch" resultType="comdto" parameterType="comdto">
-      select * from (select rownum num, a.* from (select * from board_sys where writer = #{writer}
-      order by writer desc, bno desc) a ) where num between #{start} and #{end}
+      select * from (select rownum num, a.* from (select * from board_sys where title LIKE '%'||#{title}||'%'
+      order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch_title_count" resultType="String" parameterType="comdto">
       select count(*) from board_sys where title like '%'||#{title}||'%'
@@ -340,8 +347,7 @@
       order by writer asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="view_Notice" resultType="Noticedto">
-      select * from notice where
-      bno=#{bno}
+      select * from (select rownum num, a.* from (select * from notice) a ) where num=#{num}
    </select>
    <update id="count_Notice">
       update notice set viewcnt = viewcnt + 1 where
@@ -426,8 +432,5 @@
    <select id="selectChart" resultType="Paydto">
       select * from pay where status='완료'
    </select>
-<!--    배너 관리     -->
-   <select id="bannerAll" resultType="bannerdto">
-      select * from main_img
-   </select>
+
 </mapper>

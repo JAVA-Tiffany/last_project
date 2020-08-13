@@ -144,7 +144,7 @@
                 $("#tr"+c).append("<form action='design' name='fimg"+a+"' method='post'>"
                         +"<input type='hidden' value='"+r[i]+"' name='imgname'>"
                         +"<input type='hidden' value='"+u[i]+"' name='imgmoney'>"
-                        +"<input type='hidden' value='"+y[i]+"' name='imggoods'>"
+                        +"<input type='hidden' value='"+y[i]+"' name='imggoods' id='imggoods"+a+"'>"
                         +"<input type='submit' style='display:none;' id='bmit"+a+"'>"
                       +"</form>")
              
@@ -152,7 +152,7 @@
           
        });
    function imgin(z) {
-      $(opener.document).find("#op_type").val('${list_type}');
+      $(opener.document).find("#op_type").val($("#imggoods"+z).val());
       $(opener.document).find("#op_price").val($("#imgmoney"+z).text());
       $(opener.document).find("#op_product").val($("#imgname"+z).text());
      $(opener.location).attr("href", "javascript:background_ch();");

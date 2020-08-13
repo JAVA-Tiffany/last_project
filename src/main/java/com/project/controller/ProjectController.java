@@ -51,7 +51,7 @@ public class ProjectController {
          ArrayList<String> newprice = new ArrayList<String>();
          ArrayList<String> newproduct = new ArrayList<String>();
          try {
-            List<String> arr = cook.getValueList("text1", request);
+            List<String> arr = cook.getValueList("text3", request);
             if (arr.size() == 1) {
                dto.setProduct1(arr.get(0));
                img_list = datalistdao.select_cookie_one(dto);
@@ -284,7 +284,7 @@ public class ProjectController {
          ArrayList<String> newprice = new ArrayList<String>();
          ArrayList<String> newproduct = new ArrayList<String>();
          try {
-            List<String> arr = cook.getValueList("text1", request);
+            List<String> arr = cook.getValueList("text3", request);
             if (arr.size() == 1) {
                dto.setProduct1(arr.get(0));
                img_list = datalistdao.select_cookie_one(dto);

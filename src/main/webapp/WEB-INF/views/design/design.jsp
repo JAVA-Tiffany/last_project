@@ -243,9 +243,8 @@
     }
    
    function d_fun() {
-      alert($("#op").val()+" 사진 선택")
       id="myCanvas"+count
-      $('#in').append("<div id='image"+count+"' style='z-index:"+count+";'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
+      $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;background-color:none'></canvas></div>")
       $("#image"+count).draggable();
       img[count] = new Image();
       g=img[count]
