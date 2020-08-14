@@ -201,21 +201,21 @@ if(size>10){
 
 function title_search() {
     
-    alert($("#searchType").val());
+//     alert($("#searchType").val());
     //타입 입력
     $("#type_result").val($("#searchType").val());
     
     if($("#searchType").val()=="title"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else if($("#searchType").val()=="Content"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else{
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }
  }
@@ -224,9 +224,9 @@ function title_search() {
    
    $(function() {
       var ta=0;
-	      for(i=1;i<${paylist.size()+1};i++){
-	         ta+=parseInt($("#price_text"+i).text());
-	      }
+         for(i=1;i<${paylist.size()+1};i++){
+            ta+=parseInt($("#price_text"+i).text());
+         }
       $("#total").text(ta)
    });
 </script>

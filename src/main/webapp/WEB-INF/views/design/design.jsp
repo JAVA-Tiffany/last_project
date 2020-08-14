@@ -35,7 +35,7 @@
       .then(function (canvas) { //jpg 결과값
          drawImg(canvas.toDataURL('image/jpeg')); //이미지 저장
          saveAs(canvas.toDataURL(), 'file-name.jpg'); 
-         alert("장바구니 담는중")
+//          alert("장바구니 담는중")
       })
       }else{
          alert("로그인 해주세요.")
@@ -64,7 +64,7 @@
          type : "POST",
          data : {imgbase64:st[1]},
          success : function(data) {
-            alert(data)
+//             alert(data)
             cartsave(data);
          },
          error : function() {
@@ -81,7 +81,7 @@
          type : "POST",
          data : {userimg_in:data,imgname:n,imgmoney:m,type:ty},
          success : function(result) {
-            alert(result)
+//             alert(result)
             location.href="cart"
          },
          error : function() {
@@ -138,10 +138,10 @@
          processData: false,
          contentType: false,
          success : function(result) {
-            alert('파일 저장 성공')
+//             alert('파일 저장 성공')
          },
          error : function() {
-            alert('파일 저장 실패')
+//             alert('파일 저장 실패')
          }
       })
    if (obj.files && obj.files[0]) {
@@ -168,7 +168,7 @@
    
    // 텍스트 추가
    function in_text() {
-      alert("in_text")
+//       alert("in_text")
       $('#in').append("<div id='image"+count+"' style=' z-index:"+count+"; position: relative; left: 63px; top: -4px;' ondblclick='test_dblclick("+count+")' onclick='imgclick("+count+")'><font style='font-size:30pt;' id='image_label"+count+"'>입력</font></div>")
       $("#image"+count).css("width",$("#image_label"+count).css("width"));
       $("#image"+count).draggable();
@@ -177,7 +177,7 @@
    
 //    텍스트 더블 클릭시 실행
     function test_dblclick(d) {
-       alert("텍스트 더블클릭")
+//        alert("텍스트 더블클릭")
        $("div").remove("#text_dblclick_event");
        $("#left_menu").append("<div id='text_dblclick_event' style='width:192px; height:92px; margin-top:30px;'>"
        +"<div style='display: flex; flex-flow:row; width: 20px; padding-left:74px;'>"
@@ -188,11 +188,11 @@
        +"<div style='margin-top:10px;'><input id='sizein' type='text' placeholder='크기 입력(px)'></div></div>");
    }
    function text_dblclick_event_del() {
-	   $("div").remove("#text_dblclick_event");
+      $("div").remove("#text_dblclick_event");
 }
    function dblclick_end(d) {
-      alert($("#sizein").val())
-      alert($("#textin").val())
+//       alert($("#sizein").val())
+//       alert($("#textin").val())
       if($("#sizein").val()!="")
       $("#image_label"+d).css("font-size",$("#sizein").val()+"pt");
       if($("#textin").val()!="")
@@ -243,8 +243,9 @@
     }
    
    function d_fun() {
+//       alert($("#op").val()+" 사진 선택")
       id="myCanvas"+count
-      $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;background-color:none'></canvas></div>")
+      $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;'></canvas></div>")
       $("#image"+count).draggable();
       img[count] = new Image();
       g=img[count]
@@ -265,7 +266,7 @@
 //    view 앞으로
    function view_forward() {
       x = $("#image"+ch).css('z-index');
-      alert($("#image"+ch).css('z-index'))
+//       alert($("#image"+ch).css('z-index'))
       if(parseInt(x)+1<count){
          for(i=0;i<count;i++){
             if($("#image"+i).css('z-index')==(parseInt(x)+1)){
@@ -282,7 +283,7 @@
 //    view 뒤로
    function view_front() {
       x = $("#image"+ch).css('z-index');
-      alert(x)
+//       alert(x)
       if(parseInt(x)-1>0){
          for(i=0;i<count;i++){
             if($("#image"+i).css('z-index')==(parseInt(x)-1)){
@@ -381,14 +382,14 @@
     }
 //     오른쪽 정렬
     function view_right() {
- 		$("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
-       	$("#image"+ch).css("left", parseInt(318)-parseInt($("#image"+ch).css("width").split("px")[0])+"px");
+       $("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
+          $("#image"+ch).css("left", parseInt(318)-parseInt($("#image"+ch).css("width").split("px")[0])+"px");
     }
 //     왼쪽,오른쪽 가운데
-   	function view_left_right_center() {
-	   	$("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
-       	$("#image"+ch).css("left", parseInt(159)-parseInt($("#image"+ch).css("width").split("px")[0])/2+"px");
-	}
+      function view_left_right_center() {
+         $("#image"+ch).css("width",$("#myCanvas"+ch).css("width"))
+          $("#image"+ch).css("left", parseInt(159)-parseInt($("#image"+ch).css("width").split("px")[0])/2+"px");
+   }
 //     위,아래 가운데
     function view_up_down_center() {
        $("#image"+ch).css("top", parseInt(209)-parseInt($("#image"+ch).css("height").split("px")[0])/2+"px");
@@ -502,7 +503,7 @@
    <script type="text/javascript">
    //무료이미지 업로드
    function freer(ddd) {
-      alert("dd")
+//       alert("dd")
       id="myCanvas"+count
         $('#in').append("<div id='image"+count+"' style='z-index:"+count+";' onclick='imgclick("+count+")'><canvas id='myCanvas"+count+"'style='width: 50px; height: 50px;background-color:none'></canvas></div>")
         $("#image"+count).draggable();
@@ -553,7 +554,7 @@
             freee-=9;
             free_img_list();
          }
-         alert("왼쪽으로\n"+frees+" , "+freee);
+//          alert("왼쪽으로\n"+frees+" , "+freee);
       }
          function freebtn2() {
          if(freee!=free_count_all){
@@ -564,7 +565,7 @@
             freee+=9;
             free_img_list();
          }
-         alert("오른쪽으로\n"+frees+" , "+freee);
+//          alert("오른쪽으로\n"+frees+" , "+freee);
       }
       </script>
       무료이미지

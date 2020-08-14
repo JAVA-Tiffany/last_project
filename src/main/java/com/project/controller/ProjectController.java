@@ -313,6 +313,7 @@ public class ProjectController {
                newprice.add("'" + img_list.get(x).getPrice() + "'");
                newproduct.add("'" + img_list.get(x).getProduct() + "'");
             }
+            model.addAttribute("select_type", type);
             model.addAttribute("newsee_list", newarr);
             model.addAttribute("newsee_type", newtype);
             model.addAttribute("newsee_price", newprice);

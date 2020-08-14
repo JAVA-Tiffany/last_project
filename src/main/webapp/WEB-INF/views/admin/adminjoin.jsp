@@ -85,7 +85,7 @@
                      }
 
                      document.getElementById('post_postcode').value = data.zonecode;
-                     alert(fullAddr)
+//                      alert(fullAddr)
                      document.getElementById('post_address').value = fullAddr;
 
                      document.getElementById('sample6_address2').focus();

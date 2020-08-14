@@ -33,29 +33,29 @@
 <iframe src="http://nid.naver.com/nidlogin.logout" style="visibility:hidden;display:none"></iframe>
 <script type="text/javascript">
 $(function () {
-	$("#Delbutton").click(function(){ 
-		   
-	    Swal.fire({
-	         title: '아이디를 삭제하시겠습니까?',
-	         text: '선택하신 아이디 : ${myinfo_list.id}를 정말 삭제하시겠습니까?',
-	         icon: 'warning',
-	         showCancelButton: true,
-	         confirmButtonColor: '#3085d6',
-	         cancelButtonColor: '#d33',
-	         confirmButtonText: 'Yes, delete it!'
-	    }).then((result) => {
-	         if (result.value) {
-	           Swal.fire({
-	              title:'Deleted!',
-	              text: '성공적으로 삭제되었습니다!',
-	              icon: 'success',
-	             preConfirm:function(){
-	                  location.href="DelUser?idval=${myinfo_list.id},myinfo"
-	              }
-	           })
-	         }
-	       })
-	 });
+   $("#Delbutton").click(function(){ 
+         
+       Swal.fire({
+            title: '아이디를 삭제하시겠습니까?',
+            text: '선택하신 아이디 : ${myinfo_list.id}를 정말 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+       }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                 title:'Deleted!',
+                 text: '성공적으로 삭제되었습니다!',
+                 icon: 'success',
+                preConfirm:function(){
+                     location.href="DelUser?idval=${myinfo_list.id},myinfo"
+                 }
+              })
+            }
+          })
+    });
 })
 
 $(document).ready(function(){
@@ -89,26 +89,26 @@ function pagereturn(){
 
    <script type="text/javascript">
    function Special() {
-		var cut = document.getElementById("id").value.split("")
-		var sp = 0;
-		for (i = 0; i < cut.length; i++) {
-			if (('!' <= cut[i] && cut[i] <= '/')
-					|| (':' <= cut[i] && cut[i] <= '@')
-					|| ('[' <= cut[i] && cut[i] <= '\'')
-					|| ('{' <= cut[i] && cut[i] <= '~')) {
-				sp = 1
-			}
-		}
-		if (sp == 0) {
-			document.getElementById("pw1").innerHTML = ""
-			document.getElementById("pw1").style.color = "black"
-		} else {
+      var cut = document.getElementById("id").value.split("")
+      var sp = 0;
+      for (i = 0; i < cut.length; i++) {
+         if (('!' <= cut[i] && cut[i] <= '/')
+               || (':' <= cut[i] && cut[i] <= '@')
+               || ('[' <= cut[i] && cut[i] <= '\'')
+               || ('{' <= cut[i] && cut[i] <= '~')) {
+            sp = 1
+         }
+      }
+      if (sp == 0) {
+         document.getElementById("pw1").innerHTML = ""
+         document.getElementById("pw1").style.color = "black"
+      } else {
 
-			document.getElementById("pw1").innerHTML = "ID 특수문자를 사용 불가"
-			document.getElementById("pw1").style.color = "red"
-			document.getElementById("id").value = ""
-		}
-	}
+         document.getElementById("pw1").innerHTML = "ID 특수문자를 사용 불가"
+         document.getElementById("pw1").style.color = "red"
+         document.getElementById("id").value = ""
+      }
+   }
       function ch() {
          if (document.getElementById("id").value == "") {
             alert("아이디 칸이 비어있습니다.")
@@ -292,7 +292,7 @@ function pagereturn(){
 <div class="limiter">
       <div class="container-login100" align="center">
          <div class="wrap-login100" align="center">
-         <h2>MAKE 정보 변경하기</h2><br>
+         <h2>Self Design 정보 변경하기</h2><br>
 <!--          <div class="login100-pic js-tilt" data-tilt> -->
 <!--             <img src="resources/images/80678738_2416624028588147_5452304186879982403_n.jpg" alt="IMG"> -->
 <!--          </div> -->
@@ -415,4 +415,4 @@ function pagereturn(){
    <script src="resources/js/main.js"></script>
    
 </body>
-</html>
+</html>s

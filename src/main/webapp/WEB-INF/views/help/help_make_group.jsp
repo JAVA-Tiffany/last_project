@@ -500,6 +500,6 @@ html, body {
 
 
 
-<jsp:include page="../default/footer.jsp"/>
+
 </body>
 </html>

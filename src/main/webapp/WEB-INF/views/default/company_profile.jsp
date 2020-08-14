@@ -134,7 +134,7 @@ body {
 <body>
  <jsp:include page="header.jsp" />
 <div class="img1">
-<img src="resources/img/title_img01.jpg" style="width:100%; height: 1100PX;">
+<img src="resources/img/title_img1.jpg" style="width:100%; height: 1100PX;">
 </div>
 <div class="text1">
 <font size="5" color="black">
@@ -152,7 +152,7 @@ body {
 </div>
 
 <div class="img2">
-<img src="resources/img/title_img02.jpg" style="width:100%;  height: 1100PX;">
+<img src="resources/img/title_img2.jpg" style="width:100%;  height: 1100PX;">
 </div>
 <div class="text3">
 <font size="3" color="white">

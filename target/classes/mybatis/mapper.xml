@@ -173,11 +173,11 @@
       order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch_Content" resultType="comdto" parameterType="comdto">
-      select * from (select rownum num, a.* from (select * from board_sys where title LIKE '%'||#{title}||'%'
+      select * from (select rownum num, a.* from (select * from board_sys where content LIKE '%'||#{content}||'%'
       order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch" resultType="comdto" parameterType="comdto">
-      select * from (select rownum num, a.* from (select * from board_sys where title LIKE '%'||#{title}||'%'
+      select * from (select rownum num, a.* from (select * from board_sys where writer LIKE '%'||#{writer}||'%'
       order by case when writer like '/admin/' then writer end asc, bno desc) a ) where num between #{start} and #{end}
    </select>
    <select id="listSearch_title_count" resultType="String" parameterType="comdto">

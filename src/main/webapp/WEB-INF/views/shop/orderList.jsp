@@ -68,15 +68,15 @@ background: #7d7d7d;
             <c:forEach var="dto" items="${order_list}">
                
                <tr style="border-top: 1px solid #d5dbe0; border-bottom: 1px solid #d5dbe0;">
-                  <th style="height: 50px; width: 200px; font-weight: normal;" align="center"><img
-                     style="height: 100px; width: 100px;" src="${dto.img}" ></th>
-                  <th style="height: 50px; font-weight: normal; "><label>${dto.product}</label>
+                  <td style="height: 50px; width: 200px;" align="center"><img
+                     style="height: 100px; width: 100px;" src="${dto.img}" ></td>
+                  <td style="height: 50px;"><label>${dto.product}</label>
                      
                      <input type="hidden" id="review_img${dto.rno}" value="${dto.product}">
-                  </th>
-                  <th style="height: 50px; width: 200px; margin-left: 30px; font-weight: normal;">단가 : <label>${dto.price}</label><br>
+                  </td>
+                  <td style="height: 50px; width: 200px; margin-left: 30px;">단가 : <label>${dto.price}</label><br>
                      총합 : <label>${dto.price * dto.count}</label>
-                  </th>
+                  </td>
                   <th style="height: 50px; width: 200px; font-weight: normal;">
                   <label id="cancelok">${dto.count}</label>
                   <c:choose>

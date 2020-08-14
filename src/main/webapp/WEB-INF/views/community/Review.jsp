@@ -33,7 +33,7 @@
       review_write.submit();
    }
    function review_search() {
-      alert("서치")
+//       alert("서치")
       $("#type").val($("#search_key").val());
       $("#search_img").val($("#img").val());
       $("#search_text").val($("#search").val());
@@ -81,7 +81,7 @@
    var count2 = 0;
    var f2;
    function img_next2(a,d){
-      
+	   
       f = $("#fileimg22"+d).val();
       f2 = f.split(",");
       if(a =="+"){
@@ -93,7 +93,7 @@
          $("#review_fileimg"+d).attr("src", f2[count2]);
       }
       if(a == "-"){
-   
+	
          count2--;
          if(count2==-1){
             count2=f2.length-1;
@@ -681,7 +681,7 @@ a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#
                               All</a> | <a href="category_list?type=dress">cloth</a> | <a
                            href="category_list?type=bag">bag</a> | <a
                            href="category_list?type=earring">earring</a> | <a
-                           href="category_list?type=phon">phon</a> |
+                           href="category_list?type=phon">phone</a> |
                         </font> <font size="3"><label>포토리뷰</label></font>
                      </div>
                   </div>
@@ -844,16 +844,16 @@ a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#
             </c:choose>
 
          </div>
-         <p class="category displaynone"></p>
-         <p>
-            <select id="search_key" name="search_key">
-               <option value="subject">제목</option>
-               <option value="content">내용</option>
-               <option value="member_id">아이디</option>
-            </select> <input id="search" name="search" class="inputTypeText"
-               placeholder="" value="" type="text" /> <label
-               onclick="review_search()" onmouseover="style='cursor:pointer'">search</label>
-         </p>
+<!--          <p class="category displaynone"></p> -->
+<!--          <p> -->
+<!--             <select id="search_key" name="search_key"> -->
+<!--                <option value="subject">제목</option> -->
+<!--                <option value="content">내용</option> -->
+<!--                <option value="member_id">아이디</option> -->
+<!--             </select> <input id="search" name="search" class="inputTypeText" -->
+<!--                placeholder="" value="" type="text" /> <label -->
+<!--                onclick="review_search()" onmouseover="style='cursor:pointer'">search</label> -->
+<!--          </p> -->
       </div>
    </div>
 
@@ -876,66 +876,66 @@ a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#
   <div class="modal-con">
     <a href="javascript:;" class="close">X</a>
     <div class="con" >
-       <div style="display:flex; flex: row;">
-       <div style="height: 674px; width: 60%; overflow: hidden;">
-          <label onclick=""  style='font-size: 40px; cursor: pointer; width: 10%; height: 10%; position: absolute; top: 44%; left:3%; z-index: 2;' id='inp' class="inp"> < </label>
-          <img src="resources/img/1.jpg" id="review_fileimg" style="    height: auto; width: 129%; overflow: hidden; z-index: 1;" class="review_fileimg">
-          <label onclick='' style='font-size: 40px; cursor: pointer; width: 10%; height: 10%; position: absolute; top: 46%; left: 56%; z-index: 2;' id='dep' class="dep"> > </label>
-       </div>
-       
-          <label class="review_id" style="position: fixed; top: 4%; left: 62%;"></label> 
-          <label class="review_content" style="position: fixed; top: 27%; left: 62%; width: 280px;"></label> 
-          
-          <div id="dd" style="position: fixed; bottom: 12px; right: 1%; border: 1px solid #d5dbe0; padding: 16px; height: 71px; width: 350px;">
-          <img style="width: 50px; height: 50px; width: 50px;height: 50px;position: absolute; top: 13%; left: 3%;" src="" class="designimg">
-          <label class="img" style="top: 27px; left: 69px; position: absolute;"></label>
-          <img style="width:30px; top: 21px; left: 289px; position: absolute;" src="resources/img/gogo.png">
-          </div>
-       </div>
+    	<div style="display:flex; flex: row;">
+    	<div style="height: 674px; width: 60%; overflow: hidden;">
+    		<label onclick=""  style='font-size: 40px; cursor: pointer; width: 10%; height: 10%; position: absolute; top: 44%; left:3%; z-index: 2;' id='inp' class="inp"> < </label>
+    		<img src="resources/img/1.jpg" id="review_fileimg" style="    height: auto; width: 129%; overflow: hidden; z-index: 1;" class="review_fileimg">
+    		<label onclick='' style='font-size: 40px; cursor: pointer; width: 10%; height: 10%; position: absolute; top: 46%; left: 56%; z-index: 2;' id='dep' class="dep"> > </label>
+    	</div>
+    	
+    		<label class="review_id" style="position: fixed; top: 4%; left: 62%;"></label> 
+	    	<label class="review_content" style="position: fixed; top: 27%; left: 62%; width: 280px;"></label> 
+	    	
+	    	<div id="dd" style="position: fixed; bottom: 12px; right: 1%; border: 1px solid #d5dbe0; padding: 16px; height: 71px; width: 350px;">
+	    	<img style="width: 50px; height: 50px; width: 50px;height: 50px;position: absolute; top: 13%; left: 3%;" src="" class="designimg">
+	    	<label class="img" style="top: 27px; left: 69px; position: absolute;"></label>
+	    	<img style="width:30px; top: 21px; left: 289px; position: absolute;" src="resources/img/gogo.png">
+	    	</div>
+    	</div>
     </div>
   </div>
 
 
-   <script>
-      function modal(d){
-           document.get
-           f = $("#fileimg22"+d).val();
-           content = $("#content"+d).val();
-           id = $("#name"+d).text();
-           type=$("#type"+d).val();
-           title=$("#title"+d).text();
-           
-           
-           if(type == 'earring'){
-              $(".designimg").attr('src','resources/img/'+type+' design/'+title+'1.png');
-           }else{
-              $(".designimg").attr('src','resources/img/'+type+' design/'+title+'.png');
-           }
-           
-           $(".img").text(title);
-           $("#dd").attr('onclick', 'design('+d+')');
-           
-           $("#modal").fadeIn(300);
-           $(".modal-con").fadeIn(300);
-           $(".review_fileimg").attr('src', f.split(',')[0]);
-           $(".review_fileimg").attr('id', "review_fileimg"+d);
-           $(".inp").attr('id', "inp"+d);
-           $(".dep").attr('id', "dep"+d);
-           $("#inp"+d).attr('onclick',"img_next2(\"-\","+d+")");
-           $("#dep"+d).attr('onclick',"img_next2(\"+\","+d+")");
-           $(".review_content").attr('id', 'review_content'+d);
-           $("#review_content"+d).text(content);
-           $(".review_id").attr('id', 'review_id'+d);
-           $("#review_id"+d).text(id);
-           
-           
-      }
-      
-      $("#modal, .close").on('click',function(){
-           $("#modal").fadeOut(300);
-           $(".modal-con").fadeOut(300);
-         }); 
-   </script>
+	<script>
+		function modal(d){
+			  document.get
+			  f = $("#fileimg22"+d).val();
+			  content = $("#content"+d).val();
+			  id = $("#name"+d).text();
+			  type=$("#type"+d).val();
+			  title=$("#title"+d).text();
+			  
+			  
+			  if(type == 'earring'){
+				  $(".designimg").attr('src','resources/img/'+type+' design/'+title+'1.png');
+			  }else{
+				  $(".designimg").attr('src','resources/img/'+type+' design/'+title+'.png');
+			  }
+			  
+			  $(".img").text(title);
+			  $("#dd").attr('onclick', 'design('+d+')');
+			  
+			  $("#modal").fadeIn(300);
+			  $(".modal-con").fadeIn(300);
+			  $(".review_fileimg").attr('src', f.split(',')[0]);
+			  $(".review_fileimg").attr('id', "review_fileimg"+d);
+			  $(".inp").attr('id', "inp"+d);
+			  $(".dep").attr('id', "dep"+d);
+			  $("#inp"+d).attr('onclick',"img_next2(\"-\","+d+")");
+			  $("#dep"+d).attr('onclick',"img_next2(\"+\","+d+")");
+			  $(".review_content").attr('id', 'review_content'+d);
+			  $("#review_content"+d).text(content);
+			  $(".review_id").attr('id', 'review_id'+d);
+			  $("#review_id"+d).text(id);
+			  
+			  
+		}
+		
+		$("#modal, .close").on('click',function(){
+			  $("#modal").fadeOut(300);
+			  $(".modal-con").fadeOut(300);
+			}); 
+	</script>
 
 </body>
 </html>

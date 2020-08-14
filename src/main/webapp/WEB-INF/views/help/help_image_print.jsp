@@ -801,7 +801,7 @@ html, body {
 			</div>
 		</div>
 	</div>
-<jsp:include page="../default/footer.jsp"/>
+
 
 
 

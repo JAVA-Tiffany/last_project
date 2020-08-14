@@ -326,7 +326,7 @@ chart.draw(data, chart_options_to);
 <!-- 예제 종료 -->
 <script type="text/javascript">
 function yerch() {
-   alert($("#chart_date").val());
+//    alert($("#chart_date").val());
    $("#chart_text").val($("#chart_date").val());
 //    $("#c1").text($("#chart_date").val().split("-")[0]);
    chart_form.submit();

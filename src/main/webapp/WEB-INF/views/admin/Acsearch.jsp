@@ -80,7 +80,7 @@ $(document).ready(function() {
                 icon: 'success',
                preConfirm:function(){
 //                     location.href="DelUser?idval="+str
-					$("#idval").val(str)
+               $("#idval").val(str)
                     acsearch_form.submit();
                 }
              })
@@ -179,21 +179,21 @@ if(size>10){
 
 function title_search() {
     
-    alert($("#searchType").val());
+//     alert($("#searchType").val());
     //타입 입력
     $("#type_result").val($("#searchType").val());
     
     if($("#searchType").val()=="id"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else if($("#searchType").val()=="name"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else{
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }
  }
@@ -486,9 +486,9 @@ padding-bottom: 10px;}
    <input type="hidden" id="adminHeader_form_end" name="end" value="10">
 </form>
 <form action="acsearch" method="post" name="acsearch_form">
-	<input type="hidden" name='acsearchstart' value="1">
-	<input type="hidden" name='acsearchend' value="10">
-	<input type="hidden" name="idval" id="idval">
+   <input type="hidden" name='acsearchstart' value="1">
+   <input type="hidden" name='acsearchend' value="10">
+   <input type="hidden" name="idval" id="idval">
 </form>
 </body>
 </html>

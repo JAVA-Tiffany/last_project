@@ -83,7 +83,7 @@ public class AdminController {
 		return "admin/Acsearch";
 	}
 
-	@RequestMapping(value = "acboard_serch", method = RequestMethod.POST)
+	@RequestMapping(value = "acboard_search", method = RequestMethod.POST)
 	public String title_search(CommnuityDTO dto, Model model, @RequestParam String type_result,
 			@RequestParam String search_result, @RequestParam String start_result, @RequestParam String end_result) {
 		serviceCom.title_search(dto, model, type_result, search_result, start_result, end_result);
@@ -157,7 +157,6 @@ public class AdminController {
 	@RequestMapping("accart")
 	public String accart(Model model, AdminNoticeDTO dto, @RequestParam String start, @RequestParam String end)
 			throws Exception {
-		System.out.println(start);
 		serviceAdm.accart_list(model, start, end);
 		return "admin/accart";
 	}

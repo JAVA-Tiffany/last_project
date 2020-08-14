@@ -36,7 +36,7 @@
                   }
 
                   document.getElementById('post_postcode').value = data.zonecode;
-                  alert(fullAddr)
+//                   alert(fullAddr)
                   document.getElementById('post_address').value = fullAddr;
 
                   document.getElementById('sample6_address2').focus();
@@ -46,13 +46,14 @@
 
    //체크박스 전체선택 및 전체 해제
    function cAll() {
+
       if ($("#chk_all").prop("checked") == true) {
-         alert("체크 온")
+//          alert("체크 온")
          $("#chk2").attr("checked", true);
          $("#chk3").attr("checked", true);
          $("#chk4").attr("checked", true);
       } else {
-         alert("체크 dhvm")
+//          alert("체크 dhvm")
          $("#chk2").attr("checked", false);
          $("#chk3").attr("checked", false);
          $("#chk4").attr("checked", false);
@@ -72,8 +73,11 @@
         buy.method="post";
         buy.target="bbbuy";
         buy.submit();
-        
     }
+   
+   function orderlist() {
+	   location.href='orderList';
+   }
 </script>
 
 
@@ -120,7 +124,8 @@
             <div style="display: flex; flex: row;">
                <div style="margin: 0 24px; display: block;">
                   <textarea
-                     style="width: 520px; height: 72px; border: solid 1px #d5dbe0; overflow: auto; box-sizing: border-box; padding: 16px; font-size: 14px; outline: none; color: -internal-light-dark-color(black, white); word-spacing: normal; text-indent: 9px; display: inline-block; background-color: light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59)); flex-direction: column; cursor: text; white-space: pre-wrap; overflow-wrap: break-word; outline-color: black;"
+                     style="width: 520px; height: 72px; border: solid 1px #d5dbe0; overflow: auto; box-sizing: border-box; 
+                     padding: 16px; font-size: 14px; outline: red; color: -internal-light-dark-color(black, white); word-spacing: normal; text-indent: 9px; display: inline-block; background-color: light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59)); flex-direction: column; cursor: text; white-space: pre-wrap; overflow-wrap: break-word; outline-color: red;"
                      placeholder="상품 제작 요청사항이 있으면 작성해주세요." name="ProRequest"></textarea>
                   <p
                      style="color: #868e96; font-size: 12px; line-height: 1.83; margin-bottom: 0; display: block;">자수
@@ -285,12 +290,12 @@
             </div>
             <p></p>
             <div style="margin: 0 24px; display: block;">
-               <div
-                  style="padding-bottom: 17px; position: relative; margin-bottom: 17px; border-bottom: 1px solid #d5dbe0;">
-                  <label style="margin-right: 16px; cursor: default;"> <span
-                     style="cursor: default;"> <input type="checkbox"><span></span></span><span>주문자
-                        정보와 동일</span></label>
-               </div>
+<!--                <div -->
+<!--                   style="padding-bottom: 17px; position: relative; margin-bottom: 17px; border-bottom: 1px solid #d5dbe0;"> -->
+<!--                   <label style="margin-right: 16px; cursor: default;"> <span -->
+<!--                      style="cursor: default;"> <input type="checkbox"><span></span></span><span>주문자 -->
+<!--                         정보와 동일</span></label> -->
+<!--                </div> -->
                <div style="position: relative; display: block;">
                   <label
                      style="display: inline-block; width: 80px; cursor: default;">

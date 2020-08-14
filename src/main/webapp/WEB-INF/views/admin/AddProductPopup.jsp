@@ -83,6 +83,7 @@ $(document).ready(function() {
                               text: '상품이 성공적으로 등록되었습니다!',
                               icon: 'success',
                              preConfirm:function(){
+                            	 opener.location.reload();
                             	 window.close();
                               }
                            });

@@ -164,8 +164,8 @@ img.style.cursor = 'pointer';
 img.style.borderRadius = options.circle ? '50%' : '';
 img.style.boxShadow = options.shadow ? '0 0 4px rgba(0,0,0,.16), 0 4px 4px rgba(0,0,0,.24)' : '';
 img.onclick = function(e) {
-	   window.open('https://talk.naver.com/W4UJZ0', 'talktalk', 'scrollbars=1, resizable=1, width='+window.screen.width+', height='+window.screen.height+'');
-	}
+      window.open('https://talk.naver.com/W4UJZ0', 'talktalk', 'scrollbars=1, resizable=1, width='+window.screen.width+', height='+window.screen.height+'');
+   }
 d.getElementsByTagName('html')[0].appendChild(img);
 })(document);
 </script>
@@ -224,7 +224,7 @@ d.getElementsByTagName('html')[0].appendChild(img);
             for(i=0;i<ssize;i++){
                $('#num').append("<div id='a"+(i+1)+"' style='margin: 0 auto;border: 1px solid #555; text-decoration: none; width: 30px; height: 20px; cursor:pointer' onclick='number_click("+(i+1)+")'>"+(i+1)+"</div>");
                $("#num").append("<form action='data' method='post' name='numbtn"+(i+1)+"'>"
-                       +"<input type='hidden' value='"+y[i]+"' name='type'>"
+                       +"<input type='hidden' value='${select_type}' name='type'>"
                        +"<input type='hidden' name='start' id='start"+(i+1)+"'>"
                        +"<input type='hidden' name='end' id='last"+(i+1)+"'>"
                        +"<input type='submit' style='display:none;' id='numbtn"+(i+1)+"'>"

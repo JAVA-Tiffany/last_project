@@ -34,7 +34,7 @@
       <div class="container-login100">
          <div class="wrap-login100">
          <span class="login100-form-title">
-                  MAKE Login
+                  Member Login
                </span>
             <div class="login100-pic js-tilt" data-tilt>
             
