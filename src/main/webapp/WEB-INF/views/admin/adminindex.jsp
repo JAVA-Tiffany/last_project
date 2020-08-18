@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,9 +29,21 @@
     <link href="resources/adcss/style.css?a" rel="stylesheet">
     <!-- color CSS -->
     <link href="resources/adcss/colors/default.css" id="theme" rel="stylesheet">
+    <style type="text/css">
+       th{
+          text-align: center;
+       }
+    </style>
 </head>
 
 <body class="fix-header">
+<c:if test="${sessionScope.id.split('_')[0] ne '/admin/' }">
+
+<script type="text/javascript">
+   alert("관리자만 접근가능합니다")
+   location.href="index"
+</script>
+</c:if>
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
@@ -154,7 +166,12 @@
    <div>
       <table border="1" style="width: 700px; height: 500px;">
          <tr style="background-color: #66666694;">
-            <th class="wi"></th><th class="wi">귀걸이</th><th class="wi">가방</th><th class="wi">옷</th><th class="wi">폰</th><th class="wi">총합</th>
+            <th class="wi" style="width:10%;text-align: center"></th>
+            <th class="wi" style="width:40px;">귀걸이</th>
+            <th class="wi" style="width:40px;">가방</th>
+            <th class="wi" style="width:40px;">옷</th>
+            <th class="wi" style="width:40px;">폰</th>
+            <th style="width:50px;" class="wi">총합</th>
          </tr>
          <tr>
             <th>1월</th><th>${chart1mon.split(",")[0]}</th><th>${chart1mon.split(",")[1]}</th><th>${chart1mon.split(",")[2]}</th><th>${chart1mon.split(",")[3]}</th><th>${chart1mont}</th>
@@ -309,7 +326,7 @@ chart.draw(data, chart_options_to);
 <!-- 예제 종료 -->
 <script type="text/javascript">
 function yerch() {
-   alert($("#chart_date").val());
+//    alert($("#chart_date").val());
    $("#chart_text").val($("#chart_date").val());
 //    $("#c1").text($("#chart_date").val().split("-")[0]);
    chart_form.submit();

@@ -199,7 +199,7 @@ function ad(d) {
         </tbody>
     </table>
     <input type="button" onclick="location.href='acnotice'"value="목록">
-    <input type="button" onclick="location.href='ModifyNotice?bno=${view.bno}'"value="수정하기">
+    <input type="button" onclick="location.href='ModifyNotice?num=${view.num}'"value="수정하기">
     </form>
  </div>       
 

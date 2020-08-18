@@ -133,17 +133,18 @@ public class AdminService {
       dao.AddProduct(dto);
    }
 
-   public void DelProduct(String product) {
-      dao.DelProduct(product);
-   }
+   public int DelProduct(String product) {
+	      return dao.DelProduct(product);
+	   }
+   
    public void accart_list(Model model,String start,String end) {
-      PayDTO dto = new PayDTO();
-      dto.setStart(start);
-      dto.setEnd(end);
-      model.addAttribute("paylist",paydao.selectAll_number(dto));
-      model.addAttribute("list_last",end);
-      model.addAttribute("list_size",paydao.selectAll_size());
-   }
+	      PayDTO dto = new PayDTO();
+	      dto.setStart(start);
+	      dto.setEnd(end);
+	      model.addAttribute("paylist",paydao.selectAll_number(dto));
+	      model.addAttribute("list_last",end);
+	      model.addAttribute("list_size",paydao.selectAll_size());
+	   }
 
    public void quantity_search(DataListDTO dto, Model model, String search_result) {
       dto.setProduct(search_result);

@@ -33,7 +33,7 @@
       review_write.submit();
    }
    function review_search() {
-      alert("서치")
+//       alert("서치")
       $("#type").val($("#search_key").val());
       $("#search_img").val($("#img").val());
       $("#search_text").val($("#search").val());
@@ -844,16 +844,16 @@ a.button{display:inline-block; padding: 10px 20px; text-decoration:none; color:#
             </c:choose>
 
          </div>
-         <p class="category displaynone"></p>
-         <p>
-            <select id="search_key" name="search_key">
-               <option value="subject">제목</option>
-               <option value="content">내용</option>
-               <option value="member_id">아이디</option>
-            </select> <input id="search" name="search" class="inputTypeText"
-               placeholder="" value="" type="text" /> <label
-               onclick="review_search()" onmouseover="style='cursor:pointer'">search</label>
-         </p>
+<!--          <p class="category displaynone"></p> -->
+<!--          <p> -->
+<!--             <select id="search_key" name="search_key"> -->
+<!--                <option value="subject">제목</option> -->
+<!--                <option value="content">내용</option> -->
+<!--                <option value="member_id">아이디</option> -->
+<!--             </select> <input id="search" name="search" class="inputTypeText" -->
+<!--                placeholder="" value="" type="text" /> <label -->
+<!--                onclick="review_search()" onmouseover="style='cursor:pointer'">search</label> -->
+<!--          </p> -->
       </div>
    </div>
 

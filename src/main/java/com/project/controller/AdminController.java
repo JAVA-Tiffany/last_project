@@ -17,6 +17,7 @@ import com.project.dto.CommnuityDTO;
 import com.project.dto.DataListDTO;
 import com.project.dto.PayDTO;
 import com.project.dto.ReplyDTO;
+import com.project.dto.UserDTO;
 import com.project.service.AdminService;
 import com.project.service.CommunityService;
 import com.project.service.ProjectService;
@@ -44,16 +45,42 @@ public class AdminController {
    }
       
    @RequestMapping("acsearch")
-   public String acsearch(Model model) {
-      service.select(model);
+   public String acsearch(Model model, UserDTO dto,@RequestParam(required = false) String idval, @RequestParam(required = false) String acsearchstart,@RequestParam(required = false) String acsearchend) {
+      if(idval!=null) {
+      System.out.println("idval"+idval);
+      String[] arr = idval.split(" ");
+      if (arr[0].contains(",")) {
+         if (arr[0].split(",")[1].equals("myinfo")) {
+            service.delete(arr[0].split(",")[0]);
+         }
+         return "redirect:index";
+      } else {
+         for (int i = 0; i < arr.length; i++) {
+            service.delete(arr[i]);
+         }
+      }
+      
+      }
+      if(acsearchstart!=null) {
+         dto.setStart(acsearchstart);
+         dto.setEnd(acsearchend);
+      }
+      service.select(model, dto);
       return "admin/Acsearch";
+      
    }
    @RequestMapping("acboard")
    public String acboard(Model model,CommnuityDTO dto) {
        serviceCom.listAll(dto,model);
       return "admin/Acboard";
    }
-   @RequestMapping(value="acboard_serch", method = RequestMethod.POST)
+   @RequestMapping(value="acsearch_search", method = RequestMethod.POST)
+   public String title_search(UserDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result,
+         @RequestParam String start_result,@RequestParam String end_result) {
+     service.user_search(dto,model,type_result,search_result,start_result,end_result);
+      return "admin/Acsearch";
+   }
+   @RequestMapping(value="acboard_search", method = RequestMethod.POST)
    public String title_search(CommnuityDTO dto, Model model, @RequestParam String type_result,@RequestParam String search_result,
          @RequestParam String start_result,@RequestParam String end_result) {
       serviceCom.title_search(dto,model,type_result,search_result,start_result,end_result);
@@ -92,18 +119,18 @@ public class AdminController {
    public String DelUser(@RequestParam String idval) {
       System.out.println(idval);
       String[] arr = idval.split(" ");
-      if(arr[0].split(",")[1].equals("myinfo")) {
-         service.delete(arr[0].split(",")[0]);
-      }else {
-         for(int i=0;i<arr.length;i++) {
+      if (arr[0].contains(",")) {
+         if (arr[0].split(",")[1].equals("myinfo")) {
+            service.delete(arr[0].split(",")[0]);
+         }
+         return "redirect:index";
+      } else {
+         for (int i = 0; i < arr.length; i++) {
             service.delete(arr[i]);
          }
-      }
-      if(arr[0].split(",")[1].equals("myinfo")) {
-         return "redirect:index";
-      }else {
          return "redirect:acsearch";
       }
+
    }
    
    @RequestMapping("DelBoard")
@@ -122,9 +149,9 @@ public class AdminController {
       return "admin/AcNotice";
    }
    @RequestMapping("accart")
-   public String accart(Model model,AdminNoticeDTO dto,@RequestParam String start,@RequestParam String end) throws Exception{
-      System.out.println(start);
-      serviceAdm.accart_list(model,start,end);
+   public String accart(Model model, AdminNoticeDTO dto, @RequestParam String start, @RequestParam String end)
+         throws Exception {
+      serviceAdm.accart_list(model, start, end);
       return "admin/accart";
    }
    
@@ -244,24 +271,20 @@ public class AdminController {
     
     @RequestMapping("DelProduct")
     public String DelProduct(@RequestParam String product) {
+       String[] arr = product.split(" ");
+        for(int i=0;i<arr.length;i++) {
+           serviceAdm.DelProduct(arr[i]);
+        }
        System.out.println(product);
-       serviceAdm.DelProduct(product);
+      
        
-       return "redirect:QuantityManage";
+       return "admin/QuantityManage";
        
        
     }
     @RequestMapping("adminjoin")
     public String adminjoin() {
        return "admin/adminjoin";
-    }
-
-
-    
-    @RequestMapping("mainChange")
-    public String mainChange(Model model) {
-    	service.bannerAll(model);
-    	return "admin/mainChange";
     }
 
 }

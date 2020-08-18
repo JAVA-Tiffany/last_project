@@ -21,12 +21,12 @@
          type : "POST",
          data : {order_id:order_id, day:day, totalprice:totalprice, method:method, addr1:addr1, addr2:addr2, addr3:addr3},
          success:function(data){
-            alert('성공');		
+//             alert('성공');		
             $(opener.location).attr("href", "javascript:orderlist();");
             window.close();
          },
          error:function(data){
-            alert('실패');
+//             alert('실패');
          }
       });
    }

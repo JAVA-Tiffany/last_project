@@ -31,8 +31,6 @@
 <title>공지사항 관리 페이지</title>
 <style type="text/css">
 .div1 {
-padding-top: 200px;
-padding-bottom: 30px;
 }
 .div2{
 padding-top: 40px;
@@ -96,6 +94,8 @@ background: #7d7d7d;
 	color:white;
 	transition: all 0.12s ease-in-out;
 }
+.util{
+padding-bottom: 10px;}
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -223,21 +223,21 @@ if(size>10){
 }
 function title_search() {
     
-    alert($("#searchType").val());
+//     alert($("#searchType").val());
     //타입 입력
     $("#type_result").val($("#searchType").val());
     
     if($("#searchType").val()=="title"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else if($("#searchType").val()=="Content"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else{
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }
  }
@@ -346,8 +346,12 @@ function ad(d) {
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
                             <h3 class="box-title">NOTICE MANAGE</h3>
-<!-- 여기서 부터 내용 -->
-					<div align="center" class="div1" style="padding-top: 30px;">
+                            <div class="util">
+                            <button type="button" class="btn" id="Delbutton">삭제</button>
+            <button type="button" class="btn" onclick ="location.href='InsNotice'">등록</button>
+                            </div>
+<!-- 여기서 부터 내용 -->	
+					<div align="center" class="div1">
    <table border="1" class="table">
          <tr>
             <th></th>
@@ -362,24 +366,18 @@ function ad(d) {
       <td><input type="checkbox" name="checkBtn"></td>
          <td>${adminList.bno }</td>
          <td>
-         <a style="text-decoration: none;"class="title" href="NoticeContent?bno=${adminList.bno}">
+         <a style="text-decoration: none;"class="title" href="NoticeContent?num=${adminList.num}">
          ${adminList.title }</a></td>
          <td>${adminList.writer }</td>
          <td style="font-size: 2px;">${adminList.regdate }</td>
          <td>${adminList.viewcnt }</td>
       </tr>
       </c:forEach>
-      <tr>
-         <td colspan="6" style="text-align: center;">
-            <button type="button" class="btn" id="Delbutton">삭제</button>
-            <button type="button" class="btn" onclick ="location.href='InsNotice'">등록</button>
-         </td>
-      </tr>
    </table>
    <!-- 검색 form -->
       <div id="acsearch" class="div2">
          <!-- search{s} -->
-         <div style="padding-bottom: 20px; display: flex; flex: row; margin: 0 auto; width: 280px;">
+         <div style="padding-bottom: 20px; display: flex; flex: row; margin: 0 auto; width: 300px;">
             <div class="w100" style="padding-right: 10px">
                <select class="form-control form-control-sm" name="searchType"
                   id="searchType">

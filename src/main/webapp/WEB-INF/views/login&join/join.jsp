@@ -106,7 +106,7 @@
                      }
 
                      document.getElementById('post_postcode').value = data.zonecode;
-                     alert(fullAddr)
+//                      alert(fullAddr)
                      document.getElementById('post_address').value = fullAddr;
 
                      document.getElementById('sample6_address2').focus();
@@ -217,7 +217,7 @@
          $("#id").val(a);
       });
       function eamil_k() {
-         alert("인증번호 보내는 중")
+//          alert("인증번호 보내는 중")
          if ($("#email_btn").val() == "인증 발급") {
             $('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
             $.ajax({

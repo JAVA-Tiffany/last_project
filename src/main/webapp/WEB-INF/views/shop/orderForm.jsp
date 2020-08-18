@@ -36,7 +36,7 @@
                   }
 
                   document.getElementById('post_postcode').value = data.zonecode;
-                  alert(fullAddr)
+//                   alert(fullAddr)
                   document.getElementById('post_address').value = fullAddr;
 
                   document.getElementById('sample6_address2').focus();
@@ -48,12 +48,12 @@
    function cAll() {
 
       if ($("#chk_all").prop("checked") == true) {
-         alert("체크 온")
+//          alert("체크 온")
          $("#chk2").attr("checked", true);
          $("#chk3").attr("checked", true);
          $("#chk4").attr("checked", true);
       } else {
-         alert("체크 dhvm")
+//          alert("체크 dhvm")
          $("#chk2").attr("checked", false);
          $("#chk3").attr("checked", false);
          $("#chk4").attr("checked", false);
@@ -290,12 +290,12 @@
             </div>
             <p></p>
             <div style="margin: 0 24px; display: block;">
-               <div
-                  style="padding-bottom: 17px; position: relative; margin-bottom: 17px; border-bottom: 1px solid #d5dbe0;">
-                  <label style="margin-right: 16px; cursor: default;"> <span
-                     style="cursor: default;"> <input type="checkbox"><span></span></span><span>주문자
-                        정보와 동일</span></label>
-               </div>
+<!--                <div -->
+<!--                   style="padding-bottom: 17px; position: relative; margin-bottom: 17px; border-bottom: 1px solid #d5dbe0;"> -->
+<!--                   <label style="margin-right: 16px; cursor: default;"> <span -->
+<!--                      style="cursor: default;"> <input type="checkbox"><span></span></span><span>주문자 -->
+<!--                         정보와 동일</span></label> -->
+<!--                </div> -->
                <div style="position: relative; display: block;">
                   <label
                      style="display: inline-block; width: 80px; cursor: default;">

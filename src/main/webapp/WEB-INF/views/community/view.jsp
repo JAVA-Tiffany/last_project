@@ -194,7 +194,7 @@ $(document).ready(function() {
                         a += '</div>'
                      a += '<div id="replyWrap'+value.p_rno+'">'
                      a += '<div class="replyWrap" style="border-top:1px solid darkgray;">';
-                      a += '<div class="replyTitle">'+'<b>'+value.writer.substring(0,2)+"****</b>&nbsp<b class='date'>"+value.regDate.substring(0,10)+'</b>';
+                      a += '<div class="replyTitle"><b>'+"관리자</b>&nbsp<b class='date'>"+value.regDate.substring(0,10)+'</b>';
                       console.log("작성자체크합니다 :"+value.writer)
                       a += '<div class="alink"><a onclick="commentUpdate('+value.p_rno+','+value.brno+',\''+value.writer+'\',\''+value.content+'\');"> 수정 </a>';
                       a += '<a onclick="commentDelete('+value.p_rno+','+value.brno+',\''+value.writer+'\');"> 삭제 </a> ';

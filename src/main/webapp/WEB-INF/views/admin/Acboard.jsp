@@ -111,6 +111,8 @@ background: #7d7d7d;
 	color:white;
 	transition: all 0.12s ease-in-out;
 }
+.util{
+padding-bottom: 10px;}
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -192,21 +194,21 @@ if(size>10){
 
 function title_search() {
     
-    alert($("#searchType").val());
+//     alert($("#searchType").val());
     //타입 입력
     $("#type_result").val($("#searchType").val());
     
     if($("#searchType").val()=="title"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else if($("#searchType").val()=="Content"){
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }else{
        $("#search_result").val($("#keyword").val());
-       alert($("#search_result").val());
+//        alert($("#search_result").val());
        list_form.submit();
     }
  }
@@ -365,7 +367,7 @@ $(document).ready(function() {
                         <div class="white-box">
                         	
                             <h3 class="box-title">Q & A MANAGE</h3>
-                         	<div > <button type="button" class="btn" id="Delbutton">글삭제</button>
+                         	<div class="util"> <button type="button" class="btn" id="Delbutton">글삭제</button>
             <button type="button" class="btn" onclick="location.href='acboardIns'">글등록</button></div>
 <!-- 여기서 부터 내용 -->
 					<div align="center" class="div1">

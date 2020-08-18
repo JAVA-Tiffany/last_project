@@ -87,7 +87,7 @@
       console.log("#url" + d)
       z = $("#url" + d).prop('src');
       z2 = $("#rno"+d).val();
-      alert(z2);
+//       alert(z2);
       location.href = "listdel?rno=" + z2+"&img="+z;
       moneysum=0;
       result();
@@ -125,7 +125,7 @@
             <tr style="border-top: 1px solid #d5dbe0;">
                
                <td style="height: 50px; width: 200px;" align="center"><img style="height: 100px; width: 100px;" src="${dto[0]}" id="url${dto[5]}"></td>
-               <td style="height: 50px;"><label id="Pname${dto[5]}">${dto[2]}</label></td>
+               <th style="height: 50px; font-weight: nomal;"><label id="Pname${dto[5]}">${dto[2]}</label></th>
                <td style="height: 50px; width: 200px; text-align: center;">
                         단가 : <label id="mo${dto[5]}">${dto[4]}</label><br> 
                         총합 : <label id="To${dto[5]}">${dto[4] * dto[6]}</label>
